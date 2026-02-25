@@ -6,43 +6,30 @@
   "dns": {
     "servers": [
       {
-        "tag": "dns_proxy",
+        "tag": "dns-remote",
         "address": "tls://1.1.1.1",
-        "address_resolver": "dns_resolver",
         "detour": "select"
       },
       {
-        "tag": "dns_direct",
+        "tag": "dns-direct",
         "address": "223.5.5.5",
-        "address_resolver": "dns_resolver",
         "detour": "direct"
       },
       {
-        "tag": "dns_fakeip",
+        "tag": "dns-fakeip",
         "address": "fakeip"
-      },
-      {
-        "tag": "dns_resolver",
-        "address": "223.5.5.5",
-        "detour": "direct"
       }
     ],
     "rules": [
-      {
-        "outbound": [
-          "any"
-        ],
-        "server": "dns_resolver"
-      },
       {
         "query_type": [
           "A",
           "AAAA"
         ],
-        "server": "dns_fakeip"
+        "server": "dns-fakeip"
       }
     ],
-    "final": "dns_direct",
+    "final": "dns-direct",
     "fakeip": {
       "enabled": true,
       "inet4_range": "198.18.0.0/15"
@@ -191,8 +178,8 @@
         "🌐 Anycast-IP [*CIDR] YA",
         "🌐 Anycast-IP [*CIDR] YA"
       ],
-      "url": "http://www.gstatic.com/generate_204",
-      "interval": "5m"
+      "url": "http://cp.cloudflare.com/",
+      "interval": "10m"
     },
     {
       "type": "direct",
@@ -1641,14 +1628,6 @@
       },
       {
         "outbound": "block",
-        "name": "🛑 Adblock",
-        "switch": true,
-        "or": true,
-        "domain_suffix": [
-          "adspector.io",
-          "adserv.ai",
-          "moviead55.ru"
-        ],
         "domain": [
           "advertising.yandex.ru",
           "fastpool.xyz",
@@ -1678,71 +1657,58 @@
           "instruments.tds.bid",
           "beacons.gcp.gvt2.com"
         ],
+        "domain_suffix": [
+          "adspector.io",
+          "adserv.ai",
+          "moviead55.ru"
+        ],
         "domain_keyword": [
           "ads",
           "ad"
         ],
-        "rule_set_build_in": [
+        "rule_set": [
           "acl:BanAD",
           "geosite:category-ads-all"
         ]
       },
       {
         "outbound": "block",
-        "name": "🍃 AdblockPlus",
-        "switch": true,
-        "rule_set_build_in": [
+        "rule_set": [
           "acl:BanProgramAD",
           "acl:BanADCompany"
         ]
       },
       {
         "outbound": "select",
-        "name": "📹 YouTube",
-        "switch": true,
-        "rule_set_build_in": [
+        "rule_set": [
           "geosite:youtube"
-        ],
-        "package": [
-          "com.google.android.youtube"
         ]
       },
       {
         "outbound": "select",
-        "name": "♊️ Google Gemini",
-        "switch": true,
         "domain": [
           "identitytoolkit.googleapis.com"
         ],
-        "rule_set_build_in": [
+        "rule_set": [
           "acl:Gemini"
         ]
       },
       {
         "outbound": "select",
-        "name": "📲 Discord",
-        "switch": true,
-        "rule_set_build_in": [
+        "rule_set": [
           "geosite:discord",
           "acl:Discord"
         ]
       },
       {
         "outbound": "select",
-        "name": "📲 WhatsApp",
-        "switch": true,
-        "rule_set_build_in": [
+        "rule_set": [
           "geosite:whatsapp",
           "acl:Whatsapp"
-        ],
-        "package": [
-          "com.whatapp"
         ]
       },
       {
         "outbound": "select",
-        "name": "📲 Telegram",
-        "switch": true,
         "ip_cidr": [
           "91.108.56.0/22",
           "91.108.4.0/22",
@@ -1760,10 +1726,7 @@
           "2a0a:f280::/32",
           "149.154.167.41/32"
         ],
-        "network": [
-          "tcp"
-        ],
-        "rule_set_build_in": [
+        "rule_set": [
           "geoip:telegram",
           "geosite:telegram",
           "acl:Telegram"
@@ -1771,46 +1734,33 @@
       },
       {
         "outbound": "select",
-        "name": "💬 Claude",
-        "switch": true,
-        "rule_set_build_in": [
+        "rule_set": [
           "acl:Claude"
         ]
       },
       {
         "outbound": "select",
-        "name": "💬 OpenAI",
-        "switch": true,
-        "rule_set_build_in": [
+        "rule_set": [
           "geoip:openai",
           "geosite:openai"
         ]
       },
       {
         "outbound": "select",
-        "name": "🌏 GFW",
-        "switch": true,
-        "rule_set_build_in": [
+        "rule_set": [
           "geoip:blocked@ru",
           "geosite:blocked@ru"
         ]
       },
       {
         "outbound": "select",
-        "name": "BlockListProfile",
-        "switch": true,
-        "rule_set_build_in": [
+        "rule_set": [
           "acl:Porn",
           "geosite:category-porn"
         ]
       },
       {
         "outbound": "select",
-        "name": "Anime",
-        "switch": true,
-        "domain_suffix": [
-          "libria.fun"
-        ],
         "domain": [
           "animemedia.info",
           "animedia.org",
@@ -1821,35 +1771,28 @@
           "animego.me",
           "libria.fun",
           "jut.su"
+        ],
+        "domain_suffix": [
+          "libria.fun"
         ]
       },
       {
         "outbound": "select",
-        "name": "STUN",
-        "switch": true,
         "protocol": [
           "stun"
         ]
       },
       {
         "outbound": "select",
-        "name": "Supercell",
-        "switch": true,
         "domain_suffix": [
           ".usercentrics.eu"
         ],
-        "rule_set_build_in": [
+        "rule_set": [
           "geosite:supercell"
-        ],
-        "package": [
-          "com.supercell.brawlstars",
-          "com.supercell.clashroyale"
         ]
       },
       {
         "outbound": "select",
-        "name": "Films",
-        "switch": true,
         "domain_suffix": [
           "zet-flix.online",
           "filmix.ac",
@@ -1859,15 +1802,7 @@
         ]
       },
       {
-        "outbound": "select",
-        "name": "Discord VoIP",
-        "network": [
-          "udp"
-        ],
-        "port_range": [
-          "19294:19344",
-          "50000:50100"
-        ]
+        "outbound": "select"
       }
     ],
     "rule_set": [
