@@ -5,7 +5,7 @@ import os
 from urllib.parse import urlparse, unquote, parse_qs
 
 # --- НАСТРОЙКИ ---
-SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt'
+SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt'
 REGEXP_FILTER = r'^(?!.*Russia).*$'
 
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
@@ -24,32 +24,46 @@ def parse_vless(link):
     parsed = urlparse(link)
     params = parse_qs(parsed.query)
     tag = unquote(parsed.fragment) or f"VLESS-{parsed.hostname}"
+    
     outbound = {
-        "type": "vless", "tag": tag, "server": parsed.hostname,
+        "type": "vless", 
+        "tag": tag, 
+        "server": parsed.hostname,
         "server_port": int(parsed.port) if parsed.port else 443,
-        "uuid": parsed.username, "packet_encoding": "xudp"
+        "uuid": parsed.username, 
+        "packet_encoding": "xudp"
     }
+    
     security = params.get('security', [''])[0]
     if security in ['tls', 'reality']:
         outbound["tls"] = {
-            "enabled": True, "server_name": params.get('sni', [parsed.hostname])[0],
+            "enabled": True, 
+            "server_name": params.get('sni', [parsed.hostname])[0],
             "utls": {"enabled": True, "fingerprint": "chrome"}
         }
         if security == 'reality':
             outbound["tls"]["reality"] = {
-                "enabled": True, "public_key": params.get('pbk', [''])[0], "short_id": params.get('sid', [''])[0]
+                "enabled": True, 
+                "public_key": params.get('pbk', [''])[0], 
+                "short_id": params.get('sid', [''])[0]
             }
+    
+    # Исправление ошибки "Unknown transport type: tcp"
     if 'type' in params:
         t_type = params['type'][0]
-        outbound["transport"] = {"type": t_type}
-        if t_type == 'grpc': outbound["transport"]["service_name"] = params.get('serviceName', [''])[0]
-        elif t_type == 'ws': outbound["transport"]["path"] = params.get('path', ['/'])[0]
+        if t_type != 'tcp': # Sing-box не принимает "type": "tcp", это значение по умолчанию
+            outbound["transport"] = {"type": t_type}
+            if t_type == 'grpc': 
+                outbound["transport"]["service_name"] = params.get('serviceName', [''])[0]
+            elif t_type == 'ws': 
+                outbound["transport"]["path"] = params.get('path', ['/'])[0]
+                
     return outbound
 
 # --- 1. СБОР REMOTE RULE_SETS ---
 formatted_rule_sets = []
-proxy_routing_tags = []  # Для прокси
-block_routing_tags = []  # Для блокировки
+proxy_routing_tags = []
+block_routing_tags = []
 
 # А. Локальные файлы из основной папки -> в PROXY
 local_dir = 'ruleset/srs/'
@@ -73,7 +87,7 @@ if os.path.exists(local_block_dir):
             full_url = GITHUB_RAW_BASE + 'block/' + file
             formatted_rule_sets.append({
                 "type": "remote", "tag": tag, "format": "binary",
-                "url": full_url, "download_detour": "direct" # Блокировки качаем напрямую
+                "url": full_url, "download_detour": "direct"
             })
             block_routing_tags.append(tag)
 
@@ -101,7 +115,8 @@ for url in REMOTE_RULE_SETS:
 try:
     raw_data = requests.get(SUB_LINK, timeout=15).text
     links = re.findall(r'^vless:\/\/.+$', raw_data, re.MULTILINE)
-except: links = []
+except: 
+    links = []
 
 proxy_outbounds = [parse_vless(l) for l in links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
 proxy_tags = [p["tag"] for p in proxy_outbounds]
@@ -136,9 +151,7 @@ final_config = {
     "route": {
         "rules": [
             {"protocol": "dns", "outbound": "dns-out"},
-            # Правила блокировки рекламы (первыми в списке)
             {"rule_set": block_routing_tags, "outbound": "block"},
-            # Правила обхода блокировок
             {"rule_set": proxy_routing_tags, "outbound": "proxy"}
         ],
         "rule_set": formatted_rule_sets,
@@ -150,4 +163,4 @@ final_config = {
 with open('config.json', 'w', encoding='utf-8') as f:
     json.dump(final_config, f, indent=2, ensure_ascii=False)
 
-print(f"Готово! Блокировка: {len(block_routing_tags)} наборов, Прокси: {len(proxy_routing_tags)} наборов.")
+print(f"Готово! Ошибка TCP исправлена. Блокировка: {len(block_routing_tags)}, Прокси: {len(proxy_routing_tags)}.")
