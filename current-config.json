@@ -6,30 +6,47 @@
   "dns": {
     "servers": [
       {
-        "tag": "dns-remote",
+        "tag": "dns_proxy",
         "address": "tls://1.1.1.1",
+        "address_resolver": "dns_resolver",
         "detour": "select"
       },
       {
-        "tag": "dns-direct",
+        "tag": "dns_direct",
+        "address": "223.5.5.5",
+        "address_resolver": "dns_resolver",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns_fakeip",
+        "address": "fakeip"
+      },
+      {
+        "tag": "dns_resolver",
         "address": "223.5.5.5",
         "detour": "direct"
       }
     ],
     "rules": [
       {
-        "outbound": "any",
-        "server": "dns-direct"
+        "outbound": [
+          "any"
+        ],
+        "server": "dns_resolver"
       },
       {
         "query_type": [
           "A",
           "AAAA"
         ],
-        "server": "dns-remote"
+        "server": "dns_fakeip"
       }
     ],
-    "final": "dns-remote"
+    "final": "dns_direct",
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15"
+    }
   },
   "inbounds": [
     {
@@ -38,7 +55,8 @@
       "inet4_address": "172.19.0.1/30",
       "auto_route": true,
       "strict_route": true,
-      "sniff": true
+      "sniff": true,
+      "sniff_override_destination": true
     }
   ],
   "outbounds": [
