@@ -1691,17 +1691,15 @@
         "outbound": "block",
         "name": "🍃 AdblockPlus",
         "switch": true,
-        "or": true,
         "rule_set_build_in": [
           "acl:BanProgramAD",
           "acl:BanADCompany"
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "📹 YouTube",
         "switch": true,
-        "or": true,
         "rule_set_build_in": [
           "geosite:youtube"
         ],
@@ -1710,10 +1708,9 @@
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "♊️ Google Gemini",
         "switch": true,
-        "or": true,
         "domain": [
           "identitytoolkit.googleapis.com"
         ],
@@ -1722,20 +1719,18 @@
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "📲 Discord",
         "switch": true,
-        "or": true,
         "rule_set_build_in": [
           "geosite:discord",
           "acl:Discord"
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "📲 WhatsApp",
         "switch": true,
-        "or": true,
         "rule_set_build_in": [
           "geosite:whatsapp",
           "acl:Whatsapp"
@@ -1745,10 +1740,9 @@
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "📲 Telegram",
         "switch": true,
-        "or": false,
         "ip_cidr": [
           "91.108.56.0/22",
           "91.108.4.0/22",
@@ -1776,49 +1770,44 @@
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "💬 Claude",
         "switch": true,
-        "or": true,
         "rule_set_build_in": [
           "acl:Claude"
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "💬 OpenAI",
         "switch": true,
-        "or": true,
         "rule_set_build_in": [
           "geoip:openai",
           "geosite:openai"
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "🌏 GFW",
         "switch": true,
-        "or": true,
         "rule_set_build_in": [
           "geoip:blocked@ru",
           "geosite:blocked@ru"
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "BlockListProfile",
         "switch": true,
-        "or": true,
         "rule_set_build_in": [
           "acl:Porn",
           "geosite:category-porn"
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "Anime",
         "switch": true,
-        "or": true,
         "domain_suffix": [
           "libria.fun"
         ],
@@ -1835,19 +1824,17 @@
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "STUN",
         "switch": true,
-        "or": true,
         "protocol": [
           "stun"
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "Supercell",
         "switch": true,
-        "or": true,
         "domain_suffix": [
           ".usercentrics.eu"
         ],
@@ -1860,10 +1847,9 @@
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "Films",
         "switch": true,
-        "or": true,
         "domain_suffix": [
           "zet-flix.online",
           "filmix.ac",
@@ -1873,10 +1859,8 @@
         ]
       },
       {
-        "outbound": "currentSelected",
+        "outbound": "select",
         "name": "Discord VoIP",
-        "switch": true,
-        "or": false,
         "network": [
           "udp"
         ],
