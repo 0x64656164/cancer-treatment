@@ -2482,6 +2482,13 @@
       },
       {
         "rule_set": [
+          "ads-ru",
+          "geosite-category-ads-all"
+        ],
+        "outbound": "block"
+      },
+      {
+        "rule_set": [
           "anime-ru",
           "copilot",
           "discord-domains",
@@ -2504,8 +2511,6 @@
           "whatsapp",
           "x",
           "youtube",
-          "ads-ru",
-          "geosite-category-ads-all",
           "geosite-ru-blocked",
           "geoip-ru-blocked-all"
         ],
@@ -2672,14 +2677,14 @@
         "tag": "ads-ru",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/block/ads-ru.srs",
-        "download_detour": "block"
+        "download_detour": "direct"
       },
       {
         "type": "remote",
         "tag": "geosite-category-ads-all",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geosite-category-ads-all.srs",
-        "download_detour": "block"
+        "download_detour": "direct"
       },
       {
         "type": "remote",
