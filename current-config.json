@@ -8,7 +8,7 @@
       {
         "tag": "dns-remote",
         "address": "tls://1.1.1.1",
-        "detour": "select"
+        "detour": "proxy"
       },
       {
         "tag": "dns-direct",
@@ -49,7 +49,7 @@
   "outbounds": [
     {
       "type": "selector",
-      "tag": "select",
+      "tag": "proxy",
       "outbounds": [
         "auto",
         "🇦🇲 Armenia [*CIDR] VK",
@@ -1624,7 +1624,7 @@
           "geoip-ru-blocked-all",
           "geosite-rutracker"
         ],
-        "outbound": "select"
+        "outbound": "proxy"
       },
       {
         "outbound": "block",
@@ -1679,13 +1679,13 @@
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "rule_set": [
           "geosite:youtube"
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "domain": [
           "identitytoolkit.googleapis.com"
         ],
@@ -1694,21 +1694,21 @@
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "rule_set": [
           "geosite:discord",
           "acl:Discord"
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "rule_set": [
           "geosite:whatsapp",
           "acl:Whatsapp"
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "ip_cidr": [
           "91.108.56.0/22",
           "91.108.4.0/22",
@@ -1733,34 +1733,34 @@
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "rule_set": [
           "acl:Claude"
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "rule_set": [
           "geoip:openai",
           "geosite:openai"
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "rule_set": [
           "geoip:blocked@ru",
           "geosite:blocked@ru"
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "rule_set": [
           "acl:Porn",
           "geosite:category-porn"
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "domain": [
           "animemedia.info",
           "animedia.org",
@@ -1777,13 +1777,13 @@
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "protocol": [
           "stun"
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "domain_suffix": [
           ".usercentrics.eu"
         ],
@@ -1792,7 +1792,7 @@
         ]
       },
       {
-        "outbound": "select",
+        "outbound": "proxy",
         "domain_suffix": [
           "zet-flix.online",
           "filmix.ac",
@@ -1802,7 +1802,7 @@
         ]
       },
       {
-        "outbound": "select"
+        "outbound": "proxy"
       }
     ],
     "rule_set": [
@@ -1811,21 +1811,21 @@
         "tag": "geosite-ru-blocked",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
-        "download_detour": "select"
+        "download_detour": "proxy"
       },
       {
         "type": "remote",
         "tag": "geoip-ru-blocked-all",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs",
-        "download_detour": "select"
+        "download_detour": "proxy"
       },
       {
         "type": "remote",
         "tag": "geosite-rutracker",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-rutracker.srs",
-        "download_detour": "select"
+        "download_detour": "proxy"
       }
     ],
     "final": "direct",
