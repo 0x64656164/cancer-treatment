@@ -2770,14 +2770,11 @@
         "action": "hijack-dns"
       },
       {
-        "ip_cidr": [
-          "10.10.34.0/24",
-          "2001:4188:2:600:10:10:34:0/120"
-        ],
-        "outbound": "select"
+        "outbound": "direct §hide§",
+        "domain": ["myip.com"]
       }
     ],
-    "final": "select",
+    "final": "direct §hide§",
     "default_domain_resolver": "dns-direct"
   },
   "experimental": {
@@ -2788,7 +2785,7 @@
     },
     "clash_api": {
       "external_controller": "127.0.0.1:16756",
-      "secret": "8WPDKxEv6zGt-bZI"
+      "secret": "m8YS8Y_NR6u5rFkQ"
     },
     "unified_delay": {
       "enabled": true
