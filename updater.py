@@ -17,53 +17,41 @@ REMOTE_RULE_SETS = [
 ]
 
 REMOTE_BLOCK_RULE_SETS = [
-    "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geosite-category-ads-all.srs"
+    "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs"
 ]
 
 def parse_vless(link):
     parsed = urlparse(link)
     params = parse_qs(parsed.query)
     tag = unquote(parsed.fragment) or f"VLESS-{parsed.hostname}"
-    
     outbound = {
-        "type": "vless", 
-        "tag": tag, 
-        "server": parsed.hostname,
+        "type": "vless", "tag": tag, "server": parsed.hostname,
         "server_port": int(parsed.port) if parsed.port else 443,
-        "uuid": parsed.username, 
-        "packet_encoding": "xudp"
+        "uuid": parsed.username, "packet_encoding": "xudp"
     }
-    
     security = params.get('security', [''])[0]
     if security in ['tls', 'reality']:
         outbound["tls"] = {
-            "enabled": True, 
-            "server_name": params.get('sni', [parsed.hostname])[0],
+            "enabled": True, "server_name": params.get('sni', [parsed.hostname])[0],
             "utls": {"enabled": True, "fingerprint": "chrome"}
         }
         if security == 'reality':
             outbound["tls"]["reality"] = {
-                "enabled": True, 
-                "public_key": params.get('pbk', [''])[0], 
-                "short_id": params.get('sid', [''])[0]
+                "enabled": True, "public_key": params.get('pbk', [''])[0], "short_id": params.get('sid', [''])[0]
             }
-    
-    # Исправление ошибки "Unknown transport type: tcp"
     if 'type' in params:
         t_type = params['type'][0]
-        if t_type != 'tcp': # Sing-box не принимает "type": "tcp", это значение по умолчанию
+        if t_type != 'tcp':
             outbound["transport"] = {"type": t_type}
-            if t_type == 'grpc': 
-                outbound["transport"]["service_name"] = params.get('serviceName', [''])[0]
-            elif t_type == 'ws': 
-                outbound["transport"]["path"] = params.get('path', ['/'])[0]
-                
+            if t_type == 'grpc': outbound["transport"]["service_name"] = params.get('serviceName', [''])[0]
+            elif t_type == 'ws': outbound["transport"]["path"] = params.get('path', ['/'])[0]
     return outbound
 
-# --- 1. СБОР REMOTE RULE_SETS ---
+# --- 1. СБОР REMOTE RULE_SETS С УДАЛЕНИЕМ ДУБЛИКАТОВ ---
 formatted_rule_sets = []
 proxy_routing_tags = []
 block_routing_tags = []
+seen_tags = set() # Множество для отслеживания уникальности тегов
 
 # А. Локальные файлы из основной папки -> в PROXY
 local_dir = 'ruleset/srs/'
@@ -71,12 +59,14 @@ if os.path.exists(local_dir):
     for file in os.listdir(local_dir):
         if file.endswith('.srs'):
             tag = file.replace('.srs', '')
-            full_url = GITHUB_RAW_BASE + file
-            formatted_rule_sets.append({
-                "type": "remote", "tag": tag, "format": "binary",
-                "url": full_url, "download_detour": "proxy"
-            })
-            proxy_routing_tags.append(tag)
+            if tag not in seen_tags:
+                full_url = GITHUB_RAW_BASE + file
+                formatted_rule_sets.append({
+                    "type": "remote", "tag": tag, "format": "binary",
+                    "url": full_url, "download_detour": "proxy"
+                })
+                proxy_routing_tags.append(tag)
+                seen_tags.add(tag)
 
 # Б. Локальные файлы из папки block -> в BLOCK
 local_block_dir = 'ruleset/srs/block'
@@ -84,39 +74,42 @@ if os.path.exists(local_block_dir):
     for file in os.listdir(local_block_dir):
         if file.endswith('.srs'):
             tag = file.replace('.srs', '')
-            full_url = GITHUB_RAW_BASE + 'block/' + file
-            formatted_rule_sets.append({
-                "type": "remote", "tag": tag, "format": "binary",
-                "url": full_url, "download_detour": "direct"
-            })
-            block_routing_tags.append(tag)
+            if tag not in seen_tags:
+                full_url = GITHUB_RAW_BASE + 'block/' + file
+                formatted_rule_sets.append({
+                    "type": "remote", "tag": tag, "format": "binary",
+                    "url": full_url, "download_detour": "direct"
+                })
+                block_routing_tags.append(tag)
+                seen_tags.add(tag)
 
 # В. Внешние ссылки для BLOCK
 for url in REMOTE_BLOCK_RULE_SETS:
     tag = url.split('/')[-1].replace('.srs', '')
-    if tag not in block_routing_tags:
+    if tag not in seen_tags:
         formatted_rule_sets.append({
             "type": "remote", "tag": tag, "format": "binary",
             "url": url, "download_detour": "direct"
         })
         block_routing_tags.append(tag)
+        seen_tags.add(tag)
 
 # Г. Внешние ссылки для PROXY
 for url in REMOTE_RULE_SETS:
     tag = url.split('/')[-1].replace('.srs', '')
-    if tag not in proxy_routing_tags and tag not in block_routing_tags:
+    if tag not in seen_tags:
         formatted_rule_sets.append({
             "type": "remote", "tag": tag, "format": "binary",
             "url": url, "download_detour": "proxy"
         })
         proxy_routing_tags.append(tag)
+        seen_tags.add(tag)
 
 # --- 2. ПОЛУЧЕНИЕ ПРОКСИ ---
 try:
     raw_data = requests.get(SUB_LINK, timeout=15).text
     links = re.findall(r'^vless:\/\/.+$', raw_data, re.MULTILINE)
-except: 
-    links = []
+except: links = []
 
 proxy_outbounds = [parse_vless(l) for l in links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
 proxy_tags = [p["tag"] for p in proxy_outbounds]
@@ -163,4 +156,4 @@ final_config = {
 with open('config.json', 'w', encoding='utf-8') as f:
     json.dump(final_config, f, indent=2, ensure_ascii=False)
 
-print(f"Готово! Ошибка TCP исправлена. Блокировка: {len(block_routing_tags)}, Прокси: {len(proxy_routing_tags)}.")
+print(f"Готово! Уникальных наборов правил: {len(seen_tags)}.")
