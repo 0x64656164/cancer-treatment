@@ -1626,6 +1626,7 @@
       },
       {
         "rule_set": [
+          "ads-ru",
           "geosite-category-ads-all"
         ],
         "outbound": "block"
@@ -1648,7 +1649,6 @@
           "openai",
           "discord-full",
           "copilot",
-          "ads-ru",
           "discord-domains",
           "whatsapp",
           "discord-voice-chats-no-cidr",
@@ -1776,13 +1776,6 @@
       },
       {
         "type": "remote",
-        "tag": "ads-ru",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/ads-ru.srs",
-        "download_detour": "proxy"
-      },
-      {
-        "type": "remote",
         "tag": "discord-domains",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-domains.srs",
@@ -1822,6 +1815,13 @@
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/unavailable-in-russia.srs",
         "download_detour": "proxy"
+      },
+      {
+        "type": "remote",
+        "tag": "ads-ru",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/block/ads-ru.srs",
+        "download_detour": "direct"
       },
       {
         "type": "remote",
