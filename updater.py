@@ -3,7 +3,7 @@ import re
 import json
 import os
 from urllib.parse import urlparse, unquote
-from base import SingBoxProxy  # Используем ваш базовый класс
+from base import SingBoxProxy
 
 # --- НАСТРОЙКИ ---
 SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt'
@@ -19,47 +19,56 @@ REMOTE_BLOCK_RULE_SETS = [
 ]
 
 def generate_final_config():
-    # 1. Получаем ссылки из подписки
     try:
         response = requests.get(SUB_LINK, timeout=15)
         response.raise_for_status()
         links = re.findall(r'^vless:\/\/.+$', response.text, re.MULTILINE)
     except Exception as e:
-        print(f"Ошибка загрузки подписки: {e}")
+        print(f"Ошибка загрузки: {e}")
         links = []
 
     all_proxy_outbounds = []
     seen_tags = set()
 
-    # Инициализируем один раз объект для доступа к методам парсинга
-    # Мы не передаем ссылку в конструктор, чтобы не создавать лишних файлов
+    # Создаем фиктивный объект для доступа к парсеру
     parser = SingBoxProxy("vless://temp@temp:443#temp")
 
-    # 2. Парсим КАЖДУЮ ссылку
     for link in links:
         try:
-            fragment = unquote(urlparse(link).fragment)
-            if not re.match(REGEXP_FILTER, fragment):
+            # Извлекаем оригинальное имя из ссылки (после #)
+            url_parts = urlparse(link)
+            original_tag = unquote(url_parts.fragment)
+            
+            # Проверка фильтра (пропускаем "Russia")
+            if not original_tag or not re.match(REGEXP_FILTER, original_tag):
                 continue
 
-            # Используем логику из base.py для парсинга ноды
+            # Парсим ссылку через логику base.py
             outbound = parser._parse_vless_link(link)
             
-            # ВАЖНО: Исправляем xhttp -> httpupgrade (совместимость с Sing-box 1.10+)
+            # --- КРИТИЧЕСКИЕ ИСПРАВЛЕНИЯ ---
+            # 1. Принудительно ставим оригинальный тег вместо дефолтного "proxy"
+            outbound["tag"] = original_tag
+            
+            # 2. Исправляем xhttp -> httpupgrade
             if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
                 outbound["transport"]["type"] = "httpupgrade"
+                # В sing-box v1.10+ host в httpupgrade должен быть строкой, а не списком
+                if isinstance(outbound["transport"].get("host"), list):
+                    outbound["transport"]["host"] = outbound["transport"]["host"][0] if outbound["transport"]["host"] else ""
 
-            # Проверяем на дубликаты тегов, чтобы конфиг был валидным
+            # 3. Добавляем в список, если тег уникален
             if outbound["tag"] not in seen_tags:
                 all_proxy_outbounds.append(outbound)
                 seen_tags.add(outbound["tag"])
+                
         except Exception as e:
-            print(f"Пропущена битая ссылка: {e}")
+            print(f"Ошибка парсинга ссылки: {e}")
 
-    # Список тегов для селектора "proxy" и "auto"
+    # Список тегов для селектора
     proxy_tags = [p["tag"] for p in all_proxy_outbounds]
 
-    # 3. Сборка Rule Sets (Локальные + Удаленные)
+    # --- СБОРКА ПРАВИЛ (RULE SETS) ---
     formatted_rule_sets = []
     proxy_routing_tags = []
     block_routing_tags = []
@@ -75,9 +84,8 @@ def generate_final_config():
         else: proxy_routing_tags.append(tag)
         rule_tags.add(tag)
 
-    # Сканируем локальные папки
-    folders = [('ruleset/srs/', False), ('ruleset/srs/block', True)]
-    for folder, is_block in folders:
+    # Локальные
+    for folder, is_block in [('ruleset/srs/', False), ('ruleset/srs/block', True)]:
         if os.path.exists(folder):
             for file in os.listdir(folder):
                 if file.endswith('.srs'):
@@ -85,36 +93,19 @@ def generate_final_config():
                     url = f"{GITHUB_RAW_BASE}{'block/' if is_block else ''}{file}"
                     add_rule(tag, url, is_block)
 
-    # Внешние наборы
-    for url in REMOTE_BLOCK_RULE_SETS:
-        add_rule(url.split('/')[-1].replace('.srs', ''), url, True)
-    for url in REMOTE_RULE_SETS:
-        add_rule(url.split('/')[-1].replace('.srs', ''), url, False)
+    # Внешние
+    for url in REMOTE_BLOCK_RULE_SETS: add_rule(url.split('/')[-1].replace('.srs', ''), url, True)
+    for url in REMOTE_RULE_SETS: add_rule(url.split('/')[-1].replace('.srs', ''), url, False)
 
-    # 4. Собираем итоговый объект Outbounds
-    # Сначала системные и селекторы, потом весь список нод
+    # --- ИТОГОВЫЕ ВЫХОДЫ ---
     main_outbounds = [
-        {
-            "type": "selector", 
-            "tag": "proxy", 
-            "outbounds": ["auto"] + proxy_tags + ["direct"]
-        },
-        {
-            "type": "urltest", 
-            "tag": "auto", 
-            "outbounds": proxy_tags, 
-            "url": "http://cp.cloudflare.com/", 
-            "interval": "10m"
-        },
+        {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags + ["direct"]},
+        {"type": "urltest", "tag": "auto", "outbounds": proxy_tags, "url": "http://cp.cloudflare.com/", "interval": "10m"},
         {"type": "direct", "tag": "direct"},
         {"type": "dns", "tag": "dns-out"},
         {"type": "block", "tag": "block"}
     ]
     
-    # Добавляем все распарсенные ноды в общий список
-    final_outbounds = main_outbounds + all_proxy_outbounds
-
-    # 5. Финальный JSON
     config = {
         "log": {"level": "info", "timestamp": True},
         "dns": {
@@ -134,7 +125,7 @@ def generate_final_config():
             "type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30",
             "auto_route": True, "strict_route": True, "sniff": True, "sniff_override_destination": True
         }],
-        "outbounds": final_outbounds,
+        "outbounds": main_outbounds + all_proxy_outbounds,
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
@@ -152,5 +143,6 @@ def generate_final_config():
 
 if __name__ == "__main__":
     generate_final_config()
-    print("Конфиг обновлен: все прокси добавлены, теги сохранены.")
+    print("Конфиг успешно пересобран. Все сервера добавлены с уникальными тегами.")
+
 
