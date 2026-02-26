@@ -27,7 +27,7 @@ jobs:
 
       - name: Install sing-box
         run: |
-          # Скачиваем последнюю версию sing-box
+          # Автоматический поиск и установка последней версии sing-box
           VERSION=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | jq -r .tag_name | sed 's/v//')
           URL="https://github.com/SagerNet/sing-box/releases/download/v${VERSION}/sing-box-${VERSION}-linux-amd64.tar.gz"
           curl -Lo sing-box.tar.gz "$URL"
@@ -36,28 +36,28 @@ jobs:
           chmod +x sing-box
           echo "$(pwd)" >> $GITHUB_PATH
 
-      - name: Compile Rule Sets (JSON to SRS)
+      - name: Decompile Rule Sets (SRS to JSON)
         run: |
-          # Создаем папки для результата, если их нет
-          mkdir -p ruleset/srs/block
+          # Создаем папки для JSON, если они отсутствуют
+          mkdir -p ruleset/json/block
           
-          # Компиляция основных правил
-          if [ -d "ruleset/json" ]; then
-            for file in ruleset/json/*.json; do
+          # Декомпиляция основных правил
+          if [ -d "ruleset/srs" ]; then
+            for file in ruleset/srs/*.srs; do
               [ -e "$file" ] || continue
-              filename=$(basename "$file" .json)
-              ./sing-box rule-set compile "$file" -o "ruleset/srs/${filename}.srs"
-              echo "Compiled: $filename"
+              filename=$(basename "$file" .srs)
+              ./sing-box rule-set decompile "$file" -o "ruleset/json/${filename}.json"
+              echo "Decompiled: $filename"
             done
           fi
           
-          # Компиляция блокирующих правил
-          if [ -d "ruleset/json/block" ]; then
-            for file in ruleset/json/block/*.json; do
+          # Декомпиляция блокирующих правил
+          if [ -d "ruleset/srs/block" ]; then
+            for file in ruleset/srs/block/*.srs; do
               [ -e "$file" ] || continue
-              filename=$(basename "$file" .json)
-              ./sing-box rule-set compile "$file" -o "ruleset/srs/block/${filename}.srs"
-              echo "Compiled block rule: $filename"
+              filename=$(basename "$file" .srs)
+              ./sing-box rule-set decompile "$file" -o "ruleset/json/block/${filename}.json"
+              echo "Decompiled block rule: $filename"
             done
           fi
 
@@ -69,13 +69,13 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Добавляем и конфиг, и все скомпилированные SRS файлы
-          git add config.json ruleset/srs/*.srs ruleset/srs/block/*.srs
+          # Добавляем config.json и все декомпилированные JSON файлы
+          git add config.json ruleset/json/*.json ruleset/json/block/*.json
           
-          # Проверяем изменения
+          # Проверяем наличие изменений перед коммитом
           if git diff --staged --quiet; then
-            echo "No changes detected"
+            echo "No changes detected in JSON files or config"
           else
-            git commit -m "Auto-update: Config and SRS rules $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
+            git commit -m "Auto-update: Decompiled SRS to JSON $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
             git push
           fi
