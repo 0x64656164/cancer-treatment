@@ -25,6 +25,42 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Install sing-box
+        run: |
+          # Скачиваем последнюю версию sing-box
+          VERSION=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | jq -r .tag_name | sed 's/v//')
+          URL="https://github.com/SagerNet/sing-box/releases/download/v${VERSION}/sing-box-${VERSION}-linux-amd64.tar.gz"
+          curl -Lo sing-box.tar.gz "$URL"
+          tar -xzf sing-box.tar.gz
+          mv sing-box-*/sing-box .
+          chmod +x sing-box
+          echo "$(pwd)" >> $GITHUB_PATH
+
+      - name: Compile Rule Sets (JSON to SRS)
+        run: |
+          # Создаем папки для результата, если их нет
+          mkdir -p ruleset/srs/block
+          
+          # Компиляция основных правил
+          if [ -d "ruleset/json" ]; then
+            for file in ruleset/json/*.json; do
+              [ -e "$file" ] || continue
+              filename=$(basename "$file" .json)
+              ./sing-box rule-set compile "$file" -o "ruleset/srs/${filename}.srs"
+              echo "Compiled: $filename"
+            done
+          fi
+          
+          # Компиляция блокирующих правил
+          if [ -d "ruleset/json/block" ]; then
+            for file in ruleset/json/block/*.json; do
+              [ -e "$file" ] || continue
+              filename=$(basename "$file" .json)
+              ./sing-box rule-set compile "$file" -o "ruleset/srs/block/${filename}.srs"
+              echo "Compiled block rule: $filename"
+            done
+          fi
+
       - name: Run updater
         run: python updater.py
 
@@ -33,12 +69,13 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          git add config.json
+          # Добавляем и конфиг, и все скомпилированные SRS файлы
+          git add config.json ruleset/srs/*.srs ruleset/srs/block/*.srs
           
           # Проверяем изменения
           if git diff --staged --quiet; then
-            echo "No changes in config.json"
+            echo "No changes detected"
           else
-            git commit -m "Update config.json: $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
+            git commit -m "Auto-update: Config and SRS rules $(date -u +'%Y-%m-%d %H:%M:%S') UTC"
             git push
           fi
