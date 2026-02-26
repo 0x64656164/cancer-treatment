@@ -1,16 +1,15 @@
-import requests
+ import requests
 import re
 import json
 import os
 from urllib.parse import urlparse, unquote
-from base import SingBoxProxy  # Импортируем вашу логику
+from base import SingBoxProxy  # Используем ваш базовый класс
 
 # --- НАСТРОЙКИ ---
 SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt'
 REGEXP_FILTER = r'^(?!.*Russia).*$'
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
 
-# Внешние SRS
 REMOTE_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs"
@@ -20,37 +19,45 @@ REMOTE_BLOCK_RULE_SETS = [
 ]
 
 def generate_final_config():
-    # 1. Получаем ссылки
+    # 1. Получаем ссылки из подписки
     try:
-        raw_data = requests.get(SUB_LINK, timeout=15).text
-        links = re.findall(r'^vless:\/\/.+$', raw_data, re.MULTILINE)
+        response = requests.get(SUB_LINK, timeout=15)
+        response.raise_for_status()
+        links = re.findall(r'^vless:\/\/.+$', response.text, re.MULTILINE)
     except Exception as e:
-        print(f"Ошибка загрузки: {e}")
+        print(f"Ошибка загрузки подписки: {e}")
         links = []
 
-    proxy_outbounds = []
+    all_proxy_outbounds = []
     seen_tags = set()
 
-    # 2. Парсим прокси через SingBoxProxy
+    # Инициализируем один раз объект для доступа к методам парсинга
+    # Мы не передаем ссылку в конструктор, чтобы не создавать лишних файлов
+    parser = SingBoxProxy("vless://temp@temp:443#temp")
+
+    # 2. Парсим КАЖДУЮ ссылку
     for link in links:
-        fragment = unquote(urlparse(link).fragment)
-        if not re.match(REGEXP_FILTER, fragment):
-            continue
+        try:
+            fragment = unquote(urlparse(link).fragment)
+            if not re.match(REGEXP_FILTER, fragment):
+                continue
 
-        # Используем SingBoxProxy для генерации структуры
-        # Мы создаем объект, но не запускаем его (start() не вызываем)
-        sb_proxy = SingBoxProxy(link)
-        outbound = sb_proxy._parse_vless_link(link)
-        
-        # Исправление xhttp -> httpupgrade (для Sing-box 1.10+)
-        if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
-            outbound["transport"]["type"] = "httpupgrade"
+            # Используем логику из base.py для парсинга ноды
+            outbound = parser._parse_vless_link(link)
+            
+            # ВАЖНО: Исправляем xhttp -> httpupgrade (совместимость с Sing-box 1.10+)
+            if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
+                outbound["transport"]["type"] = "httpupgrade"
 
-        if outbound["tag"] not in seen_tags:
-            proxy_outbounds.append(outbound)
-            seen_tags.add(outbound["tag"])
+            # Проверяем на дубликаты тегов, чтобы конфиг был валидным
+            if outbound["tag"] not in seen_tags:
+                all_proxy_outbounds.append(outbound)
+                seen_tags.add(outbound["tag"])
+        except Exception as e:
+            print(f"Пропущена битая ссылка: {e}")
 
-    proxy_tags = [p["tag"] for p in proxy_outbounds]
+    # Список тегов для селектора "proxy" и "auto"
+    proxy_tags = [p["tag"] for p in all_proxy_outbounds]
 
     # 3. Сборка Rule Sets (Локальные + Удаленные)
     formatted_rule_sets = []
@@ -61,18 +68,16 @@ def generate_final_config():
     def add_rule(tag, url, is_block):
         if tag in rule_tags: return
         formatted_rule_sets.append({
-            "type": "remote",
-            "tag": tag,
-            "format": "binary",
-            "url": url,
+            "type": "remote", "tag": tag, "format": "binary", "url": url,
             "download_detour": "direct" if is_block else "proxy"
         })
         if is_block: block_routing_tags.append(tag)
         else: proxy_routing_tags.append(tag)
         rule_tags.add(tag)
 
-    # Сканируем папки
-    for folder, is_block in [('ruleset/srs/', False), ('ruleset/srs/block', True)]:
+    # Сканируем локальные папки
+    folders = [('ruleset/srs/', False), ('ruleset/srs/block', True)]
+    for folder, is_block in folders:
         if os.path.exists(folder):
             for file in os.listdir(folder):
                 if file.endswith('.srs'):
@@ -80,13 +85,36 @@ def generate_final_config():
                     url = f"{GITHUB_RAW_BASE}{'block/' if is_block else ''}{file}"
                     add_rule(tag, url, is_block)
 
-    # Внешние ссылки
+    # Внешние наборы
     for url in REMOTE_BLOCK_RULE_SETS:
         add_rule(url.split('/')[-1].replace('.srs', ''), url, True)
     for url in REMOTE_RULE_SETS:
         add_rule(url.split('/')[-1].replace('.srs', ''), url, False)
 
-    # 4. Финальная сборка JSON
+    # 4. Собираем итоговый объект Outbounds
+    # Сначала системные и селекторы, потом весь список нод
+    main_outbounds = [
+        {
+            "type": "selector", 
+            "tag": "proxy", 
+            "outbounds": ["auto"] + proxy_tags + ["direct"]
+        },
+        {
+            "type": "urltest", 
+            "tag": "auto", 
+            "outbounds": proxy_tags, 
+            "url": "http://cp.cloudflare.com/", 
+            "interval": "10m"
+        },
+        {"type": "direct", "tag": "direct"},
+        {"type": "dns", "tag": "dns-out"},
+        {"type": "block", "tag": "block"}
+    ]
+    
+    # Добавляем все распарсенные ноды в общий список
+    final_outbounds = main_outbounds + all_proxy_outbounds
+
+    # 5. Финальный JSON
     config = {
         "log": {"level": "info", "timestamp": True},
         "dns": {
@@ -106,13 +134,7 @@ def generate_final_config():
             "type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30",
             "auto_route": True, "strict_route": True, "sniff": True, "sniff_override_destination": True
         }],
-        "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags + ["direct"]},
-            {"type": "urltest", "tag": "auto", "outbounds": proxy_tags, "url": "http://cp.cloudflare.com/", "interval": "10m"},
-            {"type": "direct", "tag": "direct"},
-            {"type": "dns", "tag": "dns-out"},
-            {"type": "block", "tag": "block"}
-        ] + proxy_outbounds,
+        "outbounds": final_outbounds,
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
@@ -130,4 +152,4 @@ def generate_final_config():
 
 if __name__ == "__main__":
     generate_final_config()
-    print("Конфигурация успешно обновлена с использованием логики singbox2proxy!")
+    print("Конфиг обновлен: все прокси добавлены, теги сохранены.")
