@@ -1,4 +1,4 @@
- import requests
+import requests
 import re
 import json
 import os
@@ -153,3 +153,4 @@ def generate_final_config():
 if __name__ == "__main__":
     generate_final_config()
     print("Конфиг обновлен: все прокси добавлены, теги сохранены.")
+
