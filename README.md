@@ -2,4 +2,6 @@
 Представляю вашему вниманию конфиг собранный из говна и палок но приспособленный для однокнопочного пользования и обхода почти всех блокировок.
 
 ## Подписка: 
-'''https//raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/config.json#Cancer-Treatment'''
+```
+https//raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/config.json#Cancer-Treatment
+```
