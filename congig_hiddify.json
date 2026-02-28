@@ -11,9 +11,9 @@
         "detour": "proxy"
       },
       {
-        "tag": "dns-direct §hide§",
+        "tag": "dns-direct",
         "address": "223.5.5.5",
-        "detour": "direct §hide§"
+        "detour": "direct"
       },
       {
         "tag": "dns-fakeip",
@@ -23,7 +23,7 @@
     "rules": [
       {
         "outbound": "any",
-        "server": "dns-direct §hide§"
+        "server": "dns-direct"
       },
       {
         "query_type": [
@@ -101,7 +101,7 @@
         "🌐 Anycast-IP | [IPv6] [*CIDR] YA",
         "🌐 Anycast-IP [*CIDR] VK",
         "🌐 Anycast-IP [*CIDR] YA",
-        "direct §hide§"
+        "direct"
       ]
     },
     {
@@ -159,7 +159,7 @@
     },
     {
       "type": "direct",
-      "tag": "direct §hide§"
+      "tag": "direct"
     },
     {
       "type": "dns",
@@ -1157,6 +1157,9 @@
           "geoip-ru-blocked-all"
         ],
         "outbound": "proxy"
+      },
+      {
+        "outbound": "direct"
       }
     ],
     "rule_set": [
@@ -1333,7 +1336,7 @@
         "tag": "geosite-category-ads-all",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs",
-        "download_detour": "direct "
+        "download_detour": "direct"
       },
       {
         "type": "remote",
@@ -1350,7 +1353,7 @@
         "download_detour": "proxy"
       }
     ],
-    "final": "direct §hide§",
+    "final": "direct",
     "auto_detect_interface": true
   }
 }
