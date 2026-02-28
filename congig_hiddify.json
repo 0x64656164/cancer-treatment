@@ -1122,6 +1122,12 @@
         "outbound": "dns-out"
       },
       {
+        "ruleset": [
+          "any"
+        ],
+        "outbound": "direct"
+      },
+      {
         "rule_set": [
           "ads-ru",
           "geosite-category-ads-all"
@@ -1157,12 +1163,6 @@
           "geoip-ru-blocked-all"
         ],
         "outbound": "proxy"
-      },
-      {
-        "ruleset": [
-          "any"
-        ],
-        "outbound": "direct"
       }
     ],
     "rule_set": [
@@ -1332,7 +1332,7 @@
         "tag": "ads-ru",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/block/ads-ru.srs",
-        "download_detour": "direct"
+        "download_detour": "proxy"
       },
       {
         "type": "remote",
