@@ -75,6 +75,8 @@ jobs:
           # Проверяем изменения
           if git diff --staged --quiet; then
             echo "No changes detected"
+            git commit -m "Авто-обновление: Конфиг и SRS правила $(TZ='Europe/Moscow' date +'%d.%m.%Y %H:%M:%S')"
+            git push
           else
             git commit -m "Авто-обновление: Конфиг и SRS правила $(TZ='Europe/Moscow' date +'%d.%m.%Y %H:%M:%S')"
             git push
