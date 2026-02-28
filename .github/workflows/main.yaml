@@ -78,8 +78,6 @@ jobs:
           # Проверяем изменения
           if git diff --staged --quiet; then
             echo "No changes detected"
-            git commit -m "Авто-обновление: Конфиг и SRS правила ${{ env.NOW }}"
-            git push
           else
             git commit -m "Авто-обновление: Конфиг и SRS правила ${{ env.NOW }}"
             git push
