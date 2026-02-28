@@ -64,6 +64,9 @@ jobs:
       - name: Run updater
         run: python updater.py
 
+      - name: Get current date
+        run: echo "NOW=$(TZ='Europe/Moscow' date +'%d.%m.%Y %H:%M:%S %Z')" >> $GITHUB_ENV
+
       - name: Commit and Push if changed
         run: |
           git config --global user.name "github-actions[bot]"
@@ -75,9 +78,9 @@ jobs:
           # Проверяем изменения
           if git diff --staged --quiet; then
             echo "No changes detected"
-            git commit -m "Авто-обновление: Конфиг и SRS правила $(TZ='Europe/Moscow' date +'%d.%m.%Y %H:%M:%S')"
+            git commit -m "Авто-обновление: Конфиг и SRS правила ${{ env.NOW }}"
             git push
           else
-            git commit -m "Авто-обновление: Конфиг и SRS правила $(TZ='Europe/Moscow' date +'%d.%m.%Y %H:%M:%S')"
+            git commit -m "Авто-обновление: Конфиг и SRS правила ${{ env.NOW }}"
             git push
           fi
