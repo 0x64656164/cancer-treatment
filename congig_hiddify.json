@@ -1159,6 +1159,9 @@
         "outbound": "proxy"
       },
       {
+        "ruleset": [
+          "any"
+        ],
         "outbound": "direct"
       }
     ],
@@ -1350,6 +1353,13 @@
         "tag": "geoip-ru-blocked-all",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs",
+        "download_detour": "proxy"
+      },
+      {
+        "type": "remote",
+        "tag": "any",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/hiddify/any.srs",
         "download_detour": "proxy"
       }
     ],
