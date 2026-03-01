@@ -28,7 +28,6 @@ def generate_final_config():
         links = []
 
     all_proxy_outbounds = []
-    seen_tags = set()
 
     # Создаем фиктивный объект для доступа к парсеру
     parser = SingBoxProxy("vless://temp@temp:443#temp")
@@ -57,10 +56,21 @@ def generate_final_config():
                 if isinstance(outbound["transport"].get("host"), list):
                     outbound["transport"]["host"] = outbound["transport"]["host"][0] if outbound["transport"]["host"] else ""
 
-            # 3. Добавляем в список, если тег уникален
-            if outbound["tag"] not in seen_tags:
+            # Инициализация словаря для отслеживания количества каждого тега
+            tag_count = {}
+
+            for outbound in outbounds:
+                tag = outbound["tag"]
+                
+                # Если тег уже встречался, увеличиваем счетчик
+                if tag in tag_count:
+                    tag_count[tag] += 1
+                    outbound["tag"] = f"{tag}-{tag_count[tag]}"  # Добавляем суффикс
+                else:
+                    tag_count[tag] = 0  # Для первого вхождения устанавливаем счетчик в 0
+
+                # Добавляем элемент в список
                 all_proxy_outbounds.append(outbound)
-                seen_tags.add(outbound["tag"])
                 
         except Exception as e:
             print(f"Ошибка парсинга ссылки: {e}")
@@ -143,6 +153,5 @@ def generate_final_config():
 
 if __name__ == "__main__":
     generate_final_config()
-    print("Конфиг успешно пересобран. Все сервера добавлены с уникальными тегами.")
-
+    print("Конфиг успешно пересобран.")
 
