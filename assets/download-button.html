@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download Button</title>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Onest', sans-serif;
+  }
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 28px;
+    height: 42px;
+    border: 1.5px solid #3b82f6;
+    border-radius: 4px;
+    background: transparent;
+    color: #3b82f6;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #3b82f6;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .btn:hover::before { transform: scaleX(1); }
+  .btn:hover { color: #fff; border-color: #3b82f6; }
+  .btn:active { transform: scale(0.98); }
+
+  .btn__icon, .btn__text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn__icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .btn__icon svg {
+    transition: transform 0.25s ease;
+  }
+  .btn:hover .btn__icon svg {
+    transform: translateY(2px);
+  }
+
+  .btn__sep {
+    position: relative;
+    z-index: 1;
+    width: 1px;
+    height: 16px;
+    background: currentColor;
+    opacity: 0.35;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<a class="btn" id="downloadBtn" href="#" target="_blank" rel="noopener noreferrer">
+  <span class="btn__icon">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 1v8M7 9l-3-3M7 9l3-3M2 12h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+  <span class="btn__sep"></span>
+  <span class="btn__text" id="btnText">Скачать</span>
+</a>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const link = params.get('link') || '#';
+  const text = params.get('text') || 'Скачать';
+
+  document.getElementById('downloadBtn').href = link;
+  document.getElementById('btnText').textContent = text;
+</script>
+
+</body>
+</html>
