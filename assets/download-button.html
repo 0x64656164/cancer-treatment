@@ -35,7 +35,7 @@
     text-decoration: none;
     cursor: pointer;
     overflow: hidden;
-    transition: color 0.3s ease, border-color 0.3s ease;
+    transition: color 0.3s ease;
     white-space: nowrap;
   }
 
@@ -51,10 +51,10 @@
   }
 
   .btn:hover::before { transform: scaleX(1); }
-  .btn:hover { color: #fff; border-color: #3b82f6; }
+  .btn:hover { color: #fff; }
   .btn:active { transform: scale(0.98); }
 
-  .btn__icon, .btn__text {
+  .btn__icon, .btn__text, .btn__sep {
     position: relative;
     z-index: 1;
   }
@@ -73,8 +73,6 @@
   }
 
   .btn__sep {
-    position: relative;
-    z-index: 1;
     width: 1px;
     height: 16px;
     background: currentColor;
@@ -88,7 +86,9 @@
 <a class="btn" id="downloadBtn" href="#" target="_blank" rel="noopener noreferrer">
   <span class="btn__icon">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 1v8M7 9l-3-3M7 9l3-3M2 12h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M7 1v8M7 9l-3-3M7 9l3-3M2 12h10"
+            stroke="currentColor" stroke-width="1.4"
+            stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </span>
   <span class="btn__sep"></span>
@@ -96,12 +96,13 @@
 </a>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const link = params.get('link') || '#';
-  const text = params.get('text') || 'Скачать';
+  // ─── Настройки ───────────────────────────────────────────
+  const BUTTON_TEXT = "Скачать файл";          // Текст кнопки
+  const BUTTON_LINK = "https://example.com/file.pdf";  // Ссылка
+  // ─────────────────────────────────────────────────────────
 
-  document.getElementById('downloadBtn').href = link;
-  document.getElementById('btnText').textContent = text;
+  document.getElementById('btnText').textContent = BUTTON_TEXT;
+  document.getElementById('downloadBtn').href = BUTTON_LINK;
 </script>
 
 </body>
