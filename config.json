@@ -7761,6 +7761,7 @@
       },
       {
         "rule_set": [
+          "other-ads",
           "ads-ru",
           "geosite-category-ads-all"
         ],
@@ -7790,6 +7791,7 @@
           "discord-voice-chats-no-cidr",
           "youtube",
           "spotify",
+          "capcut",
           "unavailable-in-russia",
           "geosite-ru-blocked",
           "geoip-ru-blocked-all"
@@ -7954,10 +7956,24 @@
       },
       {
         "type": "remote",
+        "tag": "capcut",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/capcut.srs",
+        "download_detour": "proxy"
+      },
+      {
+        "type": "remote",
         "tag": "unavailable-in-russia",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/unavailable-in-russia.srs",
         "download_detour": "proxy"
+      },
+      {
+        "type": "remote",
+        "tag": "other-ads",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/block/other-ads.srs",
+        "download_detour": "direct"
       },
       {
         "type": "remote",
