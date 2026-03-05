@@ -16,7 +16,7 @@ TOP_COUNT = 100  # Оставляем 100 лучших
 MAX_WORKERS = 8  # Не ставьте слишком много, чтобы не забить свой же канал при тестах
 # Ссылка на файл для теста (1МБ достаточно для быстрой оценки)
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
-TIMEOUT = 15 # Максимальное время на тест одного прокси
+TIMEOUT = 5 # Максимальное время на тест одного прокси
 
 REMOTE_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
