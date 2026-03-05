@@ -38,24 +38,24 @@ def generate_final_config():
             # Извлекаем оригинальное имя из ссылки (после #)
             url_parts = urlparse(link)
             original_tag = unquote(url_parts.fragment)
-            
+
             # Проверка фильтра (пропускаем "Russia")
             if not original_tag or not re.match(REGEXP_FILTER, original_tag):
                 continue
 
             # Парсим ссылку через логику base.py
             outbound = parser._parse_vless_link(link)
-            
+
             # --- КРИТИЧЕСКИЕ ИСПРАВЛЕНИЯ ---
             # 1. Принудительно ставим оригинальный тег вместо дефолтного "proxy"
             outbound["tag"] = original_tag
-            
+
             # 2. Исправляем xhttp -> httpupgrade
-            if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
-                outbound["transport"]["type"] = "httpupgrade"
+            #if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
+            #    outbound["transport"]["type"] = "httpupgrade"
                 # В sing-box v1.10+ host в httpupgrade должен быть строкой, а не списком
-                if isinstance(outbound["transport"].get("host"), list):
-                    outbound["transport"]["host"] = outbound["transport"]["host"][0] if outbound["transport"]["host"] else ""
+            #    if isinstance(outbound["transport"].get("host"), list):
+            #        outbound["transport"]["host"] = outbound["transport"]["host"][0] if outbound["transport"]["host"] else ""
 
             # 3. Добавляем в список с суффиксами, если тег уже существует
             if outbound["tag"] in seen_tags:
@@ -65,7 +65,7 @@ def generate_final_config():
                 seen_tags[outbound["tag"]] = 0
 
             all_proxy_outbounds.append(outbound)
-                
+
         except Exception as e:
             print(f"Ошибка парсинга ссылки: {e}")
 
@@ -109,7 +109,7 @@ def generate_final_config():
         {"type": "dns", "tag": "dns-out"},
         {"type": "block", "tag": "block"}
     ]
-    
+
     config = {
         "log": {"level": "info", "timestamp": True},
         "dns": {
