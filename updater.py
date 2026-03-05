@@ -2,6 +2,8 @@ import requests
 import re
 import json
 import os
+import time
+import concurrent.futures
 from urllib.parse import urlparse, unquote
 from base import SingBoxProxy
 
@@ -9,6 +11,13 @@ from base import SingBoxProxy
 SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt'
 REGEXP_FILTER = r'^(?!.*Russia).*$'
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
+
+TOP_COUNT = 100          # Оставляем только 100 лучших
+TEST_THREADS = 10        # Количество одновременных тестов
+# Ссылка для теста. 'generate_204' проверяет доступность и задержку.
+# Для реальной скорости лучше файл побольше: 'https://cachefly.cachefly.net/1mb.test'
+SPEED_TEST_URL = 'http://cp.cloudflare.com/generate_204'
+TIMEOUT = 10             # Тайм-аут на один сервер
 
 REMOTE_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
@@ -18,61 +27,78 @@ REMOTE_BLOCK_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs"
 ]
 
-def generate_final_config():
+def benchmark_proxy(link):
+    """Тестирует прокси и возвращает (outbound_dict, score)"""
     try:
-        response = requests.get(SUB_LINK, timeout=15)
-        response.raise_for_status()
-        links = re.findall(r'^vless:\/\/.+$', response.text, re.MULTILINE)
+        tag = unquote(urlparse(link).fragment) or "Unnamed"
+        
+        # Используем SingBoxProxy из вашего base.py
+        with SingBoxProxy(link) as proxy:
+            start_time = time.time()
+            # Делаем запрос через поднятый прокси
+            response = proxy.get(SPEED_TEST_URL, timeout=TIMEOUT)
+            duration = time.time() - start_time
+            
+            if response.status_code < 400:
+                # Чем меньше duration, тем выше score
+                score = 1000 / duration 
+                
+                # Генерируем структуру для конфига
+                outbound = proxy._parse_vless_link(link)
+                outbound["tag"] = tag
+                
+                # Фикс xhttp -> httpupgrade
+                if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
+                    outbound["transport"]["type"] = "httpupgrade"
+                
+                return outbound, score
+    except:
+        pass
+    return None, 0
+
+def generate_final_config():
+    print(f"Загрузка подписки...")
+    try:
+        resp = requests.get(SUB_LINK, timeout=15)
+        links = re.findall(r'^vless:\/\/.+$', resp.text, re.MULTILINE)
     except Exception as e:
         print(f"Ошибка загрузки: {e}")
-        links = []
+        return
 
-    all_proxy_outbounds = []
+    # Фильтруем по названию
+    candidates = [l for l in links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
+    print(f"Найдено {len(candidates)} кандидатов. Начинаем тест скорости в {TEST_THREADS} потоков...")
+
+    results = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=TEST_THREADS) as executor:
+        future_to_link = {executor.submit(benchmark_proxy, l): l for l in candidates}
+        for i, future in enumerate(concurrent.futures.as_completed(future_to_link)):
+            outbound, score = future.result()
+            if outbound:
+                results.append((outbound, score))
+            if i % 10 == 0:
+                print(f"Проверено {i}/{len(candidates)}...")
+
+    # Сортируем: лучшие сверху
+    results.sort(key=lambda x: x[1], reverse=True)
+    top_results = results[:TOP_COUNT]
+    
+    # Очищаем список и исправляем дубли тегов
+    final_proxies = []
     seen_tags = {}
+    for outbound, _ in top_results:
+        t = outbound["tag"]
+        if t in seen_tags:
+            seen_tags[t] += 1
+            outbound["tag"] = f"{t}-{seen_tags[t]}"
+        else:
+            seen_tags[t] = 0
+        final_proxies.append(outbound)
 
-    # Создаем фиктивный объект для доступа к парсеру
-    parser = SingBoxProxy("vless://temp@temp:443#temp")
+    proxy_tags = [p["tag"] for p in final_proxies]
+    print(f"Отобрано {len(final_proxies)} лучших серверов.")
 
-    for link in links:
-        try:
-            # Извлекаем оригинальное имя из ссылки (после #)
-            url_parts = urlparse(link)
-            original_tag = unquote(url_parts.fragment)
-
-            # Проверка фильтра (пропускаем "Russia")
-            if not original_tag or not re.match(REGEXP_FILTER, original_tag):
-                continue
-
-            # Парсим ссылку через логику base.py
-            outbound = parser._parse_vless_link(link)
-
-            # --- КРИТИЧЕСКИЕ ИСПРАВЛЕНИЯ ---
-            # 1. Принудительно ставим оригинальный тег вместо дефолтного "proxy"
-            outbound["tag"] = original_tag
-
-            # 2. Исправляем xhttp -> httpupgrade
-            #if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
-            #    outbound["transport"]["type"] = "httpupgrade"
-                # В sing-box v1.10+ host в httpupgrade должен быть строкой, а не списком
-            #    if isinstance(outbound["transport"].get("host"), list):
-            #        outbound["transport"]["host"] = outbound["transport"]["host"][0] if outbound["transport"]["host"] else ""
-
-            # 3. Добавляем в список с суффиксами, если тег уже существует
-            if outbound["tag"] in seen_tags:
-                seen_tags[outbound["tag"]] += 1
-                outbound["tag"] = f"{outbound['tag']}-{seen_tags[outbound['tag']]}"
-            else:
-                seen_tags[outbound["tag"]] = 0
-
-            all_proxy_outbounds.append(outbound)
-
-        except Exception as e:
-            print(f"Ошибка парсинга ссылки: {e}")
-
-    # Список тегов для селектора
-    proxy_tags = [p["tag"] for p in all_proxy_outbounds]
-
-    # --- СБОРКА ПРАВИЛ (RULE SETS) ---
+    # --- Сборка Rule Sets ---
     formatted_rule_sets = []
     proxy_routing_tags = []
     block_routing_tags = []
@@ -88,7 +114,7 @@ def generate_final_config():
         else: proxy_routing_tags.append(tag)
         rule_tags.add(tag)
 
-    # Локальные
+    # Локальные SRS
     for folder, is_block in [('ruleset/srs/', False), ('ruleset/srs/block', True)]:
         if os.path.exists(folder):
             for file in os.listdir(folder):
@@ -97,19 +123,10 @@ def generate_final_config():
                     url = f"{GITHUB_RAW_BASE}{'block/' if is_block else ''}{file}"
                     add_rule(tag, url, is_block)
 
-    # Внешние
     for url in REMOTE_BLOCK_RULE_SETS: add_rule(url.split('/')[-1].replace('.srs', ''), url, True)
     for url in REMOTE_RULE_SETS: add_rule(url.split('/')[-1].replace('.srs', ''), url, False)
 
-    # --- ИТОГОВЫЕ ВЫХОДЫ ---
-    main_outbounds = [
-        {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags + ["direct"]},
-        {"type": "urltest", "tag": "auto", "outbounds": proxy_tags, "url": "http://cp.cloudflare.com/", "interval": "10m"},
-        {"type": "direct", "tag": "direct"},
-        {"type": "dns", "tag": "dns-out"},
-        {"type": "block", "tag": "block"}
-    ]
-
+    # Финальный конфиг
     config = {
         "log": {"level": "info", "timestamp": True},
         "dns": {
@@ -129,7 +146,13 @@ def generate_final_config():
             "type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30",
             "auto_route": True, "strict_route": True, "sniff": True, "sniff_override_destination": True
         }],
-        "outbounds": main_outbounds + all_proxy_outbounds,
+        "outbounds": [
+            {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags + ["direct"]},
+            {"type": "urltest", "tag": "auto", "outbounds": proxy_tags, "url": "http://cp.cloudflare.com/", "interval": "10m"},
+            {"type": "direct", "tag": "direct"},
+            {"type": "dns", "tag": "dns-out"},
+            {"type": "block", "tag": "block"}
+        ] + final_proxies,
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
@@ -147,4 +170,3 @@ def generate_final_config():
 
 if __name__ == "__main__":
     generate_final_config()
-    print("Конфиг успешно пересобран.")
