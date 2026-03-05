@@ -12,12 +12,11 @@ SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/ref
 REGEXP_FILTER = r'^(?!.*Russia).*$'
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
 
-TOP_COUNT = 100          # Оставляем только 100 лучших
-TEST_THREADS = 10        # Количество одновременных тестов
-# Ссылка для теста. 'generate_204' проверяет доступность и задержку.
-# Для реальной скорости лучше файл побольше: 'https://cachefly.cachefly.net/1mb.test'
-SPEED_TEST_URL = 'http://cp.cloudflare.com/generate_204'
-TIMEOUT = 10             # Тайм-аут на один сервер
+TOP_COUNT = 100  # Оставляем 100 лучших
+MAX_WORKERS = 8  # Не ставьте слишком много, чтобы не забить свой же канал при тестах
+# Ссылка на файл для теста (1МБ достаточно для быстрой оценки)
+SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
+TIMEOUT = 15 # Максимальное время на тест одного прокси
 
 REMOTE_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
@@ -27,78 +26,90 @@ REMOTE_BLOCK_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs"
 ]
 
-def benchmark_proxy(link):
-    """Тестирует прокси и возвращает (outbound_dict, score)"""
+def measure_throughput(link):
+    """
+    Замеряет реальную скорость загрузки данных через прокси.
+    Возвращает (outbound_dict, mbps)
+    """
+    tag = unquote(urlparse(link).fragment) or "Unnamed"
     try:
-        tag = unquote(urlparse(link).fragment) or "Unnamed"
-        
-        # Используем SingBoxProxy из вашего base.py
+        # Используем контекстный менеджер из base.py
         with SingBoxProxy(link) as proxy:
-            start_time = time.time()
-            # Делаем запрос через поднятый прокси
-            response = proxy.get(SPEED_TEST_URL, timeout=TIMEOUT)
-            duration = time.time() - start_time
+            start_time = time.perf_counter()
+            # Скачиваем файл
+            response = proxy.get(SPEED_TEST_URL, timeout=TIMEOUT, stream=True)
             
-            if response.status_code < 400:
-                # Чем меньше duration, тем выше score
-                score = 1000 / duration 
+            if response.status_code == 200:
+                total_content = 0
+                # Считаем объем полученных данных
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        total_content += len(chunk)
                 
-                # Генерируем структуру для конфига
-                outbound = proxy._parse_vless_link(link)
-                outbound["tag"] = tag
+                end_time = time.perf_counter()
+                duration = end_time - start_time
                 
-                # Фикс xhttp -> httpupgrade
-                if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
-                    outbound["transport"]["type"] = "httpupgrade"
-                
-                return outbound, score
-    except:
+                if duration > 0:
+                    # Расчет Mbps: (байты * 8 бит) / секунды / 1,000,000
+                    mbps = (total_content * 8) / (duration * 1_000_000)
+                    
+                    # Подготавливаем конфиг
+                    outbound = proxy._parse_vless_link(link)
+                    outbound["tag"] = tag
+                    
+                    # Fix xhttp -> httpupgrade
+                    if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
+                        outbound["transport"]["type"] = "httpupgrade"
+                        if isinstance(outbound["transport"].get("host"), list):
+                            outbound["transport"]["host"] = outbound["transport"]["host"][0] if outbound["transport"]["host"] else ""
+                    
+                    print(f"[OK] {tag}: {mbps:.2f} Mbps")
+                    return outbound, mbps
+    except Exception:
         pass
     return None, 0
 
 def generate_final_config():
-    print(f"Загрузка подписки...")
+    print("Загрузка ссылок...")
     try:
-        resp = requests.get(SUB_LINK, timeout=15)
-        links = re.findall(r'^vless:\/\/.+$', resp.text, re.MULTILINE)
+        raw_links = requests.get(SUB_LINK).text
+        links = re.findall(r'^vless:\/\/.+$', raw_links, re.MULTILINE)
     except Exception as e:
         print(f"Ошибка загрузки: {e}")
         return
 
-    # Фильтруем по названию
-    candidates = [l for l in links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
-    print(f"Найдено {len(candidates)} кандидатов. Начинаем тест скорости в {TEST_THREADS} потоков...")
+    # Фильтрация
+    filtered = [l for l in links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
+    print(f"Начинаем замер пропускной способности для {len(filtered)} серверов...")
 
     results = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=TEST_THREADS) as executor:
-        future_to_link = {executor.submit(benchmark_proxy, l): l for l in candidates}
-        for i, future in enumerate(concurrent.futures.as_completed(future_to_link)):
-            outbound, score = future.result()
-            if outbound:
-                results.append((outbound, score))
-            if i % 10 == 0:
-                print(f"Проверено {i}/{len(candidates)}...")
+    # Запускаем тесты параллельно
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        future_to_link = {executor.submit(measure_throughput, l): l for l in filtered}
+        for future in concurrent.futures.as_completed(future_to_link):
+            outbound, speed = future.result()
+            if outbound and speed > 0:
+                results.append((outbound, speed))
 
-    # Сортируем: лучшие сверху
+    # Сортировка по убыванию скорости
     results.sort(key=lambda x: x[1], reverse=True)
-    top_results = results[:TOP_COUNT]
+    top_proxies = [r[0] for r in results[:TOP_COUNT]]
     
-    # Очищаем список и исправляем дубли тегов
-    final_proxies = []
+    print(f"Тест завершен. Лучший результат: {results[0][1]:.2f} Mbps" if results else "Нет живых серверов")
+
+    # Уникализация тегов
     seen_tags = {}
-    for outbound, _ in top_results:
-        t = outbound["tag"]
+    for pb in top_proxies:
+        t = pb["tag"]
         if t in seen_tags:
             seen_tags[t] += 1
-            outbound["tag"] = f"{t}-{seen_tags[t]}"
+            pb["tag"] = f"{t}-{seen_tags[t]}"
         else:
             seen_tags[t] = 0
-        final_proxies.append(outbound)
 
-    proxy_tags = [p["tag"] for p in final_proxies]
-    print(f"Отобрано {len(final_proxies)} лучших серверов.")
+    proxy_tags = [p["tag"] for p in top_proxies]
 
-    # --- Сборка Rule Sets ---
+    # --- СБОРКА КОНФИГА (SRS и прочее) ---
     formatted_rule_sets = []
     proxy_routing_tags = []
     block_routing_tags = []
@@ -114,7 +125,7 @@ def generate_final_config():
         else: proxy_routing_tags.append(tag)
         rule_tags.add(tag)
 
-    # Локальные SRS
+    # Добавляем SRS из репозитория
     for folder, is_block in [('ruleset/srs/', False), ('ruleset/srs/block', True)]:
         if os.path.exists(folder):
             for file in os.listdir(folder):
@@ -126,33 +137,25 @@ def generate_final_config():
     for url in REMOTE_BLOCK_RULE_SETS: add_rule(url.split('/')[-1].replace('.srs', ''), url, True)
     for url in REMOTE_RULE_SETS: add_rule(url.split('/')[-1].replace('.srs', ''), url, False)
 
-    # Финальный конфиг
+    # Финальный JSON
     config = {
-        "log": {"level": "info", "timestamp": True},
+        "log": {"level": "info"},
         "dns": {
             "servers": [
-                {"tag": "dns-remote", "address": "tls://1.1.1.1", "detour": "proxy"},
-                {"tag": "dns-direct", "address": "223.5.5.5", "detour": "direct"},
-                {"tag": "dns-fakeip", "address": "fakeip"}
+                {"tag": "remote", "address": "tls://1.1.1.1", "detour": "proxy"},
+                {"tag": "local", "address": "223.5.5.5", "detour": "direct"}
             ],
-            "rules": [
-                {"outbound": "any", "server": "dns-direct"},
-                {"query_type": ["A", "AAAA"], "server": "dns-fakeip"}
-            ],
-            "final": "dns-remote",
-            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
+            "rules": [{"outbound": "any", "server": "local"}],
+            "final": "remote"
         },
-        "inbounds": [{
-            "type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30",
-            "auto_route": True, "strict_route": True, "sniff": True, "sniff_override_destination": True
-        }],
+        "inbounds": [{"type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30", "auto_route": True}],
         "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags + ["direct"]},
+            {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags},
             {"type": "urltest", "tag": "auto", "outbounds": proxy_tags, "url": "http://cp.cloudflare.com/", "interval": "10m"},
             {"type": "direct", "tag": "direct"},
-            {"type": "dns", "tag": "dns-out"},
-            {"type": "block", "tag": "block"}
-        ] + final_proxies,
+            {"type": "block", "tag": "block"},
+            {"type": "dns", "tag": "dns-out"}
+        ] + top_proxies,
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
