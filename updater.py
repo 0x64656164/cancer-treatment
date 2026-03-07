@@ -16,7 +16,7 @@ TOP_COUNT = 100
 MAX_WORKERS = 8
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
 TIMEOUT = 5            # Максимум 5 секунд на ожидание и загрузку 1МБ
-MIN_SPEED_MBPS = 0.5   # Порог: серверы медленнее 0.5 Мбит/с отбрасываются
+MIN_SPEED_MBPS = 1.5   # Порог: серверы медленнее 1.5 Мбит/с отбрасываются
 
 REMOTE_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
