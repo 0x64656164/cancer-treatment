@@ -43,7 +43,7 @@ def measure_packet_loss(host: str) -> float:
         match = re.search(r'(\d+(?:\.\d+)?)% packet loss', result.stdout)
         if match:
             return float(match.group(1))
-    except Exception:
+    except KeyboardInterrupt:
         pass
     return 100.0
 
