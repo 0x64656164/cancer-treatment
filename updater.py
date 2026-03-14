@@ -14,7 +14,7 @@ REGEXP_FILTER = r'^(?=.*(?:YA|VK))(?!.*Russia).*$'
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
 
 TOP_COUNT = 50          # Берём только топ-50 по скорости
-MAX_WORKERS = 8
+MAX_WORKERS = 16
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
 TIMEOUT = 5             # Максимум 5 секунд на ожидание и загрузку 1МБ
 MAX_PACKET_LOSS = 10.0  # Порог потери пакетов в %: серверы выше отбрасываются
