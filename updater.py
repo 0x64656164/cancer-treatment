@@ -9,7 +9,7 @@ from urllib.parse import urlparse, unquote
 from base import SingBoxProxy
 
 # --- НАСТРОЙКИ ---
-SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt'
+SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt'
 REGEXP_FILTER = r'^(?=.*(?:YA|VK))(?!.*Russia).*$'
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
 
