@@ -3,22 +3,19 @@ import re
 import json
 import os
 import time
-import subprocess
 import concurrent.futures
 from urllib.parse import urlparse, unquote
 from base import SingBoxProxy
 
 # --- НАСТРОЙКИ ---
-SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt'
+SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt'
 REGEXP_FILTER = r'^(?=.*(?:YA|VK))(?!.*Russia).*$'
-GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
+GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656464/cancer-treatment/refs/heads/main/ruleset/srs/'
 
 TOP_COUNT = 50          # Берём только топ-50 по скорости
-MAX_WORKERS = 16
+MAX_WORKERS = 8
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
 TIMEOUT = 5             # Максимум 5 секунд на ожидание и загрузку 1МБ
-MAX_PACKET_LOSS = 10.0  # Порог потери пакетов в %: серверы выше отбрасываются
-PING_COUNT = 10         # Кол-во пингов для замера потерь
 
 REMOTE_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
@@ -29,43 +26,10 @@ REMOTE_BLOCK_RULE_SETS = [
 ]
 
 
-def measure_packet_loss(host: str) -> float:
-    """
-    Замеряет потерю пакетов до хоста через системный ping.
-    Возвращает процент потерь (0.0–100.0), или 100.0 при ошибке.
-    """
-    try:
-        result = subprocess.run(
-            ["ping", "-c", str(PING_COUNT), "-W", "2", host],
-            capture_output=True, text=True, timeout=PING_COUNT * 3
-        )
-        # Ищем строку вида "X% packet loss"
-        match = re.search(r'(\d+(?:\.\d+)?)% packet loss', result.stdout)
-        if match:
-            return float(match.group(1))
-    except KeyboardInterrupt:
-        pass
-    return 100.0
-
-
 def measure_throughput(link):
     tag = unquote(urlparse(link).fragment) or "Unnamed"
     try:
         with SingBoxProxy(link) as proxy:
-            # --- Фильтр 1: потеря пакетов ---
-            # Получаем хост сервера из распарсенной ссылки
-            outbound_tmp = proxy._parse_vless_link(link)
-            server_host = outbound_tmp.get("server", "")
-
-            if server_host:
-                loss = measure_packet_loss(server_host)
-                if loss > MAX_PACKET_LOSS:
-                    print(f"[LOSS] {tag}: {loss:.1f}% packet loss - Rejected")
-                    return None, 0, 0.0
-            else:
-                loss = 0.0
-
-            # --- Фильтр 2: скорость ---
             start_time = time.perf_counter()
             response = proxy.get(SPEED_TEST_URL, timeout=TIMEOUT, stream=True)
 
@@ -93,13 +57,13 @@ def measure_throughput(link):
                                 if outbound["transport"]["host"] else ""
                             )
 
-                    print(f"[GOOD] {tag}: {mbps:.2f} Mbps, loss={loss:.1f}%")
-                    return outbound, mbps, loss
+                    print(f"[GOOD] {tag}: {mbps:.2f} Mbps")
+                    return outbound, mbps
 
     except Exception:
         pass
 
-    return None, 0, 0.0
+    return None, 0
 
 
 def generate_final_config():
@@ -113,15 +77,15 @@ def generate_final_config():
 
     filtered = [l for l in links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
     print(f"Начинаем стресс-тест для {len(filtered)} серверов...")
-    print(f"Параметры: потеря пакетов ≤ {MAX_PACKET_LOSS}%, топ-{TOP_COUNT} по скорости\n")
+    print(f"Параметры: топ-{TOP_COUNT} по скорости\n")
 
     results = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         future_to_link = {executor.submit(measure_throughput, l): l for l in filtered}
         for future in concurrent.futures.as_completed(future_to_link):
-            outbound, speed, loss = future.result()
+            outbound, speed = future.result()
             if outbound:
-                results.append((outbound, speed, loss))
+                results.append((outbound, speed))
 
     if not results:
         print("Критическая ошибка: Ни один сервер не прошел проверку!")
@@ -134,11 +98,11 @@ def generate_final_config():
     final_proxies = [r[0] for r in top_results]
     proxy_tags = [p["tag"] for p in final_proxies]
 
-    print(f"\nТест окончен. Прошли фильтр потерь: {len(results)}, "
+    print(f"\nТест окончен. Всего прошли проверку: {len(results)}, "
           f"отобрано в топ-{TOP_COUNT}: {len(final_proxies)} серверов.")
     print("\nТоп-10 по скорости:")
-    for i, (ob, spd, ls) in enumerate(top_results[:10], 1):
-        print(f"  {i:>2}. {ob['tag'][:50]:<50} {spd:6.2f} Mbps  loss={ls:.1f}%")
+    for i, (ob, spd) in enumerate(top_results[:10], 1):
+        print(f"  {i:>2}. {ob['tag'][:55]:<55} {spd:6.2f} Mbps")
 
     # Уникализация тегов
     seen_tags = {}
