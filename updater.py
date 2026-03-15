@@ -10,7 +10,7 @@ from base import SingBoxProxy
 # --- НАСТРОЙКИ ---
 SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt'
 REGEXP_FILTER = r'^(?=.*(?:YA|VK))(?!.*Russia).*$'
-GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656464/cancer-treatment/refs/heads/main/ruleset/srs/'
+GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
 
 TOP_COUNT = 50          # Берём только топ-50 по скорости
 MAX_WORKERS = 8
