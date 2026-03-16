@@ -170,12 +170,12 @@ def generate_final_config():
                 "url": "http://cp.cloudflare.com/", "interval": "10m"
             },
             {"type": "direct", "tag": "direct"},
-            {"type": "block", "tag": "block"},
-            {"type": "dns", "tag": "dns-out"}
+            {"type": "block", "tag": "block"}
+            #{"type": "dns", "tag": "dns-out"}
         ] + final_proxies,
         "route": {
             "rules": [
-                {"protocol": "dns", "outbound": "dns-out"},
+                {"protocol": "dns", "action": "hijack-dns"},
                 {"rule_set": block_routing_tags, "outbound": "block"},
                 {"rule_set": proxy_routing_tags, "outbound": "proxy"}
             ],
