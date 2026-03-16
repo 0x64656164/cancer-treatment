@@ -3,13 +3,23 @@ import re
 import json
 import os
 import time
+import ipaddress
+import socket
 import concurrent.futures
 from urllib.parse import urlparse, unquote
 from base import SingBoxProxy
 
 # --- НАСТРОЙКИ ---
-SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt'
-REGEXP_FILTER = r'^(?!.*Russia).*$'
+SUB_LINKS = [
+    'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt',
+    'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt'
+    # 'https://example.com/sub2.txt',
+    # 'https://example.com/sub3.txt',
+]
+CIDR_WHITELIST_FILE = 'cidr_whitelist.txt'
+
+REGEXP_FILTER = r'^(?!.*?\b(Russia|RU)\b).*$'
+
 REGEXP_FILTER_FALLBACK = r'.*'   # то же, но без исключения Russia, пока так, потом уберу совсем
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656464/cancer-treatment/refs/heads/main/ruleset/srs/'
 
@@ -28,6 +38,127 @@ REMOTE_BLOCK_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs"
 ]
 
+
+# ---------------------------------------------------------------------------
+# CIDR-фильтр: загружается один раз при старте
+# ---------------------------------------------------------------------------
+
+def load_cidr_whitelist(path: str) -> list:
+    """Читает файл с CIDR-подсетями (по одной на строку), возвращает список сетей."""
+    if not os.path.exists(path):
+        print(f"⚠ Файл {path} не найден — CIDR-фильтр отключён, все серверы пройдут дальше.")
+        return []
+
+    networks = []
+    errors = 0
+    with open(path, encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            try:
+                networks.append(ipaddress.ip_network(line, strict=False))
+            except ValueError:
+                errors += 1
+
+    print(f"CIDR-whitelist загружен: {len(networks)} сетей"
+          + (f", пропущено некорректных строк: {errors}" if errors else ""))
+    return networks
+
+
+# Глобальный список сетей — инициализируется один раз при старте
+CIDR_NETWORKS = load_cidr_whitelist(CIDR_WHITELIST_FILE)
+
+# Кэш DNS-резолюции, чтобы не резолвить один хост дважды
+_dns_cache: dict = {}
+
+
+def _resolve(host: str):
+    """Резолвит хост в IP, кэширует результат. Возвращает None при ошибке."""
+    if host not in _dns_cache:
+        try:
+            _dns_cache[host] = socket.gethostbyname(host)
+        except Exception:
+            _dns_cache[host] = None
+    return _dns_cache[host]
+
+
+def is_in_cidr_whitelist(host: str) -> bool:
+    """
+    Проверяет, попадает ли IP-адрес хоста в один из разрешённых CIDR.
+    Если список сетей пуст (файл не найден) — пропускает всё.
+    """
+    if not CIDR_NETWORKS:
+        return True
+
+    ip_str = _resolve(host)
+    if ip_str is None:
+        return False  # не резолвится — отсеиваем
+
+    try:
+        ip = ipaddress.ip_address(ip_str)
+        return any(ip in net for net in CIDR_NETWORKS)
+    except ValueError:
+        return False
+
+
+def extract_host_from_vless(link: str) -> str:
+    """Извлекает хост (адрес сервера) из vless-ссылки."""
+    return urlparse(link).hostname or ""
+
+
+def filter_by_cidr(links: list) -> list:
+    """
+    Фильтрует список vless-ссылок, оставляя только те,
+    чей сервер попадает в CIDR-whitelist.
+    DNS-резолюция идёт параллельно для скорости.
+    """
+    if not CIDR_NETWORKS:
+        return links
+
+    print(f"CIDR-фильтрация: проверяем {len(links)} серверов...")
+
+    # Параллельная резолюция — заполняем кэш заранее
+    hosts = list({extract_host_from_vless(l) for l in links if extract_host_from_vless(l)})
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS * 2) as ex:
+        ex.map(_resolve, hosts)
+
+    passed = [l for l in links if is_in_cidr_whitelist(extract_host_from_vless(l))]
+    print(f"CIDR-фильтр: прошло {len(passed)} из {len(links)} серверов\n")
+    return passed
+
+
+# ---------------------------------------------------------------------------
+# Загрузка подписок
+# ---------------------------------------------------------------------------
+
+def fetch_links_from_subscriptions() -> list:
+    """Загружает все vless-ссылки со всех подписок, дедуплицирует."""
+    all_links = []
+    seen = set()
+
+    for url in SUB_LINKS:
+        print(f"Загрузка подписки: {url}")
+        try:
+            raw = requests.get(url, timeout=15).text
+            found = re.findall(r'^vless:\/\/.+$', raw, re.MULTILINE)
+            new_count = 0
+            for link in found:
+                if link not in seen:
+                    seen.add(link)
+                    all_links.append(link)
+                    new_count += 1
+            print(f"  → Найдено: {len(found)}, новых (уникальных): {new_count}")
+        except Exception as e:
+            print(f"  ✗ Ошибка загрузки {url}: {e}")
+
+    print(f"\nИтого уникальных серверов со всех подписок: {len(all_links)}\n")
+    return all_links
+
+
+# ---------------------------------------------------------------------------
+# Speed-тест
+# ---------------------------------------------------------------------------
 
 def measure_throughput(link):
     tag = unquote(urlparse(link).fragment) or "Unnamed"
@@ -100,29 +231,35 @@ def needs_fallback(results):
     return False
 
 
+# ---------------------------------------------------------------------------
+# Основная функция
+# ---------------------------------------------------------------------------
+
 def generate_final_config():
-    print("Загрузка базы ссылок...")
-    try:
-        raw_links = requests.get(SUB_LINK).text
-        links = re.findall(r'^vless:\/\/.+$', raw_links, re.MULTILINE)
-    except Exception as e:
-        print(f"Ошибка загрузки подписки: {e}")
+    # 1. Загрузка всех ссылок со всех подписок
+    links = fetch_links_from_subscriptions()
+    if not links:
+        print("Критическая ошибка: Не удалось загрузить ни одной ссылки!")
         return
 
-    # --- Первый проход: основной фильтр (без Russia) ---
+    # 2. CIDR-фильтрация по адресу сервера
+    links = filter_by_cidr(links)
+    if not links:
+        print("Критическая ошибка: После CIDR-фильтрации не осталось серверов!")
+        return
+
+    # 3. Первый проход: основной фильтр по тегу (без Russia)
     filtered = [l for l in links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
     results = run_speed_test(filtered, "основной фильтр, без Russia")
 
-    # --- Фоллбэк: повтор с разрешением Russia ---
+    # 4. Фоллбэк: повтор с разрешением Russia
     if needs_fallback(results):
         filtered_fallback = [l for l in links if re.match(REGEXP_FILTER_FALLBACK, unquote(urlparse(l).fragment))]
-        # Исключаем ссылки, которые уже тестировались, чтобы не дублировать
         already_tested = set(filtered)
         new_links = [l for l in filtered_fallback if l not in already_tested]
 
         if new_links:
             fallback_results = run_speed_test(new_links, "фоллбэк, включая Russia")
-            # Объединяем и пересортируем
             results = sorted(results + fallback_results, key=lambda x: x[1], reverse=True)
         else:
             print("Фоллбэк: новых ссылок для теста не найдено.")
