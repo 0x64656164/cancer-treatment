@@ -16,7 +16,7 @@ SUB_LINKS = [
     # 'https://example.com/sub2.txt',
     # 'https://example.com/sub3.txt',
 ]
-CIDR_WHITELIST_FILE = 'cidr_whitelist.txt'
+CIDR_WHITELIST_FILE = 'cidrwhitelist.txt'
 
 REGEXP_FILTER = r'^(?!.*?\b(Russia|RU)\b).*$'
 
