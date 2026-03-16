@@ -8,9 +8,9 @@ from urllib.parse import urlparse, unquote
 from base import SingBoxProxy
 
 # --- НАСТРОЙКИ ---
-SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt'
-REGEXP_FILTER = r'^(?=.*(?:YA|VK))(?!.*Russia).*$'
-REGEXP_FILTER_FALLBACK = r'^(?=.*(?:YA|VK)).*$'   # то же, но без исключения Russia
+SUB_LINK = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt'
+REGEXP_FILTER = r'^(?!.*Russia).*$'
+REGEXP_FILTER_FALLBACK = r'.*'   # то же, но без исключения Russia, пока так, потом уберу совсем
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656464/cancer-treatment/refs/heads/main/ruleset/srs/'
 
 TOP_COUNT = 50          # Берём только топ-50 по скорости
