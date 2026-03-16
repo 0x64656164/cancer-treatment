@@ -161,7 +161,7 @@ def generate_final_config():
             "strategy": "prefer_ipv4"
         },
         "inbounds": [
-            {"type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30", "auto_route": True}
+            {"type": "tun", "tag": "tun-in", "address": ["172.19.0.1/30"], "auto_route": True}
         ],
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags},
@@ -171,7 +171,6 @@ def generate_final_config():
             },
             {"type": "direct", "tag": "direct"},
             {"type": "block", "tag": "block"}
-            #{"type": "dns", "tag": "dns-out"}
         ] + final_proxies,
         "route": {
             "rules": [
