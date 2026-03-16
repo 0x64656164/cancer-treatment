@@ -18,7 +18,7 @@ SUB_LINKS = [
 ]
 CIDR_WHITELIST_FILE = 'cidrwhitelist.txt'
 
-REGEXP_FILTER = r'^(?!.*?\b(Russia|RU)\b).*$'
+REGEXP_FILTER = r'^(?!.*?\b(Russia|RU|🇷🇺)\b).*$'
 
 REGEXP_FILTER_FALLBACK = r'.*'   # то же, но без исключения Russia, пока так, потом уберу совсем
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656464/cancer-treatment/refs/heads/main/ruleset/srs/'
