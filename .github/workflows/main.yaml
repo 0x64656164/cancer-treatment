@@ -27,7 +27,6 @@ jobs:
 
       - name: Install sing-box
         run: |
-          # Скачиваем последнюю версию sing-box
           VERSION=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | jq -r .tag_name | sed 's/v//')
           URL="https://github.com/SagerNet/sing-box/releases/download/v${VERSION}/sing-box-${VERSION}-linux-amd64.tar.gz"
           curl -Lo sing-box.tar.gz "$URL"
@@ -40,8 +39,9 @@ jobs:
         run: |
           # Создаем папки для результата, если их нет
           mkdir -p ruleset/srs/block
-          
-          # Компиляция основных правил
+          mkdir -p ruleset/hiddify/block
+
+          # Компиляция основных правил (для обычного конфига)
           if [ -d "ruleset/json" ]; then
             for file in ruleset/json/*.json; do
               [ -e "$file" ] || continue
@@ -50,8 +50,8 @@ jobs:
               echo "Compiled: $filename"
             done
           fi
-          
-          # Компиляция блокирующих правил
+
+          # Компиляция блокирующих правил (для обычного конфига)
           if [ -d "ruleset/json/block" ]; then
             for file in ruleset/json/block/*.json; do
               [ -e "$file" ] || continue
@@ -61,8 +61,31 @@ jobs:
             done
           fi
 
+          # Компиляция правил для Hiddify
+          if [ -d "ruleset/json/hiddify" ]; then
+            for file in ruleset/json/hiddify/*.json; do
+              [ -e "$file" ] || continue
+              filename=$(basename "$file" .json)
+              ./sing-box rule-set compile "$file" -o "ruleset/hiddify/${filename}.srs"
+              echo "Compiled hiddify rule: $filename"
+            done
+          fi
+
+          # Компиляция блокирующих правил для Hiddify
+          if [ -d "ruleset/json/block" ]; then
+            for file in ruleset/json/block/*.json; do
+              [ -e "$file" ] || continue
+              filename=$(basename "$file" .json)
+              ./sing-box rule-set compile "$file" -o "ruleset/hiddify/block/${filename}.srs"
+              echo "Compiled hiddify block rule: $filename"
+            done
+          fi
+
       - name: Run updater
         run: python updater.py
+
+      - name: Run Hiddify updater
+        run: python hiddify_updater.py
 
       - name: Get current date
         run: echo "NOW=$(TZ='Europe/Moscow' date +'%d.%m.%Y %H:%M:%S %Z')" >> $GITHUB_ENV
@@ -71,11 +94,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Добавляем и конфиг, и все скомпилированные SRS файлы
-          git add config.json ruleset/srs/*.srs ruleset/srs/block/*.srs
-          
-          # Проверяем изменения
+
+          git add config.json hiddify_config.json \
+            ruleset/srs/*.srs ruleset/srs/block/*.srs \
+            ruleset/hiddify/*.srs ruleset/hiddify/block/*.srs
+
           if git diff --staged --quiet; then
             echo "No changes detected"
           else
