@@ -11,7 +11,7 @@ from base import SingBoxProxy
 
 # --- НАСТРОЙКИ ---
 SUB_LINKS = [
-    'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt',
+    'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt',
     'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt'
     # 'https://example.com/sub2.txt',
     # 'https://example.com/sub3.txt',
@@ -29,9 +29,6 @@ MIN_BEST_SPEED = 1.5    # Минимальная скорость лучшего
 MAX_WORKERS = 8
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
 TIMEOUT = 5             # Максимум 5 секунд на ожидание и загрузку 1МБ
-
-# Псевдо-скорость для hysteria2 серверов (не тестируются, но включаются в пул)
-HY2_PSEUDO_SPEED = 50.0
 
 REMOTE_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
@@ -135,29 +132,66 @@ def filter_by_cidr(links: list) -> list:
 # Загрузка подписок
 # ---------------------------------------------------------------------------
 
-def fetch_links_from_subscriptions() -> list:
-    """Загружает все ссылки со всех подписок, дедуплицирует."""
-    all_links = []
+def fetch_links_from_subscriptions() -> tuple:
+    """
+    Загружает все ссылки со всех подписок, дедуплицирует.
+    Возвращает два списка: (обычные ссылки, hysteria2 ссылки).
+    Hysteria2 выделяются отдельно — они обходят CIDR-фильтр и speed-тест.
+    """
+    regular_links = []
+    hy2_links = []
     seen = set()
 
     for url in SUB_LINKS:
         print(f"Загрузка подписки: {url}")
         try:
             raw = requests.get(url, timeout=15).text
-            # Исправлено: добавлен hysteria2 в паттерн
             found = re.findall(r'^(?:vless|vmess|trojan|hy2|hysteria2):\/\/.+$', raw, re.MULTILINE)
-            new_count = 0
+            new_regular = 0
+            new_hy2 = 0
             for link in found:
                 if link not in seen:
                     seen.add(link)
-                    all_links.append(link)
-                    new_count += 1
-            print(f"  → Найдено: {len(found)}, новых (уникальных): {new_count}")
+                    if link.startswith(("hy2://", "hysteria2://")):
+                        hy2_links.append(link)
+                        new_hy2 += 1
+                    else:
+                        regular_links.append(link)
+                        new_regular += 1
+            print(f"  → Найдено: {len(found)}, новых обычных: {new_regular}, новых hy2: {new_hy2}")
         except Exception as e:
             print(f"  ✗ Ошибка загрузки {url}: {e}")
 
-    print(f"\nИтого уникальных серверов со всех подписок: {len(all_links)}\n")
-    return all_links
+    print(f"\nИтого уникальных: обычных серверов: {len(regular_links)}, hysteria2: {len(hy2_links)}\n")
+    return regular_links, hy2_links
+
+
+def collect_hy2_outbounds(hy2_links: list) -> list:
+    """
+    Парсит hysteria2 ссылки в outbound-конфиги без speed-теста и CIDR-фильтра.
+    Возвращает список готовых outbound-словарей.
+    """
+    if not hy2_links:
+        return []
+
+    print(f"Парсинг {len(hy2_links)} hysteria2 серверов (без speed-теста и CIDR)...")
+    outbounds = []
+    # Создаём экземпляр только для доступа к методам парсинга, без запуска процесса
+    proxy = SingBoxProxy.__new__(SingBoxProxy)
+
+    for link in hy2_links:
+        tag = unquote(urlparse(link).fragment) or "Unnamed"
+        try:
+            outbound = proxy._parse_hysteria2_link(link)
+            outbound["tag"] = tag
+            outbound["domain_strategy"] = "prefer_ipv4"
+            outbounds.append(outbound)
+            print(f"  [HY2] {tag}")
+        except Exception as e:
+            print(f"  [FAIL] {tag}: {e}")
+
+    print(f"Hysteria2 готово: {len(outbounds)} серверов\n")
+    return outbounds
 
 
 # ---------------------------------------------------------------------------
@@ -180,19 +214,6 @@ def parse_link(proxy, link):
 
 def measure_throughput(link):
     tag = unquote(urlparse(link).fragment) or "Unnamed"
-
-    # hysteria2 — не тестируем скорость, только парсим конфиг
-    if link.startswith(("hy2://", "hysteria2://")):
-        try:
-            proxy = SingBoxProxy(link, config_only=True)
-            outbound = proxy._parse_hysteria2_link(link)
-            outbound["tag"] = tag
-            outbound["domain_strategy"] = "prefer_ipv4"
-            print(f"[SKIP SPEED] {tag}: hysteria2 ({HY2_PSEUDO_SPEED} Mbps pseudo)")
-            return outbound, HY2_PSEUDO_SPEED
-        except Exception as e:
-            print(f"[FAIL] {tag}: hysteria2 parse error: {e}")
-            return None, 0
 
     try:
         with SingBoxProxy(link) as proxy:
@@ -266,25 +287,24 @@ def needs_fallback(results):
 # ---------------------------------------------------------------------------
 
 def generate_final_config():
-    # 1. Загрузка всех ссылок со всех подписок
-    links = fetch_links_from_subscriptions()
-    if not links:
+    # 1. Загрузка всех ссылок со всех подписок — hy2 сразу отделяются
+    regular_links, hy2_links = fetch_links_from_subscriptions()
+    if not regular_links and not hy2_links:
         print("Критическая ошибка: Не удалось загрузить ни одной ссылки!")
         return
 
-    # 2. CIDR-фильтрация по адресу сервера
-    links = filter_by_cidr(links)
-    if not links:
-        print("Критическая ошибка: После CIDR-фильтрации не осталось серверов!")
-        return
+    # 2. CIDR-фильтрация только для обычных серверов (hy2 проходят мимо)
+    regular_links = filter_by_cidr(regular_links)
+    if not regular_links:
+        print("⚠ После CIDR-фильтрации не осталось обычных серверов, продолжаем только с hy2.")
 
     # 3. Первый проход: основной фильтр по тегу (без Russia)
-    filtered = [l for l in links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
-    results = run_speed_test(filtered, "основной фильтр, без Russia")
+    filtered = [l for l in regular_links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
+    results = run_speed_test(filtered, "основной фильтр, без Russia") if filtered else []
 
     # 4. Фоллбэк: повтор с разрешением Russia
     if needs_fallback(results):
-        filtered_fallback = [l for l in links if re.match(REGEXP_FILTER_FALLBACK, unquote(urlparse(l).fragment))]
+        filtered_fallback = [l for l in regular_links if re.match(REGEXP_FILTER_FALLBACK, unquote(urlparse(l).fragment))]
         already_tested = set(filtered)
         new_links = [l for l in filtered_fallback if l not in already_tested]
 
@@ -294,21 +314,26 @@ def generate_final_config():
         else:
             print("Фоллбэк: новых ссылок для теста не найдено.")
 
-    if not results:
-        print("Критическая ошибка: Ни один сервер не прошел проверку!")
-        return
-
+    # 5. Берём топ-50 из обычных серверов
     top_results = results[:TOP_COUNT]
     final_proxies = [r[0] for r in top_results]
-    proxy_tags = [p["tag"] for p in final_proxies]
 
     print(f"\nТест окончен. Всего прошли проверку: {len(results)}, "
           f"отобрано в топ-{TOP_COUNT}: {len(final_proxies)} серверов.")
-    print("\nТоп-10 по скорости:")
-    for i, (ob, spd) in enumerate(top_results[:10], 1):
-        print(f"  {i:>2}. {ob['tag'][:55]:<55} {spd:6.2f} Mbps")
+    if top_results:
+        print("\nТоп-10 по скорости:")
+        for i, (ob, spd) in enumerate(top_results[:10], 1):
+            print(f"  {i:>2}. {ob['tag'][:55]:<55} {spd:6.2f} Mbps")
 
-    # Уникализация тегов
+    # 6. Парсим hysteria2 и добавляем в конец списка (после топ-50)
+    hy2_outbounds = collect_hy2_outbounds(hy2_links)
+    final_proxies += hy2_outbounds
+
+    if not final_proxies:
+        print("Критическая ошибка: Ни один сервер не прошел проверку!")
+        return
+
+    # 7. Уникализация тегов по всему итоговому списку
     seen_tags = {}
     for pb in final_proxies:
         t = pb["tag"]
@@ -317,6 +342,8 @@ def generate_final_config():
             pb["tag"] = f"{t}-{seen_tags[t]}"
         else:
             seen_tags[t] = 0
+
+    proxy_tags = [p["tag"] for p in final_proxies]
 
     # Сборка структуры Rule Sets
     formatted_rule_sets = []
