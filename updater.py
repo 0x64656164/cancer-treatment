@@ -415,9 +415,7 @@ def generate_final_config():
         }
     }
 
-    header = "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n"
     with open('config.json', 'w', encoding='utf-8') as f:
-        f.write(header)
         json.dump(config, f, indent=2, ensure_ascii=False)
 
     print("\nconfig.json успешно сохранён.")
