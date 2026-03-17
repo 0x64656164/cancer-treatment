@@ -11,9 +11,9 @@ from base import SingBoxProxy
 
 # --- НАСТРОЙКИ ---
 SUB_LINKS = [
-    'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt',
-    'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt'
-    # 'https://example.com/sub2.txt',
+    'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt',
+    'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt',
+    'https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist'
     # 'https://example.com/sub3.txt',
 ]
 CIDR_WHITELIST_FILE = 'cidrwhitelist.txt'
