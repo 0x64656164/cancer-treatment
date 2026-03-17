@@ -162,6 +162,18 @@ def fetch_links_from_subscriptions() -> list:
 
 def measure_throughput(link):
     tag = unquote(urlparse(link).fragment) or "Unnamed"
+
+    if link.startswith("hy2://"): # Иногда только Hysteria2 работают
+        try:
+            with SingBoxProxy(link) as proxy:
+                outbound = proxy._parse_vless_link(link)
+                outbound["tag"] = tag
+                outbound["domain_strategy"] = "prefer_ipv4"
+                print(f"[SKIP SPEED] {tag}: hysteria2")
+                return outbound, 100
+        except Exception:
+            return None, 0
+
     try:
         with SingBoxProxy(link) as proxy:
             start_time = time.perf_counter()
@@ -182,7 +194,6 @@ def measure_throughput(link):
                     outbound["tag"] = tag
                     outbound["domain_strategy"] = "prefer_ipv4"
 
-                    # Совместимость с xhttp
                     if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
                         outbound["transport"]["type"] = "httpupgrade"
                         if isinstance(outbound["transport"].get("host"), list):
@@ -193,7 +204,6 @@ def measure_throughput(link):
 
                     print(f"[GOOD] {tag}: {mbps:.2f} Mbps")
                     return outbound, mbps
-
     except Exception:
         pass
 
