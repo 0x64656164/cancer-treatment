@@ -21,7 +21,7 @@ CIDR_WHITELIST_FILE = 'cidrwhitelist.txt'
 REGEXP_FILTER = r'^(?!.*?\b(Russia|RU|🇷🇺)\b).*$'
 
 REGEXP_FILTER_FALLBACK = r'.*'   # то же, но без исключения Russia, пока так, потом уберу совсем
-GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656464/cancer-treatment/refs/heads/main/ruleset/srs/'
+GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
 
 TOP_COUNT = 50          # Берём только топ-50 по скорости
 MIN_SERVERS = 5         # Минимум серверов, прошедших проверку
