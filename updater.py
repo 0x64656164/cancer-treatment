@@ -30,6 +30,9 @@ MAX_WORKERS = 8
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
 TIMEOUT = 5             # Максимум 5 секунд на ожидание и загрузку 1МБ
 
+# Псевдо-скорость для hysteria2 серверов (не тестируются, но включаются в пул)
+HY2_PSEUDO_SPEED = 50.0
+
 REMOTE_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs"
@@ -102,14 +105,14 @@ def is_in_cidr_whitelist(host: str) -> bool:
         return False
 
 
-def extract_host_from_vless(link: str) -> str:
-    """Извлекает хост (адрес сервера) из vless-ссылки."""
+def extract_host_from_link(link: str) -> str:
+    """Извлекает хост (адрес сервера) из ссылки."""
     return urlparse(link).hostname or ""
 
 
 def filter_by_cidr(links: list) -> list:
     """
-    Фильтрует список vless-ссылок, оставляя только те,
+    Фильтрует список ссылок, оставляя только те,
     чей сервер попадает в CIDR-whitelist.
     DNS-резолюция идёт параллельно для скорости.
     """
@@ -119,11 +122,11 @@ def filter_by_cidr(links: list) -> list:
     print(f"CIDR-фильтрация: проверяем {len(links)} серверов...")
 
     # Параллельная резолюция — заполняем кэш заранее
-    hosts = list({extract_host_from_vless(l) for l in links if extract_host_from_vless(l)})
+    hosts = list({extract_host_from_link(l) for l in links if extract_host_from_link(l)})
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS * 2) as ex:
         ex.map(_resolve, hosts)
 
-    passed = [l for l in links if is_in_cidr_whitelist(extract_host_from_vless(l))]
+    passed = [l for l in links if is_in_cidr_whitelist(extract_host_from_link(l))]
     print(f"CIDR-фильтр: прошло {len(passed)} из {len(links)} серверов\n")
     return passed
 
@@ -133,7 +136,7 @@ def filter_by_cidr(links: list) -> list:
 # ---------------------------------------------------------------------------
 
 def fetch_links_from_subscriptions() -> list:
-    """Загружает все vless-ссылки со всех подписок, дедуплицирует."""
+    """Загружает все ссылки со всех подписок, дедуплицирует."""
     all_links = []
     seen = set()
 
@@ -141,7 +144,8 @@ def fetch_links_from_subscriptions() -> list:
         print(f"Загрузка подписки: {url}")
         try:
             raw = requests.get(url, timeout=15).text
-            found = re.findall(r'^(?:vless|vmess|trojan|hy2):\/\/.+$', raw, re.MULTILINE)
+            # Исправлено: добавлен hysteria2 в паттерн
+            found = re.findall(r'^(?:vless|vmess|trojan|hy2|hysteria2):\/\/.+$', raw, re.MULTILINE)
             new_count = 0
             for link in found:
                 if link not in seen:
@@ -160,18 +164,34 @@ def fetch_links_from_subscriptions() -> list:
 # Speed-тест
 # ---------------------------------------------------------------------------
 
+def parse_link(proxy, link):
+    """Выбирает правильный парсер в зависимости от протокола ссылки."""
+    if link.startswith("vmess://"):
+        return proxy._parse_vmess_link(link)
+    elif link.startswith("vless://"):
+        return proxy._parse_vless_link(link)
+    elif link.startswith("trojan://"):
+        return proxy._parse_trojan_link(link)
+    elif link.startswith(("hy2://", "hysteria2://")):
+        return proxy._parse_hysteria2_link(link)
+    else:
+        raise ValueError(f"Неизвестный протокол: {link[:20]}")
+
+
 def measure_throughput(link):
     tag = unquote(urlparse(link).fragment) or "Unnamed"
 
-    if link.startswith("hy2://"): # Иногда только Hysteria2 работают
+    # hysteria2 — не тестируем скорость, только парсим конфиг
+    if link.startswith(("hy2://", "hysteria2://")):
         try:
-            with SingBoxProxy(link) as proxy:
-                outbound = proxy._parse_vless_link(link)
-                outbound["tag"] = tag
-                outbound["domain_strategy"] = "prefer_ipv4"
-                print(f"[SKIP SPEED] {tag}: hysteria2")
-                return outbound, 100
-        except Exception:
+            proxy = SingBoxProxy(link, config_only=True)
+            outbound = proxy._parse_hysteria2_link(link)
+            outbound["tag"] = tag
+            outbound["domain_strategy"] = "prefer_ipv4"
+            print(f"[SKIP SPEED] {tag}: hysteria2 ({HY2_PSEUDO_SPEED} Mbps pseudo)")
+            return outbound, HY2_PSEUDO_SPEED
+        except Exception as e:
+            print(f"[FAIL] {tag}: hysteria2 parse error: {e}")
             return None, 0
 
     try:
@@ -190,7 +210,7 @@ def measure_throughput(link):
                 if duration > 0 and total_content > 0:
                     mbps = (total_content * 8) / (duration * 1_000_000)
 
-                    outbound = proxy._parse_vless_link(link)
+                    outbound = parse_link(proxy, link)
                     outbound["tag"] = tag
                     outbound["domain_strategy"] = "prefer_ipv4"
 
