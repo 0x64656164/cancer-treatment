@@ -141,7 +141,7 @@ def fetch_links_from_subscriptions() -> list:
         print(f"Загрузка подписки: {url}")
         try:
             raw = requests.get(url, timeout=15).text
-            found = re.findall(r'^vless:\/\/.+$', raw, re.MULTILINE)
+            found = re.findall(r'^(?:vless|vmess|trojan|hy2):\/\/.+$', raw, re.MULTILINE)
             new_count = 0
             for link in found:
                 if link not in seen:
