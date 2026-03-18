@@ -27,7 +27,7 @@ GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment
 TOP_COUNT = 50          # Берём только топ-50 по скорости
 MIN_SERVERS = 5         # Минимум серверов, прошедших проверку
 MIN_BEST_SPEED = 1.5    # Минимальная скорость лучшего сервера (Mbps)
-MAX_WORKERS = 16
+MAX_WORKERS = 24
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
 TIMEOUT = 5             # Максимум 5 секунд на ожидание и загрузку 1МБ
 
