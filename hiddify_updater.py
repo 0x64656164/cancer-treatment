@@ -15,7 +15,7 @@ SUB_LINKS = [
     'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt',
     #'https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist',
     #'https://whiteprime.github.io/xraycheck/configs/white-list_available(top100)',
-    'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt'
+    #'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt'
 ]
 CIDR_WHITELIST_FILE = 'cidrwhitelist.txt'
 
