@@ -5,36 +5,26 @@
     "level": "info"
   },
   "dns": {
-  "servers": [
-    {
-      "tag": "remote",
-      "address": "tls://1.1.1.1",
-      "detour": "direct"
-    },
-    {
-      "tag": "local",
-      "address": "udp://223.5.5.5",
-      "detour": "direct"
-    },
-    {
-      "tag": "bootstrap",
-      "address": "udp://1.1.1.1",
-      "detour": "direct"
-    }
-  ],
-  "rules": [
-    {
-      "outbound": "any",
-      "server": "bootstrap"
-    },
-    {
-      "clash_mode": "direct",
-      "server": "local"
-    }
-  ],
-  "final": "remote",
-  "strategy": "prefer_ipv4",
-  "independent_cache": true
+    "servers": [
+      {
+        "tag": "remote",
+        "address": "tls://1.1.1.1",
+        "detour": "proxy"
+      },
+      {
+        "tag": "local",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      }
+    ],
+    "rules": [
+      {
+        "outbound": "any",
+        "server": "local"
+      }
+    ],
+    "final": "remote",
+    "strategy": "prefer_ipv4"
   },
   "inbounds": [
     {
@@ -1402,7 +1392,7 @@
         "tag": "whitelist",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/hiddify/whitelist.srs",
-        "download_detour": "direct"
+        "download_detour": "proxy"
       },
       {
         "type": "remote",
