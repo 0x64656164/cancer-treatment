@@ -31,10 +31,7 @@ MAX_WORKERS = 8
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
 TIMEOUT = 5             # Максимум 5 секунд на ожидание и загрузку 1МБ
 
-REMOTE_RULE_SETS = [
-    "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
-    "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs"
-]
+REMOTE_RULE_SETS = []
 REMOTE_BLOCK_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs"
 ]
@@ -411,7 +408,7 @@ def generate_final_config():
                 {"rule_set": proxy_routing_tags, "outbound": "proxy"}
             ],
             "rule_set": formatted_rule_sets,
-            "final": "direct",
+            "final": "proxy",
             "auto_detect_interface": True
         }
     }
