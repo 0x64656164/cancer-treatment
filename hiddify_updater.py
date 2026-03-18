@@ -405,7 +405,7 @@ def generate_final_config():
             "rules": [
                 {"protocol": "dns", "action": "hijack-dns"},
                 {"rule_set": block_routing_tags, "outbound": "block"},
-                {"rule_set": proxy_routing_tags, "outbound": "proxy"}
+                {"rule_set": proxy_routing_tags, "outbound": "direct"}
             ],
             "rule_set": formatted_rule_sets,
             "final": "proxy",
