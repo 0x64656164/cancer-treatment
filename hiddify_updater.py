@@ -21,7 +21,7 @@ CIDR_WHITELIST_FILE = 'cidrwhitelist.txt'
 REGEXP_FILTER = r'^(?!.*?\b(Russia|RU|🇷🇺)\b).*$'
 
 REGEXP_FILTER_FALLBACK = r'.*'   # то же, но без исключения Russia, пока так, потом уберу совсем
-GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656464/cancer-treatment/refs/heads/main/ruleset/hiddify/'
+GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/hiddify/'
 
 TOP_COUNT = 50          # Берём только топ-50 по скорости
 MIN_SERVERS = 5         # Минимум серверов, прошедших проверку
@@ -37,6 +37,17 @@ REMOTE_RULE_SETS = [
 REMOTE_BLOCK_RULE_SETS = [
     "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs"
 ]
+
+# --- MUX НАСТРОЙКИ ---
+# Применяется только к обычным серверам (vless/vmess/trojan)
+# Hysteria2 не поддерживает MUX — для hy2 не используется
+MUX_CONFIG = {
+    "enabled": True,
+    "protocol": "h2mux",
+    "max_connections": 18,
+    "min_streams": 2,
+    "padding": False
+}
 
 
 # ---------------------------------------------------------------------------
@@ -170,6 +181,7 @@ def collect_hy2_outbounds(hy2_links: list) -> list:
     """
     Парсит hysteria2 ссылки в outbound-конфиги без speed-теста и CIDR-фильтра.
     Возвращает список готовых outbound-словарей.
+    Hysteria2 не поддерживает MUX — multiplex не добавляется.
     """
     if not hy2_links:
         return []
@@ -185,6 +197,7 @@ def collect_hy2_outbounds(hy2_links: list) -> list:
             outbound = proxy._parse_hysteria2_link(link)
             outbound["tag"] = tag
             outbound["domain_strategy"] = "prefer_ipv4"
+            # MUX для hysteria2 не добавляется — протокол не поддерживает
             outbounds.append(outbound)
             print(f"  [HY2] {tag}")
         except Exception as e:
@@ -242,6 +255,9 @@ def measure_throughput(link):
                                 outbound["transport"]["host"][0]
                                 if outbound["transport"]["host"] else ""
                             )
+
+                    # Добавляем MUX для обычных серверов (vless/vmess/trojan)
+                    outbound["multiplex"] = MUX_CONFIG
 
                     print(f"[GOOD] {tag}: {mbps:.2f} Mbps")
                     return outbound, mbps
