@@ -24,9 +24,8 @@ REGEXP_FILTER = r'^(?!.*(?:\bRussia\b|\bRU\b|🇷🇺)).*$'
 REGEXP_FILTER_FALLBACK = r'.*'   # то же, но без исключения Russia, пока так, потом уберу совсем
 GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/hiddify/'
 
-TOP_COUNT = 50          # Берём только топ-50 по скорости
-MIN_SERVERS = 5         # Минимум серверов, прошедших проверку
-MIN_BEST_SPEED = 1.5    # Минимальная скорость лучшего сервера (Mbps)
+MIN_SERVERS = 5         # Минимум серверов, прошедших проверку (для фоллбэка)
+MIN_BEST_SPEED = 1.5    # Минимальная скорость лучшего сервера (Mbps) (для фоллбэка)
 MAX_WORKERS = 24
 SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
 TIMEOUT = 5             # Максимум 5 секунд на ожидание и загрузку 1МБ
@@ -252,7 +251,7 @@ def measure_throughput(link):
 def run_speed_test(links, label):
     """Прогоняет список ссылок через speed test, возвращает отсортированные результаты."""
     print(f"Начинаем стресс-тест для {len(links)} серверов ({label})...")
-    print(f"Параметры: топ-{TOP_COUNT} по скорости\n")
+    print(f"Параметры: адаптивный порог по средней скорости\n")
 
     results = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
@@ -264,6 +263,23 @@ def run_speed_test(links, label):
 
     results.sort(key=lambda x: x[1], reverse=True)
     return results
+
+
+def filter_by_average_speed(results):
+    """
+    Отбрасывает серверы ниже средней скорости по всей выборке.
+    Порог адаптивный: если лучшие дают 10 Mbps — серверы на 2 Mbps отсеются автоматически.
+    """
+    if not results:
+        return results
+
+    avg_speed = sum(spd for _, spd in results) / len(results)
+    filtered = [(ob, spd) for ob, spd in results if spd >= avg_speed]
+
+    print(f"Адаптивный порог: средняя скорость = {avg_speed:.2f} Mbps")
+    print(f"Отобрано: {len(filtered)} из {len(results)} серверов "
+          f"(отброшено {len(results) - len(filtered)})\n")
+    return filtered
 
 
 def needs_fallback(results):
@@ -312,18 +328,20 @@ def generate_final_config():
         else:
             print("Фоллбэк: новых ссылок для теста не найдено.")
 
-    # 5. Берём топ-50 из обычных серверов
-    top_results = results[:TOP_COUNT]
+    # 5. Отбрасываем серверы ниже средней скорости по выборке
+    top_results = filter_by_average_speed(results)
     final_proxies = [r[0] for r in top_results]
 
     print(f"\nТест окончен. Всего прошли проверку: {len(results)}, "
-          f"отобрано в топ-{TOP_COUNT}: {len(final_proxies)} серверов.")
+          f"после адаптивного отбора: {len(final_proxies)} серверов.")
     if top_results:
         print("\nТоп-10 по скорости:")
         for i, (ob, spd) in enumerate(top_results[:10], 1):
             print(f"  {i:>2}. {ob['tag'][:55]:<55} {spd:6.2f} Mbps")
+        if len(top_results) > 10:
+            print(f"  ... и ещё {len(top_results) - 10} серверов")
 
-    # 6. Парсим hysteria2 и добавляем в конец списка (после топ-50)
+    # 6. Парсим hysteria2 и добавляем в конец списка (после адаптивного отбора)
     hy2_outbounds = collect_hy2_outbounds(hy2_links)
     final_proxies += hy2_outbounds
 
