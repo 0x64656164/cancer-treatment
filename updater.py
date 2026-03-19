@@ -74,7 +74,7 @@ MAX_WORKERS    = 64   # увеличено: зонды тратят время �
 #
 PROBE_ROUNDS = 3     # количество замеров на сервер
 PROBE_DELAY  = 60    # секунд между замерами (окно наблюдения = (PROBE_ROUNDS-1) * PROBE_DELAY)
-PROBE_URL    = 'https://cachefly.cachefly.net/100kb.test'
+PROBE_URL    = 'https://cachefly.cachefly.net/10mb.test'
 TIMEOUT      = 8     # секунд на один замер
 
 
