@@ -5,11 +5,53 @@ import os
 import time
 import ipaddress
 import socket
+import base64
+import sys
 import concurrent.futures
-from urllib.parse import urlparse, unquote
+from urllib.parse import urlparse, unquote, parse_qs
 from base import SingBoxProxy
 
-# --- НАСТРОЙКИ ---
+# ---------------------------------------------------------------------------
+# ПРОФИЛИ ВЫВОДА
+# ---------------------------------------------------------------------------
+# Каждый профиль описывает один выходной конфиг.
+# Оба генерируются за один прогон (тест серверов запускается один раз).
+# Чтобы сгенерировать только один профиль: python updater.py srs
+#                                            python updater.py hiddify
+#
+PROFILES = {
+    "srs": {
+        "output_file":        "config.json",
+        "github_raw_base":    "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/",
+        "ruleset_folder":     "ruleset/srs/",
+        "route_final":        "direct",
+        "proxy_rule_outbound":"proxy",       # куда идут proxy-правила (proxy / direct)
+        "file_header":        None,          # None = без заголовка
+        "remote_rule_sets": [
+            "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
+            "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs",
+        ],
+        "remote_block_rule_sets": [
+            "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs",
+        ],
+    },
+    "hiddify": {
+        "output_file":        "hiddify_config.json",
+        "github_raw_base":    "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/hiddify/",
+        "ruleset_folder":     "ruleset/hiddify/",
+        "route_final":        "proxy",
+        "proxy_rule_outbound":"direct",      # hiddify: proxy-правила идут на direct (сплит-туннель)
+        "file_header":        "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
+        "remote_rule_sets":   [],
+        "remote_block_rule_sets": [
+            "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs",
+        ],
+    },
+}
+
+# ---------------------------------------------------------------------------
+# ОБЩИЕ НАСТРОЙКИ
+# ---------------------------------------------------------------------------
 SUB_LINKS = [
     'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt',
     'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt',
@@ -19,38 +61,267 @@ SUB_LINKS = [
 ]
 CIDR_WHITELIST_FILE = 'cidrwhitelist.txt'
 
-REGEXP_FILTER = r'^(?!.*(?:\bRussia\b|\bRU\b|🇷🇺)).*$'
+REGEXP_FILTER          = r'^(?!.*(?:\bRussia\b|\bRU\b|🇷🇺)).*$'
+REGEXP_FILTER_FALLBACK = r'.*'
 
-REGEXP_FILTER_FALLBACK = r'.*'   # то же, но без исключения Russia, пока так, потом уберу совсем
-GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/'
+MIN_SERVERS    = 5
+MIN_BEST_SPEED = 1.5
+MAX_WORKERS    = 24
 
-MIN_SERVERS = 5         # Минимум серверов, прошедших проверку (для фоллбэка)
-MIN_BEST_SPEED = 1.5    # Минимальная скорость лучшего сервера (Mbps) (для фоллбэка)
-MAX_WORKERS = 24
-SPEED_TEST_URL = 'https://cachefly.cachefly.net/1mb.test'
-TIMEOUT = 5             # Максимум 5 секунд на ожидание и загрузку 1МБ
-
-REMOTE_RULE_SETS = [
-    "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
-    "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs"
-]
-REMOTE_BLOCK_RULE_SETS = [
-    "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs"
-]
-
+# --- Параметры зондирования ---
+PROBE_ROUNDS = 3
+PROBE_URL    = 'https://cachefly.cachefly.net/100kb.test'
+TIMEOUT      = 8
 
 # ---------------------------------------------------------------------------
-# CIDR-фильтр: загружается один раз при старте
+# ФИЛЬТР ПО ПАРАМЕТРАМ ПРОТОКОЛА
 # ---------------------------------------------------------------------------
+#
+# Ключ словаря — протокол (vless/vmess/trojan/hy2/hysteria2).
+# Если протокол отсутствует в словаре — все его серверы отсеиваются.
+#
+# ┌─────────────────┬───────────────────────────────────────────────────────────────────────────┐
+# │ Поле            │ Описание                                                                  │
+# ├─────────────────┼───────────────────────────────────────────────────────────────────────────┤
+# │ logic           │ "AND" (все условия, по умолчанию) / "OR" (хватит одного)                  │
+# │ transport       │ тип транспорта: tcp / ws / grpc / httpupgrade / xhttp / quic              │
+# │ security        │ tls / reality / none                                                      │
+# │ flow            │ flow-значение: "" / "xtls-rprx-vision" / ...                              │
+# │ sni             │ SNI: точное или "*.example.com" wildcard                                  │
+# │ fp              │ fingerprint браузера: chrome / firefox / safari / edge / ios / ...        │
+# │ port            │ порт: число, строка "443", или диапазон "8000-9000"                       │
+# │ host            │ Host-заголовок (ws/httpupgrade): точное или wildcard "*.cdn.com"          │
+# │ path            │ путь (ws/httpupgrade/xhttp): точное, префикс "/cdn*", или regex "/re:..."  │
+# │ alpn            │ ALPN: "h2" / "http/1.1" / "h3" — сервер проходит если хоть одно совпало  │
+# │ encryption      │ (vmess) метод шифрования: auto / aes-128-gcm / chacha20-poly1305 / none  │
+# │ pbk             │ (reality) публичный ключ — whitelist конкретных ключей                    │
+# │ sid             │ (reality) short ID — whitelist конкретных ID                              │
+# │ service_name    │ (grpc) имя сервиса                                                        │
+# │ obfs            │ (hy2) тип обфускации: none / salamander                                   │
+# │ obfs_password   │ (hy2) regex-паттерн на пароль обфускации: "^secret.*"                    │
+# └─────────────────┴───────────────────────────────────────────────────────────────────────────┘
+#
+# Пустой список [] для любого поля = ограничение снято (разрешено всё).
+#
+PROTOCOL_FILTERS = {
+    "vless": {
+        "logic":        "AND",
+        "transport":    ["ws", "grpc", "httpupgrade", "xhttp"],
+        "security":     ["tls", "reality"],
+        "flow":         [],
+        "sni":          [],
+        "fp":           [],
+        "port":         [],
+        "host":         [],
+        "path":         [],
+        "alpn":         [],
+        "pbk":          [],
+        "sid":          [],
+        "service_name": [],
+    },
+    "vmess": {
+        "logic":      "AND",
+        "transport":  ["ws"],
+        "security":   ["tls"],
+        "sni":        [],
+        "host":       [],
+        "path":       [],
+        "alpn":       [],
+        "port":       [],
+        "encryption": [],
+    },
+    "trojan": {
+        "logic":        "AND",
+        "transport":    ["ws", "grpc"],
+        "security":     ["tls"],
+        "sni":          [],
+        "host":         [],
+        "path":         [],
+        "alpn":         [],
+        "port":         [],
+        "service_name": [],
+    },
+    "hy2": {
+        "logic":         "AND",
+        "transport":     [],
+        "security":      [],
+        "sni":           [],
+        "port":          [],
+        "obfs":          [],
+        "obfs_password": [],
+    },
+    "hysteria2": {
+        "logic":         "AND",
+        "transport":     [],
+        "security":      [],
+        "sni":           [],
+        "port":          [],
+        "obfs":          [],
+        "obfs_password": [],
+    },
+}
+
+
+# ===========================================================================
+# ФИЛЬТР ПО ПАРАМЕТРАМ ПРОТОКОЛА — реализация
+# ===========================================================================
+
+def _parse_link_params(link: str) -> dict:
+    p = {
+        "protocol": "", "transport": "", "security": "", "flow": "",
+        "sni": "", "fp": "", "port": "", "host": "", "path": "",
+        "alpn": [], "encryption": "", "pbk": "", "sid": "",
+        "service_name": "", "obfs": "", "obfs_password": "",
+    }
+    try:
+        parsed = urlparse(link)
+        proto = parsed.scheme.lower()
+        p["protocol"] = proto
+        p["port"] = str(parsed.port or "")
+
+        if proto == "vmess":
+            raw = link[len("vmess://"):]
+            if '#' in raw:
+                raw = raw[:raw.index('#')]
+            padded = raw + '=' * (-len(raw) % 4)
+            data = json.loads(base64.b64decode(padded).decode('utf-8', errors='ignore'))
+            net = data.get("net", data.get("type", "tcp"))
+            tls = data.get("tls", "")
+            p["transport"]  = net if net else "tcp"
+            p["security"]   = tls if tls else "none"
+            p["sni"]        = data.get("sni", "")
+            p["fp"]         = data.get("fp", "")
+            p["host"]       = data.get("host", "")
+            p["path"]       = data.get("path", "")
+            p["encryption"] = data.get("scy", data.get("security", "auto"))
+            alpn_raw        = data.get("alpn", "")
+            p["alpn"]       = [a.strip() for a in alpn_raw.split(",") if a.strip()] if alpn_raw else []
+            if not p["port"] and data.get("port"):
+                p["port"] = str(data["port"])
+            return p
+
+        qs = parse_qs(parsed.query, keep_blank_values=True)
+
+        def q(key): return qs.get(key, [""])[0]
+
+        p["transport"]     = q("type") or "tcp"
+        p["security"]      = q("security") or ("tls" if proto == "trojan" else "none")
+        p["flow"]          = q("flow")
+        p["sni"]           = q("sni")
+        p["fp"]            = q("fp")
+        p["host"]          = q("host")
+        p["path"]          = q("path")
+        p["pbk"]           = q("pbk")
+        p["sid"]           = q("sid")
+        p["service_name"]  = q("serviceName")
+        p["obfs"]          = q("obfs") or q("obfsType")
+        p["obfs_password"] = q("obfs-password") or q("obfsParam")
+        alpn_raw           = q("alpn")
+        p["alpn"]          = [a.strip() for a in unquote(alpn_raw).split(",") if a.strip()] if alpn_raw else []
+    except Exception:
+        pass
+    return p
+
+
+def _str_matches(value: str, allowed: list) -> bool:
+    for pattern in allowed:
+        if pattern.startswith("*."):
+            suffix = pattern[1:]
+            if value == pattern[2:] or value.endswith(suffix):
+                return True
+        elif value == pattern:
+            return True
+    return False
+
+
+def _path_matches(path: str, allowed: list) -> bool:
+    for pattern in allowed:
+        if pattern.startswith("/re:"):
+            if re.match(pattern[4:], path):
+                return True
+        elif pattern.endswith("*"):
+            if path.startswith(pattern[:-1]):
+                return True
+        elif path == pattern:
+            return True
+    return False
+
+
+def _port_matches(port_str: str, allowed: list) -> bool:
+    try:
+        port = int(port_str)
+    except (ValueError, TypeError):
+        return False
+    for entry in allowed:
+        s = str(entry)
+        if '-' in s:
+            lo, hi = s.split('-', 1)
+            if int(lo) <= port <= int(hi):
+                return True
+        elif int(s) == port:
+            return True
+    return False
+
+
+def _alpn_matches(alpn_list: list, allowed: list) -> bool:
+    return any(a in allowed for a in alpn_list)
+
+
+def _regex_matches(value: str, patterns: list) -> bool:
+    return any(re.search(pat, value) for pat in patterns)
+
+
+def passes_protocol_filter(link: str) -> bool:
+    p = _parse_link_params(link)
+    proto = p["protocol"]
+    if proto not in PROTOCOL_FILTERS:
+        return False
+    rules = PROTOCOL_FILTERS[proto]
+    logic = rules.get("logic", "AND").upper()
+    checks = []
+
+    def check(field, matcher_fn, *args):
+        if rules.get(field):
+            checks.append(matcher_fn(*args))
+
+    check("transport",     _str_matches,   p["transport"],     rules.get("transport", []))
+    check("security",      _str_matches,   p["security"],      rules.get("security", []))
+    check("flow",          _str_matches,   p["flow"],          rules.get("flow", []))
+    check("sni",           _str_matches,   p["sni"],           rules.get("sni", []))
+    check("fp",            _str_matches,   p["fp"],            rules.get("fp", []))
+    check("host",          _str_matches,   p["host"],          rules.get("host", []))
+    check("encryption",    _str_matches,   p["encryption"],    rules.get("encryption", []))
+    check("pbk",           _str_matches,   p["pbk"],           rules.get("pbk", []))
+    check("sid",           _str_matches,   p["sid"],           rules.get("sid", []))
+    check("service_name",  _str_matches,   p["service_name"],  rules.get("service_name", []))
+    check("obfs",          _str_matches,   p["obfs"],          rules.get("obfs", []))
+    check("port",          _port_matches,  p["port"],          rules.get("port", []))
+    check("path",          _path_matches,  p["path"],          rules.get("path", []))
+    check("alpn",          _alpn_matches,  p["alpn"],          rules.get("alpn", []))
+    check("obfs_password", _regex_matches, p["obfs_password"], rules.get("obfs_password", []))
+
+    if not checks:
+        return True
+    return any(checks) if logic == "OR" else all(checks)
+
+
+def filter_by_params(links: list) -> list:
+    before = len(links)
+    passed = [l for l in links if passes_protocol_filter(l)]
+    print(f"Фильтр параметров: прошло {len(passed)} из {before} "
+          f"(отсеяно {before - len(passed)})\n")
+    return passed
+
+
+# ===========================================================================
+# CIDR-ФИЛЬТР
+# ===========================================================================
 
 def load_cidr_whitelist(path: str) -> list:
-    """Читает файл с CIDR-подсетями (по одной на строку), возвращает список сетей."""
     if not os.path.exists(path):
-        print(f"⚠ Файл {path} не найден — CIDR-фильтр отключён, все серверы пройдут дальше.")
+        print(f"⚠ Файл {path} не найден — CIDR-фильтр отключён.")
         return []
-
-    networks = []
-    errors = 0
+    networks, errors = [], 0
     with open(path, encoding='utf-8') as f:
         for line in f:
             line = line.strip()
@@ -60,21 +331,16 @@ def load_cidr_whitelist(path: str) -> list:
                 networks.append(ipaddress.ip_network(line, strict=False))
             except ValueError:
                 errors += 1
-
     print(f"CIDR-whitelist загружен: {len(networks)} сетей"
           + (f", пропущено некорректных строк: {errors}" if errors else ""))
     return networks
 
 
-# Глобальный список сетей — инициализируется один раз при старте
 CIDR_NETWORKS = load_cidr_whitelist(CIDR_WHITELIST_FILE)
-
-# Кэш DNS-резолюции, чтобы не резолвить один хост дважды
 _dns_cache: dict = {}
 
 
 def _resolve(host: str):
-    """Резолвит хост в IP, кэширует результат. Возвращает None при ошибке."""
     if host not in _dns_cache:
         try:
             _dns_cache[host] = socket.gethostbyname(host)
@@ -84,71 +350,45 @@ def _resolve(host: str):
 
 
 def is_in_cidr_whitelist(host: str) -> bool:
-    """
-    Проверяет, попадает ли IP-адрес хоста в один из разрешённых CIDR.
-    Если список сетей пуст (файл не найден) — пропускает всё.
-    """
     if not CIDR_NETWORKS:
         return True
-
     ip_str = _resolve(host)
     if ip_str is None:
-        return False  # не резолвится — отсеиваем
-
+        return False
     try:
-        ip = ipaddress.ip_address(ip_str)
-        return any(ip in net for net in CIDR_NETWORKS)
+        return any(ipaddress.ip_address(ip_str) in net for net in CIDR_NETWORKS)
     except ValueError:
         return False
 
 
 def extract_host_from_link(link: str) -> str:
-    """Извлекает хост (адрес сервера) из ссылки."""
     return urlparse(link).hostname or ""
 
 
 def filter_by_cidr(links: list) -> list:
-    """
-    Фильтрует список ссылок, оставляя только те,
-    чей сервер попадает в CIDR-whitelist.
-    DNS-резолюция идёт параллельно для скорости.
-    """
     if not CIDR_NETWORKS:
         return links
-
     print(f"CIDR-фильтрация: проверяем {len(links)} серверов...")
-
-    # Параллельная резолюция — заполняем кэш заранее
     hosts = list({extract_host_from_link(l) for l in links if extract_host_from_link(l)})
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS * 2) as ex:
         ex.map(_resolve, hosts)
-
     passed = [l for l in links if is_in_cidr_whitelist(extract_host_from_link(l))]
     print(f"CIDR-фильтр: прошло {len(passed)} из {len(links)} серверов\n")
     return passed
 
 
-# ---------------------------------------------------------------------------
-# Загрузка подписок
-# ---------------------------------------------------------------------------
+# ===========================================================================
+# ЗАГРУЗКА ПОДПИСОК
+# ===========================================================================
 
 def fetch_links_from_subscriptions() -> tuple:
-    """
-    Загружает все ссылки со всех подписок, дедуплицирует.
-    Возвращает два списка: (обычные ссылки, hysteria2 ссылки).
-    Hysteria2 выделяются отдельно — они обходят CIDR-фильтр и speed-тест.
-    """
-    regular_links = []
-    hy2_links = []
-    seen = set()
-
+    regular_links, hy2_links, seen = [], [], set()
     for url in SUB_LINKS:
         print(f"Загрузка подписки: {url}")
         try:
             raw = requests.get(url, timeout=15).text
             found = re.findall(r'^(?:vless|vmess|trojan|hy2|hysteria2):\/\/.+$', raw, re.MULTILINE)
-            new_regular = 0
-            new_hy2 = 0
+            new_regular = new_hy2 = 0
             for link in found:
                 if link not in seen:
                     seen.add(link)
@@ -161,214 +401,141 @@ def fetch_links_from_subscriptions() -> tuple:
             print(f"  → Найдено: {len(found)}, новых обычных: {new_regular}, новых hy2: {new_hy2}")
         except Exception as e:
             print(f"  ✗ Ошибка загрузки {url}: {e}")
-
-    print(f"\nИтого уникальных: обычных серверов: {len(regular_links)}, hysteria2: {len(hy2_links)}\n")
+    print(f"\nИтого уникальных: обычных: {len(regular_links)}, hysteria2: {len(hy2_links)}\n")
     return regular_links, hy2_links
 
 
 def collect_hy2_outbounds(hy2_links: list) -> list:
-    """
-    Парсит hysteria2 ссылки в outbound-конфиги без speed-теста и CIDR-фильтра.
-    Возвращает список готовых outbound-словарей.
-    """
     if not hy2_links:
         return []
-
-    print(f"Парсинг {len(hy2_links)} hysteria2 серверов (без speed-теста и CIDR)...")
+    print(f"Парсинг {len(hy2_links)} hysteria2 серверов...")
     outbounds = []
-    # Создаём экземпляр только для доступа к методам парсинга, без запуска процесса
     proxy = SingBoxProxy.__new__(SingBoxProxy)
-
     for link in hy2_links:
         tag = unquote(urlparse(link).fragment) or "Unnamed"
         try:
-            outbound = proxy._parse_hysteria2_link(link)
-            outbound["tag"] = tag
-            outbound["domain_strategy"] = "prefer_ipv4"
-            outbounds.append(outbound)
+            ob = proxy._parse_hysteria2_link(link)
+            ob["tag"] = tag
+            ob["domain_strategy"] = "prefer_ipv4"
+            outbounds.append(ob)
             print(f"  [HY2] {tag}")
         except Exception as e:
             print(f"  [FAIL] {tag}: {e}")
-
     print(f"Hysteria2 готово: {len(outbounds)} серверов\n")
     return outbounds
 
 
-# ---------------------------------------------------------------------------
-# Speed-тест
-# ---------------------------------------------------------------------------
+# ===========================================================================
+# ЗОНДИРОВАНИЕ
+# ===========================================================================
 
 def parse_link(proxy, link):
-    """Выбирает правильный парсер в зависимости от протокола ссылки."""
-    if link.startswith("vmess://"):
-        return proxy._parse_vmess_link(link)
-    elif link.startswith("vless://"):
-        return proxy._parse_vless_link(link)
-    elif link.startswith("trojan://"):
-        return proxy._parse_trojan_link(link)
-    elif link.startswith(("hy2://", "hysteria2://")):
-        return proxy._parse_hysteria2_link(link)
-    else:
-        raise ValueError(f"Неизвестный протокол: {link[:20]}")
+    if link.startswith("vmess://"):    return proxy._parse_vmess_link(link)
+    if link.startswith("vless://"):    return proxy._parse_vless_link(link)
+    if link.startswith("trojan://"):   return proxy._parse_trojan_link(link)
+    if link.startswith(("hy2://", "hysteria2://")): return proxy._parse_hysteria2_link(link)
+    raise ValueError(f"Неизвестный протокол: {link[:20]}")
 
 
-def measure_throughput(link):
+def _fix_outbound(outbound: dict) -> dict:
+    if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
+        outbound["transport"]["type"] = "httpupgrade"
+        if isinstance(outbound["transport"].get("host"), list):
+            outbound["transport"]["host"] = (
+                outbound["transport"]["host"][0]
+                if outbound["transport"]["host"] else ""
+            )
+    return outbound
+
+
+def probe_server(link: str):
+    """score = median_speed × success_rate"""
     tag = unquote(urlparse(link).fragment) or "Unnamed"
-
-    try:
-        with SingBoxProxy(link) as proxy:
-            start_time = time.perf_counter()
-            response = proxy.get(SPEED_TEST_URL, timeout=TIMEOUT, stream=True)
-
-            if response.status_code == 200:
-                total_content = 0
-                for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        total_content += len(chunk)
-
-                duration = time.perf_counter() - start_time
-
-                if duration > 0 and total_content > 0:
-                    mbps = (total_content * 8) / (duration * 1_000_000)
-
-                    outbound = parse_link(proxy, link)
-                    outbound["tag"] = tag
-                    outbound["domain_strategy"] = "prefer_ipv4"
-
-                    if "transport" in outbound and outbound["transport"].get("type") == "xhttp":
-                        outbound["transport"]["type"] = "httpupgrade"
-                        if isinstance(outbound["transport"].get("host"), list):
-                            outbound["transport"]["host"] = (
-                                outbound["transport"]["host"][0]
-                                if outbound["transport"]["host"] else ""
-                            )
-
-                    print(f"[GOOD] {tag}: {mbps:.2f} Mbps")
-                    return outbound, mbps
-    except Exception:
-        pass
-
-    return None, 0
+    speeds, outbound = [], None
+    for _ in range(PROBE_ROUNDS):
+        try:
+            with SingBoxProxy(link) as proxy:
+                start = time.perf_counter()
+                r = proxy.get(PROBE_URL, timeout=TIMEOUT, stream=True)
+                if r.status_code == 200:
+                    total = sum(len(c) for c in r.iter_content(chunk_size=8192) if c)
+                    duration = time.perf_counter() - start
+                    if duration > 0 and total > 0:
+                        mbps = (total * 8) / (duration * 1_000_000)
+                        speeds.append(mbps)
+                        if outbound is None:
+                            outbound = _fix_outbound(parse_link(proxy, link))
+                            outbound["tag"] = tag
+                            outbound["domain_strategy"] = "prefer_ipv4"
+        except Exception:
+            pass
+    if not speeds or outbound is None:
+        return None, 0
+    success_rate = len(speeds) / PROBE_ROUNDS
+    median_speed = sorted(speeds)[len(speeds) // 2]
+    score = median_speed * success_rate
+    print(f"[OK] {tag[:50]:<50} median={median_speed:.1f} Mbps  "
+          f"{len(speeds)}/{PROBE_ROUNDS} зондов  score={score:.2f}")
+    return outbound, score
 
 
-def run_speed_test(links, label):
-    """Прогоняет список ссылок через speed test, возвращает отсортированные результаты."""
-    print(f"Начинаем стресс-тест для {len(links)} серверов ({label})...")
-    print(f"Параметры: адаптивный порог по средней скорости\n")
-
+def run_probes(links: list, label: str) -> list:
+    print(f"\nЗондирование: {len(links)} серверов ({label})")
+    print(f"Параметры: {PROBE_ROUNDS} зонда, файл {PROBE_URL.split('/')[-1]}, таймаут {TIMEOUT}с\n")
     results = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_link = {executor.submit(measure_throughput, l): l for l in links}
-        for future in concurrent.futures.as_completed(future_to_link):
-            outbound, speed = future.result()
-            if outbound:
-                results.append((outbound, speed))
-
+        futures = {executor.submit(probe_server, l): l for l in links}
+        for future in concurrent.futures.as_completed(futures):
+            ob, score = future.result()
+            if ob:
+                results.append((ob, score))
     results.sort(key=lambda x: x[1], reverse=True)
     return results
 
 
-def filter_by_average_speed(results):
-    """
-    Отбрасывает серверы ниже средней скорости по всей выборке.
-    Порог адаптивный: если лучшие дают 10 Mbps — серверы на 2 Mbps отсеются автоматически.
-    """
+def filter_by_average_score(results: list) -> list:
     if not results:
         return results
-
-    avg_speed = sum(spd for _, spd in results) / len(results)
-    filtered = [(ob, spd) for ob, spd in results if spd >= avg_speed]
-
-    print(f"Адаптивный порог: средняя скорость = {avg_speed:.2f} Mbps")
-    print(f"Отобрано: {len(filtered)} из {len(results)} серверов "
+    avg = sum(s for _, s in results) / len(results)
+    filtered = [(ob, s) for ob, s in results if s >= avg]
+    print(f"Адаптивный порог: средний score = {avg:.2f}")
+    print(f"Отобрано: {len(filtered)} из {len(results)} "
           f"(отброшено {len(results) - len(filtered)})\n")
     return filtered
 
 
-def needs_fallback(results):
-    """Проверяет, нужен ли фоллбэк по результатам теста."""
+def needs_fallback(results: list) -> bool:
     if len(results) < MIN_SERVERS:
-        print(f"\n⚠ Прошло проверку только {len(results)} серверов (минимум: {MIN_SERVERS}). "
-              f"Запускаем фоллбэк без фильтра Russia...")
+        print(f"\n⚠ Прошло только {len(results)} серверов (минимум: {MIN_SERVERS}). Фоллбэк...")
         return True
-    best_speed = results[0][1]
-    if best_speed < MIN_BEST_SPEED:
-        print(f"\n⚠ Лучший сервер показал {best_speed:.2f} Mbps (минимум: {MIN_BEST_SPEED} Mbps). "
-              f"Запускаем фоллбэк без фильтра Russia...")
+    if results[0][1] < MIN_BEST_SPEED:
+        print(f"\n⚠ Лучший score {results[0][1]:.2f} < {MIN_BEST_SPEED}. Фоллбэк...")
         return True
     return False
 
 
-# ---------------------------------------------------------------------------
-# Основная функция
-# ---------------------------------------------------------------------------
+# ===========================================================================
+# ЗАПИСЬ КОНФИГА ДЛЯ ОДНОГО ПРОФИЛЯ
+# ===========================================================================
 
-def generate_final_config():
-    # 1. Загрузка всех ссылок со всех подписок — hy2 сразу отделяются
-    regular_links, hy2_links = fetch_links_from_subscriptions()
-    if not regular_links and not hy2_links:
-        print("Критическая ошибка: Не удалось загрузить ни одной ссылки!")
-        return
+def write_config(profile: dict, final_proxies: list):
+    """Собирает и записывает один конфиг файл по переданному профилю."""
 
-    # 2. CIDR-фильтрация только для обычных серверов (hy2 проходят мимо)
-    regular_links = filter_by_cidr(regular_links)
-    if not regular_links:
-        print("⚠ После CIDR-фильтрации не осталось обычных серверов, продолжаем только с hy2.")
-
-    # 3. Первый проход: основной фильтр по тегу (без Russia)
-    filtered = [l for l in regular_links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
-    results = run_speed_test(filtered, "основной фильтр, без Russia") if filtered else []
-
-    # 4. Фоллбэк: повтор с разрешением Russia
-    if needs_fallback(results):
-        filtered_fallback = [l for l in regular_links if re.match(REGEXP_FILTER_FALLBACK, unquote(urlparse(l).fragment))]
-        already_tested = set(filtered)
-        new_links = [l for l in filtered_fallback if l not in already_tested]
-
-        if new_links:
-            fallback_results = run_speed_test(new_links, "фоллбэк, включая Russia")
-            results = sorted(results + fallback_results, key=lambda x: x[1], reverse=True)
-        else:
-            print("Фоллбэк: новых ссылок для теста не найдено.")
-
-    # 5. Отбрасываем серверы ниже средней скорости по выборке
-    top_results = filter_by_average_speed(results)
-    final_proxies = [r[0] for r in top_results]
-
-    print(f"\nТест окончен. Всего прошли проверку: {len(results)}, "
-          f"после адаптивного отбора: {len(final_proxies)} серверов.")
-    if top_results:
-        print("\nТоп-10 по скорости:")
-        for i, (ob, spd) in enumerate(top_results[:10], 1):
-            print(f"  {i:>2}. {ob['tag'][:55]:<55} {spd:6.2f} Mbps")
-        if len(top_results) > 10:
-            print(f"  ... и ещё {len(top_results) - 10} серверов")
-
-    # 6. Парсим hysteria2 и добавляем в конец списка (после адаптивного отбора)
-    hy2_outbounds = collect_hy2_outbounds(hy2_links)
-    final_proxies += hy2_outbounds
-
-    if not final_proxies:
-        print("Критическая ошибка: Ни один сервер не прошел проверку!")
-        return
-
-    # 7. Уникализация тегов по всему итоговому списку
-    seen_tags = {}
-    for pb in final_proxies:
+    # Уникализация тегов — делаем копию, чтобы не портить оригинал для второго профиля
+    proxies = [dict(p) for p in final_proxies]
+    seen_tags: dict = {}
+    for pb in proxies:
         t = pb["tag"]
         if t in seen_tags:
             seen_tags[t] += 1
             pb["tag"] = f"{t}-{seen_tags[t]}"
         else:
             seen_tags[t] = 0
+    proxy_tags = [p["tag"] for p in proxies]
 
-    proxy_tags = [p["tag"] for p in final_proxies]
-
-    # Сборка структуры Rule Sets
-    formatted_rule_sets = []
-    proxy_routing_tags = []
-    block_routing_tags = []
-    rule_tags = set()
+    # Rule Sets
+    formatted_rule_sets, proxy_routing_tags, block_routing_tags = [], [], []
+    rule_tags: set = set()
 
     def add_rule(tag, url, is_block):
         if tag in rule_tags:
@@ -377,37 +544,35 @@ def generate_final_config():
             "type": "remote", "tag": tag, "format": "binary", "url": url,
             "download_detour": "direct" if is_block else "proxy"
         })
-        if is_block:
-            block_routing_tags.append(tag)
-        else:
-            proxy_routing_tags.append(tag)
+        (block_routing_tags if is_block else proxy_routing_tags).append(tag)
         rule_tags.add(tag)
 
-    if os.path.exists('ruleset/srs/'):
-        for folder, is_block in [('ruleset/srs/', False), ('ruleset/srs/block/', True)]:
-            if not os.path.exists(folder):
+    folder = profile["ruleset_folder"]
+    base   = profile["github_raw_base"]
+    if os.path.exists(folder):
+        for subfolder, is_block in [(folder, False), (folder + "block/", True)]:
+            if not os.path.exists(subfolder):
                 continue
-            for file in os.listdir(folder):
+            for file in os.listdir(subfolder):
                 if file.endswith('.srs'):
                     tag = file.replace('.srs', '')
-                    url = f"{GITHUB_RAW_BASE}{'block/' if is_block else ''}{file}"
+                    url = f"{base}{'block/' if is_block else ''}{file}"
                     add_rule(tag, url, is_block)
 
-    for url in REMOTE_BLOCK_RULE_SETS:
+    for url in profile["remote_block_rule_sets"]:
         add_rule(url.split('/')[-1].replace('.srs', ''), url, True)
-    for url in REMOTE_RULE_SETS:
+    for url in profile["remote_rule_sets"]:
         add_rule(url.split('/')[-1].replace('.srs', ''), url, False)
 
-    # Формируем итоговый JSON
     config = {
         "log": {"level": "info"},
         "dns": {
             "servers": [
                 {"tag": "remote", "address": "tls://1.1.1.1", "detour": "proxy"},
-                {"tag": "local", "address": "223.5.5.5", "detour": "direct"}
+                {"tag": "local",  "address": "223.5.5.5",     "detour": "direct"}
             ],
-            "rules": [{"outbound": "any", "server": "local"}],
-            "final": "remote",
+            "rules":    [{"outbound": "any", "server": "local"}],
+            "final":    "remote",
             "strategy": "prefer_ipv4"
         },
         "inbounds": [
@@ -415,30 +580,109 @@ def generate_final_config():
         ],
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags},
-            {
-                "type": "urltest", "tag": "auto", "outbounds": proxy_tags,
-                "url": "http://cp.cloudflare.com/", "interval": "10m"
-            },
+            {"type": "urltest",  "tag": "auto",  "outbounds": proxy_tags,
+             "url": "http://cp.cloudflare.com/", "interval": "10m"},
             {"type": "direct", "tag": "direct"},
-            {"type": "block", "tag": "block"}
-        ] + final_proxies,
+            {"type": "block",  "tag": "block"},
+        ] + proxies,
         "route": {
             "rules": [
                 {"protocol": "dns", "action": "hijack-dns"},
                 {"rule_set": block_routing_tags, "outbound": "block"},
-                {"rule_set": proxy_routing_tags, "outbound": "proxy"}
+                {"rule_set": proxy_routing_tags, "outbound": profile["proxy_rule_outbound"]},
             ],
-            "rule_set": formatted_rule_sets,
-            "final": "direct",
+            "rule_set":             formatted_rule_sets,
+            "final":                profile["route_final"],
             "auto_detect_interface": True
         }
     }
 
-    with open('config.json', 'w', encoding='utf-8') as f:
+    output = profile["output_file"]
+    header = profile.get("file_header")
+    with open(output, 'w', encoding='utf-8') as f:
+        if header:
+            f.write(header)
         json.dump(config, f, indent=2, ensure_ascii=False)
 
-    print("\nconfig.json успешно сохранён.")
+    print(f"  ✓ {output} сохранён ({len(proxies)} outbound'ов, "
+          f"{len(proxy_routing_tags)} proxy-правил, {len(block_routing_tags)} block-правил)")
+
+
+# ===========================================================================
+# ОСНОВНАЯ ФУНКЦИЯ
+# ===========================================================================
+
+def main(profile_names: list):
+    # 1. Загрузка подписок
+    regular_links, hy2_links = fetch_links_from_subscriptions()
+    if not regular_links and not hy2_links:
+        print("Критическая ошибка: не удалось загрузить ни одной ссылки!")
+        return
+
+    # 2. Фильтр по параметрам протокола
+    regular_links = filter_by_params(regular_links)
+    hy2_links     = [l for l in hy2_links if passes_protocol_filter(l)]
+
+    # 3. CIDR-фильтрация
+    regular_links = filter_by_cidr(regular_links)
+    if not regular_links:
+        print("⚠ После CIDR-фильтрации обычных серверов не осталось, продолжаем только с hy2.")
+
+    # 4. Первый проход: без Russia
+    filtered = [l for l in regular_links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
+    results  = run_probes(filtered, "основной фильтр, без Russia") if filtered else []
+
+    # 5. Фоллбэк: включаем Russia
+    if needs_fallback(results):
+        filtered_fallback = [l for l in regular_links
+                             if re.match(REGEXP_FILTER_FALLBACK, unquote(urlparse(l).fragment))]
+        already_tested = set(filtered)
+        new_links = [l for l in filtered_fallback if l not in already_tested]
+        if new_links:
+            fallback_results = run_probes(new_links, "фоллбэк, включая Russia")
+            results = sorted(results + fallback_results, key=lambda x: x[1], reverse=True)
+        else:
+            print("Фоллбэк: новых ссылок не найдено.")
+
+    # 6. Адаптивный отбор
+    top_results  = filter_by_average_score(results)
+    top_proxies  = [r[0] for r in top_results]
+
+    print(f"Тест окончен. Прошло проверку: {len(results)}, "
+          f"после адаптивного отбора: {len(top_proxies)} серверов.")
+    if top_results:
+        print("\nТоп-10 по score:")
+        for i, (ob, sc) in enumerate(top_results[:10], 1):
+            print(f"  {i:>2}. {ob['tag'][:55]:<55} score={sc:.2f}")
+        if len(top_results) > 10:
+            print(f"  ... и ещё {len(top_results) - 10} серверов")
+
+    # 7. Hysteria2 — добавляем в конец без теста
+    hy2_outbounds = collect_hy2_outbounds(hy2_links)
+    final_proxies = top_proxies + hy2_outbounds
+
+    if not final_proxies:
+        print("Критическая ошибка: ни один сервер не прошел проверку!")
+        return
+
+    # 8. Запись конфигов для выбранных профилей (тест уже позади — просто пишем файлы)
+    print(f"\n{'='*60}")
+    print(f"Запись конфигов для профилей: {', '.join(profile_names)}")
+    print(f"{'='*60}")
+    for name in profile_names:
+        print(f"\n[{name}]")
+        write_config(PROFILES[name], final_proxies)
+
+    print("\nГотово.")
 
 
 if __name__ == "__main__":
-    generate_final_config()
+    # Без аргументов — генерируем все профили
+    # С аргументами — только указанные: python updater.py srs hiddify
+    requested = sys.argv[1:] if len(sys.argv) > 1 else list(PROFILES.keys())
+    unknown = [n for n in requested if n not in PROFILES]
+    if unknown:
+        print(f"Неизвестные профили: {unknown}")
+        print(f"Доступные: {list(PROFILES.keys())}")
+        sys.exit(1)
+    main(requested)
