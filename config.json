@@ -40,26 +40,26 @@
       "tag": "proxy",
       "outbounds": [
         "auto",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR]",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-1",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-2",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-3",
-        "🇳🇱 The Netherlands [*CIDR]",
-        "🇳🇱 The Netherlands [*CIDR]-1",
-        "0305 | 🇳🇱 Netherlands | HYSTERIA2 | 📺 YT | TG: @YoutubeUnBlockRu"
+        "🌐 Anycast-IP [*CIDR]",
+        "🌐 Anycast-IP [*CIDR]-1",
+        "🌐 Anycast-IP | [IPv6] [*CIDR]",
+        "🌐 Anycast-IP | [IPv6] [*CIDR]-1",
+        "🌐 Anycast-IP | [IPv6] [*CIDR]-2",
+        "🌐 Anycast-IP | [IPv6] [*CIDR]-3",
+        "0414 | 🇳🇱 Netherlands | HYSTERIA2 | 📺 YT | TG: @YoutubeUnBlockRu"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR]",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-1",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-2",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-3",
-        "🇳🇱 The Netherlands [*CIDR]",
-        "🇳🇱 The Netherlands [*CIDR]-1",
-        "0305 | 🇳🇱 Netherlands | HYSTERIA2 | 📺 YT | TG: @YoutubeUnBlockRu"
+        "🌐 Anycast-IP [*CIDR]",
+        "🌐 Anycast-IP [*CIDR]-1",
+        "🌐 Anycast-IP | [IPv6] [*CIDR]",
+        "🌐 Anycast-IP | [IPv6] [*CIDR]-1",
+        "🌐 Anycast-IP | [IPv6] [*CIDR]-2",
+        "🌐 Anycast-IP | [IPv6] [*CIDR]-3",
+        "0414 | 🇳🇱 Netherlands | HYSTERIA2 | 📺 YT | TG: @YoutubeUnBlockRu"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -74,59 +74,7 @@
     },
     {
       "type": "hysteria2",
-      "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR]",
-      "server": "62.210.124.146",
-      "server_port": 22000,
-      "password": "dongtaiwang.com",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.microsoft.com",
-        "insecure": true
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "hysteria2",
-      "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-1",
-      "server": "62.210.124.146",
-      "server_port": 22000,
-      "password": "dongtaiwang.com",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.microsoft.com",
-        "insecure": true
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "hysteria2",
-      "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-2",
-      "server": "62.210.124.146",
-      "server_port": 22000,
-      "password": "dongtaiwang.com",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.microsoft.com",
-        "insecure": false
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "hysteria2",
-      "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR]-3",
-      "server": "62.210.124.146",
-      "server_port": 22000,
-      "password": "dongtaiwang.com",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.microsoft.com",
-        "insecure": true
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "hysteria2",
-      "tag": "🇳🇱 The Netherlands [*CIDR]",
+      "tag": "🌐 Anycast-IP [*CIDR]",
       "server": "144.31.224.14",
       "server_port": 443,
       "password": "123456789StrongPass",
@@ -139,7 +87,7 @@
     },
     {
       "type": "hysteria2",
-      "tag": "🇳🇱 The Netherlands [*CIDR]-1",
+      "tag": "🌐 Anycast-IP [*CIDR]-1",
       "server": "144.31.224.14",
       "server_port": 443,
       "password": "123456789StrongPass",
@@ -152,7 +100,59 @@
     },
     {
       "type": "hysteria2",
-      "tag": "0305 | 🇳🇱 Netherlands | HYSTERIA2 | 📺 YT | TG: @YoutubeUnBlockRu",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR]",
+      "server": "62.210.124.146",
+      "server_port": 22000,
+      "password": "dongtaiwang.com",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "insecure": true
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR]-1",
+      "server": "62.210.124.146",
+      "server_port": 22000,
+      "password": "dongtaiwang.com",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "insecure": true
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR]-2",
+      "server": "62.210.124.146",
+      "server_port": 22000,
+      "password": "dongtaiwang.com",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "insecure": false
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR]-3",
+      "server": "62.210.124.146",
+      "server_port": 22000,
+      "password": "dongtaiwang.com",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "insecure": true
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "0414 | 🇳🇱 Netherlands | HYSTERIA2 | 📺 YT | TG: @YoutubeUnBlockRu",
       "server": "144.31.224.14",
       "server_port": 443,
       "password": "123456789StrongPass",
