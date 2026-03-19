@@ -14,19 +14,14 @@ from base import SingBoxProxy
 # ---------------------------------------------------------------------------
 # ПРОФИЛИ ВЫВОДА
 # ---------------------------------------------------------------------------
-# Каждый профиль описывает один выходной конфиг.
-# Оба генерируются за один прогон (тест серверов запускается один раз).
-# Чтобы сгенерировать только один профиль: python updater.py srs
-#                                            python updater.py hiddify
-#
 PROFILES = {
     "srs": {
-        "output_file":        "config.json",
-        "github_raw_base":    "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/",
-        "ruleset_folder":     "ruleset/srs/",
-        "route_final":        "direct",
-        "proxy_rule_outbound":"proxy",       # куда идут proxy-правила (proxy / direct)
-        "file_header":        None,          # None = без заголовка
+        "output_file":         "config.json",
+        "github_raw_base":     "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/",
+        "ruleset_folder":      "ruleset/srs/",
+        "route_final":         "direct",
+        "proxy_rule_outbound": "proxy",
+        "file_header":         None,
         "remote_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs",
@@ -36,13 +31,13 @@ PROFILES = {
         ],
     },
     "hiddify": {
-        "output_file":        "hiddify_config.json",
-        "github_raw_base":    "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/hiddify/",
-        "ruleset_folder":     "ruleset/hiddify/",
-        "route_final":        "proxy",
-        "proxy_rule_outbound":"direct",      # hiddify: proxy-правила идут на direct (сплит-туннель)
-        "file_header":        "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
-        "remote_rule_sets":   [],
+        "output_file":         "hiddify_config.json",
+        "github_raw_base":     "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/hiddify/",
+        "ruleset_folder":      "ruleset/hiddify/",
+        "route_final":         "proxy",
+        "proxy_rule_outbound": "direct",
+        "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
+        "remote_rule_sets":    [],
         "remote_block_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs",
         ],
@@ -66,12 +61,22 @@ REGEXP_FILTER_FALLBACK = r'.*'
 
 MIN_SERVERS    = 5
 MIN_BEST_SPEED = 1.5
-MAX_WORKERS    = 24
+MAX_WORKERS    = 64   # увеличено: зонды тратят время на паузы, потоков нужно больше
 
 # --- Параметры зондирования ---
-PROBE_ROUNDS = 3
+#
+# Схема одного сервера:
+#   зонд 1 → пауза PROBE_DELAY сек → зонд 2 → пауза PROBE_DELAY сек → зонд 3
+#
+# Пауза выявляет серверы, которые живут несколько минут и потом падают.
+# Итоговое окно наблюдения: PROBE_ROUNDS * PROBE_DELAY секунд.
+# При PROBE_ROUNDS=3 и PROBE_DELAY=60 → сервер наблюдается ~2 минуты.
+#
+PROBE_ROUNDS = 3     # количество замеров на сервер
+PROBE_DELAY  = 60    # секунд между замерами (окно наблюдения = (PROBE_ROUNDS-1) * PROBE_DELAY)
 PROBE_URL    = 'https://cachefly.cachefly.net/100kb.test'
-TIMEOUT      = 8
+TIMEOUT      = 8     # секунд на один замер
+
 
 # ---------------------------------------------------------------------------
 # ФИЛЬТР ПО ПАРАМЕТРАМ ПРОТОКОЛА
@@ -88,11 +93,11 @@ TIMEOUT      = 8
 # │ security        │ tls / reality / none                                                      │
 # │ flow            │ flow-значение: "" / "xtls-rprx-vision" / ...                              │
 # │ sni             │ SNI: точное или "*.example.com" wildcard                                  │
-# │ fp              │ fingerprint браузера: chrome / firefox / safari / edge / ios / ...        │
+# │ fp              │ fingerprint браузера: chrome / firefox / safari / edge / ios / qq / ...   │
 # │ port            │ порт: число, строка "443", или диапазон "8000-9000"                       │
 # │ host            │ Host-заголовок (ws/httpupgrade): точное или wildcard "*.cdn.com"          │
-# │ path            │ путь (ws/httpupgrade/xhttp): точное, префикс "/cdn*", или regex "/re:..."  │
-# │ alpn            │ ALPN: "h2" / "http/1.1" / "h3" — сервер проходит если хоть одно совпало  │
+# │ path            │ путь: точное, префикс "/cdn*", или regex "/re:^/api/.*"                   │
+# │ alpn            │ ALPN: "h2" / "http/1.1" / "h3" — проходит если хоть одно совпало         │
 # │ encryption      │ (vmess) метод шифрования: auto / aes-128-gcm / chacha20-poly1305 / none  │
 # │ pbk             │ (reality) публичный ключ — whitelist конкретных ключей                    │
 # │ sid             │ (reality) short ID — whitelist конкретных ID                              │
@@ -101,17 +106,22 @@ TIMEOUT      = 8
 # │ obfs_password   │ (hy2) regex-паттерн на пароль обфускации: "^secret.*"                    │
 # └─────────────────┴───────────────────────────────────────────────────────────────────────────┘
 #
-# Пустой список [] для любого поля = ограничение снято (разрешено всё).
+# Пустой список [] = ограничение снято (разрешено всё).
+#
+# Условия выставлены на основе реально работающих серверов из подписок:
+#   - vless/reality/tcp/xtls-rprx-vision — основной рабочий паттерн
+#   - fp: chrome, random, qq — встречаются на рабочих серверах
+#   - Остальные протоколы: пропускаем всё (пустые условия)
 #
 PROTOCOL_FILTERS = {
     "vless": {
         "logic":        "AND",
-        "transport":    ["ws", "grpc", "httpupgrade", "xhttp"],
-        "security":     ["tls", "reality"],
-        "flow":         [],
-        "sni":          [],
-        "fp":           [],
-        "port":         [],
+        "transport":    ["tcp", "xhttp"],          # tcp+reality и xhttp+reality оба рабочие
+        "security":     ["tls", "reality"],        # только зашифрованные
+        "flow":         ["xtls-rprx-vision", ""],  # vision flow или без flow (xhttp-серверы)
+        "fp":           ["chrome", "random", "qq", "firefox", "safari", "edge", "ios", "android", "360"],
+        "sni":          [],                    # любой SNI
+        "port":         [],                    # любой порт
         "host":         [],
         "path":         [],
         "alpn":         [],
@@ -119,10 +129,11 @@ PROTOCOL_FILTERS = {
         "sid":          [],
         "service_name": [],
     },
+    # Остальные протоколы: все условия пусты — пропускаем всё
     "vmess": {
         "logic":      "AND",
-        "transport":  ["ws"],
-        "security":   ["tls"],
+        "transport":  [],
+        "security":   [],
         "sni":        [],
         "host":       [],
         "path":       [],
@@ -132,8 +143,8 @@ PROTOCOL_FILTERS = {
     },
     "trojan": {
         "logic":        "AND",
-        "transport":    ["ws", "grpc"],
-        "security":     ["tls"],
+        "transport":    [],
+        "security":     [],
         "sni":          [],
         "host":         [],
         "path":         [],
@@ -163,7 +174,7 @@ PROTOCOL_FILTERS = {
 
 
 # ===========================================================================
-# ФИЛЬТР ПО ПАРАМЕТРАМ ПРОТОКОЛА — реализация
+# ФИЛЬТР ПО ПАРАМЕТРАМ — реализация
 # ===========================================================================
 
 def _parse_link_params(link: str) -> dict:
@@ -426,14 +437,14 @@ def collect_hy2_outbounds(hy2_links: list) -> list:
 
 
 # ===========================================================================
-# ЗОНДИРОВАНИЕ
+# ЗОНДИРОВАНИЕ С ПАУЗАМИ
 # ===========================================================================
 
 def parse_link(proxy, link):
-    if link.startswith("vmess://"):    return proxy._parse_vmess_link(link)
-    if link.startswith("vless://"):    return proxy._parse_vless_link(link)
-    if link.startswith("trojan://"):   return proxy._parse_trojan_link(link)
-    if link.startswith(("hy2://", "hysteria2://")): return proxy._parse_hysteria2_link(link)
+    if link.startswith("vmess://"):              return proxy._parse_vmess_link(link)
+    if link.startswith("vless://"):              return proxy._parse_vless_link(link)
+    if link.startswith("trojan://"):             return proxy._parse_trojan_link(link)
+    if link.startswith(("hy2://","hysteria2://")): return proxy._parse_hysteria2_link(link)
     raise ValueError(f"Неизвестный протокол: {link[:20]}")
 
 
@@ -448,40 +459,73 @@ def _fix_outbound(outbound: dict) -> dict:
     return outbound
 
 
+def _single_probe(link: str) -> float | None:
+    """Один замер скорости. Возвращает Mbps или None при ошибке."""
+    try:
+        with SingBoxProxy(link) as proxy:
+            start = time.perf_counter()
+            r = proxy.get(PROBE_URL, timeout=TIMEOUT, stream=True)
+            if r.status_code == 200:
+                total = sum(len(c) for c in r.iter_content(chunk_size=8192) if c)
+                duration = time.perf_counter() - start
+                if duration > 0 and total > 0:
+                    return (total * 8) / (duration * 1_000_000)
+    except Exception:
+        pass
+    return None
+
+
 def probe_server(link: str):
-    """score = median_speed × success_rate"""
+    """
+    Зондирует сервер PROBE_ROUNDS раз с паузой PROBE_DELAY секунд между замерами.
+
+    Окно наблюдения = (PROBE_ROUNDS - 1) × PROBE_DELAY секунд.
+    Серверы, которые живут 2-3 минуты и падают, не пройдут все раунды
+    и получат низкий success_rate → низкий score → отсев.
+
+    score = median_speed × success_rate
+    """
     tag = unquote(urlparse(link).fragment) or "Unnamed"
-    speeds, outbound = [], None
-    for _ in range(PROBE_ROUNDS):
-        try:
-            with SingBoxProxy(link) as proxy:
-                start = time.perf_counter()
-                r = proxy.get(PROBE_URL, timeout=TIMEOUT, stream=True)
-                if r.status_code == 200:
-                    total = sum(len(c) for c in r.iter_content(chunk_size=8192) if c)
-                    duration = time.perf_counter() - start
-                    if duration > 0 and total > 0:
-                        mbps = (total * 8) / (duration * 1_000_000)
-                        speeds.append(mbps)
-                        if outbound is None:
-                            outbound = _fix_outbound(parse_link(proxy, link))
-                            outbound["tag"] = tag
-                            outbound["domain_strategy"] = "prefer_ipv4"
-        except Exception:
-            pass
+    speeds = []
+    outbound = None
+
+    for round_num in range(PROBE_ROUNDS):
+        # Пауза перед каждым раундом кроме первого
+        if round_num > 0:
+            time.sleep(PROBE_DELAY)
+
+        mbps = _single_probe(link)
+        if mbps is not None:
+            speeds.append(mbps)
+            if outbound is None:
+                try:
+                    with SingBoxProxy(link) as proxy:
+                        outbound = _fix_outbound(parse_link(proxy, link))
+                        outbound["tag"] = tag
+                        outbound["domain_strategy"] = "prefer_ipv4"
+                except Exception:
+                    pass
+
     if not speeds or outbound is None:
         return None, 0
+
     success_rate = len(speeds) / PROBE_ROUNDS
     median_speed = sorted(speeds)[len(speeds) // 2]
     score = median_speed * success_rate
-    print(f"[OK] {tag[:50]:<50} median={median_speed:.1f} Mbps  "
-          f"{len(speeds)}/{PROBE_ROUNDS} зондов  score={score:.2f}")
+
+    # Иконка стабильности: ✓✓✓ / ✓✓✗ / ✓✗✗
+    stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
+    print(f"[{stability}] {tag[:48]:<48} "
+          f"median={median_speed:.1f} Mbps  score={score:.2f}")
     return outbound, score
 
 
 def run_probes(links: list, label: str) -> list:
+    total_minutes = (PROBE_ROUNDS - 1) * PROBE_DELAY / 60
     print(f"\nЗондирование: {len(links)} серверов ({label})")
-    print(f"Параметры: {PROBE_ROUNDS} зонда, файл {PROBE_URL.split('/')[-1]}, таймаут {TIMEOUT}с\n")
+    print(f"Схема: {PROBE_ROUNDS} раунда × пауза {PROBE_DELAY}с "
+          f"= окно наблюдения ~{total_minutes:.0f} мин, потоков: {MAX_WORKERS}\n")
+
     results = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         futures = {executor.submit(probe_server, l): l for l in links}
@@ -489,6 +533,7 @@ def run_probes(links: list, label: str) -> list:
             ob, score = future.result()
             if ob:
                 results.append((ob, score))
+
     results.sort(key=lambda x: x[1], reverse=True)
     return results
 
@@ -519,9 +564,6 @@ def needs_fallback(results: list) -> bool:
 # ===========================================================================
 
 def write_config(profile: dict, final_proxies: list):
-    """Собирает и записывает один конфиг файл по переданному профилю."""
-
-    # Уникализация тегов — делаем копию, чтобы не портить оригинал для второго профиля
     proxies = [dict(p) for p in final_proxies]
     seen_tags: dict = {}
     for pb in proxies:
@@ -533,7 +575,6 @@ def write_config(profile: dict, final_proxies: list):
             seen_tags[t] = 0
     proxy_tags = [p["tag"] for p in proxies]
 
-    # Rule Sets
     formatted_rule_sets, proxy_routing_tags, block_routing_tags = [], [], []
     rule_tags: set = set()
 
@@ -591,8 +632,8 @@ def write_config(profile: dict, final_proxies: list):
                 {"rule_set": block_routing_tags, "outbound": "block"},
                 {"rule_set": proxy_routing_tags, "outbound": profile["proxy_rule_outbound"]},
             ],
-            "rule_set":             formatted_rule_sets,
-            "final":                profile["route_final"],
+            "rule_set":              formatted_rule_sets,
+            "final":                 profile["route_final"],
             "auto_detect_interface": True
         }
     }
@@ -645,11 +686,10 @@ def main(profile_names: list):
             print("Фоллбэк: новых ссылок не найдено.")
 
     # 6. Адаптивный отбор
-    top_results  = filter_by_average_score(results)
-    top_proxies  = [r[0] for r in top_results]
+    top_results = filter_by_average_score(results)
+    top_proxies = [r[0] for r in top_results]
 
-    print(f"Тест окончен. Прошло проверку: {len(results)}, "
-          f"после адаптивного отбора: {len(top_proxies)} серверов.")
+    print(f"Тест окончен. Прошло: {len(results)}, отобрано: {len(top_proxies)} серверов.")
     if top_results:
         print("\nТоп-10 по score:")
         for i, (ob, sc) in enumerate(top_results[:10], 1):
@@ -657,7 +697,7 @@ def main(profile_names: list):
         if len(top_results) > 10:
             print(f"  ... и ещё {len(top_results) - 10} серверов")
 
-    # 7. Hysteria2 — добавляем в конец без теста
+    # 7. Hysteria2 — без теста, в конец
     hy2_outbounds = collect_hy2_outbounds(hy2_links)
     final_proxies = top_proxies + hy2_outbounds
 
@@ -665,7 +705,7 @@ def main(profile_names: list):
         print("Критическая ошибка: ни один сервер не прошел проверку!")
         return
 
-    # 8. Запись конфигов для выбранных профилей (тест уже позади — просто пишем файлы)
+    # 8. Запись конфигов
     print(f"\n{'='*60}")
     print(f"Запись конфигов для профилей: {', '.join(profile_names)}")
     print(f"{'='*60}")
@@ -677,8 +717,6 @@ def main(profile_names: list):
 
 
 if __name__ == "__main__":
-    # Без аргументов — генерируем все профили
-    # С аргументами — только указанные: python updater.py srs hiddify
     requested = sys.argv[1:] if len(sys.argv) > 1 else list(PROFILES.keys())
     unknown = [n for n in requested if n not in PROFILES]
     if unknown:
