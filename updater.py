@@ -583,7 +583,7 @@ def write_config(profile: dict, final_proxies: list):
             return
         formatted_rule_sets.append({
             "type": "remote", "tag": tag, "format": "binary", "url": url,
-            "download_detour": "direct" if is_block else "proxy"
+            "download_detour": "direct"
         })
         (block_routing_tags if is_block else proxy_routing_tags).append(tag)
         rule_tags.add(tag)
