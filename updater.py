@@ -23,6 +23,10 @@ PROFILES = {
         "route_final":         "direct",
         "proxy_rule_outbound": "proxy",
         "file_header":         None,
+        # Балансеры, которые попадут в конфиг.
+        # Убери любой элемент из списка чтобы отключить соответствующую группу.
+        # Допустимые значения: "EUROPE", "RUSSIA", "ALL"
+        "enabled_groups":      ["EUROPE", "RUSSIA", "ALL"],
         "remote_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs",
@@ -38,6 +42,8 @@ PROFILES = {
         "route_final":         "proxy",
         "proxy_rule_outbound": "direct",
         "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
+        # Hiddify: Russia-серверы и ALL отключены — только зарубежные
+        "enabled_groups":      ["EUROPE"],
         "remote_rule_sets":    [],
         "remote_block_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs",
@@ -57,24 +63,13 @@ SUB_LINKS = [
 ]
 CIDR_WHITELIST_FILE = 'cidr_whitelist2.txt'
 
-REGEXP_FILTER          = r'^(?!.*(?:\bRussia\b|\bRU\b|🇷🇺)).*$'
-REGEXP_FILTER_FALLBACK = r'.*'
-
 MIN_SERVERS    = 5
 MIN_BEST_SPEED = 1.5
 MAX_WORKERS    = 64   # увеличено: зонды тратят время на паузы, потоков нужно больше
 
 # --- Параметры зондирования ---
-#
-# Схема одного сервера:
-#   зонд 1 → пауза PROBE_DELAY сек → зонд 2 → пауза PROBE_DELAY сек → зонд 3
-#
-# Пауза выявляет серверы, которые живут несколько минут и потом падают.
-# Итоговое окно наблюдения: PROBE_ROUNDS * PROBE_DELAY секунд.
-# При PROBE_ROUNDS=3 и PROBE_DELAY=60 → сервер наблюдается ~2 минуты.
-#
 PROBE_ROUNDS = 3     # количество замеров на сервер
-PROBE_DELAY  = 60    # секунд между замерами (окно наблюдения = (PROBE_ROUNDS-1) * PROBE_DELAY)
+PROBE_DELAY  = 60    # секунд между замерами
 PROBE_URL    = 'https://cachefly.cachefly.net/10mb.test'
 TIMEOUT      = 8     # секунд на один замер
 
@@ -82,52 +77,15 @@ TIMEOUT      = 8     # секунд на один замер
 # ---------------------------------------------------------------------------
 # ФИЛЬТР ПО ПАРАМЕТРАМ ПРОТОКОЛА
 # ---------------------------------------------------------------------------
-#
-# Ключ словаря — протокол (vless/vmess/trojan/hy2/hysteria2).
-# Если протокол отсутствует в словаре — все его серверы отсеиваются.
-#
-# ┌─────────────────┬───────────────────────────────────────────────────────────────────────────┐
-# │ Поле            │ Описание                                                                  │
-# ├─────────────────┼───────────────────────────────────────────────────────────────────────────┤
-# │ logic           │ "AND" (все условия, по умолчанию) / "OR" (хватит одного)                  │
-# │ transport       │ тип транспорта: tcp / ws / grpc / httpupgrade / xhttp / quic              │
-# │ security        │ tls / reality / none                                                      │
-# │ flow            │ flow-значение: "" / "xtls-rprx-vision" / ...                              │
-# │ sni             │ SNI: точное, "*.example.com" wildcard, или путь к файлу (.txt/.json)      │
-# │ fp              │ fingerprint браузера: chrome / firefox / safari / edge / ios / qq / ...   │
-# │ port            │ порт: число, строка "443", или диапазон "8000-9000"                       │
-# │ host            │ Host-заголовок (ws/httpupgrade): точное или wildcard "*.cdn.com"          │
-# │ path            │ путь: точное, префикс "/cdn*", или regex "/re:^/api/.*"                   │
-# │ alpn            │ ALPN: "h2" / "http/1.1" / "h3" — проходит если хоть одно совпало         │
-# │ encryption      │ (vmess) метод шифрования: auto / aes-128-gcm / chacha20-poly1305 / none  │
-# │ pbk             │ (reality) публичный ключ — whitelist конкретных ключей                    │
-# │ sid             │ (reality) short ID — whitelist конкретных ID                              │
-# │ service_name    │ (grpc) имя сервиса                                                        │
-# │ obfs            │ (hy2) тип обфускации: none / salamander                                   │
-# │ obfs_password   │ (hy2) regex-паттерн на пароль обфускации: "^secret.*"                    │
-# └─────────────────┴───────────────────────────────────────────────────────────────────────────┘
-#
-# Пустой список [] = ограничение снято (разрешено всё).
-#
-# В полях-списках можно указать путь к файлу (.txt или .json) — он будет
-# раскрыт при старте:
-#   .txt  — каждая непустая строка (без # комментариев) становится элементом
-#   .json — ожидается JSON-массив строк
-#
-# Условия выставлены на основе реально работающих серверов из подписок:
-#   - vless/reality/tcp/xtls-rprx-vision — основной рабочий паттерн
-#   - fp: chrome, random, qq — встречаются на рабочих серверах
-#   - Остальные протоколы: пропускаем всё (пустые условия)
-#
 PROTOCOL_FILTERS = {
     "vless": {
         "logic":        "AND",
-        "transport":    ["tcp", "xhttp"],          # tcp+reality и xhttp+reality оба рабочие
-        "security":     ["tls", "reality"],        # только зашифрованные
-        "flow":         ["xtls-rprx-vision", ""],  # vision flow или без flow (xhttp-серверы)
+        "transport":    ["tcp", "xhttp"],
+        "security":     ["tls", "reality"],
+        "flow":         ["xtls-rprx-vision", ""],
         "fp":           ["chrome", "random", "qq", "firefox", "safari", "edge", "ios", "android", "360"],
-        "sni":          [],  # whitelist SNI: файл раскрывается при старте
-        "port":         [],                    # любой порт
+        "sni":          [],
+        "port":         [],
         "host":         [],
         "path":         [],
         "alpn":         [],
@@ -174,11 +132,6 @@ PROTOCOL_FILTERS = {
 # ===========================================================================
 
 def _load_domain_file(path: str) -> list:
-    """
-    Загружает список строк из файла.
-    .json — ожидается JSON-массив строк.
-    Любой другой формат — построчное чтение; строки, начинающиеся с #, пропускаются.
-    """
     if not os.path.exists(path):
         print(f"⚠ Файл доменов '{path}' не найден — условие SNI по файлу отключено.")
         return []
@@ -191,7 +144,7 @@ def _load_domain_file(path: str) -> list:
                     return [str(d).strip() for d in data if str(d).strip()]
                 print(f"⚠ {path}: ожидался JSON-массив, получено {type(data).__name__} — пропускаем.")
                 return []
-            else:  # .txt и любой другой
+            else:
                 return [
                     line.strip()
                     for line in f
@@ -203,12 +156,6 @@ def _load_domain_file(path: str) -> list:
 
 
 def _expand_filter_files(filters: dict) -> dict:
-    """
-    Раскрывает пути к файлам в списках условий фильтров.
-
-    Если элемент списка оканчивается на .txt или .json — он заменяется
-    содержимым соответствующего файла. Работает для любого поля фильтра.
-    """
     expanded = {}
     for proto, rules in filters.items():
         new_rules = {}
@@ -230,7 +177,6 @@ def _expand_filter_files(filters: dict) -> dict:
     return expanded
 
 
-# Раскрываем файловые ссылки один раз при загрузке модуля
 PROTOCOL_FILTERS["hysteria2"] = PROTOCOL_FILTERS["hy2"]
 PROTOCOL_FILTERS = _expand_filter_files(PROTOCOL_FILTERS)
 
@@ -509,11 +455,6 @@ def _single_probe(link: str) -> float | None:
 def probe_server(link: str):
     """
     Зондирует сервер PROBE_ROUNDS раз с паузой PROBE_DELAY секунд между замерами.
-
-    Окно наблюдения = (PROBE_ROUNDS - 1) × PROBE_DELAY секунд.
-    Серверы, которые живут 2-3 минуты и падают, не пройдут все раунды
-    и получат низкий success_rate → низкий score → отсев.
-
     score = median_speed × success_rate
     """
     tag = unquote(urlparse(link).fragment) or "Unnamed"
@@ -521,7 +462,6 @@ def probe_server(link: str):
     outbound = None
 
     for round_num in range(PROBE_ROUNDS):
-        # Пауза перед каждым раундом кроме первого
         if round_num > 0:
             time.sleep(PROBE_DELAY)
 
@@ -544,7 +484,6 @@ def probe_server(link: str):
     median_speed = sorted(speeds)[len(speeds) // 2]
     score = median_speed * success_rate
 
-    # Иконка стабильности: ✓✓✓ / ✓✓✗ / ✓✗✗
     stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
     print(f"[{stability}] {tag[:48]:<48} "
           f"median={median_speed:.1f} Mbps  score={score:.2f}")
@@ -594,17 +533,69 @@ def needs_fallback(results: list) -> bool:
 # ЗАПИСЬ КОНФИГА ДЛЯ ОДНОГО ПРОФИЛЯ
 # ===========================================================================
 
-def write_config(profile: dict, final_proxies: list):
-    proxies = [dict(p) for p in final_proxies]
-    seen_tags: dict = {}
+def _dedup_tags(proxies: list) -> list:
+    """Создаёт копии outbound'ов с уникальными тегами (добавляет -2, -3, …)."""
+    proxies = [dict(p) for p in proxies]
+    seen: dict = {}
     for pb in proxies:
         t = pb["tag"]
-        if t in seen_tags:
-            seen_tags[t] += 1
-            pb["tag"] = f"{t}-{seen_tags[t]}"
+        if t in seen:
+            seen[t] += 1
+            pb["tag"] = f"{t}-{seen[t]}"
         else:
-            seen_tags[t] = 0
-    proxy_tags = [p["tag"] for p in proxies]
+            seen[t] = 0
+    return proxies
+
+
+def write_config(profile: dict, groups: dict):
+    """
+    groups = {
+        "EUROPE": [outbound, ...],   # серверы без Russia-тега
+        "RUSSIA": [outbound, ...],   # серверы с Russia-тегом
+        "ALL":    [outbound, ...],   # EUROPE + RUSSIA (порядок сохранён)
+    }
+
+    Какие балансеры попадут в конфиг — задаётся полем profile["enabled_groups"].
+    Например ["EUROPE", "ALL"] — RUSSIA-группа не добавляется.
+    Допустимые значения: "EUROPE", "RUSSIA", "ALL".
+    """
+    # ── дедублирование тегов по общему пулу ──────────────────────────────
+    # ALL = EUROPE + RUSSIA — восстанавливаем срезы после дедупа
+    all_raw     = [dict(p) for p in groups["ALL"]]
+    all_deduped = _dedup_tags(all_raw)
+    n_europe         = len(groups["EUROPE"])
+    europe_deduped   = all_deduped[:n_europe]
+    russia_deduped   = all_deduped[n_europe:]
+
+    europe_tags = [p["tag"] for p in europe_deduped]
+    russia_tags = [p["tag"] for p in russia_deduped]
+
+    # ── применяем enabled_groups ──────────────────────────────────────────
+    enabled = set(profile.get("enabled_groups", ["EUROPE", "RUSSIA", "ALL"]))
+
+    if "EUROPE" not in enabled:
+        europe_deduped, europe_tags = [], []
+    if "RUSSIA" not in enabled:
+        russia_deduped, russia_tags = [], []
+
+    # ALL строится из оставшихся групп; если "ALL" отключён — тоже пуст
+    all_tags = (europe_tags + russia_tags) if "ALL" in enabled else []
+
+    # Итоговый пул физических outbound'ов (без дублей между группами)
+    proxies = europe_deduped + russia_deduped
+
+    # ── верхний selector «proxy»: только непустые и включённые группы ────
+    top_groups = []
+    if europe_tags:
+        top_groups.append("EUROPE")
+    if russia_tags:
+        top_groups.append("RUSSIA")
+    if all_tags:
+        top_groups.append("ALL")
+
+    if not top_groups:
+        print(f"  ⚠ Нет активных групп для профиля — конфиг не записан.")
+        return
 
     formatted_rule_sets, proxy_routing_tags, block_routing_tags = [], [], []
     rule_tags: set = set()
@@ -636,6 +627,40 @@ def write_config(profile: dict, final_proxies: list):
     for url in profile["remote_rule_sets"]:
         add_rule(url.split('/')[-1].replace('.srs', ''), url, False)
 
+    # ── строим список outbounds ───────────────────────────────────────────
+    outbounds = [
+        {"type": "selector", "tag": "proxy", "outbounds": top_groups},
+    ]
+
+    if europe_tags:
+        outbounds += [
+            {"type": "selector", "tag": "EUROPE",
+             "outbounds": ["EUROPE-auto"] + europe_tags},
+            {"type": "urltest",  "tag": "EUROPE-auto", "outbounds": europe_tags,
+             "url": "http://cp.cloudflare.com/", "interval": "10m"},
+        ]
+
+    if russia_tags:
+        outbounds += [
+            {"type": "selector", "tag": "RUSSIA",
+             "outbounds": ["RUSSIA-auto"] + russia_tags},
+            {"type": "urltest",  "tag": "RUSSIA-auto", "outbounds": russia_tags,
+             "url": "http://cp.cloudflare.com/", "interval": "10m"},
+        ]
+
+    if all_tags:
+        outbounds += [
+            {"type": "selector", "tag": "ALL",
+             "outbounds": ["ALL-auto"] + all_tags},
+            {"type": "urltest",  "tag": "ALL-auto", "outbounds": all_tags,
+             "url": "http://cp.cloudflare.com/", "interval": "10m"},
+        ]
+
+    outbounds += [
+        {"type": "direct", "tag": "direct"},
+        {"type": "block",  "tag": "block"},
+    ] + proxies
+
     config = {
         "log": {"level": "info"},
         "dns": {
@@ -650,13 +675,7 @@ def write_config(profile: dict, final_proxies: list):
         "inbounds": [
             {"type": "tun", "tag": "tun-in", "address": ["172.19.0.1/30"], "auto_route": True}
         ],
-        "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto"] + proxy_tags},
-            {"type": "urltest",  "tag": "auto",  "outbounds": proxy_tags,
-             "url": "http://cp.cloudflare.com/", "interval": "10m"},
-            {"type": "direct", "tag": "direct"},
-            {"type": "block",  "tag": "block"},
-        ] + proxies,
+        "outbounds": outbounds,
         "route": {
             "rules": [
                 {"protocol": "dns", "action": "hijack-dns"},
@@ -676,13 +695,29 @@ def write_config(profile: dict, final_proxies: list):
             f.write(header)
         json.dump(config, f, indent=2, ensure_ascii=False)
 
-    print(f"  ✓ {output} сохранён ({len(proxies)} outbound'ов, "
-          f"{len(proxy_routing_tags)} proxy-правил, {len(block_routing_tags)} block-правил)")
+    active = " + ".join(top_groups)
+    print(f"  ✓ {output} сохранён  "
+          f"активные группы: [{active}]  "
+          f"EUROPE={len(europe_tags)}  RUSSIA={len(russia_tags)}  ALL={len(all_tags)}  "
+          f"proxy-правил={len(proxy_routing_tags)}  block-правил={len(block_routing_tags)}")
 
 
 # ===========================================================================
 # ОСНОВНАЯ ФУНКЦИЯ
 # ===========================================================================
+
+def _is_russia(link: str) -> bool:
+    tag = unquote(urlparse(link).fragment)
+    return bool(re.search(REGEXP_RUSSIA, tag))
+
+
+def _print_top(results: list, label: str, n: int = 10):
+    print(f"\nТоп-{n} [{label}] по score:")
+    for i, (ob, sc) in enumerate(results[:n], 1):
+        print(f"  {i:>2}. {ob['tag'][:55]:<55} score={sc:.2f}")
+    if len(results) > n:
+        print(f"  ... и ещё {len(results) - n} серверов")
+
 
 def main(profile_names: list):
     # 1. Загрузка подписок
@@ -699,50 +734,52 @@ def main(profile_names: list):
     if not all_links:
         print("⚠ После CIDR-фильтрации серверов не осталось!")
         return
-    regular_links = all_links
 
-    # 4. Первый проход: без Russia
-    filtered = [l for l in regular_links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
-    results  = run_probes(filtered, "основной фильтр, без Russia") if filtered else []
+    # 4. Разделяем на EUROPE и RUSSIA до тестирования
+    europe_links = [l for l in all_links if not _is_russia(l)]
+    russia_links = [l for l in all_links if     _is_russia(l)]
+    print(f"Разделение: EUROPE={len(europe_links)}, RUSSIA={len(russia_links)}\n")
 
-    # 5. Фоллбэк: включаем Russia
-    if needs_fallback(results):
-        filtered_fallback = [l for l in regular_links
-                             if re.match(REGEXP_FILTER_FALLBACK, unquote(urlparse(l).fragment))]
-        already_tested = set(filtered)
-        new_links = [l for l in filtered_fallback if l not in already_tested]
-        if new_links:
-            fallback_results = run_probes(new_links, "фоллбэк, включая Russia")
-            results = sorted(results + fallback_results, key=lambda x: x[1], reverse=True)
-        else:
-            print("Фоллбэк: новых ссылок не найдено.")
+    # 5. Тестируем обе группы независимо (всегда, не как fallback)
+    europe_results = run_probes(europe_links, "EUROPE") if europe_links else []
+    russia_results = run_probes(russia_links, "RUSSIA") if russia_links else []
 
-    # 6. Адаптивный отбор
-    top_results = filter_by_average_score(results)
-    top_proxies = [r[0] for r in top_results]
+    # 6. Адаптивный отбор внутри каждой группы отдельно
+    europe_top = filter_by_average_score(europe_results, "EUROPE")
+    russia_top = filter_by_average_score(russia_results, "RUSSIA")
 
-    print(f"Тест окончен. Прошло: {len(results)}, отобрано: {len(top_proxies)} серверов.")
-    if top_results:
-        print("\nТоп-10 по score:")
-        for i, (ob, sc) in enumerate(top_results[:10], 1):
-            print(f"  {i:>2}. {ob['tag'][:55]:<55} score={sc:.2f}")
-        if len(top_results) > 10:
-            print(f"  ... и ещё {len(top_results) - 10} серверов")
+    # 7. Итоговая статистика
+    print(f"Результаты тестирования:")
+    print(f"  EUROPE : прошло зонды {len(europe_results)}, отобрано {len(europe_top)}")
+    print(f"  RUSSIA : прошло зонды {len(russia_results)}, отобрано {len(russia_top)}")
+    print(f"  ALL    : {len(europe_top) + len(russia_top)} серверов суммарно")
 
-    # 7. Итоговый список серверов (hysteria2 прошли те же тесты)
-    final_proxies = top_proxies
+    if needs_fallback(europe_top):
+        print("⚠ EUROPE маловато серверов — рекомендуем использовать группу ALL.")
 
-    if not final_proxies:
+    if europe_top:
+        _print_top(europe_top, "EUROPE")
+    if russia_top:
+        _print_top(russia_top, "RUSSIA")
+
+    if not europe_top and not russia_top:
         print("Критическая ошибка: ни один сервер не прошел проверку!")
         return
 
-    # 8. Запись конфигов
+    # 8. Формируем группы: ALL = EUROPE + RUSSIA (порядок важен для write_config)
+    groups = {
+        "EUROPE": [ob for ob, _ in europe_top],
+        "RUSSIA": [ob for ob, _ in russia_top],
+        "ALL":    [ob for ob, _ in europe_top] + [ob for ob, _ in russia_top],
+    }
+
+    # 9. Запись конфигов
     print(f"\n{'='*60}")
     print(f"Запись конфигов для профилей: {', '.join(profile_names)}")
     print(f"{'='*60}")
     for name in profile_names:
         print(f"\n[{name}]")
-        write_config(PROFILES[name], final_proxies)
+        write_config(PROFILES[name], groups)
 
     print("\nГотово.")
 
