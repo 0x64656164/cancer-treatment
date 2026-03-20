@@ -26,7 +26,7 @@ PROFILES = {
         # Балансеры, которые попадут в конфиг.
         # Убери любой элемент из списка чтобы отключить соответствующую группу.
         # Допустимые значения: "EUROPE", "RUSSIA", "ALL"
-        "enabled_groups":      ["ALL"],
+        "enabled_groups":      ["EUROPE", "RUSSIA", "ALL"],
         "remote_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs",
@@ -43,7 +43,7 @@ PROFILES = {
         "proxy_rule_outbound": "direct",
         "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
         # Hiddify: Russia-серверы и ALL отключены — только зарубежные
-        "enabled_groups":      ["EUROPE", "RUSSIA", "ALL"],
+        "enabled_groups":      ["EUROPE"],
         "remote_rule_sets":    [],
         "remote_block_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs",
@@ -492,22 +492,49 @@ def probe_server(link: str):
     return outbound, score
 
 
-def run_probes(links: list, label: str) -> list:
-    total_minutes = (PROBE_ROUNDS - 1) * PROBE_DELAY / 60
-    print(f"\nЗондирование: {len(links)} серверов ({label})")
-    print(f"Схема: {PROBE_ROUNDS} раунда × пауза {PROBE_DELAY}с "
-          f"= окно наблюдения ~{total_minutes:.0f} мин, потоков: {MAX_WORKERS}\n")
+def run_probes_grouped(groups: dict) -> dict:
+    """
+    Зондирует несколько групп серверов в ОДНОМ общем пуле потоков.
 
-    results = []
+    groups = {"EUROPE": [...links], "RUSSIA": [...links], ...}
+    Возвращает {"EUROPE": [(outbound, score), ...], "RUSSIA": [...], ...}
+
+    Ключевое ускорение: вместо последовательного запуска отдельного пула
+    на каждую группу все серверы (EUROPE + RUSSIA) попадают в один
+    ThreadPoolExecutor. Потоки заняты sleep(PROBE_DELAY) большую часть
+    времени, поэтому общий wall-time = max(time_europe, time_russia)
+    вместо time_europe + time_russia.
+    """
+    total_links = sum(len(v) for v in groups.values())
+    total_minutes = (PROBE_ROUNDS - 1) * PROBE_DELAY / 60
+    print(f"\nЗондирование: {total_links} серверов суммарно "
+          f"({', '.join(f'{k}={len(v)}' for k, v in groups.items())})")
+    print(f"Схема: {PROBE_ROUNDS} раунда x пауза {PROBE_DELAY}с "
+          f"= окно наблюдения ~{total_minutes:.0f} мин, "
+          f"потоков: {MAX_WORKERS} (общий пул)\n")
+
+    # Помечаем каждую ссылку её группой
+    labelled = [
+        (label, link)
+        for label, links in groups.items()
+        for link in links
+    ]
+
+    per_group = {label: [] for label in groups}
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {executor.submit(probe_server, l): l for l in links}
+        futures = {executor.submit(probe_server, link): label
+                   for label, link in labelled}
         for future in concurrent.futures.as_completed(futures):
+            label = futures[future]
             ob, score = future.result()
             if ob:
-                results.append((ob, score))
+                per_group[label].append((ob, score))
 
-    results.sort(key=lambda x: x[1], reverse=True)
-    return results
+    for label in per_group:
+        per_group[label].sort(key=lambda x: x[1], reverse=True)
+
+    return per_group
 
 
 def filter_by_average_score(results: list, label: str = "") -> list:
@@ -680,11 +707,11 @@ def write_config(profile: dict, groups: dict):
         ],
         "outbounds": outbounds,
         "route": {
-            "rules": [
+            "rules": [r for r in [
                 {"protocol": "dns", "action": "hijack-dns"},
-                {"rule_set": block_routing_tags, "outbound": "block"},
-                {"rule_set": proxy_routing_tags, "outbound": profile["proxy_rule_outbound"]},
-            ],
+                {"rule_set": block_routing_tags, "outbound": "block"}  if block_routing_tags else None,
+                {"rule_set": proxy_routing_tags, "outbound": profile["proxy_rule_outbound"]} if proxy_routing_tags else None,
+            ] if r is not None],
             "rule_set":              formatted_rule_sets,
             "final":                 profile["route_final"],
             "auto_detect_interface": True
@@ -743,9 +770,16 @@ def main(profile_names: list):
     russia_links = [l for l in all_links if     _is_russia(l)]
     print(f"Разделение: EUROPE={len(europe_links)}, RUSSIA={len(russia_links)}\n")
 
-    # 5. Тестируем обе группы независимо (всегда, не как fallback)
-    europe_results = run_probes(europe_links, "EUROPE") if europe_links else []
-    russia_results = run_probes(russia_links, "RUSSIA") if russia_links else []
+    # 5. Тестируем обе группы в одном общем пуле (параллельно, не последовательно)
+    probe_input = {}
+    if europe_links:
+        probe_input["EUROPE"] = europe_links
+    if russia_links:
+        probe_input["RUSSIA"] = russia_links
+
+    probe_output = run_probes_grouped(probe_input)
+    europe_results = probe_output.get("EUROPE", [])
+    russia_results = probe_output.get("RUSSIA", [])
 
     # 6. Адаптивный отбор внутри каждой группы отдельно
     europe_top = filter_by_average_score(europe_results, "EUROPE")
