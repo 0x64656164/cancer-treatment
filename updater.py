@@ -75,6 +75,25 @@ PROBE_DELAY  = 60    # секунд между замерами
 PROBE_URL    = 'https://cachefly.cachefly.net/10mb.test'
 TIMEOUT      = 8     # секунд на один замер
 
+# --- Параметры отбора ---
+#
+# MIN_SUCCESS_ROUNDS  — жёсткий порог: сервер должен ответить хотя бы в этом
+#                       количестве раундов, иначе отсеивается до скоринга.
+#                       Рекомендуется ceil(PROBE_ROUNDS / 2), т.е. большинство.
+#
+# SCORE_FLOOR_RATIO   — мягкий порог относительно лучшего сервера в группе:
+#                       проходят серверы с score >= best_score * SCORE_FLOOR_RATIO.
+#                       0.25 = отбрасываем только тех, кто хуже лучшего в 4+ раза.
+#                       Меньше -> шире пул, больше -> строже.
+#
+# MIN_KEEP_PER_GROUP  — гарантированный минимум серверов в группе.
+#                       Если после SCORE_FLOOR_RATIO осталось меньше — порог
+#                       смягчается и берутся лучшие MIN_KEEP_PER_GROUP.
+#
+MIN_SUCCESS_ROUNDS  = 2     # из PROBE_ROUNDS=3 нужно пройти минимум 2
+SCORE_FLOOR_RATIO   = 0.25  # отсекаем тех, кто хуже лучшего более чем в 4 раза
+MIN_KEEP_PER_GROUP  = 5     # минимум серверов в каждой группе
+
 
 # ---------------------------------------------------------------------------
 # ФИЛЬТР ПО ПАРАМЕТРАМ ПРОТОКОЛА
@@ -82,7 +101,7 @@ TIMEOUT      = 8     # секунд на один замер
 PROTOCOL_FILTERS = {
     "vless": {
         "logic":        "AND",
-        "transport":    ["tcp", "xhttp"],
+        "transport":    ["tcp", "xhttp", "ws"],
         "security":     ["tls", "reality"],
         "flow":         ["xtls-rprx-vision", ""],
         "fp":           ["chrome", "random", "qq", "firefox", "safari", "edge", "ios", "android", "360"],
@@ -454,10 +473,31 @@ def _single_probe(link: str) -> float | None:
     return None
 
 
+def _harmonic_mean(values: list) -> float:
+    """
+    Гармоническое среднее скоростей.
+
+    Почему не медиана и не среднее арифметическое:
+    - Среднее арифм. завышает оценку серверов с одним случайным всплеском.
+    - Медиана игнорирует реальный разброс.
+    - Гармоническое среднее даёт низкий результат при одном медленном замере,
+      т.е. штрафует нестабильность — именно то, что нужно для VPN-серверов.
+    """
+    if not values:
+        return 0.0
+    return len(values) / sum(1.0 / v for v in values if v > 0)
+
+
 def probe_server(link: str):
     """
     Зондирует сервер PROBE_ROUNDS раз с паузой PROBE_DELAY секунд между замерами.
-    score = median_speed × success_rate
+
+    Жёсткий фильтр: сервер должен ответить минимум MIN_SUCCESS_ROUNDS раз,
+    иначе возвращает (None, 0) — до стадии скоринга не доходит.
+
+    score = harmonic_mean(speeds)
+      Гармоническое среднее штрафует нестабильность сильнее медианы:
+      сервер с замерами [100, 100, 1] получит score ≈ 2.9, а не 100.
     """
     tag = unquote(urlparse(link).fragment) or "Unnamed"
     speeds = []
@@ -479,16 +519,18 @@ def probe_server(link: str):
                 except Exception:
                     pass
 
-    if not speeds or outbound is None:
+    # Жёсткий порог по количеству успешных раундов
+    if len(speeds) < MIN_SUCCESS_ROUNDS or outbound is None:
+        tag_short = tag[:48]
+        stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
+        print(f"[{stability}] {tag_short:<48}  — отсеян (< {MIN_SUCCESS_ROUNDS} успешных раундов)")
         return None, 0
 
-    success_rate = len(speeds) / PROBE_ROUNDS
-    median_speed = sorted(speeds)[len(speeds) // 2]
-    score = median_speed * success_rate
+    score = _harmonic_mean(speeds)
 
     stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
     print(f"[{stability}] {tag[:48]:<48} "
-          f"median={median_speed:.1f} Mbps  score={score:.2f}")
+          f"hmean={score:.1f} Mbps  rounds={len(speeds)}/{PROBE_ROUNDS}")
     return outbound, score
 
 
@@ -537,15 +579,44 @@ def run_probes_grouped(groups: dict) -> dict:
     return per_group
 
 
-def filter_by_average_score(results: list, label: str = "") -> list:
+def filter_by_score(results: list, label: str = "") -> list:
+    """
+    Отбор серверов по score относительно лучшего в группе.
+
+    Алгоритм:
+    1. Порог = best_score * SCORE_FLOOR_RATIO  (относительный, не по среднему).
+       Это удерживает серверы, уступающие лучшему не более чем в 1/RATIO раз.
+    2. Если после шага 1 осталось меньше MIN_KEEP_PER_GROUP — берём топ-N
+       принудительно, чтобы группа не оказалась пустой.
+
+    В отличие от порога >= среднего:
+    - Не срезает половину пула механически.
+    - Реагирует на реальное распределение скоростей.
+    - Гарантирует минимальное число серверов в группе.
+    """
     if not results:
-        return results
-    avg = sum(s for _, s in results) / len(results)
-    filtered = [(ob, s) for ob, s in results if s >= avg]
+        return []
+
     prefix = f"[{label}] " if label else ""
-    print(f"{prefix}Адаптивный порог: средний score = {avg:.2f}")
-    print(f"{prefix}Отобрано: {len(filtered)} из {len(results)} "
-          f"(отброшено {len(results) - len(filtered)})\n")
+    best_score = results[0][1]  # results уже отсортированы по убыванию
+    floor = best_score * SCORE_FLOOR_RATIO
+
+    filtered = [(ob, s) for ob, s in results if s >= floor]
+
+    # Гарантируем минимум серверов
+    if len(filtered) < MIN_KEEP_PER_GROUP and len(results) >= MIN_KEEP_PER_GROUP:
+        filtered = results[:MIN_KEEP_PER_GROUP]
+        print(f"{prefix}Порог смягчён: взяты топ-{MIN_KEEP_PER_GROUP} "
+              f"(floor {floor:.2f} дал только {len(filtered)} серверов)")
+    elif len(filtered) < MIN_KEEP_PER_GROUP:
+        filtered = results  # серверов вообще мало — берём всех
+        print(f"{prefix}Серверов мало ({len(results)}), берём всех")
+
+    print(f"{prefix}Порог: best={best_score:.2f}  "
+          f"floor={floor:.2f} (×{SCORE_FLOOR_RATIO})  "
+          f"отобрано {len(filtered)}/{len(results)}"
+          + (f"  (отброшено {len(results) - len(filtered)})" if len(results) > len(filtered) else ""))
+    print()
     return filtered
 
 
@@ -782,8 +853,8 @@ def main(profile_names: list):
     russia_results = probe_output.get("RUSSIA", [])
 
     # 6. Адаптивный отбор внутри каждой группы отдельно
-    europe_top = filter_by_average_score(europe_results, "EUROPE")
-    russia_top = filter_by_average_score(russia_results, "RUSSIA")
+    europe_top = filter_by_score(europe_results, "EUROPE")
+    russia_top = filter_by_score(russia_results, "RUSSIA")
 
     # 7. Итоговая статистика
     print(f"Результаты тестирования:")
