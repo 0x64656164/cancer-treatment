@@ -126,7 +126,7 @@ PROTOCOL_FILTERS = {
         "security":     ["tls", "reality"],        # только зашифрованные
         "flow":         ["xtls-rprx-vision", ""],  # vision flow или без flow (xhttp-серверы)
         "fp":           ["chrome", "random", "qq", "firefox", "safari", "edge", "ios", "android", "360"],
-        "sni":          ["domain_whitelist.txt"],  # whitelist SNI: файл раскрывается при старте
+        "sni":          [],  # whitelist SNI: файл раскрывается при старте
         "port":         [],                    # любой порт
         "host":         [],
         "path":         [],
@@ -150,7 +150,7 @@ PROTOCOL_FILTERS = {
         "logic":        "AND",
         "transport":    [],
         "security":     [],
-        "sni":          ["domain_whitelist.txt"],
+        "sni":          [],
         "host":         [],
         "path":         [],
         "alpn":         [],
