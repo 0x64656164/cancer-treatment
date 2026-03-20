@@ -65,6 +65,9 @@ CIDR_WHITELIST_FILE = 'cidr_whitelist2.txt'
 
 REGEXP_RUSSIA  = r'(?:\bRussia\b|\bRU\b|🇷🇺)'   # тег считается "российским"
 
+COUNTRY_API_URL = 'https://api.country.is/'
+COUNTRY_CHECK_TIMEOUT = 3
+
 MIN_SERVERS    = 5
 MIN_BEST_SPEED = 1.5
 MAX_WORKERS    = 64   # увеличено: зонды тратят время на паузы, потоков нужно больше
@@ -457,6 +460,21 @@ def _fix_outbound(outbound: dict) -> dict:
     return outbound
 
 
+def check_exit_country(proxy_session) -> str | None:
+    """
+    Определяет страну выхода через уже открытую прокси-сессию.
+    Возвращает код страны (например, 'RU', 'NL') или None при ошибке.
+    """
+    try:
+        response = proxy_session.get(COUNTRY_API_URL, timeout=COUNTRY_CHECK_TIMEOUT)
+        if response.status_code == 200:
+            data = response.json()
+            return data.get('country', '').upper()
+    except Exception:
+        pass
+    return None
+
+
 def _single_probe(link: str) -> float | None:
     """Один замер скорости. Возвращает Mbps или None при ошибке."""
     try:
@@ -491,17 +509,21 @@ def _harmonic_mean(values: list) -> float:
 def probe_server(link: str):
     """
     Зондирует сервер PROBE_ROUNDS раз с паузой PROBE_DELAY секунд между замерами.
+    Дополнительно определяет страну выхода через API.
 
     Жёсткий фильтр: сервер должен ответить минимум MIN_SUCCESS_ROUNDS раз,
-    иначе возвращает (None, 0) — до стадии скоринга не доходит.
+    иначе возвращает (None, 0, None) — до стадии скоринга не доходит.
 
     score = harmonic_mean(speeds)
       Гармоническое среднее штрафует нестабильность сильнее медианы:
       сервер с замерами [100, 100, 1] получит score ≈ 2.9, а не 100.
+    
+    Возвращает: (outbound, score, country_code)
     """
     tag = unquote(urlparse(link).fragment) or "Unnamed"
     speeds = []
     outbound = None
+    exit_country = None
 
     for round_num in range(PROBE_ROUNDS):
         if round_num > 0:
@@ -516,6 +538,10 @@ def probe_server(link: str):
                         outbound = _fix_outbound(parse_link(proxy, link))
                         outbound["tag"] = tag
                         outbound["domain_strategy"] = "prefer_ipv4"
+                        
+                        # Проверяем страну выхода через уже открытое соединение
+                        if exit_country is None:
+                            exit_country = check_exit_country(proxy)
                 except Exception:
                     pass
 
@@ -524,14 +550,15 @@ def probe_server(link: str):
         tag_short = tag[:48]
         stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
         print(f"[{stability}] {tag_short:<48}  — отсеян (< {MIN_SUCCESS_ROUNDS} успешных раундов)")
-        return None, 0
+        return None, 0, None
 
     score = _harmonic_mean(speeds)
 
     stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
+    country_mark = f" [{exit_country}]" if exit_country else ""
     print(f"[{stability}] {tag[:48]:<48} "
-          f"hmean={score:.1f} Mbps  rounds={len(speeds)}/{PROBE_ROUNDS}")
-    return outbound, score
+          f"hmean={score:.1f} Mbps  rounds={len(speeds)}/{PROBE_ROUNDS}{country_mark}")
+    return outbound, score, exit_country
 
 
 def run_probes_grouped(groups: dict) -> dict:
@@ -539,7 +566,7 @@ def run_probes_grouped(groups: dict) -> dict:
     Зондирует несколько групп серверов в ОДНОМ общем пуле потоков.
 
     groups = {"EUROPE": [...links], "RUSSIA": [...links], ...}
-    Возвращает {"EUROPE": [(outbound, score), ...], "RUSSIA": [...], ...}
+    Возвращает {"EUROPE": [(outbound, score, country), ...], "RUSSIA": [...], ...}
 
     Ключевое ускорение: вместо последовательного запуска отдельного пула
     на каждую группу все серверы (EUROPE + RUSSIA) попадают в один
@@ -569,9 +596,9 @@ def run_probes_grouped(groups: dict) -> dict:
                    for label, link in labelled}
         for future in concurrent.futures.as_completed(futures):
             label = futures[future]
-            ob, score = future.result()
+            ob, score, country = future.result()
             if ob:
-                per_group[label].append((ob, score))
+                per_group[label].append((ob, score, country))
 
     for label in per_group:
         per_group[label].sort(key=lambda x: x[1], reverse=True)
@@ -582,6 +609,7 @@ def run_probes_grouped(groups: dict) -> dict:
 def filter_by_score(results: list, label: str = "") -> list:
     """
     Отбор серверов по score относительно лучшего в группе.
+    results = [(outbound, score, country), ...]
 
     Алгоритм:
     1. Порог = best_score * SCORE_FLOOR_RATIO  (относительный, не по среднему).
@@ -601,7 +629,7 @@ def filter_by_score(results: list, label: str = "") -> list:
     best_score = results[0][1]  # results уже отсортированы по убыванию
     floor = best_score * SCORE_FLOOR_RATIO
 
-    filtered = [(ob, s) for ob, s in results if s >= floor]
+    filtered = [(ob, s, c) for ob, s, c in results if s >= floor]
 
     # Гарантируем минимум серверов
     if len(filtered) < MIN_KEEP_PER_GROUP and len(results) >= MIN_KEEP_PER_GROUP:
@@ -624,7 +652,7 @@ def needs_fallback(results: list) -> bool:
     if len(results) < MIN_SERVERS:
         print(f"\n⚠ Прошло только {len(results)} серверов (минимум: {MIN_SERVERS}). Фоллбэк...")
         return True
-    if results[0][1] < MIN_BEST_SPEED:
+    if results and results[0][1] < MIN_BEST_SPEED:
         print(f"\n⚠ Лучший score {results[0][1]:.2f} < {MIN_BEST_SPEED}. Фоллбэк...")
         return True
     return False
@@ -807,15 +835,31 @@ def write_config(profile: dict, groups: dict):
 # ОСНОВНАЯ ФУНКЦИЯ
 # ===========================================================================
 
-def _is_russia(link: str) -> bool:
+def _is_russia(link: str, country: str | None = None) -> bool:
+    """
+    Определяет, является ли сервер российским.
+    
+    1. Проверка по regex в теге (быстрая)
+    2. Проверка по коду страны из API (если передан)
+    """
     tag = unquote(urlparse(link).fragment)
-    return bool(re.search(REGEXP_RUSSIA, tag))
+    
+    # Проверка по regex
+    if re.search(REGEXP_RUSSIA, tag):
+        return True
+    
+    # Проверка по коду страны
+    if country == 'RU':
+        return True
+    
+    return False
 
 
 def _print_top(results: list, label: str, n: int = 10):
     print(f"\nТоп-{n} [{label}] по score:")
-    for i, (ob, sc) in enumerate(results[:n], 1):
-        print(f"  {i:>2}. {ob['tag'][:55]:<55} score={sc:.2f}")
+    for i, (ob, sc, country) in enumerate(results[:n], 1):
+        country_mark = f" [{country}]" if country else ""
+        print(f"  {i:>2}. {ob['tag'][:55]:<55} score={sc:.2f}{country_mark}")
     if len(results) > n:
         print(f"  ... и ещё {len(results) - n} серверов")
 
@@ -836,10 +880,10 @@ def main(profile_names: list):
         print("⚠ После CIDR-фильтрации серверов не осталось!")
         return
 
-    # 4. Разделяем на EUROPE и RUSSIA до тестирования
+    # 4. Разделяем на EUROPE и RUSSIA до тестирования (только по regex)
     europe_links = [l for l in all_links if not _is_russia(l)]
     russia_links = [l for l in all_links if     _is_russia(l)]
-    print(f"Разделение: EUROPE={len(europe_links)}, RUSSIA={len(russia_links)}\n")
+    print(f"Разделение (по regex): EUROPE={len(europe_links)}, RUSSIA={len(russia_links)}\n")
 
     # 5. Тестируем обе группы в одном общем пуле (параллельно, не последовательно)
     probe_input = {}
@@ -849,8 +893,27 @@ def main(profile_names: list):
         probe_input["RUSSIA"] = russia_links
 
     probe_output = run_probes_grouped(probe_input)
+    
+    # НОВОЕ: дополнительная классификация по стране выхода
+    # Серверы без Russia-тега, но с RU выходом переносим в RUSSIA
     europe_results = probe_output.get("EUROPE", [])
     russia_results = probe_output.get("RUSSIA", [])
+    
+    # Перераспределяем EUROPE-серверы с RU выходом
+    reclassified_to_russia = []
+    final_europe = []
+    for ob, score, country in europe_results:
+        if country == 'RU':
+            reclassified_to_russia.append((ob, score, country))
+        else:
+            final_europe.append((ob, score, country))
+    
+    if reclassified_to_russia:
+        print(f"\n⚠ Переклассифицировано в RUSSIA: {len(reclassified_to_russia)} серверов с RU выходом")
+        russia_results.extend(reclassified_to_russia)
+        russia_results.sort(key=lambda x: x[1], reverse=True)
+    
+    europe_results = final_europe
 
     # 6. Адаптивный отбор внутри каждой группы отдельно
     europe_top = filter_by_score(europe_results, "EUROPE")
@@ -876,9 +939,9 @@ def main(profile_names: list):
 
     # 8. Формируем группы: ALL = EUROPE + RUSSIA (порядок важен для write_config)
     groups = {
-        "EUROPE": [ob for ob, _ in europe_top],
-        "RUSSIA": [ob for ob, _ in russia_top],
-        "ALL":    [ob for ob, _ in europe_top] + [ob for ob, _ in russia_top],
+        "EUROPE": [ob for ob, _, _ in europe_top],
+        "RUSSIA": [ob for ob, _, _ in russia_top],
+        "ALL":    [ob for ob, _, _ in europe_top] + [ob for ob, _, _ in russia_top],
     }
 
     # 9. Запись конфигов
