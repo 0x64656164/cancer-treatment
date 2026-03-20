@@ -26,7 +26,7 @@ PROFILES = {
         # Балансеры, которые попадут в конфиг.
         # Убери любой элемент из списка чтобы отключить соответствующую группу.
         # Допустимые значения: "EUROPE", "RUSSIA", "ALL"
-        "enabled_groups":      ["EUROPE", "RUSSIA", "ALL"],
+        "enabled_groups":      ["ALL"],
         "remote_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs",
@@ -43,7 +43,7 @@ PROFILES = {
         "proxy_rule_outbound": "direct",
         "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
         # Hiddify: Russia-серверы и ALL отключены — только зарубежные
-        "enabled_groups":      ["EUROPE"],
+        "enabled_groups":      ["EUROPE", "RUSSIA", "ALL"],
         "remote_rule_sets":    [],
         "remote_block_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs",
