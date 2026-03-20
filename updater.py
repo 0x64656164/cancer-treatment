@@ -10,6 +10,7 @@ import sys
 import concurrent.futures
 from urllib.parse import urlparse, unquote, parse_qs
 from base import SingBoxProxy
+from lib.wildcard_matcher import match as wc_match
 
 # ---------------------------------------------------------------------------
 # ПРОФИЛИ ВЫВОДА
@@ -50,12 +51,11 @@ PROFILES = {
 SUB_LINKS = [
     'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt',
     'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt',
-    #'https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist',
-    #'https://whiteprime.github.io/xraycheck/configs/white-list_available(top100)',
+    'https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist',
+    'https://whiteprime.github.io/xraycheck/configs/white-list_available(top100)',
     'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt'
 ]
 CIDR_WHITELIST_FILE = 'cidr_whitelist.txt'
-DOMAIN_WHITELIST_FILE = 'domain_whitelist.txt'
 
 REGEXP_FILTER          = r'^(?!.*(?:\bRussia\b|\bRU\b|🇷🇺)).*$'
 REGEXP_FILTER_FALLBACK = r'.*'
@@ -93,7 +93,7 @@ TIMEOUT      = 8     # секунд на один замер
 # │ transport       │ тип транспорта: tcp / ws / grpc / httpupgrade / xhttp / quic              │
 # │ security        │ tls / reality / none                                                      │
 # │ flow            │ flow-значение: "" / "xtls-rprx-vision" / ...                              │
-# │ sni             │ SNI: точное или "*.example.com" wildcard                                  │
+# │ sni             │ SNI: точное, "*.example.com" wildcard, или путь к файлу (.txt/.json)      │
 # │ fp              │ fingerprint браузера: chrome / firefox / safari / edge / ios / qq / ...   │
 # │ port            │ порт: число, строка "443", или диапазон "8000-9000"                       │
 # │ host            │ Host-заголовок (ws/httpupgrade): точное или wildcard "*.cdn.com"          │
@@ -109,6 +109,11 @@ TIMEOUT      = 8     # секунд на один замер
 #
 # Пустой список [] = ограничение снято (разрешено всё).
 #
+# В полях-списках можно указать путь к файлу (.txt или .json) — он будет
+# раскрыт при старте:
+#   .txt  — каждая непустая строка (без # комментариев) становится элементом
+#   .json — ожидается JSON-массив строк
+#
 # Условия выставлены на основе реально работающих серверов из подписок:
 #   - vless/reality/tcp/xtls-rprx-vision — основной рабочий паттерн
 #   - fp: chrome, random, qq — встречаются на рабочих серверах
@@ -121,7 +126,7 @@ PROTOCOL_FILTERS = {
         "security":     ["tls", "reality"],        # только зашифрованные
         "flow":         ["xtls-rprx-vision", ""],  # vision flow или без flow (xhttp-серверы)
         "fp":           ["chrome", "random", "qq", "firefox", "safari", "edge", "ios", "android", "360"],
-        "sni":          [],                    # любой SNI
+        "sni":          ["domain_whitelist.txt"],  # whitelist SNI: файл раскрывается при старте
         "port":         [],                    # любой порт
         "host":         [],
         "path":         [],
@@ -130,12 +135,11 @@ PROTOCOL_FILTERS = {
         "sid":          [],
         "service_name": [],
     },
-    # Остальные протоколы: все условия пусты — пропускаем всё
     "vmess": {
         "logic":      "AND",
         "transport":  [],
         "security":   [],
-        "sni":        [],
+        "sni":        ["domain_whitelist.txt"],
         "host":       [],
         "path":       [],
         "alpn":       [],
@@ -146,7 +150,7 @@ PROTOCOL_FILTERS = {
         "logic":        "AND",
         "transport":    [],
         "security":     [],
-        "sni":          [],
+        "sni":          ["domain_whitelist.txt"],
         "host":         [],
         "path":         [],
         "alpn":         [],
@@ -157,21 +161,78 @@ PROTOCOL_FILTERS = {
         "logic":         "AND",
         "transport":     [],
         "security":      [],
-        "sni":           [],
-        "port":          [],
-        "obfs":          [],
-        "obfs_password": [],
-    },
-    "hysteria2": {
-        "logic":         "AND",
-        "transport":     [],
-        "security":      [],
-        "sni":           [],
+        "sni":           ["domain_whitelist.txt"],
         "port":          [],
         "obfs":          [],
         "obfs_password": [],
     },
 }
+
+
+# ===========================================================================
+# РАСКРЫТИЕ ФАЙЛОВ В ФИЛЬТРАХ
+# ===========================================================================
+
+def _load_domain_file(path: str) -> list:
+    """
+    Загружает список строк из файла.
+    .json — ожидается JSON-массив строк.
+    Любой другой формат — построчное чтение; строки, начинающиеся с #, пропускаются.
+    """
+    if not os.path.exists(path):
+        print(f"⚠ Файл доменов '{path}' не найден — условие SNI по файлу отключено.")
+        return []
+    ext = os.path.splitext(path)[1].lower()
+    try:
+        with open(path, encoding='utf-8') as f:
+            if ext == '.json':
+                data = json.load(f)
+                if isinstance(data, list):
+                    return [str(d).strip() for d in data if str(d).strip()]
+                print(f"⚠ {path}: ожидался JSON-массив, получено {type(data).__name__} — пропускаем.")
+                return []
+            else:  # .txt и любой другой
+                return [
+                    line.strip()
+                    for line in f
+                    if line.strip() and not line.startswith('#')
+                ]
+    except Exception as e:
+        print(f"⚠ Ошибка чтения файла доменов '{path}': {e}")
+        return []
+
+
+def _expand_filter_files(filters: dict) -> dict:
+    """
+    Раскрывает пути к файлам в списках условий фильтров.
+
+    Если элемент списка оканчивается на .txt или .json — он заменяется
+    содержимым соответствующего файла. Работает для любого поля фильтра.
+    """
+    expanded = {}
+    for proto, rules in filters.items():
+        new_rules = {}
+        for field, value in rules.items():
+            if not isinstance(value, list):
+                new_rules[field] = value
+                continue
+            new_list = []
+            for entry in value:
+                if isinstance(entry, str) and entry.lower().endswith(('.txt', '.json')):
+                    domains = _load_domain_file(entry)
+                    if domains:
+                        print(f"  Фильтр [{proto}.{field}]: загружено {len(domains)} записей из '{entry}'")
+                    new_list.extend(domains)
+                else:
+                    new_list.append(entry)
+            new_rules[field] = new_list
+        expanded[proto] = new_rules
+    return expanded
+
+
+# Раскрываем файловые ссылки один раз при загрузке модуля
+PROTOCOL_FILTERS["hysteria2"] = PROTOCOL_FILTERS["hy2"]
+PROTOCOL_FILTERS = _expand_filter_files(PROTOCOL_FILTERS)
 
 
 # ===========================================================================
@@ -236,14 +297,7 @@ def _parse_link_params(link: str) -> dict:
 
 
 def _str_matches(value: str, allowed: list) -> bool:
-    for pattern in allowed:
-        if pattern.startswith("*."):
-            suffix = pattern[1:]
-            if value == pattern[2:] or value.endswith(suffix):
-                return True
-        elif value == pattern:
-            return True
-    return False
+    return any(wc_match(value, pattern) for pattern in allowed)
 
 
 def _path_matches(path: str, allowed: list) -> bool:
@@ -393,48 +447,24 @@ def filter_by_cidr(links: list) -> list:
 # ЗАГРУЗКА ПОДПИСОК
 # ===========================================================================
 
-def fetch_links_from_subscriptions() -> tuple:
-    regular_links, hy2_links, seen = [], [], set()
+def fetch_links_from_subscriptions() -> list:
+    links, seen = [], set()
     for url in SUB_LINKS:
         print(f"Загрузка подписки: {url}")
         try:
             raw = requests.get(url, timeout=15).text
             found = re.findall(r'^(?:vless|vmess|trojan|hy2|hysteria2):\/\/.+$', raw, re.MULTILINE)
-            new_regular = new_hy2 = 0
+            new = 0
             for link in found:
                 if link not in seen:
                     seen.add(link)
-                    if link.startswith(("hy2://", "hysteria2://")):
-                        hy2_links.append(link)
-                        new_hy2 += 1
-                    else:
-                        regular_links.append(link)
-                        new_regular += 1
-            print(f"  → Найдено: {len(found)}, новых обычных: {new_regular}, новых hy2: {new_hy2}")
+                    links.append(link)
+                    new += 1
+            print(f"  → Найдено: {len(found)}, новых: {new}")
         except Exception as e:
             print(f"  ✗ Ошибка загрузки {url}: {e}")
-    print(f"\nИтого уникальных: обычных: {len(regular_links)}, hysteria2: {len(hy2_links)}\n")
-    return regular_links, hy2_links
-
-
-def collect_hy2_outbounds(hy2_links: list) -> list:
-    if not hy2_links:
-        return []
-    print(f"Парсинг {len(hy2_links)} hysteria2 серверов...")
-    outbounds = []
-    proxy = SingBoxProxy.__new__(SingBoxProxy)
-    for link in hy2_links:
-        tag = unquote(urlparse(link).fragment) or "Unnamed"
-        try:
-            ob = proxy._parse_hysteria2_link(link)
-            ob["tag"] = tag
-            ob["domain_strategy"] = "prefer_ipv4"
-            outbounds.append(ob)
-            print(f"  [HY2] {tag}")
-        except Exception as e:
-            print(f"  [FAIL] {tag}: {e}")
-    print(f"Hysteria2 готово: {len(outbounds)} серверов\n")
-    return outbounds
+    print(f"\nИтого уникальных: {len(links)}\n")
+    return links
 
 
 # ===========================================================================
@@ -656,19 +686,20 @@ def write_config(profile: dict, final_proxies: list):
 
 def main(profile_names: list):
     # 1. Загрузка подписок
-    regular_links, hy2_links = fetch_links_from_subscriptions()
-    if not regular_links and not hy2_links:
+    all_links = fetch_links_from_subscriptions()
+    if not all_links:
         print("Критическая ошибка: не удалось загрузить ни одной ссылки!")
         return
 
     # 2. Фильтр по параметрам протокола
-    regular_links = filter_by_params(regular_links)
-    hy2_links     = [l for l in hy2_links if passes_protocol_filter(l)]
+    all_links = filter_by_params(all_links)
 
     # 3. CIDR-фильтрация
-    regular_links = filter_by_cidr(regular_links)
-    if not regular_links:
-        print("⚠ После CIDR-фильтрации обычных серверов не осталось, продолжаем только с hy2.")
+    all_links = filter_by_cidr(all_links)
+    if not all_links:
+        print("⚠ После CIDR-фильтрации серверов не осталось!")
+        return
+    regular_links = all_links
 
     # 4. Первый проход: без Russia
     filtered = [l for l in regular_links if re.match(REGEXP_FILTER, unquote(urlparse(l).fragment))]
@@ -698,9 +729,8 @@ def main(profile_names: list):
         if len(top_results) > 10:
             print(f"  ... и ещё {len(top_results) - 10} серверов")
 
-    # 7. Hysteria2 — без теста, в конец
-    hy2_outbounds = collect_hy2_outbounds(hy2_links)
-    final_proxies = top_proxies + hy2_outbounds
+    # 7. Итоговый список серверов (hysteria2 прошли те же тесты)
+    final_proxies = top_proxies
 
     if not final_proxies:
         print("Критическая ошибка: ни один сервер не прошел проверку!")
