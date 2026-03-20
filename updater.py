@@ -55,7 +55,7 @@ SUB_LINKS = [
     #'https://whiteprime.github.io/xraycheck/configs/white-list_available(top100)',
     #'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt'
 ]
-CIDR_WHITELIST_FILE = 'cidr_whitelist.txt'
+CIDR_WHITELIST_FILE = 'cidr_whitelist2.txt'
 
 REGEXP_FILTER          = r'^(?!.*(?:\bRussia\b|\bRU\b|🇷🇺)).*$'
 REGEXP_FILTER_FALLBACK = r'.*'
