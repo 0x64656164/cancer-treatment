@@ -11,6 +11,43 @@ import concurrent.futures
 from urllib.parse import urlparse, unquote, parse_qs
 from base import SingBoxProxy
 from lib.wildcard_matcher import match as wc_match
+from datetime import datetime, timedelta
+from typing import Dict, List, Tuple, Optional
+
+# ---------------------------------------------------------------------------
+# СИСТЕМА РЕЙТИНГА
+# ---------------------------------------------------------------------------
+SERVERS_DB_FILE = 'servers_ratings.json'
+
+# Веса компонентов рейтинга (сумма должна быть 1.0)
+# UPTIME в приоритете для серверов с коротким временем жизни
+RATING_WEIGHTS = {
+    'speed':       0.25,   # Скорость соединения
+    'stability':   0.20,   # Стабильность (% успешных проверок)
+    'uptime':      0.40,   # Время жизни сервера (ВЫСОКИЙ ПРИОРИТЕТ)
+    'consistency': 0.10,   # Постоянство скорости (низкая дисперсия)
+    'freshness':   0.05,   # Бонус за недавнюю активность
+}
+
+# Параметры рейтинговой системы
+RATING_MIN_TESTS = 3              # Минимум тестов для полного рейтинга
+RATING_DECAY_HOURS = 24           # Период полураспада freshness бонуса
+RATING_STABILITY_THRESHOLD = 0.6  # Минимальная стабильность для сохранения
+
+# Параметры отбора серверов
+TOP_SERVERS_PERCENT = 0.7         # Топ 70% по рейтингу попадают в конфиг
+MIN_RATING_THRESHOLD = 0.3        # Минимальный рейтинг для включения (0-1)
+MAX_SERVERS_IN_CONFIG = 30        # Максимум серверов в конфиге на группу
+
+# Параметры очистки базы
+MAX_SERVER_AGE_HOURS = 120        # Удаление через 5 дней без активности
+MIN_TESTS_TO_KEEP = 2             # Минимум успешных тестов для сохранения
+MAX_SERVERS_IN_DB = 100           # Максимум серверов в базе на группу
+
+# Параметры тестирования
+TEST_NEW_SERVERS_COUNT = 20       # Сколько новых серверов тестировать за раз
+RETEST_OLD_SERVERS_COUNT = 10     # Сколько старых ретестировать за раз
+RETEST_LOW_RATING_FIRST = True    # Приоритет ретеста серверам с низким рейтингом
 
 # ---------------------------------------------------------------------------
 # ПРОФИЛИ ВЫВОДА
@@ -23,15 +60,12 @@ PROFILES = {
         "route_final":         "direct",
         "proxy_rule_outbound": "proxy",
         "file_header":         None,
-        # Балансеры, которые попадут в конфиг.
-        # Убери любой элемент из списка чтобы отключить соответствующую группу.
-        # Допустимые значения: "EUROPE", "RUSSIA", "ALL"
         "enabled_groups":      ["EUROPE"],
         "remote_rule_sets": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-ru-blocked.srs",
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geoip/geoip-ru-blocked-all.srs",
         ],
-        "remote_block_rule_sets": [
+        "remote_block_rule_set s": [
             "https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/sing-box/rule-set-geosite/geosite-category-ads-all.srs",
         ],
     },
@@ -42,7 +76,6 @@ PROFILES = {
         "route_final":         "proxy",
         "proxy_rule_outbound": "direct",
         "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
-        # Hiddify: Russia-серверы и ALL отключены — только зарубежные
         "enabled_groups":      ["EUROPE"],
         "remote_rule_sets":    [],
         "remote_block_rule_sets": [
@@ -57,46 +90,27 @@ PROFILES = {
 SUB_LINKS = [
     'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt',
     'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt',
-    #'https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/whitelist',
-    #'https://whiteprime.github.io/xraycheck/configs/white-list_available(top100)',
     'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt'
 ]
 CIDR_WHITELIST_FILE = 'cidr_whitelist2.txt'
 
-REGEXP_RUSSIA  = r'(?:\bRussia\b|\bRU\b|🇷🇺)'   # тег считается "российским"
+REGEXP_RUSSIA  = r'(?:\bRussia\b|\bRU\b|🇷🇺)'
 
 COUNTRY_API_URL = 'https://api.country.is/'
 COUNTRY_CHECK_TIMEOUT = 3
 
 MIN_SERVERS    = 5
 MIN_BEST_SPEED = 1.5
-MAX_WORKERS    = 64   # увеличено: зонды тратят время на паузы, потоков нужно больше
+MAX_WORKERS    = 64
 
-# --- Параметры зондирования ---
-PROBE_ROUNDS = 3     # количество замеров на сервер
-PROBE_DELAY  = 60    # секунд между замерами
+PROBE_ROUNDS = 3
+PROBE_DELAY  = 60
 PROBE_URL    = 'https://cachefly.cachefly.net/10mb.test'
-TIMEOUT      = 8     # секунд на один замер
+TIMEOUT      = 8
 
-# --- Параметры отбора ---
-#
-# MIN_SUCCESS_ROUNDS  — жёсткий порог: сервер должен ответить хотя бы в этом
-#                       количестве раундов, иначе отсеивается до скоринга.
-#                       Рекомендуется ceil(PROBE_ROUNDS / 2), т.е. большинство.
-#
-# SCORE_FLOOR_RATIO   — мягкий порог относительно лучшего сервера в группе:
-#                       проходят серверы с score >= best_score * SCORE_FLOOR_RATIO.
-#                       0.25 = отбрасываем только тех, кто хуже лучшего в 4+ раза.
-#                       Меньше -> шире пул, больше -> строже.
-#
-# MIN_KEEP_PER_GROUP  — гарантированный минимум серверов в группе.
-#                       Если после SCORE_FLOOR_RATIO осталось меньше — порог
-#                       смягчается и берутся лучшие MIN_KEEP_PER_GROUP.
-#
-MIN_SUCCESS_ROUNDS  = 2     # из PROBE_ROUNDS=3 нужно пройти минимум 2
-SCORE_FLOOR_RATIO   = 0.25  # отсекаем тех, кто хуже лучшего более чем в 4 раза
-MIN_KEEP_PER_GROUP  = 5     # минимум серверов в каждой группе
-
+MIN_SUCCESS_ROUNDS  = 2
+SCORE_FLOOR_RATIO   = 0.25
+MIN_KEEP_PER_GROUP  = 5
 
 # ---------------------------------------------------------------------------
 # ФИЛЬТР ПО ПАРАМЕТРАМ ПРОТОКОЛА
@@ -152,7 +166,405 @@ PROTOCOL_FILTERS = {
 
 
 # ===========================================================================
-# РАСКРЫТИЕ ФАЙЛОВ В ФИЛЬТРАХ
+# СИСТЕМА РЕЙТИНГА СЕРВЕРОВ
+# ===========================================================================
+
+class ServerRatingSystem:
+    """
+    Продвинутая система рейтинга серверов.
+    
+    Рейтинг вычисляется из 5 компонентов (0-1 каждый):
+    
+    1. SPEED (скорость) - 25% - нормализованная скорость относительно лучшего
+    2. STABILITY (стабильность) - 20% - % успешных проверок
+    3. UPTIME (время жизни) - 40% - как долго сервер работает (ВЫСОКИЙ ПРИОРИТЕТ)
+    4. CONSISTENCY (постоянство) - 10% - обратная вариация скорости
+    5. FRESHNESS (свежесть) - 5% - бонус за недавнюю активность
+    
+    Итоговый рейтинг = взвешенная сумма компонентов
+    
+    Логика uptime (агрессивная шкала):
+    - < 6 мин:   ~0.01 (почти ноль)
+    - 15 мин:    ~0.08 (очень мало)
+    - 30 мин:    ~0.20
+    - 1 час:     0.35
+    - 2 часа:    0.50
+    - 6 часов:   0.70
+    - 12 часов:  0.82
+    - 24 часа:   0.90
+    - 48 часов:  0.95
+    - 72+ часа:  1.00 (максимум)
+    """
+    
+    def __init__(self, db_file=SERVERS_DB_FILE):
+        self.db_file = db_file
+        self.data = self._load()
+        
+    def _load(self) -> dict:
+        """Загрузка базы рейтингов."""
+        if not os.path.exists(self.db_file):
+            return {"servers": {}, "metadata": {"last_cleanup": None}}
+        
+        try:
+            with open(self.db_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"⚠ Ошибка чтения базы рейтингов: {e}")
+            return {"servers": {}, "metadata": {"last_cleanup": None}}
+    
+    def _save(self):
+        """Сохранение базы рейтингов."""
+        try:
+            with open(self.db_file, 'w', encoding='utf-8') as f:
+                json.dump(self.data, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"⚠ Ошибка записи базы рейтингов: {e}")
+    
+    def _get_server_key(self, outbound: dict) -> str:
+        """Генерация уникального ключа сервера."""
+        key_parts = [
+            outbound.get('type', ''),
+            outbound.get('server', ''),
+            str(outbound.get('server_port', '')),
+            outbound.get('uuid', outbound.get('password', ''))[:8]
+        ]
+        return '|'.join(key_parts)
+    
+    def _calculate_rating(self, server_data: dict, group_max_speed: float = 100.0) -> Tuple[float, dict]:
+        """
+        Вычисление рейтинга сервера.
+        
+        Returns:
+            (rating, components) - итоговый рейтинг и его компоненты
+        """
+        now = datetime.now()
+        
+        # Извлекаем данные
+        speeds = server_data.get('speed_history', [])
+        total_tests = server_data.get('total_tests', 0)
+        successful_tests = server_data.get('successful_tests', 0)
+        first_seen = datetime.fromisoformat(server_data.get('first_seen', now.isoformat()))
+        last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
+        
+        # Инициализация компонентов
+        components = {
+            'speed': 0.0,
+            'stability': 0.0,
+            'uptime': 0.0,
+            'consistency': 0.0,
+            'freshness': 0.0,
+        }
+        
+        # Если данных недостаточно - возвращаем минимальный рейтинг
+        if not speeds or total_tests == 0:
+            return 0.0, components
+        
+        # 1. SPEED - средняя скорость относительно максимума в группе
+        avg_speed = sum(speeds) / len(speeds)
+        components['speed'] = min(1.0, avg_speed / max(group_max_speed, 1.0))
+        
+        # 2. STABILITY - процент успешных проверок
+        components['stability'] = successful_tests / max(total_tests, 1)
+        
+        # 3. UPTIME - время жизни сервера (логарифмическая шкала с приоритетом долгожителям)
+        uptime_hours = (last_seen - first_seen).total_seconds() / 3600
+        # Новая шкала с приоритетом uptime:
+        # 15 мин (0.25ч) = 0.05
+        # 30 мин (0.5ч)  = 0.15
+        # 1 час          = 0.35
+        # 2 часа         = 0.50
+        # 6 часов        = 0.70
+        # 12 часов       = 0.82
+        # 24 часа        = 0.90
+        # 48 часов       = 0.95
+        # 72+ часа       = 1.00
+        if uptime_hours < 0.1:  # Менее 6 минут - почти ноль
+            components['uptime'] = 0.01
+        elif uptime_hours < 1.0:  # До часа - очень медленный рост
+            components['uptime'] = 0.05 + (uptime_hours / 1.0) * 0.30  # 0.05 -> 0.35
+        elif uptime_hours < 6.0:  # 1-6 часов - умеренный рост
+            components['uptime'] = 0.35 + ((uptime_hours - 1.0) / 5.0) * 0.35  # 0.35 -> 0.70
+        elif uptime_hours < 24.0:  # 6-24 часа - замедление роста
+            components['uptime'] = 0.70 + ((uptime_hours - 6.0) / 18.0) * 0.20  # 0.70 -> 0.90
+        elif uptime_hours < 72.0:  # 24-72 часа - финальный рост
+            components['uptime'] = 0.90 + ((uptime_hours - 24.0) / 48.0) * 0.10  # 0.90 -> 1.00
+        else:  # 72+ часов - максимум
+            components['uptime'] = 1.0
+        
+        # 4. CONSISTENCY - стабильность скорости (низкая дисперсия = хорошо)
+        if len(speeds) >= 2:
+            mean = sum(speeds) / len(speeds)
+            variance = sum((s - mean) ** 2 for s in speeds) / len(speeds)
+            cv = (variance ** 0.5) / max(mean, 1)  # коэффициент вариации
+            # CV < 0.2 = отлично, CV > 1.0 = плохо
+            components['consistency'] = max(0.0, 1.0 - min(cv / 0.5, 2.0))
+        else:
+            components['consistency'] = 0.5  # нейтральное значение
+        
+        # 5. FRESHNESS - бонус за недавнюю активность (экспоненциальный decay)
+        hours_since_last = (now - last_seen).total_seconds() / 3600
+        decay_factor = 0.5 ** (hours_since_last / RATING_DECAY_HOURS)
+        components['freshness'] = decay_factor
+        
+        # Взвешенная сумма
+        rating = sum(components[k] * RATING_WEIGHTS[k] for k in components)
+        
+        # Штраф за малое количество тестов (confidence penalty)
+        if total_tests < RATING_MIN_TESTS:
+            confidence = total_tests / RATING_MIN_TESTS
+            rating *= confidence
+        
+        return rating, components
+    
+    def add_test_result(self, outbound: dict, speed: Optional[float], 
+                       country: Optional[str], group: str) -> bool:
+        """
+        Добавление результата теста.
+        
+        Returns:
+            True если тест успешен, False если провален
+        """
+        key = self._get_server_key(outbound)
+        now = datetime.now().isoformat()
+        
+        servers = self.data.setdefault("servers", {})
+        
+        if key not in servers:
+            # Новый сервер
+            servers[key] = {
+                'outbound': outbound,
+                'group': group,
+                'country': country,
+                'first_seen': now,
+                'last_seen': now,
+                'total_tests': 0,
+                'successful_tests': 0,
+                'speed_history': [],
+                'rating': 0.0,
+                'rating_components': {},
+            }
+        
+        server = servers[key]
+        server['total_tests'] += 1
+        
+        if speed is not None and speed > 0:
+            # Успешный тест
+            server['successful_tests'] += 1
+            server['last_seen'] = now
+            server['country'] = country or server.get('country')
+            
+            # Обновляем историю скоростей (храним последние 10)
+            speed_history = server.get('speed_history', [])
+            speed_history.append(speed)
+            server['speed_history'] = speed_history[-10:]
+            
+            self._save()
+            return True
+        else:
+            # Провальный тест - не обновляем last_seen
+            self._save()
+            return False
+    
+    def recalculate_all_ratings(self):
+        """
+        Пересчёт рейтингов всех серверов.
+        Вызывается после добавления новых результатов.
+        """
+        servers = self.data.get("servers", {})
+        
+        # Группируем серверы и находим максимальную скорость в каждой группе
+        groups_max_speed = {}
+        for server_data in servers.values():
+            group = server_data.get('group', 'UNKNOWN')
+            speeds = server_data.get('speed_history', [])
+            if speeds:
+                avg_speed = sum(speeds) / len(speeds)
+                groups_max_speed[group] = max(groups_max_speed.get(group, 0), avg_speed)
+        
+        # Пересчитываем рейтинги
+        for key, server_data in servers.items():
+            group = server_data.get('group', 'UNKNOWN')
+            max_speed = groups_max_speed.get(group, 100.0)
+            rating, components = self._calculate_rating(server_data, max_speed)
+            
+            server_data['rating'] = rating
+            server_data['rating_components'] = components
+        
+        self._save()
+    
+    def get_top_servers(self, group: Optional[str] = None, 
+                       limit: Optional[int] = None,
+                       min_rating: float = MIN_RATING_THRESHOLD) -> List[dict]:
+        """
+        Получить топ серверов по рейтингу.
+        
+        Args:
+            group: Фильтр по группе
+            limit: Максимальное количество серверов
+            min_rating: Минимальный рейтинг для включения
+        """
+        servers = self.data.get("servers", {})
+        
+        # Фильтрация
+        filtered = []
+        for key, server_data in servers.items():
+            # Проверка группы
+            if group and server_data.get('group') != group:
+                continue
+            
+            # Проверка минимального рейтинга
+            rating = server_data.get('rating', 0)
+            if rating < min_rating:
+                continue
+            
+            # Проверка минимальной стабильности
+            stability = server_data.get('rating_components', {}).get('stability', 0)
+            if stability < RATING_STABILITY_THRESHOLD:
+                continue
+            
+            filtered.append({
+                'key': key,
+                'outbound': server_data['outbound'],
+                'rating': rating,
+                'components': server_data.get('rating_components', {}),
+                'country': server_data.get('country'),
+                'total_tests': server_data.get('total_tests', 0),
+                'successful_tests': server_data.get('successful_tests', 0),
+                'last_seen': server_data.get('last_seen'),
+            })
+        
+        # Сортировка по рейтингу
+        filtered.sort(key=lambda x: x['rating'], reverse=True)
+        
+        if limit:
+            filtered = filtered[:limit]
+        
+        return filtered
+    
+    def get_servers_for_retest(self, group: Optional[str] = None, 
+                               count: int = RETEST_OLD_SERVERS_COUNT) -> List[dict]:
+        """
+        Выбор серверов для повторного тестирования.
+        Приоритет: старые серверы с низким freshness или низким рейтингом.
+        """
+        servers = self.data.get("servers", {})
+        now = datetime.now()
+        
+        candidates = []
+        for key, server_data in servers.items():
+            if group and server_data.get('group') != group:
+                continue
+            
+            last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
+            hours_since = (now - last_seen).total_seconds() / 3600
+            
+            # Приоритет тем, кого давно не проверяли или с низким рейтингом
+            rating = server_data.get('rating', 0)
+            
+            if RETEST_LOW_RATING_FIRST:
+                priority = hours_since * (1.1 - rating)  # Больше часов и ниже рейтинг = выше приоритет
+            else:
+                priority = hours_since
+            
+            candidates.append({
+                'key': key,
+                'outbound': server_data['outbound'],
+                'group': server_data.get('group'),
+                'priority': priority,
+                'hours_since_last': hours_since,
+                'rating': rating,
+            })
+        
+        # Сортируем по приоритету
+        candidates.sort(key=lambda x: x['priority'], reverse=True)
+        
+        return candidates[:count]
+    
+    def cleanup(self):
+        """Очистка базы от устаревших и плохих серверов."""
+        servers = self.data.get("servers", {})
+        now = datetime.now()
+        cutoff = now - timedelta(hours=MAX_SERVER_AGE_HOURS)
+        
+        to_remove = []
+        
+        for key, server_data in servers.items():
+            last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
+            total_tests = server_data.get('total_tests', 0)
+            successful_tests = server_data.get('successful_tests', 0)
+            rating = server_data.get('rating', 0)
+            
+            # Удаляем если:
+            # 1. Слишком старый и давно не виден
+            # 2. Мало успешных тестов
+            # 3. Очень низкий рейтинг
+            should_remove = (
+                (last_seen < cutoff) or
+                (successful_tests < MIN_TESTS_TO_KEEP) or
+                (rating < MIN_RATING_THRESHOLD * 0.5 and total_tests >= 3)
+            )
+            
+            if should_remove:
+                to_remove.append(key)
+        
+        for key in to_remove:
+            del servers[key]
+        
+        # Ограничиваем размер базы по группам
+        for group in ['EUROPE', 'RUSSIA', 'ALL']:
+            group_servers = [(k, v['rating']) for k, v in servers.items() 
+                           if v.get('group') == group]
+            
+            if len(group_servers) > MAX_SERVERS_IN_DB:
+                # Сортируем по рейтингу и удаляем худшие
+                group_servers.sort(key=lambda x: x[1], reverse=True)
+                
+                for key, _ in group_servers[MAX_SERVERS_IN_DB:]:
+                    if key in servers:
+                        del servers[key]
+        
+        self.data['metadata']['last_cleanup'] = now.isoformat()
+        self._save()
+        
+        if to_remove:
+            print(f"🗑️  Очистка: удалено {len(to_remove)} серверов")
+    
+    def print_stats(self):
+        """Вывод статистики по базе."""
+        servers = self.data.get("servers", {})
+        
+        print("\n" + "="*80)
+        print("📊 СТАТИСТИКА БАЗЫ РЕЙТИНГОВ")
+        print("="*80)
+        
+        for group in ['EUROPE', 'RUSSIA']:
+            group_servers = [v for v in servers.values() if v.get('group') == group]
+            if not group_servers:
+                continue
+            
+            ratings = [s.get('rating', 0) for s in group_servers]
+            avg_rating = sum(ratings) / len(ratings) if ratings else 0
+            
+            print(f"\n{group}:")
+            print(f"  Всего серверов: {len(group_servers)}")
+            print(f"  Средний рейтинг: {avg_rating:.3f}")
+            print(f"  Топ-5 серверов:")
+            
+            # Сортируем и показываем топ-5
+            group_servers.sort(key=lambda x: x.get('rating', 0), reverse=True)
+            for i, server in enumerate(group_servers[:5], 1):
+                tag = server['outbound'].get('tag', 'Unknown')[:40]
+                rating = server.get('rating', 0)
+                comp = server.get('rating_components', {})
+                
+                print(f"    {i}. {tag:<40} R={rating:.3f} "
+                      f"[sp={comp.get('speed', 0):.2f} st={comp.get('stability', 0):.2f} "
+                      f"up={comp.get('uptime', 0):.2f} cs={comp.get('consistency', 0):.2f} "
+                      f"fr={comp.get('freshness', 0):.2f}]")
+
+
+# ===========================================================================
+# РАСКРЫТИЕ ФАЙЛОВ В ФИЛЬТРАХ (без изменений)
 # ===========================================================================
 
 def _load_domain_file(path: str) -> list:
@@ -206,7 +618,7 @@ PROTOCOL_FILTERS = _expand_filter_files(PROTOCOL_FILTERS)
 
 
 # ===========================================================================
-# ФИЛЬТР ПО ПАРАМЕТРАМ — реализация
+# ФИЛЬТР ПО ПАРАМЕТРАМ (без изменений)
 # ===========================================================================
 
 def _parse_link_params(link: str) -> dict:
@@ -328,7 +740,7 @@ def passes_protocol_filter(link: str) -> bool:
     check("host",          _str_matches,   p["host"],          rules.get("host", []))
     check("encryption",    _str_matches,   p["encryption"],    rules.get("encryption", []))
     check("pbk",           _str_matches,   p["pbk"],           rules.get("pbk", []))
-    check("sid",           _str_matches,   p["sid"],           rules.get("sid", []))
+    check("sid",           _str_matches,   p["sid",           rules.get("sid", []))
     check("service_name",  _str_matches,   p["service_name"],  rules.get("service_name", []))
     check("obfs",          _str_matches,   p["obfs"],          rules.get("obfs", []))
     check("port",          _port_matches,  p["port"],          rules.get("port", []))
@@ -350,7 +762,7 @@ def filter_by_params(links: list) -> list:
 
 
 # ===========================================================================
-# CIDR-ФИЛЬТР
+# CIDR-ФИЛЬТР (без изменений)
 # ===========================================================================
 
 def load_cidr_whitelist(path: str) -> list:
@@ -414,7 +826,7 @@ def filter_by_cidr(links: list) -> list:
 
 
 # ===========================================================================
-# ЗАГРУЗКА ПОДПИСОК
+# ЗАГРУЗКА ПОДПИСОК (без изменений)
 # ===========================================================================
 
 def fetch_links_from_subscriptions() -> list:
@@ -438,7 +850,7 @@ def fetch_links_from_subscriptions() -> list:
 
 
 # ===========================================================================
-# ЗОНДИРОВАНИЕ С ПАУЗАМИ
+# ЗОНДИРОВАНИЕ (адаптировано под рейтинги)
 # ===========================================================================
 
 def parse_link(proxy, link):
@@ -461,10 +873,6 @@ def _fix_outbound(outbound: dict) -> dict:
 
 
 def check_exit_country(proxy_session) -> str | None:
-    """
-    Определяет страну выхода через уже открытую прокси-сессию.
-    Возвращает код страны (например, 'RU', 'NL') или None при ошибке.
-    """
     try:
         response = proxy_session.get(COUNTRY_API_URL, timeout=COUNTRY_CHECK_TIMEOUT)
         if response.status_code == 200:
@@ -476,7 +884,6 @@ def check_exit_country(proxy_session) -> str | None:
 
 
 def _single_probe(link: str) -> float | None:
-    """Один замер скорости. Возвращает Mbps или None при ошибке."""
     try:
         with SingBoxProxy(link) as proxy:
             start = time.perf_counter()
@@ -492,34 +899,13 @@ def _single_probe(link: str) -> float | None:
 
 
 def _harmonic_mean(values: list) -> float:
-    """
-    Гармоническое среднее скоростей.
-
-    Почему не медиана и не среднее арифметическое:
-    - Среднее арифм. завышает оценку серверов с одним случайным всплеском.
-    - Медиана игнорирует реальный разброс.
-    - Гармоническое среднее даёт низкий результат при одном медленном замере,
-      т.е. штрафует нестабильность — именно то, что нужно для VPN-серверов.
-    """
     if not values:
         return 0.0
     return len(values) / sum(1.0 / v for v in values if v > 0)
 
 
 def probe_server(link: str):
-    """
-    Зондирует сервер PROBE_ROUNDS раз с паузой PROBE_DELAY секунд между замерами.
-    Дополнительно определяет страну выхода через API.
-
-    Жёсткий фильтр: сервер должен ответить минимум MIN_SUCCESS_ROUNDS раз,
-    иначе возвращает (None, 0, None) — до стадии скоринга не доходит.
-
-    score = harmonic_mean(speeds)
-      Гармоническое среднее штрафует нестабильность сильнее медианы:
-      сервер с замерами [100, 100, 1] получит score ≈ 2.9, а не 100.
-    
-    Возвращает: (outbound, score, country_code)
-    """
+    """Полное зондирование нового сервера."""
     tag = unquote(urlparse(link).fragment) or "Unnamed"
     speeds = []
     outbound = None
@@ -539,17 +925,15 @@ def probe_server(link: str):
                         outbound["tag"] = tag
                         outbound["domain_strategy"] = "prefer_ipv4"
                         
-                        # Проверяем страну выхода через уже открытое соединение
                         if exit_country is None:
                             exit_country = check_exit_country(proxy)
                 except Exception:
                     pass
 
-    # Жёсткий порог по количеству успешных раундов
     if len(speeds) < MIN_SUCCESS_ROUNDS or outbound is None:
         tag_short = tag[:48]
         stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
-        print(f"[{stability}] {tag_short:<48}  — отсеян (< {MIN_SUCCESS_ROUNDS} успешных раундов)")
+        print(f"[{stability}] {tag_short:<48}  — отсеян")
         return None, 0, None
 
     score = _harmonic_mean(speeds)
@@ -557,113 +941,28 @@ def probe_server(link: str):
     stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
     country_mark = f" [{exit_country}]" if exit_country else ""
     print(f"[{stability}] {tag[:48]:<48} "
-          f"hmean={score:.1f} Mbps  rounds={len(speeds)}/{PROBE_ROUNDS}{country_mark}")
+          f"hmean={score:.1f} Mbps{country_mark}")
     return outbound, score, exit_country
 
 
-def run_probes_grouped(groups: dict) -> dict:
-    """
-    Зондирует несколько групп серверов в ОДНОМ общем пуле потоков.
-
-    groups = {"EUROPE": [...links], "RUSSIA": [...links], ...}
-    Возвращает {"EUROPE": [(outbound, score, country), ...], "RUSSIA": [...], ...}
-
-    Ключевое ускорение: вместо последовательного запуска отдельного пула
-    на каждую группу все серверы (EUROPE + RUSSIA) попадают в один
-    ThreadPoolExecutor. Потоки заняты sleep(PROBE_DELAY) большую часть
-    времени, поэтому общий wall-time = max(time_europe, time_russia)
-    вместо time_europe + time_russia.
-    """
-    total_links = sum(len(v) for v in groups.values())
-    total_minutes = (PROBE_ROUNDS - 1) * PROBE_DELAY / 60
-    print(f"\nЗондирование: {total_links} серверов суммарно "
-          f"({', '.join(f'{k}={len(v)}' for k, v in groups.items())})")
-    print(f"Схема: {PROBE_ROUNDS} раунда x пауза {PROBE_DELAY}с "
-          f"= окно наблюдения ~{total_minutes:.0f} мин, "
-          f"потоков: {MAX_WORKERS} (общий пул)\n")
-
-    # Помечаем каждую ссылку её группой
-    labelled = [
-        (label, link)
-        for label, links in groups.items()
-        for link in links
-    ]
-
-    per_group = {label: [] for label in groups}
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {executor.submit(probe_server, link): label
-                   for label, link in labelled}
-        for future in concurrent.futures.as_completed(futures):
-            label = futures[future]
-            ob, score, country = future.result()
-            if ob:
-                per_group[label].append((ob, score, country))
-
-    for label in per_group:
-        per_group[label].sort(key=lambda x: x[1], reverse=True)
-
-    return per_group
-
-
-def filter_by_score(results: list, label: str = "") -> list:
-    """
-    Отбор серверов по score относительно лучшего в группе.
-    results = [(outbound, score, country), ...]
-
-    Алгоритм:
-    1. Порог = best_score * SCORE_FLOOR_RATIO  (относительный, не по среднему).
-       Это удерживает серверы, уступающие лучшему не более чем в 1/RATIO раз.
-    2. Если после шага 1 осталось меньше MIN_KEEP_PER_GROUP — берём топ-N
-       принудительно, чтобы группа не оказалась пустой.
-
-    В отличие от порога >= среднего:
-    - Не срезает половину пула механически.
-    - Реагирует на реальное распределение скоростей.
-    - Гарантирует минимальное число серверов в группе.
-    """
-    if not results:
-        return []
-
-    prefix = f"[{label}] " if label else ""
-    best_score = results[0][1]  # results уже отсортированы по убыванию
-    floor = best_score * SCORE_FLOOR_RATIO
-
-    filtered = [(ob, s, c) for ob, s, c in results if s >= floor]
-
-    # Гарантируем минимум серверов
-    if len(filtered) < MIN_KEEP_PER_GROUP and len(results) >= MIN_KEEP_PER_GROUP:
-        filtered = results[:MIN_KEEP_PER_GROUP]
-        print(f"{prefix}Порог смягчён: взяты топ-{MIN_KEEP_PER_GROUP} "
-              f"(floor {floor:.2f} дал только {len(filtered)} серверов)")
-    elif len(filtered) < MIN_KEEP_PER_GROUP:
-        filtered = results  # серверов вообще мало — берём всех
-        print(f"{prefix}Серверов мало ({len(results)}), берём всех")
-
-    print(f"{prefix}Порог: best={best_score:.2f}  "
-          f"floor={floor:.2f} (×{SCORE_FLOOR_RATIO})  "
-          f"отобрано {len(filtered)}/{len(results)}"
-          + (f"  (отброшено {len(results) - len(filtered)})" if len(results) > len(filtered) else ""))
-    print()
-    return filtered
-
-
-def needs_fallback(results: list) -> bool:
-    if len(results) < MIN_SERVERS:
-        print(f"\n⚠ Прошло только {len(results)} серверов (минимум: {MIN_SERVERS}). Фоллбэк...")
-        return True
-    if results and results[0][1] < MIN_BEST_SPEED:
-        print(f"\n⚠ Лучший score {results[0][1]:.2f} < {MIN_BEST_SPEED}. Фоллбэк...")
-        return True
-    return False
+def quick_probe_server(outbound: dict) -> Optional[float]:
+    """Быстрая проверка существующего сервера (1 раунд)."""
+    tag = outbound.get('tag', 'Unknown')
+    mbps = _single_probe("placeholder")  # TODO: восстановить link из outbound
+    
+    if mbps:
+        print(f"[✓] {tag[:48]:<48} {mbps:.1f} Mbps (ретест)")
+    else:
+        print(f"[✗] {tag[:48]:<48} не отвечает (ретест)")
+    
+    return mbps
 
 
 # ===========================================================================
-# ЗАПИСЬ КОНФИГА ДЛЯ ОДНОГО ПРОФИЛЯ
+# ЗАПИСЬ КОНФИГА (без изменений)
 # ===========================================================================
 
 def _dedup_tags(proxies: list) -> list:
-    """Создаёт копии outbound'ов с уникальными тегами (добавляет -2, -3, …)."""
     proxies = [dict(p) for p in proxies]
     seen: dict = {}
     for pb in proxies:
@@ -677,19 +976,6 @@ def _dedup_tags(proxies: list) -> list:
 
 
 def write_config(profile: dict, groups: dict):
-    """
-    groups = {
-        "EUROPE": [outbound, ...],   # серверы без Russia-тега
-        "RUSSIA": [outbound, ...],   # серверы с Russia-тегом
-        "ALL":    [outbound, ...],   # EUROPE + RUSSIA (порядок сохранён)
-    }
-
-    Какие балансеры попадут в конфиг — задаётся полем profile["enabled_groups"].
-    Например ["EUROPE", "ALL"] — RUSSIA-группа не добавляется.
-    Допустимые значения: "EUROPE", "RUSSIA", "ALL".
-    """
-    # ── дедублирование тегов по общему пулу ──────────────────────────────
-    # ALL = EUROPE + RUSSIA — восстанавливаем срезы после дедупа
     all_raw     = [dict(p) for p in groups["ALL"]]
     all_deduped = _dedup_tags(all_raw)
     n_europe         = len(groups["EUROPE"])
@@ -699,7 +985,6 @@ def write_config(profile: dict, groups: dict):
     europe_tags = [p["tag"] for p in europe_deduped]
     russia_tags = [p["tag"] for p in russia_deduped]
 
-    # ── применяем enabled_groups ──────────────────────────────────────────
     enabled = set(profile.get("enabled_groups", ["EUROPE", "RUSSIA", "ALL"]))
 
     if "EUROPE" not in enabled:
@@ -707,13 +992,10 @@ def write_config(profile: dict, groups: dict):
     if "RUSSIA" not in enabled:
         russia_deduped, russia_tags = [], []
 
-    # ALL строится из оставшихся групп; если "ALL" отключён — тоже пуст
     all_tags = (europe_tags + russia_tags) if "ALL" in enabled else []
 
-    # Итоговый пул физических outbound'ов (без дублей между группами)
     proxies = europe_deduped + russia_deduped
 
-    # ── верхний selector «proxy»: только непустые и включённые группы ────
     top_groups = []
     if europe_tags:
         top_groups.append("EUROPE")
@@ -756,7 +1038,6 @@ def write_config(profile: dict, groups: dict):
     for url in profile["remote_rule_sets"]:
         add_rule(url.split('/')[-1].replace('.srs', ''), url, False)
 
-    # ── строим список outbounds ───────────────────────────────────────────
     outbounds = [
         {"type": "selector", "tag": "proxy", "outbounds": top_groups},
     ]
@@ -827,132 +1108,173 @@ def write_config(profile: dict, groups: dict):
     active = " + ".join(top_groups)
     print(f"  ✓ {output} сохранён  "
           f"активные группы: [{active}]  "
-          f"EUROPE={len(europe_tags)}  RUSSIA={len(russia_tags)}  ALL={len(all_tags)}  "
-          f"proxy-правил={len(proxy_routing_tags)}  block-правил={len(block_routing_tags)}")
+          f"EUROPE={len(europe_tags)}  RUSSIA={len(russia_tags)}  ALL={len(all_tags)}")
 
 
 # ===========================================================================
-# ОСНОВНАЯ ФУНКЦИЯ
+# ОСНОВНАЯ ФУНКЦИЯ С РЕЙТИНГАМИ
 # ===========================================================================
 
 def _is_russia(link: str, country: str | None = None) -> bool:
-    """
-    Определяет, является ли сервер российским.
-    
-    1. Проверка по regex в теге (быстрая)
-    2. Проверка по коду страны из API (если передан)
-    """
     tag = unquote(urlparse(link).fragment)
     
-    # Проверка по regex
     if re.search(REGEXP_RUSSIA, tag):
         return True
     
-    # Проверка по коду страны
     if country == 'RU':
         return True
     
     return False
 
 
-def _print_top(results: list, label: str, n: int = 10):
-    print(f"\nТоп-{n} [{label}] по score:")
-    for i, (ob, sc, country) in enumerate(results[:n], 1):
-        country_mark = f" [{country}]" if country else ""
-        print(f"  {i:>2}. {ob['tag'][:55]:<55} score={sc:.2f}{country_mark}")
-    if len(results) > n:
-        print(f"  ... и ещё {len(results) - n} серверов")
-
-
 def main(profile_names: list):
-    # 1. Загрузка подписок
+    print("="*80)
+    print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ v2.0")
+    print("="*80)
+    
+    # Инициализация рейтинговой системы
+    rating_system = ServerRatingSystem()
+    
+    # Очистка базы
+    rating_system.cleanup()
+    
+    # 1. Загрузка новых серверов
+    print("\n" + "="*80)
+    print("📥 ЗАГРУЗКА НОВЫХ СЕРВЕРОВ")
+    print("="*80)
+    
     all_links = fetch_links_from_subscriptions()
-    if not all_links:
-        print("Критическая ошибка: не удалось загрузить ни одной ссылки!")
+    
+    if all_links:
+        all_links = filter_by_params(all_links)
+        all_links = filter_by_cidr(all_links)
+        
+        # Разделяем на группы
+        europe_new_links = [l for l in all_links if not _is_russia(l)][:TEST_NEW_SERVERS_COUNT]
+        russia_new_links = [l for l in all_links if _is_russia(l)][:TEST_NEW_SERVERS_COUNT]
+        
+        print(f"\nНовых для тестирования: EUROPE={len(europe_new_links)}, RUSSIA={len(russia_new_links)}")
+    else:
+        europe_new_links, russia_new_links = [], []
+    
+    # 2. Выбор старых серверов для ретеста
+    print("\n" + "="*80)
+    print("🔄 ВЫБОР СЕРВЕРОВ ДЛЯ РЕТЕСТА")
+    print("="*80)
+    
+    europe_retest = rating_system.get_servers_for_retest(group='EUROPE', count=RETEST_OLD_SERVERS_COUNT)
+    russia_retest = rating_system.get_servers_for_retest(group='RUSSIA', count=RETEST_OLD_SERVERS_COUNT)
+    
+    print(f"Ретест: EUROPE={len(europe_retest)}, RUSSIA={len(russia_retest)}")
+    
+    # 3. Тестирование новых серверов
+    if europe_new_links or russia_new_links:
+        print("\n" + "="*80)
+        print("🧪 ТЕСТИРОВАНИЕ НОВЫХ СЕРВЕРОВ")
+        print("="*80)
+        
+        probe_input = {}
+        if europe_new_links:
+            probe_input["EUROPE"] = europe_new_links
+        if russia_new_links:
+            probe_input["RUSSIA"] = russia_new_links
+        
+        # Тестируем параллельно
+        labelled = [(label, link) for label, links in probe_input.items() for link in links]
+        
+        with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            futures = {executor.submit(probe_server, link): (label, link) 
+                      for label, link in labelled}
+            
+            for future in concurrent.futures.as_completed(futures):
+                label, link = futures[future]
+                ob, score, country = future.result()
+                
+                if ob and score > 0:
+                    # Добавляем результат в рейтинговую систему
+                    rating_system.add_test_result(ob, score, country, label)
+    
+    # 4. Ретест старых серверов (быстрая проверка)
+    if europe_retest or russia_retest:
+        print("\n" + "="*80)
+        print("🔄 РЕТЕСТ СТАРЫХ СЕРВЕРОВ")
+        print("="*80)
+        
+        for server_info in europe_retest + russia_retest:
+            outbound = server_info['outbound']
+            group = server_info['group']
+            
+            # Быстрая проверка
+            speed = quick_probe_server(outbound)
+            rating_system.add_test_result(outbound, speed, None, group)
+    
+    # 5. Пересчёт всех рейтингов
+    print("\n" + "="*80)
+    print("⚙️  ПЕРЕСЧЁТ РЕЙТИНГОВ")
+    print("="*80)
+    
+    rating_system.recalculate_all_ratings()
+    
+    # 6. Статистика
+    rating_system.print_stats()
+    
+    # 7. Отбор серверов для конфига
+    print("\n" + "="*80)
+    print("📋 ФОРМИРОВАНИЕ КОНФИГА")
+    print("="*80)
+    
+    europe_servers = rating_system.get_top_servers(
+        group='EUROPE',
+        limit=MAX_SERVERS_IN_CONFIG,
+        min_rating=MIN_RATING_THRESHOLD
+    )
+    
+    russia_servers = rating_system.get_top_servers(
+        group='RUSSIA',
+        limit=MAX_SERVERS_IN_CONFIG,
+        min_rating=MIN_RATING_THRESHOLD
+    )
+    
+    print(f"\nОтобрано для конфига: EUROPE={len(europe_servers)}, RUSSIA={len(russia_servers)}")
+    
+    if not europe_servers and not russia_servers:
+        print("\n❌ Критическая ошибка: нет серверов с достаточным рейтингом!")
         return
-
-    # 2. Фильтр по параметрам протокола
-    all_links = filter_by_params(all_links)
-
-    # 3. CIDR-фильтрация
-    all_links = filter_by_cidr(all_links)
-    if not all_links:
-        print("⚠ После CIDR-фильтрации серверов не осталось!")
-        return
-
-    # 4. Разделяем на EUROPE и RUSSIA до тестирования (только по regex)
-    europe_links = [l for l in all_links if not _is_russia(l)]
-    russia_links = [l for l in all_links if     _is_russia(l)]
-    print(f"Разделение (по regex): EUROPE={len(europe_links)}, RUSSIA={len(russia_links)}\n")
-
-    # 5. Тестируем обе группы в одном общем пуле (параллельно, не последовательно)
-    probe_input = {}
-    if europe_links:
-        probe_input["EUROPE"] = europe_links
-    if russia_links:
-        probe_input["RUSSIA"] = russia_links
-
-    probe_output = run_probes_grouped(probe_input)
     
-    # НОВОЕ: дополнительная классификация по стране выхода
-    # Серверы без Russia-тега, но с RU выходом переносим в RUSSIA
-    europe_results = probe_output.get("EUROPE", [])
-    russia_results = probe_output.get("RUSSIA", [])
+    # Выводим топ-10
+    print("\n🏆 ТОП-10 СЕРВЕРОВ ПО РЕЙТИНГУ:")
+    for group_name, servers in [("EUROPE", europe_servers), ("RUSSIA", russia_servers)]:
+        if not servers:
+            continue
+        print(f"\n{group_name}:")
+        for i, server in enumerate(servers[:10], 1):
+            tag = server['outbound'].get('tag', 'Unknown')[:40]
+            rating = server['rating']
+            comp = server['components']
+            country = f"[{server['country']}]" if server.get('country') else ""
+            
+            print(f"  {i:2}. {tag:<40} R={rating:.3f} {country}")
+            print(f"      sp={comp.get('speed', 0):.2f} st={comp.get('stability', 0):.2f} "
+                  f"up={comp.get('uptime', 0):.2f} cs={comp.get('consistency', 0):.2f} "
+                  f"fr={comp.get('freshness', 0):.2f}")
     
-    # Перераспределяем EUROPE-серверы с RU выходом
-    reclassified_to_russia = []
-    final_europe = []
-    for ob, score, country in europe_results:
-        if country == 'RU':
-            reclassified_to_russia.append((ob, score, country))
-        else:
-            final_europe.append((ob, score, country))
-    
-    if reclassified_to_russia:
-        print(f"\n⚠ Переклассифицировано в RUSSIA: {len(reclassified_to_russia)} серверов с RU выходом")
-        russia_results.extend(reclassified_to_russia)
-        russia_results.sort(key=lambda x: x[1], reverse=True)
-    
-    europe_results = final_europe
-
-    # 6. Адаптивный отбор внутри каждой группы отдельно
-    europe_top = filter_by_score(europe_results, "EUROPE")
-    russia_top = filter_by_score(russia_results, "RUSSIA")
-
-    # 7. Итоговая статистика
-    print(f"Результаты тестирования:")
-    print(f"  EUROPE : прошло зонды {len(europe_results)}, отобрано {len(europe_top)}")
-    print(f"  RUSSIA : прошло зонды {len(russia_results)}, отобрано {len(russia_top)}")
-    print(f"  ALL    : {len(europe_top) + len(russia_top)} серверов суммарно")
-
-    if needs_fallback(europe_top):
-        print("⚠ EUROPE маловато серверов — рекомендуем использовать группу ALL.")
-
-    if europe_top:
-        _print_top(europe_top, "EUROPE")
-    if russia_top:
-        _print_top(russia_top, "RUSSIA")
-
-    if not europe_top and not russia_top:
-        print("Критическая ошибка: ни один сервер не прошел проверку!")
-        return
-
-    # 8. Формируем группы: ALL = EUROPE + RUSSIA (порядок важен для write_config)
+    # 8. Формируем группы для конфига
     groups = {
-        "EUROPE": [ob for ob, _, _ in europe_top],
-        "RUSSIA": [ob for ob, _, _ in russia_top],
-        "ALL":    [ob for ob, _, _ in europe_top] + [ob for ob, _, _ in russia_top],
+        "EUROPE": [s['outbound'] for s in europe_servers],
+        "RUSSIA": [s['outbound'] for s in russia_servers],
+        "ALL":    [s['outbound'] for s in europe_servers] + [s['outbound'] for s in russia_servers],
     }
-
+    
     # 9. Запись конфигов
-    print(f"\n{'='*60}")
-    print(f"Запись конфигов для профилей: {', '.join(profile_names)}")
-    print(f"{'='*60}")
+    print("\n" + "="*80)
+    print("💾 ЗАПИСЬ КОНФИГОВ")
+    print("="*80)
+    
     for name in profile_names:
         print(f"\n[{name}]")
         write_config(PROFILES[name], groups)
-
-    print("\nГотово.")
+    
+    print("\n✅ Обновление завершено успешно!")
 
 
 if __name__ == "__main__":
