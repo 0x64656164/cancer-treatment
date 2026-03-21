@@ -20,33 +20,33 @@ from typing import Dict, List, Tuple, Optional
 SERVERS_DB_FILE = 'servers_ratings.json'
 
 # Веса компонентов рейтинга (сумма должна быть 1.0)
-# UPTIME в приоритете для серверов с коротким временем жизни
+# UPTIME в приоритете, но FRESHNESS тоже важен для быстро умирающих серверов
 RATING_WEIGHTS = {
-    'speed':       0.25,   # Скорость соединения
-    'stability':   0.20,   # Стабильность (% успешных проверок)
+    'speed':       0.20,   # Скорость соединения (было 0.25)
+    'stability':   0.15,   # Стабильность (было 0.20)
     'uptime':      0.40,   # Время жизни сервера (ВЫСОКИЙ ПРИОРИТЕТ)
-    'consistency': 0.10,   # Постоянство скорости (низкая дисперсия)
-    'freshness':   0.05,   # Бонус за недавнюю активность
+    'consistency': 0.10,   # Постоянство скорости
+    'freshness':   0.15,   # Бонус за недавнюю активность (УВЕЛИЧЕН с 0.05)
 }
 
 # Параметры рейтинговой системы
-RATING_MIN_TESTS = 3              # Минимум тестов для полного рейтинга
-RATING_DECAY_HOURS = 24           # Период полураспада freshness бонуса
-RATING_STABILITY_THRESHOLD = 0.6  # Минимальная стабильность для сохранения
+RATING_MIN_TESTS = 2              # Минимум тестов для полного рейтинга (было 3)
+RATING_DECAY_HOURS = 12           # Период полураспада freshness бонуса (было 24 - теперь быстрее)
+RATING_STABILITY_THRESHOLD = 0.3  # Минимальная стабильность для сохранения (было 0.6 - СЛИШКОМ СТРОГО)
 
 # Параметры отбора серверов
 TOP_SERVERS_PERCENT = 0.7         # Топ 70% по рейтингу попадают в конфиг
-MIN_RATING_THRESHOLD = 0.3        # Минимальный рейтинг для включения (0-1)
+MIN_RATING_THRESHOLD = 0.15       # Минимальный рейтинг для включения (было 0.3 - СЛИШКОМ СТРОГО)
 MAX_SERVERS_IN_CONFIG = 30        # Максимум серверов в конфиге на группу
 
 # Параметры очистки базы
-MAX_SERVER_AGE_HOURS = 120        # Удаление через 5 дней без активности
-MIN_TESTS_TO_KEEP = 2             # Минимум успешных тестов для сохранения
-MAX_SERVERS_IN_DB = 100           # Максимум серверов в базе на группу
+MAX_SERVER_AGE_HOURS = 168        # Удаление через 7 дней без активности (было 120 = 5 дней)
+MIN_TESTS_TO_KEEP = 1             # Минимум успешных тестов для сохранения (было 2 - СТРОГО)
+MAX_SERVERS_IN_DB = 150           # Максимум серверов в базе на группу (было 100 - увеличили пул)
 
 # Параметры тестирования
-TEST_NEW_SERVERS_COUNT = 20       # Сколько новых серверов тестировать за раз
-RETEST_OLD_SERVERS_COUNT = 10     # Сколько старых ретестировать за раз
+TEST_NEW_SERVERS_COUNT = 40       # Сколько новых серверов тестировать за раз (было 20 - МАЛО)
+RETEST_OLD_SERVERS_COUNT = 20     # Сколько старых ретестировать за раз (было 10 - МАЛО)
 RETEST_LOW_RATING_FIRST = True    # Приоритет ретеста серверам с низким рейтингом
 
 # ---------------------------------------------------------------------------
@@ -108,7 +108,7 @@ PROBE_DELAY  = 60
 PROBE_URL    = 'https://cachefly.cachefly.net/10mb.test'
 TIMEOUT      = 8
 
-MIN_SUCCESS_ROUNDS  = 2
+MIN_SUCCESS_ROUNDS  = 1     # из PROBE_ROUNDS=3 нужно пройти минимум 1 (было 2 - строго для нестабильных)
 SCORE_FLOOR_RATIO   = 0.25
 MIN_KEEP_PER_GROUP  = 5
 
@@ -435,6 +435,37 @@ class ServerRatingSystem:
         
         # Сортировка по рейтингу
         filtered.sort(key=lambda x: x['rating'], reverse=True)
+        
+        # FALLBACK: если серверов слишком мало, смягчаем критерии
+        if len(filtered) < MIN_SERVERS and group:
+            print(f"⚠️  [{group}] Мало серверов ({len(filtered)}), смягчаем критерии...")
+            
+            # Пробуем без проверки стабильности
+            filtered_relaxed = []
+            for key, server_data in servers.items():
+                if group and server_data.get('group') != group:
+                    continue
+                
+                rating = server_data.get('rating', 0)
+                if rating < min_rating * 0.5:  # Вдвое мягче
+                    continue
+                
+                filtered_relaxed.append({
+                    'key': key,
+                    'outbound': server_data['outbound'],
+                    'rating': rating,
+                    'components': server_data.get('rating_components', {}),
+                    'country': server_data.get('country'),
+                    'total_tests': server_data.get('total_tests', 0),
+                    'successful_tests': server_data.get('successful_tests', 0),
+                    'last_seen': server_data.get('last_seen'),
+                })
+            
+            filtered_relaxed.sort(key=lambda x: x['rating'], reverse=True)
+            
+            if len(filtered_relaxed) > len(filtered):
+                print(f"✓ Найдено {len(filtered_relaxed)} серверов с мягкими критериями")
+                filtered = filtered_relaxed
         
         if limit:
             filtered = filtered[:limit]
