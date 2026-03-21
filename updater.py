@@ -740,7 +740,7 @@ def passes_protocol_filter(link: str) -> bool:
     check("host",          _str_matches,   p["host"],          rules.get("host", []))
     check("encryption",    _str_matches,   p["encryption"],    rules.get("encryption", []))
     check("pbk",           _str_matches,   p["pbk"],           rules.get("pbk", []))
-    check("sid",           _str_matches,   p["sid",           rules.get("sid", []))
+    check("sid",           _str_matches,   p["sid"],           rules.get("sid", []))
     check("service_name",  _str_matches,   p["service_name"],  rules.get("service_name", []))
     check("obfs",          _str_matches,   p["obfs"],          rules.get("obfs", []))
     check("port",          _port_matches,  p["port"],          rules.get("port", []))
