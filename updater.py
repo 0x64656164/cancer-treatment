@@ -266,9 +266,12 @@ class ServerRatingSystem:
         # 2. STABILITY - процент успешных проверок
         components['stability'] = successful_tests / max(total_tests, 1)
         
-        # 3. UPTIME - время жизни сервера (логарифмическая шкала с приоритетом долгожителям)
-        uptime_hours = (last_seen - first_seen).total_seconds() / 3600
-        # Новая шкала с приоритетом uptime:
+        # 3. UPTIME - время жизни сервера (от первого появления до СЕЙЧАС)
+        # Важно: считаем от first_seen до NOW, а не до last_seen
+        # Это позволяет накапливать uptime даже если сервер временно недоступен
+        uptime_hours = (now - first_seen).total_seconds() / 3600
+        
+        # Агрессивная шкала с приоритетом долгожителям:
         # 15 мин (0.25ч) = 0.05
         # 30 мин (0.5ч)  = 0.15
         # 1 час          = 0.35
@@ -317,9 +320,16 @@ class ServerRatingSystem:
         return rating, components
     
     def add_test_result(self, outbound: dict, speed: Optional[float], 
-                       country: Optional[str], group: str) -> bool:
+                       country: Optional[str], group: str, link: Optional[str] = None) -> bool:
         """
         Добавление результата теста.
+        
+        Args:
+            outbound: Конфигурация сервера
+            speed: Скорость (Mbps) или None при провале
+            country: Код страны выхода
+            group: Группа сервера (EUROPE/RUSSIA)
+            link: Оригинальный link (vless://, vmess://, и т.д.)
         
         Returns:
             True если тест успешен, False если провален
@@ -333,6 +343,7 @@ class ServerRatingSystem:
             # Новый сервер
             servers[key] = {
                 'outbound': outbound,
+                'link': link,  # Сохраняем оригинальный link
                 'group': group,
                 'country': country,
                 'first_seen': now,
@@ -346,6 +357,10 @@ class ServerRatingSystem:
         
         server = servers[key]
         server['total_tests'] += 1
+        
+        # Обновляем link если передан (может обновиться при изменении параметров)
+        if link:
+            server['link'] = link
         
         if speed is not None and speed > 0:
             # Успешный тест
@@ -425,6 +440,7 @@ class ServerRatingSystem:
             filtered.append({
                 'key': key,
                 'outbound': server_data['outbound'],
+                'link': server_data.get('link'),  # Добавляем link
                 'rating': rating,
                 'components': server_data.get('rating_components', {}),
                 'country': server_data.get('country'),
@@ -453,6 +469,7 @@ class ServerRatingSystem:
                 filtered_relaxed.append({
                     'key': key,
                     'outbound': server_data['outbound'],
+                    'link': server_data.get('link'),  # Добавляем link
                     'rating': rating,
                     'components': server_data.get('rating_components', {}),
                     'country': server_data.get('country'),
@@ -500,6 +517,7 @@ class ServerRatingSystem:
             candidates.append({
                 'key': key,
                 'outbound': server_data['outbound'],
+                'link': server_data.get('link'),  # Добавляем link для ретеста
                 'group': server_data.get('group'),
                 'priority': priority,
                 'hours_since_last': hours_since,
@@ -936,7 +954,12 @@ def _harmonic_mean(values: list) -> float:
 
 
 def probe_server(link: str):
-    """Полное зондирование нового сервера."""
+    """
+    Полное зондирование нового сервера.
+    
+    Проверка страны выхода выполняется ОДИН РАЗ при первом успешном раунде.
+    Если первый раунд не прошёл, страна не определяется.
+    """
     tag = unquote(urlparse(link).fragment) or "Unnamed"
     speeds = []
     outbound = None
@@ -949,17 +972,23 @@ def probe_server(link: str):
         mbps = _single_probe(link)
         if mbps is not None:
             speeds.append(mbps)
-            if outbound is None:
+            
+            # Определяем страну выхода при ЛЮБОМ успешном раунде, не только первом
+            if outbound is None or exit_country is None:
                 try:
                     with SingBoxProxy(link) as proxy:
-                        outbound = _fix_outbound(parse_link(proxy, link))
-                        outbound["tag"] = tag
-                        outbound["domain_strategy"] = "prefer_ipv4"
+                        if outbound is None:
+                            outbound = _fix_outbound(parse_link(proxy, link))
+                            outbound["tag"] = tag
+                            outbound["domain_strategy"] = "prefer_ipv4"
                         
+                        # Проверяем страну если ещё не определили
                         if exit_country is None:
                             exit_country = check_exit_country(proxy)
-                except Exception:
-                    pass
+                            if exit_country:
+                                print(f"  → Определена страна: {exit_country}")
+                except Exception as e:
+                    print(f"  ⚠️  Ошибка определения страны: {e}")
 
     if len(speeds) < MIN_SUCCESS_ROUNDS or outbound is None:
         tag_short = tag[:48]
@@ -970,16 +999,27 @@ def probe_server(link: str):
     score = _harmonic_mean(speeds)
 
     stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
-    country_mark = f" [{exit_country}]" if exit_country else ""
+    country_mark = f" [{exit_country}]" if exit_country else " [??]"
     print(f"[{stability}] {tag[:48]:<48} "
           f"hmean={score:.1f} Mbps{country_mark}")
     return outbound, score, exit_country
 
 
-def quick_probe_server(outbound: dict) -> Optional[float]:
-    """Быстрая проверка существующего сервера (1 раунд)."""
+def quick_probe_server(outbound: dict, link: str = None) -> Optional[float]:
+    """
+    Быстрая проверка существующего сервера (1 раунд).
+    
+    Если link не передан, пропускаем проверку (невозможно восстановить из outbound).
+    """
     tag = outbound.get('tag', 'Unknown')
-    mbps = _single_probe("placeholder")  # TODO: восстановить link из outbound
+    
+    if not link:
+        # Без исходного link невозможно провести тест
+        # TODO: реализовать восстановление link из outbound
+        print(f"[⊘] {tag[:48]:<48} пропущен (нет link)")
+        return None
+    
+    mbps = _single_probe(link)
     
     if mbps:
         print(f"[✓] {tag[:48]:<48} {mbps:.1f} Mbps (ретест)")
@@ -1160,7 +1200,7 @@ def _is_russia(link: str, country: str | None = None) -> bool:
 
 def main(profile_names: list):
     print("="*80)
-    print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ v2.0")
+    print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ")
     print("="*80)
     
     # Инициализация рейтинговой системы
@@ -1222,8 +1262,13 @@ def main(profile_names: list):
                 ob, score, country = future.result()
                 
                 if ob and score > 0:
-                    # Добавляем результат в рейтинговую систему
-                    rating_system.add_test_result(ob, score, country, label)
+                    # Реклассификация: если сервер помечен как EUROPE, но выход через RU
+                    if label == 'EUROPE' and country == 'RU':
+                        print(f"  ⚠️  Переклассификация в RUSSIA: {ob['tag'][:50]} [RU]")
+                        label = 'RUSSIA'
+                    
+                    # Добавляем результат в рейтинговую систему (передаём link)
+                    rating_system.add_test_result(ob, score, country, label, link=link)
     
     # 4. Ретест старых серверов (быстрая проверка)
     if europe_retest or russia_retest:
@@ -1233,11 +1278,12 @@ def main(profile_names: list):
         
         for server_info in europe_retest + russia_retest:
             outbound = server_info['outbound']
+            link = server_info.get('link')
             group = server_info['group']
             
             # Быстрая проверка
-            speed = quick_probe_server(outbound)
-            rating_system.add_test_result(outbound, speed, None, group)
+            speed = quick_probe_server(outbound, link)
+            rating_system.add_test_result(outbound, speed, None, group, link=link)
     
     # 5. Пересчёт всех рейтингов
     print("\n" + "="*80)
