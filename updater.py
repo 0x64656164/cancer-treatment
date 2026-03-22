@@ -105,7 +105,7 @@ MIN_BEST_SPEED = 1.5
 MAX_WORKERS    = 64
 
 PROBE_ROUNDS = 3
-PROBE_DELAY  = 60
+PROBE_DELAY  = 30
 PROBE_URL    = 'https://cachefly.cachefly.net/10mb.test'
 CONN_TIMEOUT = 3
 READ_TIMEOUT = 8
