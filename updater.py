@@ -159,7 +159,7 @@ PROTOCOL_FILTERS = {
         "logic":         "AND",
         "transport":     [],
         "security":      [],
-        "sni":           ["domain_whitelist.txt"],
+        "sni":           [],
         "port":          [],
         "obfs":          [],
         "obfs_password": [],
