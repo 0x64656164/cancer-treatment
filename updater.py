@@ -106,7 +106,8 @@ MAX_WORKERS    = 64
 PROBE_ROUNDS = 3
 PROBE_DELAY  = 60
 PROBE_URL    = 'https://cachefly.cachefly.net/10mb.test'
-TIMEOUT      = 8
+CONN_TIMEOUT = 3
+READ_TIMEOUT = 8
 
 MIN_SUCCESS_ROUNDS  = 1     # из PROBE_ROUNDS=3 нужно пройти минимум 1 (было 2 - строго для нестабильных)
 SCORE_FLOOR_RATIO   = 0.25
@@ -936,7 +937,7 @@ def _single_probe(link: str) -> float | None:
     try:
         with SingBoxProxy(link) as proxy:
             start = time.perf_counter()
-            r = proxy.get(PROBE_URL, timeout=TIMEOUT, stream=True)
+            r = proxy.get(PROBE_URL, timeout=(CONN_TIMEOUT, READ_TIMEOUT), stream=True)
             if r.status_code == 200:
                 total = sum(len(c) for c in r.iter_content(chunk_size=8192) if c)
                 duration = time.perf_counter() - start
