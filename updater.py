@@ -90,7 +90,8 @@ PROFILES = {
 SUB_LINKS = [
     'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt',
     'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt',
-    'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt'
+    'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt',
+    'https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/3.txt'
 ]
 CIDR_WHITELIST_FILE = 'cidr_whitelist2.txt'
 
