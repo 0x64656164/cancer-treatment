@@ -18,22 +18,6 @@ from typing import Dict, List, Tuple, Optional
 # СИСТЕМА РЕЙТИНГА
 # ---------------------------------------------------------------------------
 SERVERS_DB_FILE = 'servers_ratings.json'
-COUNTRIES_FILE = 'countries.json'
-
-# Загрузка названий стран
-def load_countries():
-    """Загрузка названий стран из countries.json"""
-    if not os.path.exists(COUNTRIES_FILE):
-        print(f"⚠ Файл {COUNTRIES_FILE} не найден, используются ISO-коды")
-        return {}
-    try:
-        with open(COUNTRIES_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"⚠ Ошибка загрузки {COUNTRIES_FILE}: {e}")
-        return {}
-
-COUNTRIES = load_countries()
 
 # Веса компонентов рейтинга (сумма должна быть 1.0)
 # UPTIME в приоритете, но FRESHNESS тоже важен для быстро умирающих серверов
@@ -181,57 +165,6 @@ PROTOCOL_FILTERS = {
         "obfs_password": [],
     },
 }
-
-
-# ===========================================================================
-# ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ РАБОТЫ СО СТРАНАМИ
-# ===========================================================================
-
-def get_country_name(country_code: Optional[str]) -> str:
-    """
-    Получить название страны по ISO-коду.
-    
-    Args:
-        country_code: ISO-код страны (например, 'RU', 'DE')
-    
-    Returns:
-        Название страны или 'Unknown' если код не найден
-    """
-    if not country_code:
-        return "Unknown"
-    
-    return COUNTRIES.get(country_code.upper(), country_code.upper())
-
-
-def generate_server_tag(country_code: Optional[str], server_number: int) -> str:
-    """
-    Генерация тега сервера на основе страны и номера.
-    
-    Args:
-        country_code: ISO-код страны
-        server_number: Порядковый номер сервера
-    
-    Returns:
-        Тег в формате "CountryName #N"
-    """
-    country_name = get_country_name(country_code)
-    return f"{country_name} #{server_number}"
-
-
-def determine_group_by_country(country_code: Optional[str]) -> str:
-    """
-    Определение группы сервера по коду страны.
-    
-    Args:
-        country_code: ISO-код страны
-    
-    Returns:
-        'RUSSIA' если RU, иначе 'EUROPE'
-    """
-    if not country_code:
-        return 'EUROPE'  # По умолчанию неопределенные идут в EUROPE
-    
-    return 'RUSSIA' if country_code.upper() == 'RU' else 'EUROPE'
 
 
 # ===========================================================================
@@ -412,7 +345,7 @@ class ServerRatingSystem:
             # Новый сервер
             servers[key] = {
                 'outbound': outbound,
-                'link': link,
+                'link': link,  # Сохраняем оригинальный link
                 'group': group,
                 'country': country,
                 'first_seen': now,
@@ -427,7 +360,7 @@ class ServerRatingSystem:
         server = servers[key]
         server['total_tests'] += 1
         
-        # Обновляем link если передан
+        # Обновляем link если передан (может обновиться при изменении параметров)
         if link:
             server['link'] = link
         
@@ -435,16 +368,7 @@ class ServerRatingSystem:
             # Успешный тест
             server['successful_tests'] += 1
             server['last_seen'] = now
-            
-            # Обновляем страну и группу на основе актуальных данных
-            if country:
-                server['country'] = country
-                # Автоматическое переназначение группы на основе страны
-                new_group = determine_group_by_country(country)
-                if server['group'] != new_group:
-                    print(f"  🔄 Переназначение группы: {server['group']} → {new_group} "
-                          f"для {outbound.get('tag', 'Unknown')[:50]} [{country}]")
-                    server['group'] = new_group
+            server['country'] = country or server.get('country')
             
             # Обновляем историю скоростей (храним последние 10)
             speed_history = server.get('speed_history', [])
@@ -518,7 +442,7 @@ class ServerRatingSystem:
             filtered.append({
                 'key': key,
                 'outbound': server_data['outbound'],
-                'link': server_data.get('link'),
+                'link': server_data.get('link'),  # Добавляем link
                 'rating': rating,
                 'components': server_data.get('rating_components', {}),
                 'country': server_data.get('country'),
@@ -547,7 +471,7 @@ class ServerRatingSystem:
                 filtered_relaxed.append({
                     'key': key,
                     'outbound': server_data['outbound'],
-                    'link': server_data.get('link'),
+                    'link': server_data.get('link'),  # Добавляем link
                     'rating': rating,
                     'components': server_data.get('rating_components', {}),
                     'country': server_data.get('country'),
@@ -595,7 +519,7 @@ class ServerRatingSystem:
             candidates.append({
                 'key': key,
                 'outbound': server_data['outbound'],
-                'link': server_data.get('link'),
+                'link': server_data.get('link'),  # Добавляем link для ретеста
                 'group': server_data.get('group'),
                 'priority': priority,
                 'hours_since_last': hours_since,
@@ -1111,13 +1035,28 @@ def quick_probe_server(outbound: dict, link: str = None) -> Optional[float]:
 # ЗАПИСЬ КОНФИГА (без изменений)
 # ===========================================================================
 
-def write_config(profile: dict, groups: dict):
-    # Серверы уже переименованы в rename_servers_by_country, дедупликация не нужна
-    europe_proxies = [dict(p) for p in groups["EUROPE"]]
-    russia_proxies = [dict(p) for p in groups["RUSSIA"]]
+def _dedup_tags(proxies: list) -> list:
+    proxies = [dict(p) for p in proxies]
+    seen: dict = {}
+    for pb in proxies:
+        t = pb["tag"]
+        if t in seen:
+            seen[t] += 1
+            pb["tag"] = f"{t}-{seen[t]}"
+        else:
+            seen[t] = 0
+    return proxies
 
-    europe_tags = [p["tag"] for p in europe_proxies]
-    russia_tags = [p["tag"] for p in russia_proxies]
+
+def write_config(profile: dict, groups: dict):
+    all_raw     = [dict(p) for p in groups["ALL"]]
+    all_deduped = _dedup_tags(all_raw)
+    n_europe         = len(groups["EUROPE"])
+    europe_deduped   = all_deduped[:n_europe]
+    russia_deduped   = all_deduped[n_europe:]
+
+    europe_tags = [p["tag"] for p in europe_deduped]
+    russia_tags = [p["tag"] for p in russia_deduped]
 
     enabled = set(profile.get("enabled_groups", ["EUROPE", "RUSSIA", "ALL"]))
 
@@ -1128,7 +1067,7 @@ def write_config(profile: dict, groups: dict):
 
     all_tags = (europe_tags + russia_tags) if "ALL" in enabled else []
 
-    proxies = europe_proxies + russia_proxies
+    proxies = europe_deduped + russia_deduped
 
     top_groups = []
     if europe_tags:
@@ -1261,38 +1200,9 @@ def _is_russia(link: str, country: str | None = None) -> bool:
     return False
 
 
-def rename_servers_by_country(servers: List[dict]) -> List[dict]:
-    """
-    Переименование серверов по странам с добавлением порядковых номеров.
-    
-    Args:
-        servers: Список серверов с outbound и country
-    
-    Returns:
-        Обновленный список серверов с новыми тегами
-    """
-    # Группируем серверы по странам
-    country_groups = {}
-    for server in servers:
-        country = server.get('country', 'Unknown')
-        if country not in country_groups:
-            country_groups[country] = []
-        country_groups[country].append(server)
-    
-    # Переименовываем каждую группу
-    renamed_servers = []
-    for country, country_servers in country_groups.items():
-        for i, server in enumerate(country_servers, 1):
-            new_tag = generate_server_tag(country, i)
-            server['outbound']['tag'] = new_tag
-            renamed_servers.append(server)
-    
-    return renamed_servers
-
-
 def main(profile_names: list):
     print("="*80)
-    print("🎯 ОБНОВЛЕНИЕ КОНФИГУРАЦИИ НАЧАТО")
+    print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ")
     print("="*80)
     
     # Инициализация рейтинговой системы
@@ -1354,15 +1264,13 @@ def main(profile_names: list):
                 ob, score, country = future.result()
                 
                 if ob and score > 0:
-                    # Определяем правильную группу на основе страны
-                    correct_group = determine_group_by_country(country)
+                    # Реклассификация: если сервер помечен как EUROPE, но выход через RU
+                    if label == 'EUROPE' and country == 'RU':
+                        print(f"  ⚠️  Переклассификация в RUSSIA: {ob['tag'][:50]} [RU]")
+                        label = 'RUSSIA'
                     
-                    if label != correct_group:
-                        print(f"  🔄 Переклассификация: {label} → {correct_group} "
-                              f"для {ob['tag'][:50]} [{country}]")
-                    
-                    # Добавляем результат в рейтинговую систему с правильной группой
-                    rating_system.add_test_result(ob, score, country, correct_group, link=link)
+                    # Добавляем результат в рейтинговую систему (передаём link)
+                    rating_system.add_test_result(ob, score, country, label, link=link)
     
     # 4. Ретест старых серверов (быстрая проверка)
     if europe_retest or russia_retest:
@@ -1377,8 +1285,6 @@ def main(profile_names: list):
             
             # Быстрая проверка
             speed = quick_probe_server(outbound, link)
-            
-            # При ретесте страна может не определяться, сохраняем существующую
             rating_system.add_test_result(outbound, speed, None, group, link=link)
     
     # 5. Пересчёт всех рейтингов
@@ -1414,17 +1320,9 @@ def main(profile_names: list):
         print("\n❌ Критическая ошибка: нет серверов с достаточным рейтингом!")
         return
     
-    # 8. Переименование серверов по странам
-    print("\n" + "="*80)
-    print("🏷️  ПЕРЕИМЕНОВАНИЕ СЕРВЕРОВ ПО СТРАНАМ")
-    print("="*80)
-    
-    europe_servers_renamed = rename_servers_by_country(europe_servers)
-    russia_servers_renamed = rename_servers_by_country(russia_servers)
-    
-    # Выводим топ-10 с новыми именами
+    # Выводим топ-10
     print("\n🏆 ТОП-10 СЕРВЕРОВ ПО РЕЙТИНГУ:")
-    for group_name, servers in [("EUROPE", europe_servers_renamed), ("RUSSIA", russia_servers_renamed)]:
+    for group_name, servers in [("EUROPE", europe_servers), ("RUSSIA", russia_servers)]:
         if not servers:
             continue
         print(f"\n{group_name}:")
@@ -1439,14 +1337,14 @@ def main(profile_names: list):
                   f"up={comp.get('uptime', 0):.2f} cs={comp.get('consistency', 0):.2f} "
                   f"fr={comp.get('freshness', 0):.2f}")
     
-    # 9. Формируем группы для конфига
+    # 8. Формируем группы для конфига
     groups = {
-        "EUROPE": [s['outbound'] for s in europe_servers_renamed],
-        "RUSSIA": [s['outbound'] for s in russia_servers_renamed],
-        "ALL":    [s['outbound'] for s in europe_servers_renamed] + [s['outbound'] for s in russia_servers_renamed],
+        "EUROPE": [s['outbound'] for s in europe_servers],
+        "RUSSIA": [s['outbound'] for s in russia_servers],
+        "ALL":    [s['outbound'] for s in europe_servers] + [s['outbound'] for s in russia_servers],
     }
     
-    # 10. Запись конфигов
+    # 9. Запись конфигов
     print("\n" + "="*80)
     print("💾 ЗАПИСЬ КОНФИГОВ")
     print("="*80)
