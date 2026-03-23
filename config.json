@@ -62,8 +62,8 @@
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-3",
         "🇸🇪 Sweden [*CIDR] VK",
-        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-3",
         "🇩🇪 Germany [*CIDR] VK",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-3",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-4",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-4",
         "🇩🇪 Germany [*CIDR] VK-1",
@@ -98,8 +98,8 @@
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-3",
         "🇸🇪 Sweden [*CIDR] VK",
-        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-3",
         "🇩🇪 Germany [*CIDR] VK",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-3",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-4",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-4",
         "🇩🇪 Germany [*CIDR] VK-1",
@@ -421,28 +421,6 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK-3",
-      "server": "212.111.84.22",
-      "server_port": 443,
-      "uuid": "7a99c653-7627-4f26-b8d7-6cb31ff4d019",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "vklive.enotfast.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "CGOMSAFIwnQdt2HQ3yTZr608Dc_fhjjIenocbiCYZWk",
-          "short_id": "12b4bc71293e01"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
       "tag": "🇩🇪 Germany [*CIDR] VK",
       "server": "146.185.242.210",
       "server_port": 8443,
@@ -455,6 +433,28 @@
           "enabled": true,
           "public_key": "3MQ8keneMeXCznwXalfPuzwPM3bR7gIoA5Hvow2KKj0",
           "short_id": "0123456789abcdef"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK-3",
+      "server": "212.111.84.22",
+      "server_port": 443,
+      "uuid": "7a99c653-7627-4f26-b8d7-6cb31ff4d019",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "vklive.enotfast.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "CGOMSAFIwnQdt2HQ3yTZr608Dc_fhjjIenocbiCYZWk",
+          "short_id": "12b4bc71293e01"
         },
         "utls": {
           "enabled": true,
