@@ -64,9 +64,9 @@
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-3",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-3",
+        "🇸🇪 Sweden [*CIDR] VK",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-4",
         "🇩🇪 Germany [*CIDR] VK",
-        "🇸🇪 Sweden [*CIDR] VK",
         "🇸🇪 Sweden [*CIDR] VK-1",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-5",
         "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
@@ -100,9 +100,9 @@
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-3",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-3",
+        "🇸🇪 Sweden [*CIDR] VK",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-4",
         "🇩🇪 Germany [*CIDR] VK",
-        "🇸🇪 Sweden [*CIDR] VK",
         "🇸🇪 Sweden [*CIDR] VK-1",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-5",
         "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
@@ -423,6 +423,28 @@
     },
     {
       "type": "vless",
+      "tag": "🇸🇪 Sweden [*CIDR] VK",
+      "server": "lx1.melodramaonline.net",
+      "server_port": 443,
+      "uuid": "7e0a9f75-b424-493b-b7e6-cebd7ea8642d",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "5bGFIWSo4vlrd9Tv1yFcpdpSjrjYYN20SOWHYfighHc",
+          "short_id": "a1b2c3d4a1b2c3d4"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
       "tag": "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-4",
       "server": "5.188.141.186",
       "server_port": 443,
@@ -457,28 +479,6 @@
           "enabled": true,
           "public_key": "3MQ8keneMeXCznwXalfPuzwPM3bR7gIoA5Hvow2KKj0",
           "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🇸🇪 Sweden [*CIDR] VK",
-      "server": "lx1.melodramaonline.net",
-      "server_port": 443,
-      "uuid": "7e0a9f75-b424-493b-b7e6-cebd7ea8642d",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "5bGFIWSo4vlrd9Tv1yFcpdpSjrjYYN20SOWHYfighHc",
-          "short_id": "a1b2c3d4a1b2c3d4"
         },
         "utls": {
           "enabled": true,
@@ -635,9 +635,9 @@
     {
       "type": "vless",
       "tag": "🇩🇪 Germany [*CIDR] VK-2",
-      "server": "cdn-ru-cf.barryvpn.com",
+      "server": "89.208.86.199",
       "server_port": 8443,
-      "uuid": "3d737761-5951-462e-86c1-ff921d9f9999",
+      "uuid": "6cabb434-f480-478a-9586-a5667167eeb1",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
@@ -657,9 +657,9 @@
     {
       "type": "vless",
       "tag": "🇩🇪 Germany [*CIDR] VK-3",
-      "server": "89.208.86.199",
+      "server": "cdn-ru-cf.barryvpn.com",
       "server_port": 8443,
-      "uuid": "6cabb434-f480-478a-9586-a5667167eeb1",
+      "uuid": "3d737761-5951-462e-86c1-ff921d9f9999",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
