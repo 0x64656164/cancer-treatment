@@ -50,7 +50,7 @@ RETEST_OLD_SERVERS_COUNT = 20     # Сколько старых ретестир
 RETEST_LOW_RATING_FIRST = True    # Приоритет ретеста серверам с низким рейтингом
 
 # ОПТИМИЗИРОВАННЫЕ НАСТРОЙКИ (как в index.html)
-MAX_NEW_SERVERS_TO_TEST = 100      # Максимум новых серверов для тестирования
+MAX_NEW_SERVERS_TO_TEST = 5000      # Максимум новых серверов для тестирования
 MAX_WORKERS_FAST = 64              # Количество параллельных потоков
 FAST_MODE_THRESHOLD = 50           # Порог для включения быстрого режима
 MIN_WORKING_SERVERS_FAST = 10      # Минимальное количество рабочих серверов
