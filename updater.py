@@ -49,6 +49,12 @@ TEST_NEW_SERVERS_COUNT = 40       # Сколько новых серверов �
 RETEST_OLD_SERVERS_COUNT = 20     # Сколько старых ретестировать за раз (было 10 - МАЛО)
 RETEST_LOW_RATING_FIRST = True    # Приоритет ретеста серверам с низким рейтингом
 
+# ОПТИМИЗИРОВАННЫЕ НАСТРОЙКИ (как в index.html)
+MAX_NEW_SERVERS_TO_TEST = 100      # Максимум новых серверов для тестирования
+MAX_WORKERS_FAST = 64              # Количество параллельных потоков
+FAST_MODE_THRESHOLD = 50           # Порог для включения быстрого режима
+MIN_WORKING_SERVERS_FAST = 10      # Минимальное количество рабочих серверов
+
 # ---------------------------------------------------------------------------
 # ПРОФИЛИ ВЫВОДА
 # ---------------------------------------------------------------------------
@@ -92,12 +98,7 @@ SUB_LINKS = [
     'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt',
     'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt',
     'https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/3.txt',
-    #'https://raw.githubusercontent.com/RYZgames31/UWB/refs/heads/main/wcfg',
-    #'https://raw.githubusercontent.com/55prosek-lgtm/vpn_config_for_russia/refs/heads/main/whitelist.txt',
     'https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt',
-    #'https://raw.githubusercontent.com/vsevjik/OBSpiskov/refs/heads/main/wwh',
-    #'https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass-unsecure/bypass-unsecure-all.txt',
-    #'https://raw.githubusercontent.com/LowiKLive/BypassWhitelistRu/refs/heads/main/WhiteList-Bypass_Ru.txt',
     'https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt'
 ]
 CIDR_WHITELIST_FILE = 'cidr_whitelist2.txt'
@@ -659,7 +660,7 @@ class ServerRatingSystem:
 
 
 # ===========================================================================
-# РАСКРЫТИЕ ФАЙЛОВ В ФИЛЬТРАХ (без изменений)
+# РАСКРЫТИЕ ФАЙЛОВ В ФИЛЬТРАХ
 # ===========================================================================
 
 def _load_domain_file(path: str) -> list:
@@ -713,7 +714,7 @@ PROTOCOL_FILTERS = _expand_filter_files(PROTOCOL_FILTERS)
 
 
 # ===========================================================================
-# ФИЛЬТР ПО ПАРАМЕТРАМ (без изменений)
+# ФИЛЬТР ПО ПАРАМЕТРАМ
 # ===========================================================================
 
 def _parse_link_params(link: str) -> dict:
@@ -857,7 +858,7 @@ def filter_by_params(links: list) -> list:
 
 
 # ===========================================================================
-# CIDR-ФИЛЬТР (без изменений)
+# CIDR-ФИЛЬТР
 # ===========================================================================
 
 def load_cidr_whitelist(path: str) -> list:
@@ -921,7 +922,7 @@ def filter_by_cidr(links: list) -> list:
 
 
 # ===========================================================================
-# ЗАГРУЗКА ПОДПИСОК (без изменений)
+# ЗАГРУЗКА ПОДПИСОК
 # ===========================================================================
 
 def fetch_links_from_subscriptions() -> list:
@@ -1081,7 +1082,213 @@ def quick_probe_server(outbound: dict, link: str = None) -> Optional[float]:
 
 
 # ===========================================================================
-# ЗАПИСЬ КОНФИГА (без изменений)
+# БЫСТРОЕ ЗОНДИРОВАНИЕ (как в index.html)
+# ===========================================================================
+
+def _quick_single_probe(link: str, timeout: int = 3) -> float | None:
+    """
+    БЫСТРАЯ ОДНОРАУНДОВАЯ ПРОВЕРКА для ретеста
+    """
+    try:
+        with SingBoxProxy(link) as proxy:
+            adapter = requests.adapters.HTTPAdapter(max_retries=0)
+            proxy.mount("https://", adapter)
+            proxy.mount("http://", adapter)
+            
+            start = time.perf_counter()
+            r = proxy.get(PROBE_URL, timeout=(timeout, timeout), stream=True)
+            
+            if r.status_code == 200:
+                total = sum(len(c) for c in r.iter_content(chunk_size=8192) if c)
+                duration = time.perf_counter() - start
+                
+                if duration > 0 and total > 0:
+                    return (total * 8) / (duration * 1_000_000)
+    except Exception:
+        pass
+    
+    return None
+
+
+def quick_probe_single(link: str, timeout: int = 3) -> Tuple[Optional[float], Optional[str], Optional[dict]]:
+    """
+    БЫСТРАЯ ОДНОРАУНДОВАЯ ПРОВЕРКА (как в index.html)
+    Возвращает (скорость, страна, outbound) или (None, None, None)
+    """
+    tag = unquote(urlparse(link).fragment) or "Unnamed"
+    
+    try:
+        with SingBoxProxy(link) as proxy:
+            adapter = requests.adapters.HTTPAdapter(max_retries=0)
+            proxy.mount("https://", adapter)
+            proxy.mount("http://", adapter)
+            
+            start = time.perf_counter()
+            r = proxy.get(PROBE_URL, timeout=(timeout, timeout), stream=True)
+            
+            if r.status_code == 200:
+                total = sum(len(c) for c in r.iter_content(chunk_size=8192) if c)
+                duration = time.perf_counter() - start
+                
+                if duration > 0 and total > 0:
+                    speed = (total * 8) / (duration * 1_000_000)
+                    
+                    # Парсим outbound
+                    outbound = _fix_outbound(parse_link(proxy, link))
+                    outbound["tag"] = tag
+                    outbound["domain_strategy"] = "prefer_ipv4"
+                    
+                    # Определяем страну
+                    exit_country = check_exit_country(proxy)
+                    
+                    return speed, exit_country, outbound
+    except Exception as e:
+        pass
+    
+    return None, None, None
+
+
+def test_servers_batch_parallel(links: List[str], group: str, max_workers: int = MAX_WORKERS_FAST) -> List[dict]:
+    """
+    ПАРАЛЛЕЛЬНОЕ ТЕСТИРОВАНИЕ ПАЧКИ СЕРВЕРОВ (как в index.html)
+    """
+    results = []
+    total = len(links)
+    completed = 0
+    
+    print(f"  → Тестируем {total} серверов ({group}) параллельно...")
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(quick_probe_single, link): link for link in links}
+        
+        for future in concurrent.futures.as_completed(futures):
+            completed += 1
+            link = futures[future]
+            
+            try:
+                speed, country, outbound = future.result(timeout=10)
+                
+                if speed is not None and outbound is not None:
+                    # Определяем финальную группу
+                    final_group = group
+                    if group == 'EUROPE' and country == 'RU':
+                        final_group = 'RUSSIA'
+                    elif group == 'RUSSIA' and country and country != 'RU':
+                        final_group = 'EUROPE'
+                    
+                    results.append({
+                        'outbound': outbound,
+                        'speed': speed,
+                        'country': country,
+                        'group': final_group,
+                        'link': link,
+                        'tag': outbound.get('tag', 'Unknown')
+                    })
+                    
+                    # Прогресс
+                    if completed % 10 == 0 or completed == total:
+                        print(f"    [{completed}/{total}] Найдено {len(results)} рабочих")
+            
+            except Exception as e:
+                if completed % 20 == 0:
+                    print(f"    [{completed}/{total}] Ошибка: {str(e)[:50]}")
+    
+    return results
+
+
+def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem) -> Dict[str, List[dict]]:
+    """
+    УМНЫЙ ПОИСК СЕРВЕРОВ (аналог логики из index.html)
+    
+    Особенности:
+    1. Приоритет новых серверов
+    2. Ограничение на количество тестируемых
+    3. Параллельная проверка
+    4. Минимальное количество рабочих
+    """
+    
+    # Разделяем по группам
+    europe_candidates = [l for l in all_links if not _is_russia(l)]
+    russia_candidates = [l for l in all_links if _is_russia(l)]
+    
+    print(f"\n📊 Кандидатов для тестирования:")
+    print(f"  EUROPE: {len(europe_candidates)}")
+    print(f"  RUSSIA: {len(russia_candidates)}")
+    
+    # Ограничиваем количество для тестирования (быстрый режим)
+    use_fast_mode = len(europe_candidates) + len(russia_candidates) > FAST_MODE_THRESHOLD
+    
+    if use_fast_mode:
+        # Быстрый режим - тестируем ограниченное количество
+        max_per_group = MAX_NEW_SERVERS_TO_TEST // 2
+        europe_candidates = europe_candidates[:max_per_group]
+        russia_candidates = russia_candidates[:max_per_group]
+        print(f"\n⚡ БЫСТРЫЙ РЕЖИМ: тестируем максимум {MAX_NEW_SERVERS_TO_TEST} серверов")
+        print(f"  EUROPE: {len(europe_candidates)}")
+        print(f"  RUSSIA: {len(russia_candidates)}")
+    else:
+        print(f"\n📋 ОБЫЧНЫЙ РЕЖИМ: тестируем все серверы")
+    
+    found_servers = {"EUROPE": [], "RUSSIA": []}
+    
+    # Тестируем европейские серверы
+    if europe_candidates:
+        print(f"\n🌍 ТЕСТИРОВАНИЕ EUROPE ({len(europe_candidates)} серверов)")
+        europe_results = test_servers_batch_parallel(europe_candidates, "EUROPE")
+        
+        for result in europe_results:
+            found_servers[result['group']].append(result)
+            
+            # Добавляем в рейтинг систему
+            rating_system.add_test_result(
+                result['outbound'], 
+                result['speed'], 
+                result['country'], 
+                result['group'],
+                link=result['link']
+            )
+        
+        print(f"  ✓ Найдено рабочих EUROPE: {len([r for r in europe_results if r['group'] == 'EUROPE'])}")
+        print(f"  ✓ Найдено рабочих RUSSIA (переклассифицировано): {len([r for r in europe_results if r['group'] == 'RUSSIA'])}")
+    
+    # Тестируем российские серверы
+    if russia_candidates:
+        print(f"\n🇷🇺 ТЕСТИРОВАНИЕ RUSSIA ({len(russia_candidates)} серверов)")
+        russia_results = test_servers_batch_parallel(russia_candidates, "RUSSIA")
+        
+        for result in russia_results:
+            found_servers[result['group']].append(result)
+            
+            rating_system.add_test_result(
+                result['outbound'], 
+                result['speed'], 
+                result['country'], 
+                result['group'],
+                link=result['link']
+            )
+        
+        print(f"  ✓ Найдено рабочих RUSSIA: {len([r for r in russia_results if r['group'] == 'RUSSIA'])}")
+        print(f"  ✓ Найдено рабочих EUROPE (переклассифицировано): {len([r for r in russia_results if r['group'] == 'EUROPE'])}")
+    
+    # Статистика
+    print(f"\n📈 ИТОГО НАЙДЕНО РАБОЧИХ:")
+    print(f"  EUROPE: {len(found_servers['EUROPE'])}")
+    print(f"  RUSSIA: {len(found_servers['RUSSIA'])}")
+    
+    # Если мало рабочих серверов - пробуем добавить больше кандидатов
+    if len(found_servers['EUROPE']) < MIN_WORKING_SERVERS_FAST and not use_fast_mode:
+        print(f"\n⚠️  Мало рабочих EUROPE ({len(found_servers['EUROPE'])} < {MIN_WORKING_SERVERS_FAST})")
+        print("  Рекомендуется увеличить MAX_NEW_SERVERS_TO_TEST")
+    
+    if len(found_servers['RUSSIA']) < MIN_WORKING_SERVERS_FAST and not use_fast_mode:
+        print(f"\n⚠️  Мало рабочих RUSSIA ({len(found_servers['RUSSIA'])} < {MIN_WORKING_SERVERS_FAST})")
+        print("  Рекомендуется увеличить MAX_NEW_SERVERS_TO_TEST")
+    
+    return found_servers
+
+
+# ===========================================================================
+# ЗАПИСЬ КОНФИГА
 # ===========================================================================
 
 def _dedup_tags(proxies: list) -> list:
@@ -1234,7 +1441,7 @@ def write_config(profile: dict, groups: dict):
 
 
 # ===========================================================================
-# ОСНОВНАЯ ФУНКЦИЯ С РЕЙТИНГАМИ
+# ОСНОВНАЯ ФУНКЦИЯ
 # ===========================================================================
 
 def _is_russia(link: str, country: str | None = None) -> bool:
@@ -1251,7 +1458,7 @@ def _is_russia(link: str, country: str | None = None) -> bool:
 
 def main(profile_names: list):
     print("="*80)
-    print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ")
+    print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ (УМНЫЙ ПОИСК)")
     print("="*80)
     
     # Инициализация рейтинговой системы
@@ -1271,13 +1478,10 @@ def main(profile_names: list):
         all_links = filter_by_params(all_links)
         all_links = filter_by_cidr(all_links)
         
-        # Разделяем на группы
-        europe_new_links = [l for l in all_links if not _is_russia(l)][:TEST_NEW_SERVERS_COUNT]
-        russia_new_links = [l for l in all_links if _is_russia(l)][:TEST_NEW_SERVERS_COUNT]
-        
-        print(f"\nНовых для тестирования: EUROPE={len(europe_new_links)}, RUSSIA={len(russia_new_links)}")
+        print(f"\n✅ После фильтрации: {len(all_links)} серверов")
     else:
-        europe_new_links, russia_new_links = [], []
+        print("❌ Не удалось загрузить серверы")
+        return
     
     # 2. Выбор старых серверов для ретеста
     print("\n" + "="*80)
@@ -1289,65 +1493,62 @@ def main(profile_names: list):
     
     print(f"Ретест: EUROPE={len(europe_retest)}, RUSSIA={len(russia_retest)}")
     
-    # 3. Тестирование новых серверов до нахождения рабочих
+    # 3. УМНЫЙ ПОИСК НОВЫХ СЕРВЕРОВ (как в index.html)
     print("\n" + "="*80)
-    print("🧪 ЦИКЛИЧЕСКОЕ ТЕСТИРОВАНИЕ НОВЫХ СЕРВЕРОВ")
+    print("🧠 УМНЫЙ ПОИСК НОВЫХ СЕРВЕРОВ")
     print("="*80)
     
-    needed_new = 15  # Сколько МИНИМУМ рабочих новых серверов мы хотим найти для каждой группы
-    found_counts = {"EUROPE": 0, "RUSSIA": 0}
+    found_servers = smart_server_search(all_links, rating_system)
     
-    # Разделяем все найденные ссылки по потенциальным группам
-    pending_links = {
-        "EUROPE": [l for l in all_links if not _is_russia(l)],
-        "RUSSIA": [l for l in all_links if _is_russia(l)]
-    }
-
-    while (found_counts["EUROPE"] < needed_new and pending_links["EUROPE"]) or \
-          (found_counts["RUSSIA"] < needed_new and pending_links["RUSSIA"]):
-        
-        batch = []
-        # Набираем пачку для параллельной проверки (например, 20 штук)
-        for g in ["EUROPE", "RUSSIA"]:
-            if found_counts[g] < needed_new:
-                to_add = pending_links[g][:10]
-                batch.extend([(g, l) for l in to_add])
-                pending_links[g] = pending_links[g][10:]
-        
-        if not batch: break
-
-        print(f"--- Тестируем пачку {len(batch)} серверов... ---")
-        with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-            futures = {executor.submit(probe_server, l): (g, l) for g, l in batch}
-            for future in concurrent.futures.as_completed(futures):
-                label, link = futures[future]
-                ob, score, country = future.result()
-                
-                if ob and score > 0:
-                    # Переклассификация по факту теста
-                    actual_label = label
-                    if label == 'EUROPE' and country == 'RU': actual_label = 'RUSSIA'
-                    elif label == 'RUSSIA' and country and country != 'RU': actual_label = 'EUROPE'
-                    
-                    rating_system.add_test_result(ob, score, country, actual_label, link=link)
-                    found_counts[actual_label] += 1
-        
-        print(f"Промежуточный итог: EUROPE +{found_counts['EUROPE']}, RUSSIA +{found_counts['RUSSIA']}")
-        
-    # 4. Ретест старых серверов (быстрая проверка)
+    # 4. Ретест старых серверов
     if europe_retest or russia_retest:
         print("\n" + "="*80)
         print("🔄 РЕТЕСТ СТАРЫХ СЕРВЕРОВ")
         print("="*80)
+        
+        # Объединяем старые серверы для ретеста
+        old_servers_to_test = []
         
         for server_info in europe_retest + russia_retest:
             outbound = server_info['outbound']
             link = server_info.get('link')
             group = server_info['group']
             
-            # Быстрая проверка
-            speed = quick_probe_server(outbound, link)
-            rating_system.add_test_result(outbound, speed, None, group, link=link)
+            if link:
+                old_servers_to_test.append({
+                    'outbound': outbound,
+                    'link': link,
+                    'group': group,
+                    'tag': outbound.get('tag', 'Unknown')
+                })
+        
+        if old_servers_to_test:
+            print(f"  → Ретестируем {len(old_servers_to_test)} старых серверов...")
+            
+            # Параллельный ретест старых серверов
+            with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS_FAST) as executor:
+                futures = {}
+                for server in old_servers_to_test:
+                    future = executor.submit(_quick_single_probe, server['link'], CONN_TIMEOUT)
+                    futures[future] = server
+                
+                for future in concurrent.futures.as_completed(futures):
+                    server = futures[future]
+                    try:
+                        speed = future.result(timeout=10)
+                        rating_system.add_test_result(
+                            server['outbound'], 
+                            speed, 
+                            None, 
+                            server['group'],
+                            link=server['link']
+                        )
+                        if speed:
+                            print(f"    ✓ {server['tag'][:40]} - {speed:.1f} Mbps")
+                        else:
+                            print(f"    ✗ {server['tag'][:40]} - не отвечает")
+                    except Exception as e:
+                        print(f"    ⚠️ {server['tag'][:40]} - ошибка: {str(e)[:50]}")
     
     # 5. Пересчёт всех рейтингов
     print("\n" + "="*80)
