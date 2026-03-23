@@ -1289,40 +1289,51 @@ def main(profile_names: list):
     
     print(f"Ретест: EUROPE={len(europe_retest)}, RUSSIA={len(russia_retest)}")
     
-    # 3. Тестирование новых серверов
-    if europe_new_links or russia_new_links:
-        print("\n" + "="*80)
-        print("🧪 ТЕСТИРОВАНИЕ НОВЫХ СЕРВЕРОВ")
-        print("="*80)
+    # 3. Тестирование новых серверов до нахождения рабочих
+    print("\n" + "="*80)
+    print("🧪 ЦИКЛИЧЕСКОЕ ТЕСТИРОВАНИЕ НОВЫХ СЕРВЕРОВ")
+    print("="*80)
+    
+    needed_new = 15  # Сколько МИНИМУМ рабочих новых серверов мы хотим найти для каждой группы
+    found_counts = {"EUROPE": 0, "RUSSIA": 0}
+    
+    # Разделяем все найденные ссылки по потенциальным группам
+    pending_links = {
+        "EUROPE": [l for l in all_links if not _is_russia(l)],
+        "RUSSIA": [l for l in all_links if _is_russia(l)]
+    }
+
+    while (found_counts["EUROPE"] < needed_new and pending_links["EUROPE"]) or \
+          (found_counts["RUSSIA"] < needed_new and pending_links["RUSSIA"]):
         
-        probe_input = {}
-        if europe_new_links:
-            probe_input["EUROPE"] = europe_new_links
-        if russia_new_links:
-            probe_input["RUSSIA"] = russia_new_links
+        batch = []
+        # Набираем пачку для параллельной проверки (например, 20 штук)
+        for g in ["EUROPE", "RUSSIA"]:
+            if found_counts[g] < needed_new:
+                to_add = pending_links[g][:10]
+                batch.extend([(g, l) for l in to_add])
+                pending_links[g] = pending_links[g][10:]
         
-        # Тестируем параллельно
-        labelled = [(label, link) for label, links in probe_input.items() for link in links]
-        
+        if not batch: break
+
+        print(f"--- Тестируем пачку {len(batch)} серверов... ---")
         with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-            futures = {executor.submit(probe_server, link): (label, link) 
-                      for label, link in labelled}
-            
+            futures = {executor.submit(probe_server, l): (g, l) for g, l in batch}
             for future in concurrent.futures.as_completed(futures):
                 label, link = futures[future]
                 ob, score, country = future.result()
                 
                 if ob and score > 0:
-                    # Логика переклассификации в обе стороны
-                    if label == 'EUROPE' and country == 'RU':
-                        print(f"  ⚠️  Перенос в RUSSIA: {ob['tag'][:40]} [RU Exit]")
-                        label = 'RUSSIA'
-                    elif label == 'RUSSIA' and country and country != 'RU':
-                        print(f"  ⚠️  Перенос в EUROPE: {ob['tag'][:40]} [{country} Exit]")
-                        label = 'EUROPE'
+                    # Переклассификация по факту теста
+                    actual_label = label
+                    if label == 'EUROPE' and country == 'RU': actual_label = 'RUSSIA'
+                    elif label == 'RUSSIA' and country and country != 'RU': actual_label = 'EUROPE'
                     
-                    rating_system.add_test_result(ob, score, country, label, link=link)
-                    
+                    rating_system.add_test_result(ob, score, country, actual_label, link=link)
+                    found_counts[actual_label] += 1
+        
+        print(f"Промежуточный итог: EUROPE +{found_counts['EUROPE']}, RUSSIA +{found_counts['RUSSIA']}")
+        
     # 4. Ретест старых серверов (быстрая проверка)
     if europe_retest or russia_retest:
         print("\n" + "="*80)
