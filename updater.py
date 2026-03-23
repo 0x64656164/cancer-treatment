@@ -7,7 +7,6 @@ import ipaddress
 import socket
 import base64
 import sys
-import traceback
 import concurrent.futures
 from urllib.parse import urlparse, unquote, parse_qs
 from base import SingBoxProxy
@@ -32,7 +31,7 @@ RATING_WEIGHTS = {
 
 # Параметры рейтинговой системы
 RATING_MIN_TESTS = 2              # Минимум тестов для полного рейтинга (было 3)
-RATING_DECAY_HOURS = 12           # Период полураспада freshness бонуса (было 24 - теперь быстрее)
+RATING_DECAY_HOURS = 6           # Период полураспада freshness бонуса (было 24 - теперь быстрее)
 RATING_STABILITY_THRESHOLD = 0.3  # Минимальная стабильность для сохранения (было 0.6 - СЛИШКОМ СТРОГО)
 
 # Параметры отбора серверов
@@ -41,7 +40,7 @@ MIN_RATING_THRESHOLD = 0.15       # Минимальный рейтинг для
 MAX_SERVERS_IN_CONFIG = 30        # Максимум серверов в конфиге на группу
 
 # Параметры очистки базы
-MAX_SERVER_AGE_HOURS = 168        # Удаление через 7 дней без активности (было 120 = 5 дней)
+MAX_SERVER_AGE_HOURS = 48        # Удаление через 2 дня без активности (было 120 = 5 дней)
 MIN_TESTS_TO_KEEP = 1             # Минимум успешных тестов для сохранения (было 2 - СТРОГО)
 MAX_SERVERS_IN_DB = 150           # Максимум серверов в базе на группу (было 100 - увеличили пул)
 
@@ -53,7 +52,7 @@ RETEST_LOW_RATING_FIRST = True    # Приоритет ретеста серве
 # ОПТИМИЗИРОВАННЫЕ НАСТРОЙКИ (как в index.html)
 MAX_NEW_SERVERS_TO_TEST = 5000      # Максимум новых серверов для тестирования
 MAX_WORKERS_FAST = 64              # Количество параллельных потоков
-FAST_MODE_THRESHOLD = 50           # Порог для включения быстрого режима
+FAST_MODE_THRESHOLD = 500           # Порог для включения быстрого режима
 MIN_WORKING_SERVERS_FAST = 10      # Минимальное количество рабочих серверов
 
 # ---------------------------------------------------------------------------
@@ -981,13 +980,12 @@ def check_exit_country(proxy_session) -> str | None:
 
 
 def _single_probe(link: str) -> float | None:
+    """
+    Одиночная проверка скорости через SingBoxProxy
+    """
     try:
         with SingBoxProxy(link) as proxy:
-            # Устанавливаем ограничение на 1 попытку (0 повторов)
-            adapter = requests.adapters.HTTPAdapter(max_retries=0)
-            proxy.mount("https://", adapter)
-            proxy.mount("http://", adapter)
-            
+            # SingBoxProxy уже является настроенным requests.Session
             start = time.perf_counter()
             r = proxy.get(PROBE_URL, timeout=(CONN_TIMEOUT, READ_TIMEOUT), stream=True)
             if r.status_code == 200:
@@ -995,8 +993,7 @@ def _single_probe(link: str) -> float | None:
                 duration = time.perf_counter() - start
                 if duration > 0 and total > 0:
                     return (total * 8) / (duration * 1_000_000)
-    except Exception as e:
-        print(traceback.format_exc())
+    except Exception:
         pass
     return None
 
@@ -1069,7 +1066,6 @@ def quick_probe_server(outbound: dict, link: str = None) -> Optional[float]:
     
     if not link:
         # Без исходного link невозможно провести тест
-        # TODO: реализовать восстановление link из outbound
         print(f"[⊘] {tag[:48]:<48} пропущен (нет link)")
         return None
     
@@ -1093,10 +1089,6 @@ def _quick_single_probe(link: str, timeout: int = 3) -> float | None:
     """
     try:
         with SingBoxProxy(link) as proxy:
-            adapter = requests.adapters.HTTPAdapter(max_retries=0)
-            proxy.mount("https://", adapter)
-            proxy.mount("http://", adapter)
-            
             start = time.perf_counter()
             r = proxy.get(PROBE_URL, timeout=(timeout, timeout), stream=True)
             
@@ -1121,10 +1113,6 @@ def quick_probe_single(link: str, timeout: int = 3) -> Tuple[Optional[float], Op
     
     try:
         with SingBoxProxy(link) as proxy:
-            adapter = requests.adapters.HTTPAdapter(max_retries=0)
-            proxy.mount("https://", adapter)
-            proxy.mount("http://", adapter)
-            
             start = time.perf_counter()
             r = proxy.get(PROBE_URL, timeout=(timeout, timeout), stream=True)
             
@@ -1143,9 +1131,14 @@ def quick_probe_single(link: str, timeout: int = 3) -> Tuple[Optional[float], Op
                     # Определяем страну
                     exit_country = check_exit_country(proxy)
                     
+                    # Логирование успешного теста
+                    country_mark = f" [{exit_country}]" if exit_country else " [??]"
+                    print(f"[✓] {tag[:48]:<48} {speed:.1f} Mbps{country_mark}")
+                    
                     return speed, exit_country, outbound
     except Exception as e:
-        print(traceback.format_exc())
+        # Логирование ошибки
+        print(f"[✗] {tag[:48]:<48} ошибка: {str(e)[:50]}")
         pass
     
     return None, None, None
@@ -1159,7 +1152,8 @@ def test_servers_batch_parallel(links: List[str], group: str, max_workers: int =
     total = len(links)
     completed = 0
     
-    print(f"  → Тестируем {total} серверов ({group}) параллельно...")
+    print(f"\n  → Тестируем {total} серверов ({group}) параллельно...")
+    print("  " + "-" * 70)
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = {executor.submit(quick_probe_single, link): link for link in links}
@@ -1169,15 +1163,17 @@ def test_servers_batch_parallel(links: List[str], group: str, max_workers: int =
             link = futures[future]
             
             try:
-                speed, country, outbound = future.result(timeout=10)
+                speed, country, outbound = future.result(timeout=30)
                 
                 if speed is not None and outbound is not None:
                     # Определяем финальную группу
                     final_group = group
                     if group == 'EUROPE' and country == 'RU':
                         final_group = 'RUSSIA'
+                        print(f"    🔄 Переклассифицирован в RUSSIA (страна {country})")
                     elif group == 'RUSSIA' and country and country != 'RU':
                         final_group = 'EUROPE'
+                        print(f"    🔄 Переклассифицирован в EUROPE (страна {country})")
                     
                     results.append({
                         'outbound': outbound,
@@ -1189,13 +1185,16 @@ def test_servers_batch_parallel(links: List[str], group: str, max_workers: int =
                     })
                     
                     # Прогресс
-                    if completed % 10 == 0 or completed == total:
-                        print(f"    [{completed}/{total}] Найдено {len(results)} рабочих")
+                    if completed % 5 == 0 or completed == total:
+                        print(f"    📊 Прогресс: [{completed}/{total}] Найдено рабочих: {len(results)}")
             
             except Exception as e:
+                tag = unquote(urlparse(link).fragment) or "Unknown"
+                print(f"    ⚠️ Ошибка при тестировании {tag[:40]}: {str(e)[:50]}")
                 if completed % 20 == 0:
-                    print(f"    [{completed}/{total}] Ошибка: {str(e)[:50]}")
+                    print(f"    📊 Прогресс: [{completed}/{total}] (с ошибками)")
     
+    print("  " + "-" * 70)
     return results
 
 
@@ -1251,7 +1250,7 @@ def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem)
                 link=result['link']
             )
         
-        print(f"  ✓ Найдено рабочих EUROPE: {len([r for r in europe_results if r['group'] == 'EUROPE'])}")
+        print(f"\n  ✓ Найдено рабочих EUROPE: {len([r for r in europe_results if r['group'] == 'EUROPE'])}")
         print(f"  ✓ Найдено рабочих RUSSIA (переклассифицировано): {len([r for r in europe_results if r['group'] == 'RUSSIA'])}")
     
     # Тестируем российские серверы
@@ -1270,7 +1269,7 @@ def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem)
                 link=result['link']
             )
         
-        print(f"  ✓ Найдено рабочих RUSSIA: {len([r for r in russia_results if r['group'] == 'RUSSIA'])}")
+        print(f"\n  ✓ Найдено рабочих RUSSIA: {len([r for r in russia_results if r['group'] == 'RUSSIA'])}")
         print(f"  ✓ Найдено рабочих EUROPE (переклассифицировано): {len([r for r in russia_results if r['group'] == 'EUROPE'])}")
     
     # Статистика
