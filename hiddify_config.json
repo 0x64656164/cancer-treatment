@@ -50,8 +50,8 @@
       "outbounds": [
         "EUROPE-auto",
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK-1",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK-1",
         "🇩🇪 Germany | 🌐 [*CIDR] VK",
         "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK",
@@ -86,8 +86,8 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK-1",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK-1",
         "🇩🇪 Germany | 🌐 [*CIDR] VK",
         "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK",
@@ -151,6 +151,19 @@
     },
     {
       "type": "vless",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+      "server": "89.208.231.198",
+      "server_port": 443,
+      "uuid": "e928d85d-f223-0bb8-a1d2-a56e9fbd50e0",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "anti-vpn.ru"
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
       "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
       "server": "185.130.112.31",
       "server_port": 443,
@@ -168,19 +181,6 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
-      "server": "89.208.231.198",
-      "server_port": 443,
-      "uuid": "e928d85d-f223-0bb8-a1d2-a56e9fbd50e0",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "anti-vpn.ru"
       },
       "domain_strategy": "prefer_ipv4"
     },
@@ -494,28 +494,6 @@
     {
       "type": "vless",
       "tag": "🇩🇪 Germany [*CIDR] VK-1",
-      "server": "cdn-ru-cf.barryvpn.com",
-      "server_port": 8443,
-      "uuid": "834f0646-8b24-42a0-8203-e5145474113f",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "5post-gate-test.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "3MQ8keneMeXCznwXalfPuzwPM3bR7gIoA5Hvow2KKj0",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK-2",
       "server": "89.208.86.199",
       "server_port": 8443,
       "uuid": "6cabb434-f480-478a-9586-a5667167eeb1",
@@ -527,6 +505,28 @@
           "enabled": true,
           "public_key": "3MQ8keneMeXCznwXalfPuzwPM3bR7gIoA5Hvow2KKj0",
           "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany [*CIDR] VK-2",
+      "server": "cdn-ru-cf.barryvpn.com",
+      "server_port": 8443,
+      "uuid": "834f0646-8b24-42a0-8203-e5145474113f",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "5post-gate-test.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "3MQ8keneMeXCznwXalfPuzwPM3bR7gIoA5Hvow2KKj0",
+          "short_id": "0123456789abcdef"
         },
         "utls": {
           "enabled": true,
