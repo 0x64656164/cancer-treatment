@@ -59,8 +59,8 @@
         "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK-1",
         "[OpenRay] 🇷🇺 RU-13874",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-1",
-        "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-2",
         "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK-2",
+        "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-2",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-3",
         "🇸🇪 Sweden [*CIDR] VK",
@@ -95,8 +95,8 @@
         "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK-1",
         "[OpenRay] 🇷🇺 RU-13874",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-1",
-        "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-2",
         "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK-2",
+        "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-2",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2",
         "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-3",
         "🇸🇪 Sweden [*CIDR] VK",
@@ -331,19 +331,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-2",
-      "server": "89.208.230.145",
-      "server_port": 443,
-      "uuid": "e928d85d-f223-0bb8-a1d2-a56e9fbd50e0",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "anti-vpn.ru"
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
       "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK-2",
       "server": "217.16.31.38",
       "server_port": 8081,
@@ -361,6 +348,19 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK-2",
+      "server": "89.208.230.145",
+      "server_port": 443,
+      "uuid": "e928d85d-f223-0bb8-a1d2-a56e9fbd50e0",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "anti-vpn.ru"
       },
       "domain_strategy": "prefer_ipv4"
     },
