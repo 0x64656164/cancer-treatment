@@ -50,9 +50,9 @@ RETEST_OLD_SERVERS_COUNT = 20     # Сколько старых ретестир
 RETEST_LOW_RATING_FIRST = True    # Приоритет ретеста серверам с низким рейтингом
 
 # ОПТИМИЗИРОВАННЫЕ НАСТРОЙКИ (как в index.html)
-MAX_NEW_SERVERS_TO_TEST = 5000      # Максимум новых серверов для тестирования
+MAX_NEW_SERVERS_TO_TEST = 1000      # Максимум новых серверов для тестирования
 MAX_WORKERS_FAST = 64              # Количество параллельных потоков
-FAST_MODE_THRESHOLD = 500           # Порог для включения быстрого режима
+FAST_MODE_THRESHOLD = 300           # Порог для включения быстрого режима
 MIN_WORKING_SERVERS_FAST = 10      # Минимальное количество рабочих серверов
 
 # ---------------------------------------------------------------------------
@@ -98,8 +98,8 @@ SUB_LINKS = [
     'https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt',
     'https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt',
     'https://raw.githubusercontent.com/nikita29a/FreeProxyList/refs/heads/main/mirror/3.txt',
-    'https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt',
-    'https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt'
+    #'https://raw.githubusercontent.com/FLEXIY0/matryoshka-vpn/main/configs/russia_whitelist.txt',
+    #'https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt'
 ]
 CIDR_WHITELIST_FILE = 'cidr_whitelist2.txt'
 
@@ -1237,9 +1237,15 @@ def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem)
     4. Минимальное количество рабочих
     """
     
+    enabled_groups = _get_enabled_groups()
+    europe_candidates = []
+    russia_candidates = []
+    
     # Разделяем по группам
-    europe_candidates = [l for l in all_links if not _is_russia(l)]
-    russia_candidates = [l for l in all_links if _is_russia(l)]
+    if 'EUROPE' in enabled_groups:
+        europe_candidates = [l for l in all_links if not _is_russia(l)]
+    if 'RUSSIA' in enabled_groups:
+        russia_candidates = [l for l in all_links if _is_russia(l)]
     
     print(f"\n📊 Кандидатов для тестирования:")
     print(f"  EUROPE: {len(europe_candidates)}")
@@ -1332,7 +1338,13 @@ def _dedup_tags(proxies: list) -> list:
         else:
             seen[t] = 0
     return proxies
+    
 
+def _get_enabled_groups():
+    enabled = set()
+    for profile in PROFILES.values():
+        enabled.update(set(profile.get("enabled_groups", ["EUROPE", "RUSSIA", "ALL"])))
+    return enabled
 
 def write_config(profile: dict, groups: dict):
     all_raw     = [dict(p) for p in groups["ALL"]]
