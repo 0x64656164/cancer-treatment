@@ -944,6 +944,11 @@ def check_exit_country(proxy_session) -> str | None:
 def _single_probe(link: str) -> float | None:
     try:
         with SingBoxProxy(link) as proxy:
+            # Устанавливаем ограничение на 1 попытку (0 повторов)
+            adapter = requests.adapters.HTTPAdapter(max_retries=0)
+            proxy.mount("https://", adapter)
+            proxy.mount("http://", adapter)
+            
             start = time.perf_counter()
             r = proxy.get(PROBE_URL, timeout=(CONN_TIMEOUT, READ_TIMEOUT), stream=True)
             if r.status_code == 200:
@@ -1271,14 +1276,16 @@ def main(profile_names: list):
                 ob, score, country = future.result()
                 
                 if ob and score > 0:
-                    # Реклассификация: если сервер помечен как EUROPE, но выход через RU
+                    # Логика переклассификации в обе стороны
                     if label == 'EUROPE' and country == 'RU':
-                        print(f"  ⚠️  Переклассификация в RUSSIA: {ob['tag'][:50]} [RU]")
+                        print(f"  ⚠️  Перенос в RUSSIA: {ob['tag'][:40]} [RU Exit]")
                         label = 'RUSSIA'
+                    elif label == 'RUSSIA' and country and country != 'RU':
+                        print(f"  ⚠️  Перенос в EUROPE: {ob['tag'][:40]} [{country} Exit]")
+                        label = 'EUROPE'
                     
-                    # Добавляем результат в рейтинговую систему (передаём link)
                     rating_system.add_test_result(ob, score, country, label, link=link)
-    
+                    
     # 4. Ретест старых серверов (быстрая проверка)
     if europe_retest or russia_retest:
         print("\n" + "="*80)
