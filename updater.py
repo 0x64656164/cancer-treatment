@@ -7,6 +7,7 @@ import ipaddress
 import socket
 import base64
 import sys
+import traceback
 import concurrent.futures
 from urllib.parse import urlparse, unquote, parse_qs
 from base import SingBoxProxy
@@ -994,7 +995,8 @@ def _single_probe(link: str) -> float | None:
                 duration = time.perf_counter() - start
                 if duration > 0 and total > 0:
                     return (total * 8) / (duration * 1_000_000)
-    except Exception:
+    except Exception as e:
+        print(traceback.format_exc())
         pass
     return None
 
@@ -1143,6 +1145,7 @@ def quick_probe_single(link: str, timeout: int = 3) -> Tuple[Optional[float], Op
                     
                     return speed, exit_country, outbound
     except Exception as e:
+        print(traceback.format_exc())
         pass
     
     return None, None, None
