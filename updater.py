@@ -115,8 +115,9 @@ MAX_WORKERS    = 64
 PROBE_ROUNDS = 3
 PROBE_DELAY  = 30
 PROBE_URL    = 'https://cachefly.cachefly.net/10mb.test'
-CONN_TIMEOUT = 3
-READ_TIMEOUT = 8
+FAST_PROBE_URL = 'http://www.gstatic.com/generate_204'
+CONN_TIMEOUT = 1.0  # Уменьшен для быстрой проверки
+READ_TIMEOUT = 3
 
 MIN_SUCCESS_ROUNDS  = 1     # из PROBE_ROUNDS=3 нужно пройти минимум 1 (было 2 - строго для нестабильных)
 SCORE_FLOOR_RATIO   = 0.25
@@ -979,15 +980,36 @@ def check_exit_country(proxy_session) -> str | None:
     return None
 
 
-def _single_probe(link: str) -> float | None:
+def _check_connection(link: str, timeout: float = 1.0) -> bool:
     """
-    Одиночная проверка скорости через SingBoxProxy
+    БЫСТРАЯ ПРОВЕРКА СОЕДИНЕНИЯ (1 секунда)
+    Проверяет возможность установить соединение с gstatic.com
     """
     try:
         with SingBoxProxy(link) as proxy:
-            # SingBoxProxy уже является настроенным requests.Session
+            adapter = requests.adapters.HTTPAdapter(max_retries=0)
+            proxy.mount("http://", adapter)
+            proxy.mount("https://", adapter)
+            
+            # Быстрый запрос к gstatic с минимальным таймаутом
+            r = proxy.get(FAST_PROBE_URL, timeout=(timeout, timeout), allow_redirects=True)
+            return r.status_code in [200, 204, 301, 302]
+    except Exception:
+        return False
+
+
+def _speed_test(link: str, timeout: float = 2.0) -> float | None:
+    """
+    ТЕСТ СКОРОСТИ (загрузка тестового файла)
+    """
+    try:
+        with SingBoxProxy(link) as proxy:
+            adapter = requests.adapters.HTTPAdapter(max_retries=0)
+            proxy.mount("https://", adapter)
+            proxy.mount("http://", adapter)
+            
             start = time.perf_counter()
-            r = proxy.get(PROBE_URL, timeout=(CONN_TIMEOUT, READ_TIMEOUT), stream=True)
+            r = proxy.get(PROBE_URL, timeout=(timeout, timeout), stream=True)
             if r.status_code == 200:
                 total = sum(len(c) for c in r.iter_content(chunk_size=8192) if c)
                 duration = time.perf_counter() - start
@@ -1006,54 +1028,60 @@ def _harmonic_mean(values: list) -> float:
 
 def probe_server(link: str):
     """
-    Полное зондирование нового сервера.
-    
-    Проверка страны выхода выполняется ОДИН РАЗ при первом успешном раунде.
-    Если первый раунд не прошёл, страна не определяется.
+    ТРЁХЭТАПНОЕ ЗОНДИРОВАНИЕ СЕРВЕРА:
+    1. Быстрая проверка соединения (gstatic, таймаут 1 сек)
+    2. Если соединение есть - 3 замера скорости
+    3. При провале любого замера - сервер отбрасывается
     """
     tag = unquote(urlparse(link).fragment) or "Unnamed"
+    
+    # ЭТАП 1: Быстрая проверка соединения
+    if not _check_connection(link, timeout=CONN_TIMEOUT):
+        print(f"[✗] {tag[:48]:<48} — нет соединения (таймаут {CONN_TIMEOUT}с)")
+        return None, 0, None
+    
+    # ЭТАП 2: Замеры скорости
     speeds = []
     outbound = None
     exit_country = None
-
+    
     for round_num in range(PROBE_ROUNDS):
         if round_num > 0:
             time.sleep(PROBE_DELAY)
-
-        mbps = _single_probe(link)
-        if mbps is not None:
-            speeds.append(mbps)
-            
-            # Определяем страну выхода при ЛЮБОМ успешном раунде, не только первом
-            if outbound is None or exit_country is None:
-                try:
-                    with SingBoxProxy(link) as proxy:
-                        if outbound is None:
-                            outbound = _fix_outbound(parse_link(proxy, link))
-                            outbound["tag"] = tag
-                            outbound["domain_strategy"] = "prefer_ipv4"
-                        
-                        # Проверяем страну если ещё не определили
-                        if exit_country is None:
-                            exit_country = check_exit_country(proxy)
-                            if exit_country:
-                                print(f"  → Определена страна: {exit_country}")
-                except Exception as e:
-                    print(f"  ⚠️  Ошибка определения страны: {e}")
-
-    if len(speeds) < MIN_SUCCESS_ROUNDS or outbound is None:
-        tag_short = tag[:48]
-        stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
-        print(f"[{stability}] {tag_short:<48}  — отсеян")
-        return None, 0, None
-
-    score = _harmonic_mean(speeds)
-
-    stability = "".join("✓" if i < len(speeds) else "✗" for i in range(PROBE_ROUNDS))
-    country_mark = f" [{exit_country}]" if exit_country else " [??]"
-    print(f"[{stability}] {tag[:48]:<48} "
-          f"hmean={score:.1f} Mbps{country_mark}")
-    return outbound, score, exit_country
+        
+        mbps = _speed_test(link, timeout=READ_TIMEOUT)
+        
+        if mbps is None:
+            # При провале любого замера - прекращаем тестирование
+            print(f"[✗] {tag[:48]:<48} — провален замер {round_num + 1}/{PROBE_ROUNDS}")
+            return None, 0, None
+        
+        speeds.append(mbps)
+        
+        # Определяем outbound и страну при первом успешном замере
+        if outbound is None:
+            try:
+                with SingBoxProxy(link) as proxy:
+                    outbound = _fix_outbound(parse_link(proxy, link))
+                    outbound["tag"] = tag
+                    outbound["domain_strategy"] = "prefer_ipv4"
+                    exit_country = check_exit_country(proxy)
+                    if exit_country:
+                        print(f"  → Определена страна: {exit_country}")
+            except Exception as e:
+                print(f"  ⚠️ Ошибка парсинга: {e}")
+                return None, 0, None
+    
+    # Все замеры успешны
+    if len(speeds) >= MIN_SUCCESS_ROUNDS and outbound is not None:
+        score = _harmonic_mean(speeds)
+        stability = "".join("✓" for _ in range(len(speeds)))
+        country_mark = f" [{exit_country}]" if exit_country else " [??]"
+        print(f"[{stability}] {tag[:48]:<48} hmean={score:.1f} Mbps{country_mark}")
+        return outbound, score, exit_country
+    
+    print(f"[✗] {tag[:48]:<48} — недостаточно успешных замеров")
+    return None, 0, None
 
 
 def quick_probe_server(outbound: dict, link: str = None) -> Optional[float]:
@@ -1069,7 +1097,7 @@ def quick_probe_server(outbound: dict, link: str = None) -> Optional[float]:
         print(f"[⊘] {tag[:48]:<48} пропущен (нет link)")
         return None
     
-    mbps = _single_probe(link)
+    mbps = _speed_test(link, timeout=READ_TIMEOUT)
     
     if mbps:
         print(f"[✓] {tag[:48]:<48} {mbps:.1f} Mbps (ретест)")
