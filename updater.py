@@ -8,6 +8,7 @@ import socket
 import base64
 import sys
 import concurrent.futures
+import threading
 from urllib.parse import urlparse, unquote, parse_qs
 from base import SingBoxProxy
 from lib.wildcard_matcher import match as wc_match
@@ -32,6 +33,7 @@ RATING_WEIGHTS = {
 RATING_MIN_TESTS = 2
 RATING_DECAY_HOURS = 1
 RATING_STABILITY_THRESHOLD = 0.3
+RATING_SLIDING_WINDOW = 24  # количество последних проверок для анализа стабильности
 
 # Параметры отбора серверов
 TOP_SERVERS_PERCENT = 0.7
@@ -53,6 +55,49 @@ MAX_NEW_SERVERS_TO_TEST = 1000
 MAX_WORKERS_FAST = 64
 FAST_MODE_THRESHOLD = 300
 MIN_WORKING_SERVERS_FAST = 10
+
+# ---------------------------------------------------------------------------
+# НОВЫЕ ПАРАМЕТРЫ ДЛЯ НЕСТАБИЛЬНЫХ СЕРВЕРОВ
+# ---------------------------------------------------------------------------
+CATEGORY_STABLE = "A"
+CATEGORY_MEDIUM = "B"
+CATEGORY_UNSTABLE = "C"
+
+CATEGORY_THRESHOLDS = {
+    CATEGORY_STABLE:   0.70,   # рейтинг >= 0.70 и стабильность >= 0.8
+    CATEGORY_MEDIUM:   0.40,   # рейтинг >= 0.40
+    CATEGORY_UNSTABLE: 0.00,   # остальные
+}
+STABILITY_FOR_CATEGORY_A = 0.8
+
+# Карантин
+QUARANTINE_DURATION_HOURS = 2
+QUARANTINE_CONSECUTIVE_FAILS = 3
+
+# Массовые падения
+MASS_FAILURE_THRESHOLD = 0.40   # если упало >40% серверов
+MASS_FAILURE_COOLDOWN_HOURS = 1
+MASS_FAILURE_STATE_FILE = 'mass_failure_state.json'
+
+# Зомби-серверы (работают только на момент проверки)
+ZOMBIE_CONSECUTIVE_PASSES = 3    # если 3 проверки подряд успешны, то не зомби
+ZOMBIE_STAGING_MINUTES = 60      # время, в течение которого сервер считается кандидатом (раньше было 15)
+ZOMBIE_MAX_SPEED = 1.0           # скорость <1 Mbps - подозрение
+
+# Прогнозирование (временные паттерны)
+PATTERN_HOURS = 24
+BAD_HOURS_THRESHOLD = 0.5        # если в час падает >50% проверок - метка
+
+# Часовой пояс для временных паттернов (смещение от UTC в часах)
+# Можно задать через переменную окружения TZ_OFFSET (по умолчанию 3 для MSK)
+TZ_OFFSET = int(os.environ.get('TZ_OFFSET', '3'))
+
+# Глобальные счетчики для массовых падений
+_mass_failure_state = {
+    "active": False,
+    "timestamp": None,
+    "previous_state": None
+}
 
 # ---------------------------------------------------------------------------
 # ПРОФИЛИ ВЫВОДА
@@ -174,12 +219,13 @@ PROTOCOL_FILTERS = {
 
 
 # ===========================================================================
-# СИСТЕМА РЕЙТИНГА СЕРВЕРОВ
+# СИСТЕМА РЕЙТИНГА СЕРВЕРОВ (РАСШИРЕННАЯ)
 # ===========================================================================
 
 class ServerRatingSystem:
     def __init__(self, db_file=SERVERS_DB_FILE):
         self.db_file = db_file
+        self._lock = threading.Lock()  # для защиты записи в JSON
         self.data = self._load()
         
     def _load(self) -> dict:
@@ -194,8 +240,12 @@ class ServerRatingSystem:
     
     def _save(self):
         try:
-            with open(self.db_file, 'w', encoding='utf-8') as f:
-                json.dump(self.data, f, indent=2, ensure_ascii=False)
+            with self._lock:
+                # Запись во временный файл для атомарности
+                tmp_file = self.db_file + '.tmp'
+                with open(tmp_file, 'w', encoding='utf-8') as f:
+                    json.dump(self.data, f, indent=2, ensure_ascii=False)
+                os.replace(tmp_file, self.db_file)  # атомарная операция
         except Exception as e:
             print(f"⚠ Ошибка записи базы рейтингов: {e}")
     
@@ -216,15 +266,30 @@ class ServerRatingSystem:
         first_seen = datetime.fromisoformat(server_data.get('first_seen', now.isoformat()))
         last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
         
+        # Получаем историю проверок (временные метки и статусы)
+        check_history = server_data.get('check_history', [])
+        
         components = {'speed': 0.0, 'stability': 0.0, 'uptime': 0.0, 'consistency': 0.0, 'freshness': 0.0}
         
         if not speeds or total_tests == 0:
             return 0.0, components
         
+        # Скорость (средняя)
         avg_speed = sum(speeds) / len(speeds)
         components['speed'] = min(1.0, avg_speed / max(group_max_speed, 1.0))
-        components['stability'] = successful_tests / max(total_tests, 1)
         
+        # Стабильность: учитываем скользящее окно последних RATING_SLIDING_WINDOW проверок
+        if check_history:
+            recent_checks = check_history[-RATING_SLIDING_WINDOW:]
+            successful_recent = sum(1 for ch in recent_checks if ch.get('success', False))
+            stability_recent = successful_recent / len(recent_checks) if recent_checks else 0
+            # Смешиваем с общей успешностью
+            overall_stability = successful_tests / max(total_tests, 1)
+            components['stability'] = (stability_recent * 0.7 + overall_stability * 0.3)
+        else:
+            components['stability'] = successful_tests / max(total_tests, 1)
+        
+        # Время жизни
         uptime_hours = (now - first_seen).total_seconds() / 3600
         if uptime_hours < 0.1:
             components['uptime'] = 0.01
@@ -239,6 +304,7 @@ class ServerRatingSystem:
         else:
             components['uptime'] = 1.0
         
+        # Согласованность (коэффициент вариации)
         if len(speeds) >= 2:
             mean = sum(speeds) / len(speeds)
             variance = sum((s - mean) ** 2 for s in speeds) / len(speeds)
@@ -247,6 +313,7 @@ class ServerRatingSystem:
         else:
             components['consistency'] = 0.5
         
+        # Свежесть
         hours_since_last = (now - last_seen).total_seconds() / 3600
         components['freshness'] = 0.5 ** (hours_since_last / RATING_DECAY_HOURS)
         
@@ -256,6 +323,102 @@ class ServerRatingSystem:
             rating *= total_tests / RATING_MIN_TESTS
         
         return rating, components
+    
+    def _update_category(self, server_data: dict) -> str:
+        """Определение категории на основе рейтинга и стабильности"""
+        rating = server_data.get('rating', 0)
+        stability = server_data.get('rating_components', {}).get('stability', 0)
+        
+        # Если сервер в карантине, возвращаем "C" с пометкой
+        if server_data.get('quarantine_until'):
+            quarantine_until = datetime.fromisoformat(server_data['quarantine_until'])
+            if quarantine_until > datetime.now():
+                return CATEGORY_UNSTABLE
+        
+        if rating >= CATEGORY_THRESHOLDS[CATEGORY_STABLE] and stability >= STABILITY_FOR_CATEGORY_A:
+            return CATEGORY_STABLE
+        elif rating >= CATEGORY_THRESHOLDS[CATEGORY_MEDIUM]:
+            return CATEGORY_MEDIUM
+        else:
+            return CATEGORY_UNSTABLE
+    
+    def _check_mass_failure(self, results: List[dict]) -> bool:
+        global _mass_failure_state
+        total = len(results)
+        if total == 0:
+            return False
+        dead = sum(1 for r in results if r.get('status') in ('dead', 'error'))
+        failure_rate = dead / total
+        
+        now = datetime.now()
+        if failure_rate > MASS_FAILURE_THRESHOLD:
+            if not _mass_failure_state['active']:
+                _mass_failure_state['active'] = True
+                _mass_failure_state['timestamp'] = now.isoformat()
+                # Сохраняем предыдущее состояние (список активных серверов)
+                _mass_failure_state['previous_state'] = self.get_top_servers(limit=500)
+                _save_mass_failure_state(_mass_failure_state)
+                print(f"⚠️ МАССОВОЕ ПАДЕНИЕ: {failure_rate*100:.1f}% серверов не отвечают. Переход в режим защиты.")
+                return True
+            else:
+                # Если уже в режиме защиты, но прошло больше cooldown, снимаем
+                ts = datetime.fromisoformat(_mass_failure_state['timestamp'])
+                if (now - ts).total_seconds() / 3600 > MASS_FAILURE_COOLDOWN_HOURS:
+                    _mass_failure_state['active'] = False
+                    _mass_failure_state['timestamp'] = None
+                    _mass_failure_state['previous_state'] = None
+                    _save_mass_failure_state(_mass_failure_state)
+                    print("✅ Режим защиты снят.")
+        else:
+            if _mass_failure_state['active']:
+                # Восстановление
+                ts = datetime.fromisoformat(_mass_failure_state['timestamp'])
+                if (now - ts).total_seconds() / 3600 > MASS_FAILURE_COOLDOWN_HOURS:
+                    _mass_failure_state['active'] = False
+                    _mass_failure_state['timestamp'] = None
+                    _mass_failure_state['previous_state'] = None
+                    _save_mass_failure_state(_mass_failure_state)
+                    print("✅ Режим защиты снят.")
+        return _mass_failure_state['active']
+    
+    def _analyze_patterns(self, server_data: dict):
+        """Анализ временных паттернов падений с учётом часового пояса"""
+        check_history = server_data.get('check_history', [])
+        if len(check_history) < 24:
+            return
+        
+        # Группируем по часам (с учётом смещения TZ_OFFSET)
+        hour_stats = {}
+        for check in check_history[-PATTERN_HOURS:]:
+            ts = datetime.fromisoformat(check['timestamp'])
+            # Применяем смещение часового пояса
+            hour = (ts.hour + TZ_OFFSET) % 24
+            if hour not in hour_stats:
+                hour_stats[hour] = {'total': 0, 'success': 0}
+            hour_stats[hour]['total'] += 1
+            if check.get('success', False):
+                hour_stats[hour]['success'] += 1
+        
+        # Определяем часы с плохой стабильностью
+        bad_hours = []
+        for hour, stats in hour_stats.items():
+            success_rate = stats['success'] / stats['total']
+            if success_rate < BAD_HOURS_THRESHOLD:
+                bad_hours.append(hour)
+        server_data['bad_hours'] = bad_hours
+    
+    def _apply_quarantine(self, server_data: dict):
+        """Применение карантина при последовательных падениях"""
+        check_history = server_data.get('check_history', [])
+        if len(check_history) >= QUARANTINE_CONSECUTIVE_FAILS:
+            recent = check_history[-QUARANTINE_CONSECUTIVE_FAILS:]
+            if all(not ch.get('success', False) for ch in recent):
+                now = datetime.now()
+                quarantine_until = now + timedelta(hours=QUARANTINE_DURATION_HOURS)
+                server_data['quarantine_until'] = quarantine_until.isoformat()
+                print(f"  ⚠️ Сервер {server_data['outbound'].get('tag', 'unknown')} помещен в карантин до {quarantine_until}")
+                return True
+        return False
     
     def add_test_result(self, outbound: dict, speed: Optional[float], 
                        country: Optional[str], group: str, link: Optional[str] = None) -> bool:
@@ -267,13 +430,30 @@ class ServerRatingSystem:
             servers[key] = {
                 'outbound': outbound, 'link': link, 'group': group, 'country': country,
                 'first_seen': now, 'last_seen': now, 'total_tests': 0, 'successful_tests': 0,
-                'speed_history': [], 'rating': 0.0, 'rating_components': {},
+                'speed_history': [], 'check_history': [], 'rating': 0.0, 'rating_components': {},
+                'category': CATEGORY_UNSTABLE, 'quarantine_until': None, 'bad_hours': [],
+                'consecutive_successes': 0,   # для зомби-серверов
+                'active': False,               # стал активным после 3 успешных проверок
+                'staging_until': None          # временная метка, до которой сервер считается кандидатом
             }
         
         server = servers[key]
         server['total_tests'] += 1
         if link:
             server['link'] = link
+        
+        # Добавляем запись в историю проверок
+        check_entry = {
+            'timestamp': now,
+            'success': speed is not None and speed > 0,
+            'speed': speed if speed else 0,
+            'latency': None,  # можно добавить позже
+            'error': None
+        }
+        server['check_history'].append(check_entry)
+        # Ограничиваем историю (например, 100 записей)
+        if len(server['check_history']) > 100:
+            server['check_history'] = server['check_history'][-100:]
         
         if speed is not None and speed > 0:
             server['successful_tests'] += 1
@@ -282,11 +462,42 @@ class ServerRatingSystem:
             speed_history = server.get('speed_history', [])
             speed_history.append(speed)
             server['speed_history'] = speed_history[-10:]
-            self._save()
-            return True
+            
+            # Снимаем карантин при успешной проверке
+            if server.get('quarantine_until'):
+                server['quarantine_until'] = None
+                print(f"  ✓ Сервер {outbound.get('tag', 'unknown')} вышел из карантина")
+            
+            # --- Логика зомби-серверов (staging) ---
+            # Увеличиваем счётчик успешных проверок
+            server['consecutive_successes'] = server.get('consecutive_successes', 0) + 1
+            # Если счётчик достиг порога, сервер становится активным
+            if server['consecutive_successes'] >= ZOMBIE_CONSECUTIVE_PASSES:
+                if not server.get('active', False):
+                    server['active'] = True
+                    server['staging_until'] = None
+                    print(f"  ✨ Сервер {outbound.get('tag', 'unknown')} стал активным (3 успешные проверки подряд)")
+            else:
+                # Если ещё не активен, устанавливаем staging_until на ZOMBIE_STAGING_MINUTES вперёд
+                if not server.get('active', False):
+                    staging_until = datetime.now() + timedelta(minutes=ZOMBIE_STAGING_MINUTES)
+                    server['staging_until'] = staging_until.isoformat()
+            
+            # Сбрасываем счётчик неудач
+            server['consecutive_failures'] = 0
         else:
-            self._save()
-            return False
+            # Неудачная проверка
+            # Сбрасываем счётчик успешных и активность
+            server['consecutive_successes'] = 0
+            server['active'] = False
+            server['staging_until'] = None
+            # Увеличиваем счётчик неудач для карантина
+            server['consecutive_failures'] = server.get('consecutive_failures', 0) + 1
+            # Проверяем необходимость карантина
+            self._apply_quarantine(server)
+        
+        self._save()
+        return speed is not None and speed > 0
     
     def recalculate_all_ratings(self):
         servers = self.data.get("servers", {})
@@ -304,13 +515,22 @@ class ServerRatingSystem:
             rating, components = self._calculate_rating(server_data, max_speed)
             server_data['rating'] = rating
             server_data['rating_components'] = components
+            server_data['category'] = self._update_category(server_data)
+            self._analyze_patterns(server_data)
         self._save()
     
     def get_top_servers(self, group: Optional[str] = None, 
                        limit: Optional[int] = None,
-                       min_rating: float = MIN_RATING_THRESHOLD) -> List[dict]:
+                       min_rating: float = MIN_RATING_THRESHOLD,
+                       include_categories: Optional[List[str]] = None,
+                       current_hour: Optional[int] = None) -> List[dict]:
         servers = self.data.get("servers", {})
+        if current_hour is None:
+            # Текущий час с учётом смещения
+            current_hour = (datetime.now().hour + TZ_OFFSET) % 24
+        
         filtered = []
+        added_keys = set()
         for key, server_data in servers.items():
             if group and server_data.get('group') != group:
                 continue
@@ -320,41 +540,87 @@ class ServerRatingSystem:
             stability = server_data.get('rating_components', {}).get('stability', 0)
             if stability < RATING_STABILITY_THRESHOLD:
                 continue
+            category = server_data.get('category', CATEGORY_UNSTABLE)
+            if include_categories and category not in include_categories:
+                continue
+            # Пропускаем серверы в карантине
+            quarantine_until = server_data.get('quarantine_until')
+            if quarantine_until:
+                if datetime.fromisoformat(quarantine_until) > datetime.now():
+                    continue
+            
+            # Использование временных паттернов: пропускаем, если текущий час в bad_hours
+            bad_hours = server_data.get('bad_hours', [])
+            if current_hour in bad_hours:
+                continue
+            
+            # Используем только активные серверы (или staging, если активных мало)
+            # В обычном режиме берём только активные
+            if not server_data.get('active', False):
+                # Если сервер не активен, но находится в staging и прошло менее ZOMBIE_STAGING_MINUTES, можно рассмотреть
+                staging_until = server_data.get('staging_until')
+                if staging_until and datetime.fromisoformat(staging_until) > datetime.now():
+                    # Можно включить, но с меньшим приоритетом. Для простоты пока пропускаем.
+                    continue
+                else:
+                    continue
+            
             filtered.append({
                 'key': key, 'outbound': server_data['outbound'], 'link': server_data.get('link'),
                 'rating': rating, 'components': server_data.get('rating_components', {}),
                 'country': server_data.get('country'), 'total_tests': server_data.get('total_tests', 0),
                 'successful_tests': server_data.get('successful_tests', 0), 'last_seen': server_data.get('last_seen'),
+                'category': category, 'bad_hours': bad_hours
             })
+            added_keys.add(key)
         
         filtered.sort(key=lambda x: x['rating'], reverse=True)
         
         if len(filtered) < MIN_SERVERS and group:
-            print(f"⚠️  [{group}] Мало серверов ({len(filtered)}), смягчаем критерии...")
-            filtered_relaxed = []
+            print(f"⚠️  [{group}] Мало активных серверов ({len(filtered)}), смягчаем критерии...")
+            # Включаем также серверы, которые находятся в стадии активации (staging)
             for key, server_data in servers.items():
                 if group and server_data.get('group') != group:
+                    continue
+                if key in added_keys:
                     continue
                 rating = server_data.get('rating', 0)
                 if rating < min_rating * 0.5:
                     continue
-                filtered_relaxed.append({
+                # Пропускаем в карантине
+                quarantine_until = server_data.get('quarantine_until')
+                if quarantine_until and datetime.fromisoformat(quarantine_until) > datetime.now():
+                    continue
+                # Пропускаем, если час в bad_hours
+                if current_hour in server_data.get('bad_hours', []):
+                    continue
+                
+                # Включаем только серверы, которые либо активны, либо находятся в стадии активации (staging)
+                active_flag = server_data.get('active', False)
+                staging_until = server_data.get('staging_until')
+                is_candidate = active_flag or (staging_until and datetime.fromisoformat(staging_until) > datetime.now())
+                if not is_candidate:
+                    continue
+                
+                filtered_relaxed = {
                     'key': key, 'outbound': server_data['outbound'], 'link': server_data.get('link'),
                     'rating': rating, 'components': server_data.get('rating_components', {}),
                     'country': server_data.get('country'), 'total_tests': server_data.get('total_tests', 0),
                     'successful_tests': server_data.get('successful_tests', 0), 'last_seen': server_data.get('last_seen'),
-                })
-            filtered_relaxed.sort(key=lambda x: x['rating'], reverse=True)
-            if len(filtered_relaxed) > len(filtered):
-                print(f"✓ Найдено {len(filtered_relaxed)} серверов с мягкими критериями")
-                filtered = filtered_relaxed
+                    'category': server_data.get('category', CATEGORY_UNSTABLE),
+                }
+                filtered.append(filtered_relaxed)
+                added_keys.add(key)
+            filtered.sort(key=lambda x: x['rating'], reverse=True)
+            print(f"✓ Найдено {len(filtered)} серверов с мягкими критериями (активные + стадия активации)")
         
         if limit:
             filtered = filtered[:limit]
         return filtered
     
     def get_servers_for_retest(self, group: Optional[str] = None, 
-                               count: int = RETEST_OLD_SERVERS_COUNT) -> List[dict]:
+                               count: int = RETEST_OLD_SERVERS_COUNT,
+                               prioritize_low_rating: bool = RETEST_LOW_RATING_FIRST) -> List[dict]:
         servers = self.data.get("servers", {})
         now = datetime.now()
         candidates = []
@@ -364,11 +630,14 @@ class ServerRatingSystem:
             last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
             hours_since = (now - last_seen).total_seconds() / 3600
             rating = server_data.get('rating', 0)
-            priority = hours_since * (1.1 - rating) if RETEST_LOW_RATING_FIRST else hours_since
+            category = server_data.get('category', CATEGORY_UNSTABLE)
+            # Приоритет: сначала нестабильные (C), потом средние (B), потом стабильные (A)
+            category_priority = {'C': 3, 'B': 2, 'A': 1}.get(category, 1)
+            priority = category_priority * 10 + hours_since * (1.1 - rating) if prioritize_low_rating else hours_since
             candidates.append({
                 'key': key, 'outbound': server_data['outbound'], 'link': server_data.get('link'),
                 'group': server_data.get('group'), 'priority': priority,
-                'hours_since_last': hours_since, 'rating': rating,
+                'hours_since_last': hours_since, 'rating': rating, 'category': category
             })
         candidates.sort(key=lambda x: x['priority'], reverse=True)
         return candidates[:count]
@@ -417,19 +686,64 @@ class ServerRatingSystem:
                 continue
             ratings = [s.get('rating', 0) for s in group_servers]
             avg_rating = sum(ratings) / len(ratings) if ratings else 0
+            categories = {'A': 0, 'B': 0, 'C': 0}
+            active_count = sum(1 for s in group_servers if s.get('active', False))
+            for s in group_servers:
+                categories[s.get('category', 'C')] += 1
             print(f"\n{group}:")
             print(f"  Всего серверов: {len(group_servers)}")
+            print(f"  Активных: {active_count}")
             print(f"  Средний рейтинг: {avg_rating:.3f}")
+            print(f"  Категории: A={categories['A']}, B={categories['B']}, C={categories['C']}")
             print(f"  Топ-5 серверов:")
             group_servers.sort(key=lambda x: x.get('rating', 0), reverse=True)
             for i, server in enumerate(group_servers[:5], 1):
                 tag = server['outbound'].get('tag', 'Unknown')[:40]
                 rating = server.get('rating', 0)
                 comp = server.get('rating_components', {})
-                print(f"    {i}. {tag:<40} R={rating:.3f} "
+                cat = server.get('category', '?')
+                active_mark = '✓' if server.get('active') else ' '
+                print(f"    {i}. {tag:<40} [{cat}]{active_mark} R={rating:.3f} "
                       f"[sp={comp.get('speed', 0):.2f} st={comp.get('stability', 0):.2f} "
                       f"up={comp.get('uptime', 0):.2f} cs={comp.get('consistency', 0):.2f} "
                       f"fr={comp.get('freshness', 0):.2f}]")
+    
+    def get_statistics(self) -> dict:
+        servers = self.data.get("servers", {})
+        total = len(servers)
+        active = sum(1 for s in servers.values() if s.get('active', False))
+        europe = len([s for s in servers.values() if s.get('group') == 'EUROPE'])
+        russia = len([s for s in servers.values() if s.get('group') == 'RUSSIA'])
+        categories = {'A':0, 'B':0, 'C':0}
+        for s in servers.values():
+            categories[s.get('category', 'C')] += 1
+        return {
+            'total': total, 'active': active, 'europe': europe, 'russia': russia,
+            'categories': categories
+        }
+
+
+# ===========================================================================
+# ФУНКЦИИ ДЛЯ РАБОТЫ С СОСТОЯНИЕМ МАССОВОГО ПАДЕНИЯ
+# ===========================================================================
+
+def _load_mass_failure_state():
+    global _mass_failure_state
+    if not os.path.exists(MASS_FAILURE_STATE_FILE):
+        return
+    try:
+        with open(MASS_FAILURE_STATE_FILE, 'r') as f:
+            data = json.load(f)
+        _mass_failure_state.update(data)
+    except Exception as e:
+        print(f"⚠ Ошибка загрузки состояния массового падения: {e}")
+
+def _save_mass_failure_state(state):
+    try:
+        with open(MASS_FAILURE_STATE_FILE, 'w') as f:
+            json.dump(state, f)
+    except Exception as e:
+        print(f"⚠ Ошибка сохранения состояния массового падения: {e}")
 
 
 # ===========================================================================
@@ -688,30 +1002,6 @@ def filter_by_cidr(links: list) -> list:
 
 
 # ===========================================================================
-# ЗАГРУЗКА ПОДПИСОК
-# ===========================================================================
-
-def fetch_links_from_subscriptions() -> list:
-    links, seen = [], set()
-    for url in SUB_LINKS:
-        print(f"Загрузка подписки: {url}")
-        try:
-            raw = requests.get(url, timeout=15).text
-            found = re.findall(r'^(?:vless|vmess|trojan|hy2|hysteria2):\/\/.+$', raw, re.MULTILINE)
-            new = 0
-            for link in found:
-                if link not in seen:
-                    seen.add(link)
-                    links.append(link)
-                    new += 1
-            print(f"  → Найдено: {len(found)}, новых: {new}")
-        except Exception as e:
-            print(f"  ✗ Ошибка загрузки {url}: {e}")
-    print(f"\nИтого уникальных: {len(links)}\n")
-    return links
-
-
-# ===========================================================================
 # ЗОНДИРОВАНИЕ (ТРЁХЭТАПНОЕ)
 # ===========================================================================
 
@@ -776,9 +1066,10 @@ def _harmonic_mean(values: list) -> float:
     return len(values) / sum(1.0 / v for v in values if v > 0)
 
 
-def probe_server(link: str):
+def probe_server(link: str, category: Optional[str] = None):
     """
     ТРЁХЭТАПНОЕ ЗОНДИРОВАНИЕ СЕРВЕРА (компактный лог в 1 строку)
+    Если category == 'A', выполняется двойная проверка (два полных цикла)
     """
     tag = unquote(urlparse(link).fragment) or "Unnamed"
     tag_short = tag[:35]
@@ -788,7 +1079,7 @@ def probe_server(link: str):
         print(f"  ✗ {tag_short:<35} | соединение ✗")
         return None, 0, None
     
-    # ЭТАП 2: Замеры скорости
+    # ЭТАП 2: Замеры скорости (один цикл)
     speeds = []
     outbound = None
     exit_country = None
@@ -820,6 +1111,24 @@ def probe_server(link: str):
         country_mark = f" [{exit_country}]" if exit_country else ""
         speeds_str = "/".join(f"{s:.0f}" for s in speeds)
         print(f"  ✓ {tag_short:<35} | {speeds_str} = {score:.0f} Mbps{country_mark}")
+        
+        # Если категория A, выполняем дополнительную проверку (золотое дублирование)
+        if category == CATEGORY_STABLE:
+            print(f"  ⭐ {tag_short:<35} | Двойная проверка...")
+            time.sleep(1)
+            # Повторяем весь тест (сокращённо, только проверка соединения и 1 замер скорости)
+            if _check_connection(link, timeout=CONN_TIMEOUT):
+                extra_speed = _speed_test(link, timeout=READ_TIMEOUT)
+                if extra_speed and extra_speed > 0:
+                    # Если скорость упала более чем на 50%, считаем нестабильным
+                    if extra_speed < score * 0.5:
+                        print(f"  ⚠️ {tag_short:<35} | двойная проверка: скорость упала до {extra_speed:.0f} Mbps")
+                        # Возвращаем меньшую скорость для более консервативной оценки
+                        score = min(score, extra_speed)
+                else:
+                    print(f"  ⚠️ {tag_short:<35} | двойная проверка не удалась, игнорируем")
+                    return None, 0, None
+        
         return outbound, score, exit_country
     
     print(f"  ✗ {tag_short:<35} | недостаточно замеров")
@@ -858,16 +1167,36 @@ def _quick_single_probe(link: str, timeout: int = 3) -> float | None:
     return None
 
 
-def test_servers_batch_parallel(links: List[str], group: str, max_workers: int = MAX_WORKERS_FAST) -> List[dict]:
+def test_servers_batch_parallel(links: List[str], group: str, rating_system: ServerRatingSystem) -> List[dict]:
     results = []
     total = len(links)
     completed = 0
     
-    print(f"\n  → Тестируем {total} новых серверов ({group})...")
+    # Для приоритизации нужно знать категорию сервера (если он уже есть в базе)
+    # Создаём словарь категорий для быстрого доступа
+    category_map = {}
+    servers_data = rating_system.data.get("servers", {})
+    for key, data in servers_data.items():
+        outbound = data.get('outbound', {})
+        # Сопоставляем по server:port и uuid
+        for link in links:
+            # Упрощённое сопоставление: можно по тегу или ссылке
+            # Вместо сложного сравнения, просто проверим, есть ли этот link в базе
+            if data.get('link') == link:
+                category_map[link] = data.get('category', CATEGORY_UNSTABLE)
+                break
+    
+    # Сортируем ссылки по категории (A > B > C)
+    def link_priority(link):
+        cat = category_map.get(link, CATEGORY_UNSTABLE)
+        return {'A': 0, 'B': 1, 'C': 2}.get(cat, 2)
+    links_sorted = sorted(links, key=link_priority)
+    
+    print(f"\n  → Тестируем {total} {'старых' if group == 'RETEST' else 'новых'} серверов ({group})...")
     print("  " + "-" * 70)
     
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = {executor.submit(probe_server, link): link for link in links}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS_FAST) as executor:
+        futures = {executor.submit(probe_server, link, category_map.get(link, None)): link for link in links_sorted}
         
         for future in concurrent.futures.as_completed(futures):
             completed += 1
@@ -937,7 +1266,7 @@ def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem)
     # Тестируем европейские серверы
     if europe_candidates:
         print(f"\n🌍 ТЕСТИРОВАНИЕ EUROPE ({len(europe_candidates)} серверов)")
-        europe_results = test_servers_batch_parallel(europe_candidates, "EUROPE")
+        europe_results = test_servers_batch_parallel(europe_candidates, "EUROPE", rating_system)
         
         for result in europe_results:
             found_servers[result['group']].append(result)
@@ -952,7 +1281,7 @@ def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem)
     # Тестируем российские серверы
     if russia_candidates:
         print(f"\n🇷🇺 ТЕСТИРОВАНИЕ RUSSIA ({len(russia_candidates)} серверов)")
-        russia_results = test_servers_batch_parallel(russia_candidates, "RUSSIA")
+        russia_results = test_servers_batch_parallel(russia_candidates, "RUSSIA", rating_system)
         
         for result in russia_results:
             found_servers[result['group']].append(result)
@@ -1099,13 +1428,70 @@ def write_config(profile: dict, groups: dict):
 
     output = profile["output_file"]
     header = profile.get("file_header")
-    with open(output, 'w', encoding='utf-8') as f:
+    # Атомарная запись: сначала во временный файл, затем rename
+    tmp_output = output + '.tmp'
+    with open(tmp_output, 'w', encoding='utf-8') as f:
         if header:
             f.write(header)
         json.dump(config, f, indent=2, ensure_ascii=False)
+    os.replace(tmp_output, output)
 
     active = " + ".join(top_groups)
     print(f"  ✓ {output} сохранён | активные: [{active}] | EUROPE={len(europe_tags)} RUSSIA={len(russia_tags)} ALL={len(all_tags)}")
+
+
+# ===========================================================================
+# ОТПРАВКА УВЕДОМЛЕНИЙ В TELEGRAM
+# ===========================================================================
+
+def send_telegram_message(text: str) -> bool:
+    """Отправляет сообщение в Telegram, используя переменные окружения."""
+    bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
+    chat_id = os.environ.get('TELEGRAM_CHAT_ID')
+    if not bot_token or not chat_id:
+        print("⚠️ Telegram токен или chat_id не заданы в окружении. Сообщение не отправлено.")
+        return False
+    try:
+        url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+        payload = {
+            'chat_id': chat_id,
+            'text': text,
+            'parse_mode': 'HTML',
+            'disable_web_page_preview': True
+        }
+        r = requests.post(url, data=payload, timeout=10)
+        if r.status_code == 200:
+            return True
+        else:
+            print(f"⚠️ Ошибка отправки в Telegram: {r.status_code} {r.text}")
+            return False
+    except Exception as e:
+        print(f"⚠️ Ошибка отправки в Telegram: {e}")
+        return False
+
+
+def send_telegram_report(stats: dict, rating_system: ServerRatingSystem, elapsed_seconds: float):
+    """Формирует красивое сообщение с отчётом и отправляет."""
+    categories = stats['categories']
+    message = (
+        f"🛰️ <b>VLESS Monitor Report</b>\n"
+        f"───────────────────\n"
+        f"📊 <b>Статистика:</b>\n"
+        f"   Всего серверов: {stats['total']}\n"
+        f"   Активных: {stats['active']}\n"
+        f"   EUROPE: {stats['europe']}\n"
+        f"   RUSSIA: {stats['russia']}\n"
+        f"\n📈 <b>Категории:</b>\n"
+        f"   🟢 Стабильные: {categories['A']}\n"
+        f"   🟡 Средние: {categories['B']}\n"
+        f"   🔴 Нестабильные: {categories['C']}\n"
+        f"\n⏱️ Время выполнения: {elapsed_seconds:.1f} сек.\n"
+        f"\n🔗 <a href='https://github.com/{os.environ.get('GITHUB_REPOSITORY', '')}/actions/runs/{os.environ.get('GITHUB_RUN_ID', '')}'>Детали в GitHub Actions</a>"
+    )
+    # Если критически мало активных серверов, отправляем предупреждение с emoji
+    if stats['active'] < MIN_SERVERS:
+        message = "⚠️ <b>КРИТИЧЕСКАЯ СИТУАЦИЯ!</b>\n" + message
+    send_telegram_message(message)
 
 
 # ===========================================================================
@@ -1122,9 +1508,13 @@ def _is_russia(link: str, country: str | None = None) -> bool:
 
 
 def main(profile_names: list):
+    start_time = time.time()
     print("="*80)
-    print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ (ТРЁХЭТАПНЫЙ ПОИСК)")
+    print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ (ТРЁХЭТАПНЫЙ ПОИСК + КАТЕГОРИИ)")
     print("="*80)
+    
+    # Загружаем сохранённое состояние массового падения
+    _load_mass_failure_state()
     
     rating_system = ServerRatingSystem()
     rating_system.cleanup()
@@ -1157,6 +1547,26 @@ def main(profile_names: list):
     
     found_servers = smart_server_search(all_links, rating_system)
     
+    # Проверка на массовые падения (после добавления результатов)
+    # Собираем все результаты проверок новых серверов
+    all_results = []
+    for grp in found_servers:
+        for res in found_servers[grp]:
+            all_results.append({'status': 'alive' if res['speed'] > 0 else 'dead'})
+    if rating_system._check_mass_failure(all_results):
+        # Если массовое падение, используем предыдущее состояние (не обновляем конфиг)
+        print("⚠️ Режим защиты активен, используем предыдущий стабильный конфиг")
+        # Здесь можно загрузить предыдущий список активных серверов из файла или просто не обновлять
+        # Для простоты просто пропускаем обновление конфига, но продолжаем ретест
+        # Чтобы не терять данные, всё равно сохраним результаты в базу, но конфиг не перезапишем.
+        # Вместо этого, возможно, нужно вернуться к предыдущему состоянию.
+        # Пока просто выходим.
+        print("❌ Завершаем работу без обновления конфигов.")
+        # Всё равно отправляем отчёт
+        stats = rating_system.get_statistics()
+        send_telegram_report(stats, rating_system, time.time() - start_time)
+        return
+    
     if europe_retest or russia_retest:
         print("\n" + "="*80)
         print("🔄 РЕТЕСТ СТАРЫХ СЕРВЕРОВ")
@@ -1170,7 +1580,8 @@ def main(profile_names: list):
             if link:
                 old_servers_to_test.append({
                     'outbound': outbound, 'link': link, 'group': group, 
-                    'tag': outbound.get('tag', 'Unknown')
+                    'tag': outbound.get('tag', 'Unknown'),
+                    'category': server_info.get('category', CATEGORY_UNSTABLE)
                 })
         
         if old_servers_to_test:
@@ -1204,16 +1615,20 @@ def main(profile_names: list):
     print("📋 ФОРМИРОВАНИЕ КОНФИГА")
     print("="*80)
     
-    europe_servers = rating_system.get_top_servers(group='EUROPE', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD)
-    russia_servers = rating_system.get_top_servers(group='RUSSIA', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD)
+    # Получаем серверы с учётом временных паттернов (передаём текущий час с учётом TZ_OFFSET)
+    current_hour = (datetime.now().hour + TZ_OFFSET) % 24
+    europe_servers = rating_system.get_top_servers(group='EUROPE', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour)
+    russia_servers = rating_system.get_top_servers(group='RUSSIA', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour)
     
-    print(f"\nОтобрано для конфига: EUROPE={len(europe_servers)}, RUSSIA={len(russia_servers)}")
+    print(f"\nОтобрано для конфига (текущий час {current_hour}): EUROPE={len(europe_servers)}, RUSSIA={len(russia_servers)}")
     
     if not europe_servers and not russia_servers:
         print("\n❌ Критическая ошибка: нет серверов с достаточным рейтингом!")
+        # Отправляем критическое сообщение в Telegram
+        send_telegram_message("🚨 <b>КРИТИЧЕСКАЯ ОШИБКА:</b> Нет серверов с достаточным рейтингом для формирования конфига!")
         return
     
-    print("\n🏆 ТОП-10 СЕРВЕРОВ ПО РЕЙТИНГУ:")
+    print("\n🏆 ТОП-10 СЕРВЕРОВ ПО РЕЙТИНГУ (с категориями):")
     for group_name, servers in [("EUROPE", europe_servers), ("RUSSIA", russia_servers)]:
         if not servers:
             continue
@@ -1222,8 +1637,9 @@ def main(profile_names: list):
             tag = server['outbound'].get('tag', 'Unknown')[:35]
             rating = server['rating']
             comp = server['components']
+            cat = server.get('category', '?')
             country = f"[{server['country']}]" if server.get('country') else ""
-            print(f"  {i:2}. {tag:<35} R={rating:.3f} {country}")
+            print(f"  {i:2}. {tag:<35} [{cat}] R={rating:.3f} {country}")
             print(f"      sp={comp.get('speed', 0):.2f} st={comp.get('stability', 0):.2f} up={comp.get('uptime', 0):.2f}")
     
     groups = {
@@ -1240,7 +1656,12 @@ def main(profile_names: list):
         print(f"\n[{name}]")
         write_config(PROFILES[name], groups)
     
-    print("\n✅ Обновление завершено успешно!")
+    elapsed = time.time() - start_time
+    print(f"\n✅ Обновление завершено успешно! Время выполнения: {elapsed:.1f} сек.")
+    
+    # Отправляем отчёт в Telegram
+    stats = rating_system.get_statistics()
+    send_telegram_report(stats, rating_system, elapsed)
 
 
 if __name__ == "__main__":
