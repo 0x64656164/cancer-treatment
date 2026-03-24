@@ -49,18 +49,20 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇩🇪 Germany — #99",
         "🇱🇹 Lithuania — #238",
-        "🇨🇿 Czechia — #72"
+        "🇩🇪 Germany — #99",
+        "🇵🇱 Poland — #278",
+        "🇵🇱 Poland — #279"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇩🇪 Germany — #99",
         "🇱🇹 Lithuania — #238",
-        "🇨🇿 Czechia — #72"
+        "🇩🇪 Germany — #99",
+        "🇵🇱 Poland — #278",
+        "🇵🇱 Poland — #279"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,28 +74,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #99",
-      "server": "83.166.252.219",
-      "server_port": 443,
-      "uuid": "7dcfe810-294b-498c-baff-b024d81b54a6",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdnv-img.perekrestok.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
     },
     {
       "type": "vless",
@@ -119,18 +99,62 @@
     },
     {
       "type": "vless",
-      "tag": "🇨🇿 Czechia — #72",
-      "server": "185.86.146.53",
+      "tag": "🇩🇪 Germany — #99",
+      "server": "83.166.252.219",
       "server_port": 443,
-      "uuid": "4e5875b6-0a7f-4caf-9f05-2d369d832fcb",
+      "uuid": "7dcfe810-294b-498c-baff-b024d81b54a6",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "cdnv-img.perekrestok.ru",
         "reality": {
           "enabled": true,
-          "public_key": "5UnXB4BgSXHzLjNQX7ZedsEyBW99dKs4Q4yKbwui8nU",
-          "short_id": "d568"
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #278",
+      "server": "217.16.23.213",
+      "server_port": 9443,
+      "uuid": "a67b36cf-4861-484a-ad98-929457a31192",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Mkxs9LT0tRg208EbLXmP-_dQYlsPOgaTwZ3acwgVVWs",
+          "short_id": "fff8"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #279",
+      "server": "217.16.23.213",
+      "server_port": 9443,
+      "uuid": "0fe75c44-1353-4a2d-92b3-164d579339ca",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Mkxs9LT0tRg208EbLXmP-_dQYlsPOgaTwZ3acwgVVWs",
+          "short_id": "fff8"
         },
         "utls": {
           "enabled": true,
