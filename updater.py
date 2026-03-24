@@ -222,18 +222,24 @@ PROTOCOL_FILTERS = {
 # СИСТЕМА РЕЙТИНГА СЕРВЕРОВ (РАСШИРЕННАЯ)
 # ===========================================================================
 
+# ===========================================================================
+# СИСТЕМА РЕЙТИНГА СЕРВЕРОВ (РАСШИРЕННАЯ)
+# ===========================================================================
+
 class ServerRatingSystem:
     def __init__(self, db_file=SERVERS_DB_FILE):
         self.db_file = db_file
         self._lock = threading.Lock()  # для защиты записи в JSON
         self.data = self._load()
+        self._migrate_old_data()
         
     def _load(self) -> dict:
         if not os.path.exists(self.db_file):
             return {"servers": {}, "metadata": {"last_cleanup": None}}
         try:
             with open(self.db_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                data = json.load(f)
+                return data
         except Exception as e:
             print(f"⚠ Ошибка чтения базы рейтингов: {e}")
             return {"servers": {}, "metadata": {"last_cleanup": None}}
@@ -248,6 +254,80 @@ class ServerRatingSystem:
                 os.replace(tmp_file, self.db_file)  # атомарная операция
         except Exception as e:
             print(f"⚠ Ошибка записи базы рейтингов: {e}")
+    
+    def _migrate_old_data(self):
+        """Миграция старых записей: добавление отсутствующих полей"""
+        servers = self.data.get("servers", {})
+        migrated_count = 0
+        
+        for key, server_data in servers.items():
+            changed = False
+            
+            # check_history - обязательно для работы
+            if 'check_history' not in server_data:
+                server_data['check_history'] = []
+                # Переносим старую историю, если есть
+                if 'history' in server_data:
+                    server_data['check_history'] = server_data.get('history', [])
+                changed = True
+            
+            # consecutive_successes - счётчик успешных проверок подряд
+            if 'consecutive_successes' not in server_data:
+                server_data['consecutive_successes'] = 0
+                changed = True
+            
+            # active - статус активности (после 3 успешных проверок)
+            if 'active' not in server_data:
+                server_data['active'] = False
+                changed = True
+            
+            # staging_until - время до которого сервер считается кандидатом
+            if 'staging_until' not in server_data:
+                server_data['staging_until'] = None
+                changed = True
+            
+            # consecutive_failures - счётчик неудачных проверок подряд
+            if 'consecutive_failures' not in server_data:
+                server_data['consecutive_failures'] = 0
+                changed = True
+            
+            # bad_hours - часы с плохой стабильностью
+            if 'bad_hours' not in server_data:
+                server_data['bad_hours'] = []
+                changed = True
+            
+            # Обработка случая, когда check_history пустой, но есть speed_history
+            # Создаём check_history из speed_history для обратной совместимости
+            if not server_data['check_history'] and server_data.get('speed_history'):
+                # Получаем время последней проверки
+                last_seen = server_data.get('last_seen')
+                if last_seen:
+                    try:
+                        last_seen_dt = datetime.fromisoformat(last_seen)
+                    except:
+                        last_seen_dt = datetime.now()
+                else:
+                    last_seen_dt = datetime.now()
+                
+                for i, speed in enumerate(server_data['speed_history']):
+                    # Создаём время с небольшим сдвигом для каждой записи
+                    check_time = last_seen_dt - timedelta(hours=(len(server_data['speed_history']) - i) * 2)
+                    check_entry = {
+                        'timestamp': check_time.isoformat(),
+                        'success': speed > 0,
+                        'speed': speed,
+                        'latency': None,
+                        'error': None
+                    }
+                    server_data['check_history'].append(check_entry)
+                changed = True
+            
+            if changed:
+                migrated_count += 1
+        
+        if migrated_count > 0:
+            print(f"🔄 Миграция базы данных: обновлено {migrated_count} записей")
+            self._save()
     
     def _get_server_key(self, outbound: dict) -> str:
         key_parts = [
@@ -393,21 +473,25 @@ class ServerRatingSystem:
         # Группируем по часам (с учётом смещения TZ_OFFSET)
         hour_stats = {}
         for check in check_history[-PATTERN_HOURS:]:
-            ts = datetime.fromisoformat(check['timestamp'])
-            # Применяем смещение часового пояса
-            hour = (ts.hour + TZ_OFFSET) % 24
-            if hour not in hour_stats:
-                hour_stats[hour] = {'total': 0, 'success': 0}
-            hour_stats[hour]['total'] += 1
-            if check.get('success', False):
-                hour_stats[hour]['success'] += 1
+            try:
+                ts = datetime.fromisoformat(check['timestamp'])
+                # Применяем смещение часового пояса
+                hour = (ts.hour + TZ_OFFSET) % 24
+                if hour not in hour_stats:
+                    hour_stats[hour] = {'total': 0, 'success': 0}
+                hour_stats[hour]['total'] += 1
+                if check.get('success', False):
+                    hour_stats[hour]['success'] += 1
+            except (ValueError, TypeError):
+                continue
         
         # Определяем часы с плохой стабильностью
         bad_hours = []
         for hour, stats in hour_stats.items():
-            success_rate = stats['success'] / stats['total']
-            if success_rate < BAD_HOURS_THRESHOLD:
-                bad_hours.append(hour)
+            if stats['total'] > 0:
+                success_rate = stats['success'] / stats['total']
+                if success_rate < BAD_HOURS_THRESHOLD:
+                    bad_hours.append(hour)
         server_data['bad_hours'] = bad_hours
     
     def _apply_quarantine(self, server_data: dict):
@@ -437,7 +521,8 @@ class ServerRatingSystem:
                 'category': CATEGORY_UNSTABLE, 'quarantine_until': None, 'bad_hours': [],
                 'consecutive_successes': 0,   # для зомби-серверов
                 'active': False,               # стал активным после 3 успешных проверок
-                'staging_until': None          # временная метка, до которой сервер считается кандидатом
+                'staging_until': None,         # временная метка, до которой сервер считается кандидатом
+                'consecutive_failures': 0
             }
         
         server = servers[key]
@@ -453,6 +538,11 @@ class ServerRatingSystem:
             'latency': None,  # можно добавить позже
             'error': None
         }
+        
+        # Инициализируем check_history, если его нет (на случай проблем с миграцией)
+        if 'check_history' not in server:
+            server['check_history'] = []
+        
         server['check_history'].append(check_entry)
         # Ограничиваем историю (например, 100 записей)
         if len(server['check_history']) > 100:
@@ -635,7 +725,10 @@ class ServerRatingSystem:
         for key, server_data in servers.items():
             if group and server_data.get('group') != group:
                 continue
-            last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
+            try:
+                last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
+            except (ValueError, TypeError):
+                last_seen = now
             hours_since = (now - last_seen).total_seconds() / 3600
             rating = server_data.get('rating', 0)
             category = server_data.get('category', CATEGORY_UNSTABLE)
@@ -657,7 +750,10 @@ class ServerRatingSystem:
         to_remove = []
         
         for key, server_data in servers.items():
-            last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
+            try:
+                last_seen = datetime.fromisoformat(server_data.get('last_seen', now.isoformat()))
+            except (ValueError, TypeError):
+                last_seen = now
             total_tests = server_data.get('total_tests', 0)
             successful_tests = server_data.get('successful_tests', 0)
             rating = server_data.get('rating', 0)
