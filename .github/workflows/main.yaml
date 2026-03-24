@@ -101,7 +101,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add config.json hiddify_config.json servers_ratings.json \
+          git add config.json *.json *.json.tmp \
             ruleset/srs/*.srs ruleset/srs/block/*.srs \
             ruleset/hiddify/*.srs ruleset/hiddify/block/*.srs
 
