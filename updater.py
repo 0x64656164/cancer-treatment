@@ -331,9 +331,12 @@ class ServerRatingSystem:
         
         # Если сервер в карантине, возвращаем "C" с пометкой
         if server_data.get('quarantine_until'):
-            quarantine_until = datetime.fromisoformat(server_data['quarantine_until'])
-            if quarantine_until > datetime.now():
-                return CATEGORY_UNSTABLE
+            try:
+                quarantine_until = datetime.fromisoformat(server_data['quarantine_until'])
+                if quarantine_until > datetime.now():
+                    return CATEGORY_UNSTABLE
+            except (ValueError, TypeError):
+                pass
         
         if rating >= CATEGORY_THRESHOLDS[CATEGORY_STABLE] and stability >= STABILITY_FOR_CATEGORY_A:
             return CATEGORY_STABLE
@@ -546,24 +549,20 @@ class ServerRatingSystem:
             # Пропускаем серверы в карантине
             quarantine_until = server_data.get('quarantine_until')
             if quarantine_until:
-                if datetime.fromisoformat(quarantine_until) > datetime.now():
-                    continue
+                try:
+                    if datetime.fromisoformat(quarantine_until) > datetime.now():
+                        continue
+                except (ValueError, TypeError):
+                    pass
             
             # Использование временных паттернов: пропускаем, если текущий час в bad_hours
             bad_hours = server_data.get('bad_hours', [])
             if current_hour in bad_hours:
                 continue
             
-            # Используем только активные серверы (или staging, если активных мало)
-            # В обычном режиме берём только активные
+            # Используем только активные серверы
             if not server_data.get('active', False):
-                # Если сервер не активен, но находится в staging и прошло менее ZOMBIE_STAGING_MINUTES, можно рассмотреть
-                staging_until = server_data.get('staging_until')
-                if staging_until and datetime.fromisoformat(staging_until) > datetime.now():
-                    # Можно включить, но с меньшим приоритетом. Для простоты пока пропускаем.
-                    continue
-                else:
-                    continue
+                continue
             
             filtered.append({
                 'key': key, 'outbound': server_data['outbound'], 'link': server_data.get('link'),
@@ -589,8 +588,12 @@ class ServerRatingSystem:
                     continue
                 # Пропускаем в карантине
                 quarantine_until = server_data.get('quarantine_until')
-                if quarantine_until and datetime.fromisoformat(quarantine_until) > datetime.now():
-                    continue
+                if quarantine_until:
+                    try:
+                        if datetime.fromisoformat(quarantine_until) > datetime.now():
+                            continue
+                    except (ValueError, TypeError):
+                        pass
                 # Пропускаем, если час в bad_hours
                 if current_hour in server_data.get('bad_hours', []):
                     continue
@@ -598,7 +601,12 @@ class ServerRatingSystem:
                 # Включаем только серверы, которые либо активны, либо находятся в стадии активации (staging)
                 active_flag = server_data.get('active', False)
                 staging_until = server_data.get('staging_until')
-                is_candidate = active_flag or (staging_until and datetime.fromisoformat(staging_until) > datetime.now())
+                is_candidate = active_flag
+                if not is_candidate and staging_until:
+                    try:
+                        is_candidate = datetime.fromisoformat(staging_until) > datetime.now()
+                    except (ValueError, TypeError):
+                        is_candidate = False
                 if not is_candidate:
                     continue
                 
@@ -1002,6 +1010,30 @@ def filter_by_cidr(links: list) -> list:
 
 
 # ===========================================================================
+# ЗАГРУЗКА ПОДПИСОК
+# ===========================================================================
+
+def fetch_links_from_subscriptions() -> list:
+    links, seen = [], set()
+    for url in SUB_LINKS:
+        print(f"Загрузка подписки: {url}")
+        try:
+            raw = requests.get(url, timeout=15).text
+            found = re.findall(r'^(?:vless|vmess|trojan|hy2|hysteria2):\/\/.+$', raw, re.MULTILINE)
+            new = 0
+            for link in found:
+                if link not in seen:
+                    seen.add(link)
+                    links.append(link)
+                    new += 1
+            print(f"  → Найдено: {len(found)}, новых: {new}")
+        except Exception as e:
+            print(f"  ✗ Ошибка загрузки {url}: {e}")
+    print(f"\nИтого уникальных: {len(links)}\n")
+    return links
+
+
+# ===========================================================================
 # ЗОНДИРОВАНИЕ (ТРЁХЭТАПНОЕ)
 # ===========================================================================
 
@@ -1173,20 +1205,15 @@ def test_servers_batch_parallel(links: List[str], group: str, rating_system: Ser
     completed = 0
     
     # Для приоритизации нужно знать категорию сервера (если он уже есть в базе)
-    # Создаём словарь категорий для быстрого доступа
     category_map = {}
     servers_data = rating_system.data.get("servers", {})
     for key, data in servers_data.items():
         outbound = data.get('outbound', {})
-        # Сопоставляем по server:port и uuid
         for link in links:
-            # Упрощённое сопоставление: можно по тегу или ссылке
-            # Вместо сложного сравнения, просто проверим, есть ли этот link в базе
             if data.get('link') == link:
                 category_map[link] = data.get('category', CATEGORY_UNSTABLE)
                 break
     
-    # Сортируем ссылки по категории (A > B > C)
     def link_priority(link):
         cat = category_map.get(link, CATEGORY_UNSTABLE)
         return {'A': 0, 'B': 1, 'C': 2}.get(cat, 2)
@@ -1238,7 +1265,6 @@ def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem)
     europe_candidates = []
     russia_candidates = []
     
-    # Разделяем по группам
     if 'EUROPE' in enabled_groups:
         europe_candidates = [l for l in all_links if not _is_russia(l)]
     if 'RUSSIA' in enabled_groups:
@@ -1248,7 +1274,6 @@ def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem)
     print(f"  EUROPE: {len(europe_candidates)}")
     print(f"  RUSSIA: {len(russia_candidates)}")
     
-    # Ограничиваем количество для тестирования (быстрый режим)
     use_fast_mode = len(europe_candidates) + len(russia_candidates) > FAST_MODE_THRESHOLD
     
     if use_fast_mode:
@@ -1263,33 +1288,27 @@ def smart_server_search(all_links: List[str], rating_system: ServerRatingSystem)
     
     found_servers = {"EUROPE": [], "RUSSIA": []}
     
-    # Тестируем европейские серверы
     if europe_candidates:
         print(f"\n🌍 ТЕСТИРОВАНИЕ EUROPE ({len(europe_candidates)} серверов)")
         europe_results = test_servers_batch_parallel(europe_candidates, "EUROPE", rating_system)
-        
         for result in europe_results:
             found_servers[result['group']].append(result)
             rating_system.add_test_result(
                 result['outbound'], result['speed'], result['country'], 
                 result['group'], link=result['link']
             )
-        
         print(f"\n  ✓ Найдено рабочих EUROPE: {len([r for r in europe_results if r['group'] == 'EUROPE'])}")
         print(f"  ✓ Найдено рабочих RUSSIA: {len([r for r in europe_results if r['group'] == 'RUSSIA'])}")
     
-    # Тестируем российские серверы
     if russia_candidates:
         print(f"\n🇷🇺 ТЕСТИРОВАНИЕ RUSSIA ({len(russia_candidates)} серверов)")
         russia_results = test_servers_batch_parallel(russia_candidates, "RUSSIA", rating_system)
-        
         for result in russia_results:
             found_servers[result['group']].append(result)
             rating_system.add_test_result(
                 result['outbound'], result['speed'], result['country'], 
                 result['group'], link=result['link']
             )
-        
         print(f"\n  ✓ Найдено рабочих RUSSIA: {len([r for r in russia_results if r['group'] == 'RUSSIA'])}")
         print(f"  ✓ Найдено рабочих EUROPE: {len([r for r in russia_results if r['group'] == 'EUROPE'])}")
     
@@ -1428,7 +1447,6 @@ def write_config(profile: dict, groups: dict):
 
     output = profile["output_file"]
     header = profile.get("file_header")
-    # Атомарная запись: сначала во временный файл, затем rename
     tmp_output = output + '.tmp'
     with open(tmp_output, 'w', encoding='utf-8') as f:
         if header:
@@ -1445,7 +1463,6 @@ def write_config(profile: dict, groups: dict):
 # ===========================================================================
 
 def send_telegram_message(text: str) -> bool:
-    """Отправляет сообщение в Telegram, используя переменные окружения."""
     bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
     chat_id = os.environ.get('TELEGRAM_CHAT_ID')
     if not bot_token or not chat_id:
@@ -1513,9 +1530,7 @@ def main(profile_names: list):
     print("🎯 СИСТЕМА РЕЙТИНГА СЕРВЕРОВ (ТРЁХЭТАПНЫЙ ПОИСК + КАТЕГОРИИ)")
     print("="*80)
     
-    # Загружаем сохранённое состояние массового падения
     _load_mass_failure_state()
-    
     rating_system = ServerRatingSystem()
     rating_system.cleanup()
     
@@ -1547,22 +1562,13 @@ def main(profile_names: list):
     
     found_servers = smart_server_search(all_links, rating_system)
     
-    # Проверка на массовые падения (после добавления результатов)
-    # Собираем все результаты проверок новых серверов
+    # Проверка на массовые падения
     all_results = []
     for grp in found_servers:
         for res in found_servers[grp]:
             all_results.append({'status': 'alive' if res['speed'] > 0 else 'dead'})
     if rating_system._check_mass_failure(all_results):
-        # Если массовое падение, используем предыдущее состояние (не обновляем конфиг)
         print("⚠️ Режим защиты активен, используем предыдущий стабильный конфиг")
-        # Здесь можно загрузить предыдущий список активных серверов из файла или просто не обновлять
-        # Для простоты просто пропускаем обновление конфига, но продолжаем ретест
-        # Чтобы не терять данные, всё равно сохраним результаты в базу, но конфиг не перезапишем.
-        # Вместо этого, возможно, нужно вернуться к предыдущему состоянию.
-        # Пока просто выходим.
-        print("❌ Завершаем работу без обновления конфигов.")
-        # Всё равно отправляем отчёт
         stats = rating_system.get_statistics()
         send_telegram_report(stats, rating_system, time.time() - start_time)
         return
@@ -1615,7 +1621,6 @@ def main(profile_names: list):
     print("📋 ФОРМИРОВАНИЕ КОНФИГА")
     print("="*80)
     
-    # Получаем серверы с учётом временных паттернов (передаём текущий час с учётом TZ_OFFSET)
     current_hour = (datetime.now().hour + TZ_OFFSET) % 24
     europe_servers = rating_system.get_top_servers(group='EUROPE', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour)
     russia_servers = rating_system.get_top_servers(group='RUSSIA', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour)
@@ -1624,7 +1629,6 @@ def main(profile_names: list):
     
     if not europe_servers and not russia_servers:
         print("\n❌ Критическая ошибка: нет серверов с достаточным рейтингом!")
-        # Отправляем критическое сообщение в Telegram
         send_telegram_message("🚨 <b>КРИТИЧЕСКАЯ ОШИБКА:</b> Нет серверов с достаточным рейтингом для формирования конфига!")
         return
     
@@ -1659,7 +1663,6 @@ def main(profile_names: list):
     elapsed = time.time() - start_time
     print(f"\n✅ Обновление завершено успешно! Время выполнения: {elapsed:.1f} сек.")
     
-    # Отправляем отчёт в Telegram
     stats = rating_system.get_statistics()
     send_telegram_report(stats, rating_system, elapsed)
 
