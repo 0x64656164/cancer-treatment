@@ -25,7 +25,17 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Install sing-box
+      - name: Cache sing-box binary
+        id: cache-singbox
+        uses: actions/cache@v3
+        with:
+          path: ./sing-box
+          key: ${{ runner.os }}-singbox-v1.10.0
+          restore-keys: |
+            ${{ runner.os }}-singbox-
+
+      - name: Install sing-box (if not cached)
+        if: steps.cache-singbox.outputs.cache-hit != 'true'
         run: |
           VERSION=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | jq -r .tag_name | sed 's/v//')
           URL="https://github.com/SagerNet/sing-box/releases/download/v${VERSION}/sing-box-${VERSION}-linux-amd64.tar.gz"
@@ -33,6 +43,21 @@ jobs:
           tar -xzf sing-box.tar.gz
           mv sing-box-*/sing-box .
           chmod +x sing-box
+          # Сохраняем версию для кэша
+          echo "$VERSION" > sing-box-version.txt
+
+      - name: Verify sing-box exists
+        run: |
+          if [ ! -f "./sing-box" ]; then
+            echo "❌ sing-box binary not found, downloading..."
+            VERSION=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | jq -r .tag_name | sed 's/v//')
+            URL="https://github.com/SagerNet/sing-box/releases/download/v${VERSION}/sing-box-${VERSION}-linux-amd64.tar.gz"
+            curl -Lo sing-box.tar.gz "$URL"
+            tar -xzf sing-box.tar.gz
+            mv sing-box-*/sing-box .
+            chmod +x sing-box
+          fi
+          ./sing-box version
           echo "$(pwd)" >> $GITHUB_PATH
 
       - name: Compile Rule Sets (JSON to SRS)
@@ -46,8 +71,13 @@ jobs:
             for file in ruleset/json/*.json; do
               [ -e "$file" ] || continue
               filename=$(basename "$file" .json)
-              ./sing-box rule-set compile "$file" -o "ruleset/srs/${filename}.srs"
-              echo "Compiled: $filename"
+              # Проверяем, изменился ли исходный файл с момента последней компиляции
+              if [ ! -f "ruleset/srs/${filename}.srs" ] || [ "$file" -nt "ruleset/srs/${filename}.srs" ]; then
+                ./sing-box rule-set compile "$file" -o "ruleset/srs/${filename}.srs"
+                echo "Compiled: $filename"
+              else
+                echo "Skipped (up to date): $filename"
+              fi
             done
           fi
 
@@ -56,8 +86,12 @@ jobs:
             for file in ruleset/json/block/*.json; do
               [ -e "$file" ] || continue
               filename=$(basename "$file" .json)
-              ./sing-box rule-set compile "$file" -o "ruleset/srs/block/${filename}.srs"
-              echo "Compiled block rule: $filename"
+              if [ ! -f "ruleset/srs/block/${filename}.srs" ] || [ "$file" -nt "ruleset/srs/block/${filename}.srs" ]; then
+                ./sing-box rule-set compile "$file" -o "ruleset/srs/block/${filename}.srs"
+                echo "Compiled block rule: $filename"
+              else
+                echo "Skipped (up to date): block/$filename"
+              fi
             done
           fi
 
@@ -66,8 +100,12 @@ jobs:
             for file in ruleset/json/hiddify/*.json; do
               [ -e "$file" ] || continue
               filename=$(basename "$file" .json)
-              ./sing-box rule-set compile "$file" -o "ruleset/hiddify/${filename}.srs"
-              echo "Compiled hiddify rule: $filename"
+              if [ ! -f "ruleset/hiddify/${filename}.srs" ] || [ "$file" -nt "ruleset/hiddify/${filename}.srs" ]; then
+                ./sing-box rule-set compile "$file" -o "ruleset/hiddify/${filename}.srs"
+                echo "Compiled hiddify rule: $filename"
+              else
+                echo "Skipped (up to date): hiddify/$filename"
+              fi
             done
           fi
 
@@ -76,8 +114,12 @@ jobs:
             for file in ruleset/json/block/*.json; do
               [ -e "$file" ] || continue
               filename=$(basename "$file" .json)
-              ./sing-box rule-set compile "$file" -o "ruleset/hiddify/block/${filename}.srs"
-              echo "Compiled hiddify block rule: $filename"
+              if [ ! -f "ruleset/hiddify/block/${filename}.srs" ] || [ "$file" -nt "ruleset/hiddify/block/${filename}.srs" ]; then
+                ./sing-box rule-set compile "$file" -o "ruleset/hiddify/block/${filename}.srs"
+                echo "Compiled hiddify block rule: $filename"
+              else
+                echo "Skipped (up to date): hiddify/block/$filename"
+              fi
             done
           fi
 
@@ -90,9 +132,6 @@ jobs:
           TZ_OFFSET: 3  # для MSK, можно изменить
         run: python updater.py
 
-      # - name: Run Hiddify updater
-      #   run: python hiddify_updater.py
-
       - name: Get current date
         run: echo "NOW=$(TZ='Europe/Moscow' date +'%d.%m.%Y %H:%M:%S %Z')" >> $GITHUB_ENV
 
@@ -101,9 +140,13 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add config.json *.json *.json.tmp \
+          # Добавляем только изменённые файлы, игнорируя временные
+          git add config.json hiddify_config.json servers_ratings.json mass_failure_state.json \
             ruleset/srs/*.srs ruleset/srs/block/*.srs \
-            ruleset/hiddify/*.srs ruleset/hiddify/block/*.srs
+            ruleset/hiddify/*.srs ruleset/hiddify/block/*.srs || true
+
+          # Удаляем временные файлы, если они попали в staging
+          git reset -- *.tmp 2>/dev/null || true
 
           if git diff --staged --quiet; then
             echo "No changes detected"
@@ -111,3 +154,10 @@ jobs:
             git commit -m "Авто-обновление: Конфиг и SRS правила ${{ env.NOW }}"
             git push
           fi
+
+      - name: Cleanup temp files
+        if: always()
+        run: |
+          rm -f *.tmp
+          rm -f sing-box.tar.gz
+          # Не удаляем сам sing-box, чтобы сохранить в кэше
