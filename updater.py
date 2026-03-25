@@ -624,8 +624,9 @@ class ServerRatingSystem:
         
         filtered = []
         added_keys = set()
+        enabled_groups = _get_enabled_groups()
         for key, server_data in servers.items():
-            if group and server_data.get('group') != group:
+            if group and (server_data.get('group') != group or not group in enabled_groups):
                 continue
             rating = server_data.get('rating', 0)
             if rating < min_rating:
@@ -723,7 +724,6 @@ class ServerRatingSystem:
         now = datetime.now()
         candidates = []
         for key, server_data in servers.items():
-            print(key)
             if group and server_data.get('group') != group:
                 continue
             try:
