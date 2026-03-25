@@ -723,6 +723,7 @@ class ServerRatingSystem:
         now = datetime.now()
         candidates = []
         for key, server_data in servers.items():
+            print(key)
             if group and server_data.get('group') != group:
                 continue
             try:
@@ -1628,7 +1629,6 @@ def main(profile_names: list):
     
     _load_mass_failure_state()
     rating_system = ServerRatingSystem()
-    rating_system.cleanup()
     
     print("\n" + "="*80)
     print("📥 ЗАГРУЗКА НОВЫХ СЕРВЕРОВ")
@@ -1706,6 +1706,8 @@ def main(profile_names: list):
                             print(f"    ✗ {server['tag'][:35]} | не отвечает")
                     except Exception as e:
                         print(f"    ⚠️ {server['tag'][:35]} | ошибка: {str(e)[:30]}")
+                        
+    rating_system.cleanup()
     
     print("\n" + "="*80)
     print("⚙️  ПЕРЕСЧЁТ РЕЙТИНГОВ")
