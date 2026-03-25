@@ -47,7 +47,7 @@ MAX_SERVERS_IN_DB = 150
 
 # Параметры тестирования
 TEST_NEW_SERVERS_COUNT = 40
-RETEST_OLD_SERVERS_COUNT = 20
+RETEST_OLD_SERVERS_COUNT = 30
 RETEST_LOW_RATING_FIRST = True
 
 # ОПТИМИЗИРОВАННЫЕ НАСТРОЙКИ
@@ -158,8 +158,8 @@ PROBE_ROUNDS = 3
 PROBE_DELAY = 30
 PROBE_URL = 'https://cachefly.cachefly.net/10mb.test'
 FAST_PROBE_URL = 'http://www.gstatic.com/generate_204'
-CONN_TIMEOUT = 1.5
-READ_TIMEOUT = 3
+CONN_TIMEOUT = 3
+READ_TIMEOUT = 5
 
 MIN_SUCCESS_ROUNDS = 1
 SCORE_FLOOR_RATIO = 0.25
