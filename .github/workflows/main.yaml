@@ -141,7 +141,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           # Добавляем только изменённые файлы, игнорируя временные
-          git add --ignore-errors config.json hiddify_config.json servers_ratings.json mass_failure_state.json \
+          git add --ignore-errors config.json hiddify_config.json servers_ratings.json \
             ruleset/srs/*.srs ruleset/srs/block/*.srs \
             ruleset/hiddify/*.srs ruleset/hiddify/block/*.srs || true
 
