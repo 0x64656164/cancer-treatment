@@ -1684,7 +1684,7 @@ def send_telegram_report(stats: dict, rating_system: ServerRatingSystem, elapsed
     
     # Добавляем ссылку на скачивание, если доступна
     if download_url:
-        message += f"\n🔗 <a href=\"{download_url}\">Скачать конфиг (артефакты)</a>\n"
+        message += f"\n🔗 <a href=\"{download_url}\">Детали в GitHub Actions</a>\n"
     
     # Добавляем информацию о категориях серверов
     categories = stats.get('categories', {'A': 0, 'B': 0, 'C': 0})
