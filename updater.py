@@ -38,7 +38,7 @@ RATING_SLIDING_WINDOW = 24  # количество последних прове
 # Параметры отбора серверов
 TOP_SERVERS_PERCENT = 0.7
 MIN_RATING_THRESHOLD = 0.15
-MAX_SERVERS_IN_CONFIG = 100
+MAX_SERVERS_IN_CONFIG = 50
 
 # Параметры очистки базы
 MAX_SERVER_AGE_HOURS = 6
@@ -47,7 +47,7 @@ MAX_SERVERS_IN_DB = 150
 
 # Параметры тестирования
 TEST_NEW_SERVERS_COUNT = 40
-RETEST_OLD_SERVERS_COUNT = 30
+RETEST_OLD_SERVERS_COUNT = 50
 RETEST_LOW_RATING_FIRST = True
 
 # ОПТИМИЗИРОВАННЫЕ НАСТРОЙКИ
@@ -82,7 +82,7 @@ MASS_FAILURE_STATE_FILE = 'mass_failure_state.json'
 # Зомби-серверы (работают только на момент проверки)
 ZOMBIE_CONSECUTIVE_PASSES = 3    # если 3 проверки подряд успешны, то не зомби
 ZOMBIE_STAGING_MINUTES = 60      # время, в течение которого сервер считается кандидатом (раньше было 15)
-ZOMBIE_MAX_SPEED = 1.0           # скорость <1 Mbps - подозрение
+ZOMBIE_MAX_SPEED = 9.0           # скорость <1 Mbps - подозрение
 
 # Прогнозирование (временные паттерны)
 PATTERN_HOURS = 24
@@ -352,6 +352,10 @@ class ServerRatingSystem:
         components = {'speed': 0.0, 'stability': 0.0, 'uptime': 0.0, 'consistency': 0.0, 'freshness': 0.0}
         
         if not speeds or total_tests == 0:
+            return 0.0, components
+        
+        # Неактивные серверы (не прошедшие порог ZOMBIE_CONSECUTIVE_PASSES) получают нулевой рейтинг
+        if not server_data.get('active', False):
             return 0.0, components
         
         # Скорость (средняя)
