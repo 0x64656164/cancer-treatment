@@ -49,30 +49,22 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇪🇸 Spain — #566",
         "🇩🇪 Germany — #608",
-        "🇵🇱 Poland — #745",
-        "🇫🇷 France — #559",
-        "🇱🇹 Lithuania — #621",
         "🇱🇹 Lithuania — #552",
+        "🇱🇹 Lithuania — #621",
         "🇱🇹 Lithuania — #553",
-        "🇱🇹 Lithuania — #564",
-        "🇮🇹 Italy — #548"
+        "🇱🇹 Lithuania — #564"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇪🇸 Spain — #566",
         "🇩🇪 Germany — #608",
-        "🇵🇱 Poland — #745",
-        "🇫🇷 France — #559",
-        "🇱🇹 Lithuania — #621",
         "🇱🇹 Lithuania — #552",
+        "🇱🇹 Lithuania — #621",
         "🇱🇹 Lithuania — #553",
-        "🇱🇹 Lithuania — #564",
-        "🇮🇹 Italy — #548"
+        "🇱🇹 Lithuania — #564"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -84,28 +76,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇪🇸 Spain — #566",
-      "server": "212.233.74.16",
-      "server_port": 8443,
-      "uuid": "9490045c-1441-4fb5-aed7-70d55c29cbce",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "zr8_rtHm86s_G1gfRwNtunStGngYZSdYkA3PyBFXpDg",
-          "short_id": "48fccabc158a4c22"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
     },
     {
       "type": "vless",
@@ -131,54 +101,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #745",
-      "server": "109.120.183.101",
-      "server_port": 7443,
-      "uuid": "ab0e1c3c-4502-47a1-8073-0b4ccb068541",
-      "flow": "",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Mkxs9LT0tRg208EbLXmP-_dQYlsPOgaTwZ3acwgVVWs",
-          "short_id": "fff8"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷 France — #559",
-      "server": "89.208.220.36",
-      "server_port": 443,
-      "uuid": "c55ed835-16c5-0004-8759-78ac2cc7ac18",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "convert24.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "HFlu11M_xqBayi6pD2ZyC30VobHLofr4JpndMGC6OjI",
-          "short_id": "0d3c8408d1c8fecb"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🇱🇹 Lithuania — #621",
+      "tag": "🇱🇹 Lithuania — #552",
       "server": "89.208.223.26",
-      "server_port": 8443,
-      "uuid": "c623d428-bdac-43fd-a8d2-f2f0a8d1c13b",
+      "server_port": 443,
+      "uuid": "1803b89f-8458-4151-9d57-f89188d7aa8a",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
@@ -197,10 +123,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇱🇹 Lithuania — #552",
+      "tag": "🇱🇹 Lithuania — #621",
       "server": "89.208.223.26",
-      "server_port": 443,
-      "uuid": "1803b89f-8458-4151-9d57-f89188d7aa8a",
+      "server_port": 8443,
+      "uuid": "c623d428-bdac-43fd-a8d2-f2f0a8d1c13b",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
@@ -253,28 +179,6 @@
           "enabled": true,
           "public_key": "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA",
           "short_id": "e0ef3d5c0aacb615"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🇮🇹 Italy — #548",
-      "server": "146.185.240.117",
-      "server_port": 8443,
-      "uuid": "921849a0-828a-48d2-9224-47a10e29824e",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "_CjW0Khlrr5z5oc9Oy6-w2ZEanz-zMBktVn5EOX9oTM",
-          "short_id": "6419bed7fd0a2cff"
         },
         "utls": {
           "enabled": true,
