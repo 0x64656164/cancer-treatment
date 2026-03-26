@@ -1584,29 +1584,143 @@ def send_telegram_message(text: str) -> bool:
         return False
 
 
-def send_telegram_report(stats: dict, rating_system: ServerRatingSystem, elapsed_seconds: float):
-    """Формирует красивое сообщение с отчётом и отправляет."""
-    categories = stats['categories']
+def send_telegram_report(stats: dict, rating_system: ServerRatingSystem, elapsed_seconds: float, 
+                         groups: dict = None, profile_names: list = None, top_servers: dict = None):
+    """
+    Формирует детальное сообщение о смене конфига с топ-серверами и статистикой.
+    """
+    # Получаем текущую дату и время
+    now = datetime.now()
+    date_str = now.strftime("%d.%m.%Y %H:%M")
+    
+    # Подсчитываем общее количество серверов в конфиге
+    servers_in_config = 0
+    europe_count = len(groups.get("EUROPE", [])) if groups else stats.get('europe', 0)
+    russia_count = len(groups.get("RUSSIA", [])) if groups else stats.get('russia', 0)
+    servers_in_config = europe_count + russia_count
+    
+    # Получаем топ-3 сервера по рейтингу (если переданы)
+    top1 = top2 = top3 = "Нет данных"
+    top1_rating = top2_rating = top3_rating = 0
+    
+    if top_servers:
+        all_servers = []
+        if top_servers.get("EUROPE"):
+            all_servers.extend([(s['outbound'].get('tag', 'Unknown'), s['rating']) for s in top_servers["EUROPE"]])
+        if top_servers.get("RUSSIA"):
+            all_servers.extend([(s['outbound'].get('tag', 'Unknown'), s['rating']) for s in top_servers["RUSSIA"]])
+        
+        all_servers.sort(key=lambda x: x[1], reverse=True)
+        
+        if len(all_servers) >= 1:
+            top1, top1_rating = all_servers[0]
+        if len(all_servers) >= 2:
+            top2, top2_rating = all_servers[1]
+        if len(all_servers) >= 3:
+            top3, top3_rating = all_servers[2]
+    
+    # Рассчитываем качество конфига (упрощенная метрика)
+    # Используем процент активных серверов, средний рейтинг и стабильность
+    active_ratio = stats.get('active', 0) / max(stats.get('total', 1), 1)
+    
+    # Получаем средний рейтинг активных серверов
+    servers_data = rating_system.data.get("servers", {})
+    active_ratings = []
+    for server in servers_data.values():
+        if server.get('active', False):
+            active_ratings.append(server.get('rating', 0))
+    
+    avg_rating = sum(active_ratings) / len(active_ratings) if active_ratings else 0
+    avg_stability = sum(s.get('rating_components', {}).get('stability', 0) for s in servers_data.values() if s.get('active', False)) / max(len(active_ratings), 1)
+    
+    # Качество конфига (0-100)
+    quality_score = int((active_ratio * 0.4 + avg_rating * 0.4 + avg_stability * 0.2) * 100)
+    quality_score = min(100, max(0, quality_score))
+    
+    # Определяем иконку качества
+    if quality_score >= 80:
+        quality_icon = "🟢"
+        quality_text = "Отлично"
+    elif quality_score >= 60:
+        quality_icon = "🟡"
+        quality_text = "Хорошо"
+    elif quality_score >= 40:
+        quality_icon = "🟠"
+        quality_text = "Удовлетворительно"
+    else:
+        quality_icon = "🔴"
+        quality_text = "Плохо"
+    
+    # Формируем список профилей
+    profiles_str = ", ".join(profile_names) if profile_names else "srs, hiddify"
+    
+    # Ссылка на скачивание конфига (если используется GitHub Actions)
+    github_repo = os.environ.get('GITHUB_REPOSITORY', '')
+    github_run_id = os.environ.get('GITHUB_RUN_ID', '')
+    
+    download_url = f"https://github.com/{github_repo}/actions/runs/{github_run_id}" if github_repo and github_run_id else ""
+    
+    # Основное сообщение
     message = (
-        f"🛰️ <b>VLESS Monitor Report</b>\n"
-        f"───────────────────\n"
-        f"📊 <b>Статистика:</b>\n"
-        f"   Всего серверов: {stats['total']}\n"
-        f"   Активных: {stats['active']}\n"
-        f"   EUROPE: {stats['europe']}\n"
-        f"   RUSSIA: {stats['russia']}\n"
-        f"\n📈 <b>Категории:</b>\n"
-        f"   🟢 Стабильные: {categories['A']}\n"
-        f"   🟡 Средние: {categories['B']}\n"
-        f"   🔴 Нестабильные: {categories['C']}\n"
-        f"\n⏱️ Время выполнения: {elapsed_seconds:.1f} сек.\n"
-        f"\n🔗 <a href='https://github.com/{os.environ.get('GITHUB_REPOSITORY', '')}/actions/runs/{os.environ.get('GITHUB_RUN_ID', '')}'>Детали в GitHub Actions</a>"
+        f"🔄 <b>КОНФИГ ОБНОВЛЕН</b> 🔄\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"📅 <b>Время:</b> {date_str}\n"
+        f"📁 <b>Профили:</b> {profiles_str}\n"
+        f"📦 <b>Серверов в конфиге:</b> {servers_in_config}\n"
+        f"   🌍 EUROPE: {europe_count} | 🇷🇺 RUSSIA: {russia_count}\n"
+        f"\n"
+        f"🏆 <b>Топ-3 по качеству:</b>\n"
+        f"   1️⃣ {top1[:35]} — {top1_rating:.3f} ⭐\n"
+        f"   2️⃣ {top2[:35]} — {top2_rating:.3f} ⭐\n"
+        f"   3️⃣ {top3[:35]} — {top3_rating:.3f} ⭐\n"
+        f"\n"
+        f"📊 <b>Качество конфига:</b> {quality_icon} {quality_score} / 100 ({quality_text})\n"
+        f"   🟢 Активные серверы: {stats.get('active', 0)}/{stats.get('total', 0)} ({int(active_ratio*100)}%)\n"
+        f"   🚀 Средний рейтинг: {avg_rating:.3f}\n"
+        f"   📈 Стабильность: {avg_stability*100:.1f}%\n"
+        f"\n"
+        f"⏱️ <b>Время выполнения:</b> {elapsed_seconds:.1f} сек.\n"
     )
-    # Если критически мало активных серверов, отправляем предупреждение с emoji
-    if stats['active'] < MIN_SERVERS:
-        message = "⚠️ <b>КРИТИЧЕСКАЯ СИТУАЦИЯ!</b>\n" + message
-    send_telegram_message(message)
-
+    
+    # Добавляем ссылку на скачивание, если доступна
+    if download_url:
+        message += f"\n🔗 <a href=\"{download_url}\">Скачать конфиг (артефакты)</a>\n"
+    
+    # Добавляем информацию о категориях серверов
+    categories = stats.get('categories', {'A': 0, 'B': 0, 'C': 0})
+    message += (
+        f"\n📈 <b>Распределение по категориям:</b>\n"
+        f"   🟢 Стабильные (A): {categories.get('A', 0)}\n"
+        f"   🟡 Средние (B): {categories.get('B', 0)}\n"
+        f"   🔴 Нестабильные (C): {categories.get('C', 0)}\n"
+    )
+    
+    # Отправляем сообщение
+    bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
+    chat_id = os.environ.get('TELEGRAM_CHAT_ID')
+    
+    if not bot_token or not chat_id:
+        print("⚠️ Telegram токен или chat_id не заданы в окружении. Сообщение не отправлено.")
+        return False
+    
+    try:
+        url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+        payload = {
+            'chat_id': chat_id,
+            'text': message,
+            'parse_mode': 'HTML',
+            'disable_web_page_preview': True
+        }
+        r = requests.post(url, data=payload, timeout=10)
+        if r.status_code == 200:
+            print("✅ Отчет отправлен в Telegram")
+            return True
+        else:
+            print(f"⚠️ Ошибка отправки в Telegram: {r.status_code} {r.text}")
+            return False
+    except Exception as e:
+        print(f"⚠️ Ошибка отправки в Telegram: {e}")
+        return False
 
 # ===========================================================================
 # ОСНОВНАЯ ФУНКЦИЯ
@@ -1749,6 +1863,12 @@ def main(profile_names: list):
         "RUSSIA": [s['outbound'] for s in russia_servers],
         "ALL": [s['outbound'] for s in europe_servers] + [s['outbound'] for s in russia_servers],
     }
+
+    # Сохраняем топ-серверы для отчета
+    top_servers_for_report = {
+        "EUROPE": europe_servers[:10],  # топ-10 для отчета
+        "RUSSIA": russia_servers[:10]
+    }
     
     print("\n" + "="*80)
     print("💾 ЗАПИСЬ КОНФИГОВ")
@@ -1762,7 +1882,16 @@ def main(profile_names: list):
     print(f"\n✅ Обновление завершено успешно! Время выполнения: {elapsed:.1f} сек.")
     
     stats = rating_system.get_statistics()
-    send_telegram_report(stats, rating_system, elapsed)
+        # Получаем статистику и отправляем улучшенный отчет
+    stats = rating_system.get_statistics()
+    send_telegram_report(
+        stats=stats,
+        rating_system=rating_system,
+        elapsed_seconds=elapsed,
+        groups=groups,
+        profile_names=profile_names,
+        top_servers=top_servers_for_report
+    )
 
 
 if __name__ == "__main__":
