@@ -125,7 +125,7 @@ PROFILES = {
         "ruleset_folder":      "ruleset/hiddify/",
         "route_final":         "proxy",
         "proxy_rule_outbound": "direct",
-        "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
+        "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n//profile-web-page-url: https://0x64656164.github.io/cancer-treatment-site/\n",
         "enabled_groups":      ["EUROPE"],
         "remote_rule_sets":    [],
         "remote_block_rule_sets": [
