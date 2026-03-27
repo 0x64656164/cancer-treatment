@@ -37,7 +37,7 @@ RATING_SLIDING_WINDOW = 24  # количество последних прове
 
 # Параметры отбора серверов
 TOP_SERVERS_PERCENT = 0.7
-MIN_RATING_THRESHOLD = 0.15
+MIN_RATING_THRESHOLD = 0
 MAX_SERVERS_IN_CONFIG = 50
 
 # Параметры очистки базы
