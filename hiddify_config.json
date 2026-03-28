@@ -49,16 +49,26 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇳🇱 The Netherlands — #645",
+        "🇳🇱 The Netherlands — #585",
         "[OpenRay] 🇬🇧 GB-766",
-        "🇵🇱 Poland — #735"
+        "🇫🇮 Finland — #559",
+        "🇵🇱 Poland — #813",
+        "🇨🇭 Switzerland — #267"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇳🇱 The Netherlands — #645",
+        "🇳🇱 The Netherlands — #585",
         "[OpenRay] 🇬🇧 GB-766",
-        "🇵🇱 Poland — #735"
+        "🇫🇮 Finland — #559",
+        "🇵🇱 Poland — #813",
+        "🇨🇭 Switzerland — #267"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,6 +80,72 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "83.166.232.115",
+      "server_port": 9881,
+      "uuid": "0d0a5a50-e18e-496d-8b33-517222872af0",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "io.ozone.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #645",
+      "server": "146.185.209.91",
+      "server_port": 443,
+      "uuid": "5b77fb18-cece-4759-9a81-571f1be53e0c",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "66c17371"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #585",
+      "server": "94.139.246.16",
+      "server_port": 443,
+      "uuid": "5b77fb18-cece-4759-9a81-571f1be53e0c",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "e7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
     },
     {
       "type": "vless",
@@ -95,18 +171,62 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #735",
-      "server": "85.192.32.4",
-      "server_port": 8443,
-      "uuid": "c810e528-730f-4a39-ac96-cad8f909419d",
+      "tag": "🇫🇮 Finland — #559",
+      "server": "109.120.181.142",
+      "server_port": 8445,
+      "uuid": "e99bfb97-fc6f-4949-affb-16df05cf6727",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
-        "server_name": "rbc.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
-          "short_id": "50e09046c0c00159"
+          "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
+          "short_id": "bad5722c72a038"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #813",
+      "server": "89.208.209.232",
+      "server_port": 7888,
+      "uuid": "e99bfb97-fc6f-4949-affb-16df05cf6727",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
+          "short_id": "bad5722c72a038"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "domain_strategy": "prefer_ipv4"
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇭 Switzerland — #267",
+      "server": "83.166.232.115",
+      "server_port": 9882,
+      "uuid": "0d0a5a50-e18e-496d-8b33-517222872af0",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "amd.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
