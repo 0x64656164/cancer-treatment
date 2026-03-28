@@ -1239,7 +1239,7 @@ def probe_server(link: str, category: Optional[str] = None):
                 with SingBoxProxy(link) as proxy:
                     outbound = _fix_outbound(parse_link(proxy, link))
                     outbound["tag"] = tag
-                    outbound["domain_strategy"] = "prefer_ipv4"
+                    #outbound["domain_strategy"] = "prefer_ipv4"
                     exit_country = check_exit_country(proxy)
             except Exception:
                 return None, 0, None
