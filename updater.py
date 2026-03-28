@@ -762,8 +762,12 @@ class ServerRatingSystem:
             total_tests = server_data.get('total_tests', 0)
             successful_tests = server_data.get('successful_tests', 0)
             rating = server_data.get('rating', 0)
-            should_remove = ((last_seen < cutoff) or (successful_tests < MIN_TESTS_TO_KEEP) or
-                            (rating < MIN_RATING_THRESHOLD * 0.5 and total_tests >= 3))
+            is_active = server_data.get('active', False)
+            should_remove = (not is_active) and (
+                (last_seen < cutoff) or
+                (successful_tests < MIN_TESTS_TO_KEEP) or
+                (rating < MIN_RATING_THRESHOLD * 0.5 and total_tests >= 3)
+            )
             if should_remove:
                 to_remove.append(key)
         
@@ -1825,12 +1829,12 @@ def main(profile_names: list):
                     except Exception as e:
                         print(f"    ⚠️ {server['tag'][:35]} | ошибка: {str(e)[:30]}")
                         
-    rating_system.cleanup()
-    
     print("\n" + "="*80)
     print("⚙️  ПЕРЕСЧЁТ РЕЙТИНГОВ")
     print("="*80)
     rating_system.recalculate_all_ratings()
+    
+    rating_system.cleanup()
     rating_system.print_stats()
     
     print("\n" + "="*80)
