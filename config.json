@@ -47,26 +47,18 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇩🇪 Germany — #412",
-        "🇩🇪 Germany — #416",
-        "🇩🇪 Germany — #406",
         "🇩🇪 Germany — #309",
-        "🇵🇱 Poland — #694",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany — #404"
+        "🇵🇱 Poland [*CIDR] VK-1"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇩🇪 Germany — #412",
-        "🇩🇪 Germany — #416",
-        "🇩🇪 Germany — #406",
         "🇩🇪 Germany — #309",
-        "🇵🇱 Poland — #694",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany — #404"
+        "🇵🇱 Poland [*CIDR] VK-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -78,72 +70,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #412",
-      "server": "37.139.33.98",
-      "server_port": 443,
-      "uuid": "d98bb4d0-7915-43e8-9335-dfc688fc8e24",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "n7SozQLXoCxDya7vBJwS5ebj39r4KCUZrfsnBfcCLGs",
-          "short_id": "a4c82e1f0b6d9374"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #416",
-      "server": "146.185.240.64",
-      "server_port": 5555,
-      "uuid": "d98bb4d0-7915-43e8-9335-dfc688fc8e24",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.vk.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "imS00BOMVviktiAFypnoAQkpQ9-cmS-sWasAeTk2aiU",
-          "short_id": "cfd75ffd0a66"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #406",
-      "server": "146.185.240.91",
-      "server_port": 5555,
-      "uuid": "d98bb4d0-7915-43e8-9335-dfc688fc8e24",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.vk.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "imS00BOMVviktiAFypnoAQkpQ9-cmS-sWasAeTk2aiU",
-          "short_id": "9e3378923f8e0007"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
     },
     {
       "type": "vless",
@@ -159,28 +85,6 @@
           "enabled": true,
           "public_key": "4CH3o5zOMcFNMbnwXnkAg0FFepmsc0QzhahXkUzb1ik",
           "short_id": "d8c6b58bcbb0c323"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "domain_strategy": "prefer_ipv4"
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #694",
-      "server": "85.192.32.4",
-      "server_port": 443,
-      "uuid": "d7a492a3-fb7d-4f1c-8cb1-f4773f9c4f80",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
-          "short_id": "764f497dda21c4fc"
         },
         "utls": {
           "enabled": true,
@@ -213,18 +117,18 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #404",
-      "server": "37.139.33.19",
-      "server_port": 4449,
-      "uuid": "d98bb4d0-7915-43e8-9335-dfc688fc8e24",
+      "tag": "🇵🇱 Poland [*CIDR] VK-1",
+      "server": "85.192.32.4",
+      "server_port": 443,
+      "uuid": "d2ad562d-5742-4d29-bc42-9efe7d85842c",
       "flow": "xtls-rprx-vision",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "rbc.ru",
         "reality": {
           "enabled": true,
-          "public_key": "n7SozQLXoCxDya7vBJwS5ebj39r4KCUZrfsnBfcCLGs",
-          "short_id": "3689d0c3"
+          "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
+          "short_id": "50e09046c0c00159"
         },
         "utls": {
           "enabled": true,
