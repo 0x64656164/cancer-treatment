@@ -2092,6 +2092,12 @@ class SingBoxProxy:
                 "flow": params.get("flow", ""),
             }
 
+            # FIX: preserve packet_encoding from VLESS link
+            # В VLESS URL параметр camelCase (packetEncoding),
+            # в sing-box конфиге snake_case (packet_encoding)
+            if params.get("packetEncoding"):
+                outbound["packet_encoding"] = params.get("packetEncochrome
+
             # Handle transport settings
             transport_type = params.get("type", "tcp")
             if transport_type == "ws":
@@ -2111,7 +2117,7 @@ class SingBoxProxy:
                     "enabled": True,
                     "server_name": params.get("sni", params.get("host", host)),
                     "reality": {"enabled": True, "public_key": params.get("pbk", ""), "short_id": params.get("sid", "")},
-                    "utls": {"enabled": True, "fingerprint": "chrome"},
+                    "utls": {"enabled": True, "fingerprint": params.get("fp", "chrome")},
                 }
 
             return outbound
