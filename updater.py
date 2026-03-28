@@ -37,7 +37,7 @@ RATING_SLIDING_WINDOW = 24  # количество последних прове
 
 # Параметры отбора серверов
 TOP_SERVERS_PERCENT = 0.7
-MIN_RATING_THRESHOLD = 0
+MIN_RATING_THRESHOLD = 0.15
 MAX_SERVERS_IN_CONFIG = 50
 
 # Параметры очистки базы
@@ -47,7 +47,7 @@ MAX_SERVERS_IN_DB = 150
 
 # Параметры тестирования
 TEST_NEW_SERVERS_COUNT = 40
-RETEST_OLD_SERVERS_COUNT = 50
+RETEST_OLD_SERVERS_COUNT = 150
 RETEST_LOW_RATING_FIRST = True
 
 # ОПТИМИЗИРОВАННЫЕ НАСТРОЙКИ
@@ -125,7 +125,7 @@ PROFILES = {
         "ruleset_folder":      "ruleset/hiddify/",
         "route_final":         "proxy",
         "proxy_rule_outbound": "direct",
-        "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n//profile-web-page-url: https://0x64656164.github.io/cancer-treatment-site/\n",
+        "file_header":         "//profile-title: Cancer-Treatment\n//profile-update-interval: 1\n",
         "enabled_groups":      ["EUROPE"],
         "remote_rule_sets":    [],
         "remote_block_rule_sets": [
@@ -354,7 +354,7 @@ class ServerRatingSystem:
         if not speeds or total_tests == 0:
             return 0.0, components
         
-        # Неактивные серверы (не прошедшие порог ZOMBIE_CONSECUTIVE_PASSES) получают нулевой рейтинг
+        # Неактивные серверы получают нулевой рейтинг
         if not server_data.get('active', False):
             return 0.0, components
         
@@ -620,7 +620,8 @@ class ServerRatingSystem:
                        limit: Optional[int] = None,
                        min_rating: float = MIN_RATING_THRESHOLD,
                        include_categories: Optional[List[str]] = None,
-                       current_hour: Optional[int] = None) -> List[dict]:
+                       current_hour: Optional[int] = None,
+                       tested_keys: Optional[set] = None) -> List[dict]:
         servers = self.data.get("servers", {})
         if current_hour is None:
             # Текущий час с учётом смещения
@@ -657,6 +658,10 @@ class ServerRatingSystem:
             
             # Используем только активные серверы
             if not server_data.get('active', False):
+                continue
+            
+            # Только серверы, протестированные в текущем запуске
+            if tested_keys is not None and key not in tested_keys:
                 continue
             
             filtered.append({
@@ -1774,7 +1779,13 @@ def main(profile_names: list):
     print("🧠 УМНЫЙ ПОИСК НОВЫХ СЕРВЕРОВ (3 ЭТАПА)")
     print("="*80)
     
+    tested_keys: set = set()
     found_servers = smart_server_search(all_links, rating_system)
+    
+    # Собираем ключи серверов, протестированных в этом запуске (новые)
+    for grp in found_servers.values():
+        for res in grp:
+            tested_keys.add(rating_system._get_server_key(res['outbound']))
     
     # Проверка на массовые падения
     all_results = []
@@ -1818,6 +1829,7 @@ def main(profile_names: list):
                         rating_system.add_test_result(
                             server['outbound'], speed, None, server['group'], link=server['link']
                         )
+                        tested_keys.add(rating_system._get_server_key(server['outbound']))
                         if speed:
                             print(f"    ✓ {server['tag'][:35]} | {speed:.0f} Mbps")
                         else:
@@ -1838,8 +1850,8 @@ def main(profile_names: list):
     print("="*80)
     
     current_hour = (datetime.now().hour + TZ_OFFSET) % 24
-    europe_servers = rating_system.get_top_servers(group='EUROPE', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour)
-    russia_servers = rating_system.get_top_servers(group='RUSSIA', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour)
+    europe_servers = rating_system.get_top_servers(group='EUROPE', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour, tested_keys=tested_keys)
+    russia_servers = rating_system.get_top_servers(group='RUSSIA', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour, tested_keys=tested_keys)
     
     print(f"\nОтобрано для конфига (текущий час {current_hour}): EUROPE={len(europe_servers)}, RUSSIA={len(russia_servers)}")
     
