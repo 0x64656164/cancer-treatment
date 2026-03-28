@@ -2091,13 +2091,10 @@ class SingBoxProxy:
                 "uuid": user_info.strip(),
                 "flow": params.get("flow", ""),
             }
-
-            # FIX: preserve packet_encoding from VLESS link
-            # В VLESS URL параметр camelCase (packetEncoding),
-            # в sing-box конфиге snake_case (packet_encoding)
+            
             if params.get("packetEncoding"):
-                outbound["packet_encoding"] = params.get("packetEncochrome
-
+                outbound["packet_encoding"] = params.get("packetEncoding")
+            
             # Handle transport settings
             transport_type = params.get("type", "tcp")
             if transport_type == "ws":
