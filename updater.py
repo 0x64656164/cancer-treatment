@@ -620,7 +620,8 @@ class ServerRatingSystem:
                        limit: Optional[int] = None,
                        min_rating: float = MIN_RATING_THRESHOLD,
                        include_categories: Optional[List[str]] = None,
-                       current_hour: Optional[int] = None) -> List[dict]:
+                       current_hour: Optional[int] = None,
+                       fallback: Optional[bool] = False) -> List[dict]:
         servers = self.data.get("servers", {})
         if current_hour is None:
             # Текущий час с учётом смещения
@@ -633,10 +634,10 @@ class ServerRatingSystem:
             if group and (server_data.get('group') != group or not group in enabled_groups):
                 continue
             rating = server_data.get('rating', 0)
-            if rating < min_rating:
+            if rating < min_rating and not fallback:
                 continue
             stability = server_data.get('rating_components', {}).get('stability', 0)
-            if stability < RATING_STABILITY_THRESHOLD:
+            if stability < RATING_STABILITY_THRESHOLD and not fallback:
                 continue
             category = server_data.get('category', CATEGORY_UNSTABLE)
             if include_categories and category not in include_categories:
@@ -656,7 +657,7 @@ class ServerRatingSystem:
                 continue
             
             # Используем только активные серверы
-            if not server_data.get('active', False):
+            if not server_data.get('active', False) and not fallback:
                 continue
             
             filtered.append({
@@ -683,14 +684,14 @@ class ServerRatingSystem:
                     continue
                 # Пропускаем в карантине
                 quarantine_until = server_data.get('quarantine_until')
-                if quarantine_until:
+                if quarantine_until and not fallback:
                     try:
                         if datetime.fromisoformat(quarantine_until) > datetime.now():
                             continue
                     except (ValueError, TypeError):
                         pass
                 # Пропускаем, если час в bad_hours
-                if current_hour in server_data.get('bad_hours', []):
+                if current_hour in server_data.get('bad_hours', []) and not fallback:
                     continue
                 
                 # Включаем только серверы, которые либо активны, либо находятся в стадии активации (staging)
@@ -702,7 +703,7 @@ class ServerRatingSystem:
                         is_candidate = datetime.fromisoformat(staging_until) > datetime.now()
                     except (ValueError, TypeError):
                         is_candidate = False
-                if not is_candidate:
+                if not is_candidate and not fallback:
                     continue
                 
                 filtered_relaxed = {
@@ -1848,9 +1849,15 @@ def main(profile_names: list):
     print(f"\nОтобрано для конфига (текущий час {current_hour}): EUROPE={len(europe_servers)}, RUSSIA={len(russia_servers)}")
     
     if not europe_servers and not russia_servers:
-        print("\n❌ Критическая ошибка: нет серверов с достаточным рейтингом!")
-        send_telegram_message("🚨 <b>КРИТИЧЕСКАЯ ОШИБКА:</b> Нет серверов с достаточным рейтингом для формирования конфига!")
-        return
+        europe_servers = rating_system.get_top_servers(group='EUROPE', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour, fallback=True)
+        russia_servers = rating_system.get_top_servers(group='RUSSIA', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour, fallback=True)
+        
+        if not europe_servers and not russia_servers:
+            print("\n❌ Критическая ошибка: Не найдено ни одного сервера для формирования конфига!")
+            send_telegram_message("🚨 <b>КРИТИЧЕСКАЯ ОШИБКА:</b> Не найдено ни одного сервера для формирования конфига!")
+            return
+        print("\n❌ Предупреждение: Нет серверов с достаточным рейтингом!")
+        send_telegram_message("🚨 <b>ПРЕДУПРЕЖДЕНИЕ:</b> Нет серверов с достаточным рейтингом, используются любые!")
     
     print("\n🏆 ТОП-10 СЕРВЕРОВ ПО РЕЙТИНГУ (с категориями):")
     for group_name, servers in [("EUROPE", europe_servers), ("RUSSIA", russia_servers)]:
