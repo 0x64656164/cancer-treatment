@@ -2094,6 +2094,8 @@ class SingBoxProxy:
             
             if params.get("packetEncoding"):
                 outbound["packet_encoding"] = params.get("packetEncoding")
+            else:
+                outbound["packet_encoding"] = "xudp"
             
             # Handle transport settings
             transport_type = params.get("type", "tcp")
@@ -2104,7 +2106,9 @@ class SingBoxProxy:
                     outbound["transport"]["headers"]["Host"] = params.get("host")
             elif transport_type == "grpc":
                 outbound["transport"] = {"type": "grpc", "service_name": params.get("serviceName", params.get("path", ""))}
-
+            elif transport_type == "xhttp":
+                outbound['transport'] = {"type": "xhttp", "mode": params.get('mode', 'auto')}
+            
             # Handle TLS settings
             security = params.get("security", "none")
             if security == "tls":
