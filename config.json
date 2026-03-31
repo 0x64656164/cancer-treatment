@@ -47,11 +47,12 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇵🇱 Poland [*CIDR] VK",
         "🌐 Anycast-IP [*CIDR] VK",
+        "🇵🇱 Poland [*CIDR] VK",
         "🌐 Anycast-IP [*CIDR] VK-1",
-        "🇨🇿 Czechia | 🌐 | [IPv6] [*CIDR] VK",
+        "🌐 Anycast-IP [*CIDR] VK-2",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇨🇿 Czechia | 🌐 | [IPv6] [*CIDR] VK",
         "🇮🇹 Italy — #101"
       ]
     },
@@ -59,11 +60,12 @@
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇵🇱 Poland [*CIDR] VK",
         "🌐 Anycast-IP [*CIDR] VK",
+        "🇵🇱 Poland [*CIDR] VK",
         "🌐 Anycast-IP [*CIDR] VK-1",
-        "🇨🇿 Czechia | 🌐 | [IPv6] [*CIDR] VK",
+        "🌐 Anycast-IP [*CIDR] VK-2",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇨🇿 Czechia | 🌐 | [IPv6] [*CIDR] VK",
         "🇮🇹 Italy — #101"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -76,28 +78,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "5.188.143.99",
-      "server_port": 443,
-      "uuid": "6fa7e3d5-d2df-4ac1-a08e-8d1638d1f735",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "0CP26gW-dZV0f96JFM9H6aja_YfNBnpGbbxDhplVDmI",
-          "short_id": "72"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
     },
     {
       "type": "vless",
@@ -123,10 +103,76 @@
     },
     {
       "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "5.188.143.99",
+      "server_port": 443,
+      "uuid": "6fa7e3d5-d2df-4ac1-a08e-8d1638d1f735",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "0CP26gW-dZV0f96JFM9H6aja_YfNBnpGbbxDhplVDmI",
+          "short_id": "72"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "🌐 Anycast-IP [*CIDR] VK-1",
       "server": "212.233.120.150",
       "server_port": 443,
       "uuid": "693b9458-2447-4e60-ba67-ffafc52a2ff3",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "5ka-cdn.x5static.net",
+        "reality": {
+          "enabled": true,
+          "public_key": "XguLRlc-hWqFhf8-KTxtCE434F6e4Hiqoc5cTBpLxnE",
+          "short_id": "111111"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP [*CIDR] VK-2",
+      "server": "212.233.120.150",
+      "server_port": 443,
+      "uuid": "3a3dfc2f-c899-4e5f-9e36-a002ecd417b1",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "5ka-cdn.x5static.net",
+        "reality": {
+          "enabled": true,
+          "public_key": "XguLRlc-hWqFhf8-KTxtCE434F6e4Hiqoc5cTBpLxnE",
+          "short_id": "111111"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+      "server": "212.233.120.150",
+      "server_port": 443,
+      "uuid": "6e79f6aa-42da-4bad-bbb6-8bc0c0ff5d5c",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -162,28 +208,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
-      "server": "212.233.120.150",
-      "server_port": 443,
-      "uuid": "6e79f6aa-42da-4bad-bbb6-8bc0c0ff5d5c",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "5ka-cdn.x5static.net",
-        "reality": {
-          "enabled": true,
-          "public_key": "XguLRlc-hWqFhf8-KTxtCE434F6e4Hiqoc5cTBpLxnE",
-          "short_id": "111111"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
         }
       }
     },
