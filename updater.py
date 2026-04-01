@@ -56,6 +56,8 @@ MAX_WORKERS_FAST = 64
 FAST_MODE_THRESHOLD = 300
 MIN_WORKING_SERVERS_FAST = 10
 
+MIN_FALLBACK_SERVERS_COUNT = 3
+
 # ---------------------------------------------------------------------------
 # НОВЫЕ ПАРАМЕТРЫ ДЛЯ НЕСТАБИЛЬНЫХ СЕРВЕРОВ
 # ---------------------------------------------------------------------------
@@ -1856,7 +1858,7 @@ def main(profile_names: list):
 
     print(f"\nОтобрано для конфига (текущий час {current_hour}): EUROPE={len(europe_servers)}, RUSSIA={len(russia_servers)}")
 
-    if not europe_servers and not russia_servers:
+    if len(europe_servers + russia_servers) < MIN_FALLBACK_SERVERS_COUNT:
         europe_servers = rating_system.get_top_servers(group='EUROPE', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour, fallback=True)
         russia_servers = rating_system.get_top_servers(group='RUSSIA', limit=MAX_SERVERS_IN_CONFIG, min_rating=MIN_RATING_THRESHOLD, current_hour=current_hour, fallback=True)
 
