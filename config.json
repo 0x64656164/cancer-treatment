@@ -39,22 +39,32 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🇩🇪 Germany [*CIDR] VK"
+        "EUROPE-auto",
+        "🇱🇹 Lithuania [*CIDR] VK",
+        "🇱🇹 Lithuania [*CIDR] VK-1",
+        "🇱🇹 Lithuania [*CIDR] VK-2",
+        "🇱🇹 Lithuania [*CIDR] VK-3",
+        "🇱🇹 Lithuania [*CIDR] VK-4",
+        "🇱🇹 Lithuania [*CIDR] VK-5"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇱🇹 Lithuania [*CIDR] VK",
+        "🇱🇹 Lithuania [*CIDR] VK-1",
+        "🇱🇹 Lithuania [*CIDR] VK-2",
+        "🇱🇹 Lithuania [*CIDR] VK-3",
+        "🇱🇹 Lithuania [*CIDR] VK-4",
+        "🇱🇹 Lithuania [*CIDR] VK-5"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,10 +79,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "212.233.94.236",
+      "tag": "🇱🇹 Lithuania [*CIDR] VK",
+      "server": "95.163.208.121",
       "server_port": 8443,
-      "uuid": "2cb26540-2ab6-4125-a5c2-0f8972e3c66b",
+      "uuid": "d215103c-661d-4524-ad77-8ef175b76230",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -80,8 +90,118 @@
         "server_name": "rbc.ru",
         "reality": {
           "enabled": true,
-          "public_key": "ISa-DZOI4LRRb9DHMFYm5oFqBXDjYzz0hVWUfWvzLmo",
-          "short_id": "5be97fb85093a3a9"
+          "public_key": "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA",
+          "short_id": "0d960275b7b0f9af"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania [*CIDR] VK-1",
+      "server": "95.163.208.121",
+      "server_port": 8443,
+      "uuid": "5ca4c0a2-c3d1-440e-95a4-eea136587a2f",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA",
+          "short_id": "0d960275b7b0f9af"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania [*CIDR] VK-2",
+      "server": "95.163.208.121",
+      "server_port": 8443,
+      "uuid": "8521e51c-0ba5-4c3c-8612-e57d8702a0df",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA",
+          "short_id": "e0ef3d5c0aacb615"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania [*CIDR] VK-3",
+      "server": "95.163.208.121",
+      "server_port": 443,
+      "uuid": "5ca4c0a2-c3d1-440e-95a4-eea136587a2f",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ir-3.ozone.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA",
+          "short_id": "0d960275b7b0f9af"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania [*CIDR] VK-4",
+      "server": "95.163.208.121",
+      "server_port": 443,
+      "uuid": "d215103c-661d-4524-ad77-8ef175b76230",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ir-3.ozone.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA",
+          "short_id": "e0ef3d5c0aacb615"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania [*CIDR] VK-5",
+      "server": "95.163.208.121",
+      "server_port": 8443,
+      "uuid": "bd49aebe-8c8d-4838-8139-b00a360a393f",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA",
+          "short_id": "2cfb5a0ae8ab0cb0"
         },
         "utls": {
           "enabled": true,
