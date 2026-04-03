@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|212.233.94.236|8443|2cb26540": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany [*CIDR] VK",
+        "server": "212.233.94.236",
+        "server_port": 8443,
+        "uuid": "2cb26540-2ab6-4125-a5c2-0f8972e3c66b",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "rbc.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "ISa-DZOI4LRRb9DHMFYm5oFqBXDjYzz0hVWUfWvzLmo",
+            "short_id": "5be97fb85093a3a9"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "random"
+          }
+        }
+      },
+      "link": "vless://2cb26540-2ab6-4125-a5c2-0f8972e3c66b@212.233.94.236:8443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=random&sni=rbc.ru&pbk=ISa-DZOI4LRRb9DHMFYm5oFqBXDjYzz0hVWUfWvzLmo&sid=5be97fb85093a3a9#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-04-03T11:40:46.651782",
+      "last_seen": "2026-04-03T11:40:46.651782",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        1.3090761410743312
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-03T11:40:46.651782",
+          "success": true,
+          "speed": 1.3090761410743312,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-04-03T12:40:46.651817",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-03T10:34:55.655268"
+    "last_cleanup": "2026-04-03T11:40:46.652653"
   }
 }
