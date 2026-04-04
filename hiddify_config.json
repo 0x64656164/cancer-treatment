@@ -49,26 +49,30 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇵🇱 Poland — #737",
         "🇵🇱 Poland — #835",
         "🇵🇱 Poland — #863",
+        "🇵🇱 Poland — #737",
         "🇵🇱 Poland — #845",
         "🇵🇱 Poland — #878",
         "🇪🇪 Estonia — #637",
-        "🇮🇱 Israel — #752"
+        "🇰🇷 South Korea [*CIDR] VK",
+        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
+        "🇬🇷 Greece [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇵🇱 Poland — #737",
         "🇵🇱 Poland — #835",
         "🇵🇱 Poland — #863",
+        "🇵🇱 Poland — #737",
         "🇵🇱 Poland — #845",
         "🇵🇱 Poland — #878",
         "🇪🇪 Estonia — #637",
-        "🇮🇱 Israel — #752"
+        "🇰🇷 South Korea [*CIDR] VK",
+        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
+        "🇬🇷 Greece [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -80,28 +84,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #737",
-      "server": "83.166.236.24",
-      "server_port": 8443,
-      "uuid": "eedd205a-f6ee-49c6-a84d-4aea2525ed20",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
-          "short_id": "50e09046c0c00159"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
     },
     {
       "type": "vless",
@@ -140,6 +122,28 @@
           "enabled": true,
           "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
           "short_id": "764f497dda21c4fc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #737",
+      "server": "83.166.236.24",
+      "server_port": 8443,
+      "uuid": "eedd205a-f6ee-49c6-a84d-4aea2525ed20",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
+          "short_id": "50e09046c0c00159"
         },
         "utls": {
           "enabled": true,
@@ -215,9 +219,53 @@
     },
     {
       "type": "vless",
-      "tag": "🇮🇱 Israel — #752",
+      "tag": "🇰🇷 South Korea [*CIDR] VK",
       "server": "109.120.188.50",
-      "server_port": 2003,
+      "server_port": 2015,
+      "uuid": "c7b6f07d-a052-402a-b97c-69ec2d45afe2",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ir.ozone.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Ej_PPr2iomuIl23svqB6FgWf2Sw6FMC6ipavO5w5OXY",
+          "short_id": "099755ac7b731e9e"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
+      "server": "217.16.24.6",
+      "server_port": 8443,
+      "uuid": "40d02fdd-2593-4139-b678-2dd9d32f79a6",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
+          "short_id": "43dcff53849b81e6"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇬🇷 Greece [*CIDR] VK",
+      "server": "109.120.188.50",
+      "server_port": 2007,
       "uuid": "c7b6f07d-a052-402a-b97c-69ec2d45afe2",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
