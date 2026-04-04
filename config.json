@@ -48,12 +48,10 @@
       "outbounds": [
         "EUROPE-auto",
         "🇵🇱 Poland — #863",
-        "🇵🇱 Poland — #835",
         "🇵🇱 Poland — #878",
-        "🇵🇱 Poland — #845",
+        "🇵🇱 Poland — #835",
         "🇵🇱 Poland — #737",
-        "🇫🇷 France — #623",
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇵🇱 Poland — #845"
       ]
     },
     {
@@ -61,12 +59,10 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇵🇱 Poland — #863",
-        "🇵🇱 Poland — #835",
         "🇵🇱 Poland — #878",
-        "🇵🇱 Poland — #845",
+        "🇵🇱 Poland — #835",
         "🇵🇱 Poland — #737",
-        "🇫🇷 France — #623",
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇵🇱 Poland — #845"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -85,6 +81,28 @@
       "server": "83.166.236.24",
       "server_port": 8443,
       "uuid": "311389a1-12d4-4412-ad2a-068f7fbce852",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
+          "short_id": "764f497dda21c4fc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #878",
+      "server": "83.166.236.24",
+      "server_port": 8443,
+      "uuid": "e66a459e-66f9-40ed-b14b-a23be2a5bc52",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -125,10 +143,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #878",
+      "tag": "🇵🇱 Poland — #737",
       "server": "83.166.236.24",
       "server_port": 8443,
-      "uuid": "e66a459e-66f9-40ed-b14b-a23be2a5bc52",
+      "uuid": "eedd205a-f6ee-49c6-a84d-4aea2525ed20",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -137,7 +155,7 @@
         "reality": {
           "enabled": true,
           "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
-          "short_id": "764f497dda21c4fc"
+          "short_id": "50e09046c0c00159"
         },
         "utls": {
           "enabled": true,
@@ -164,72 +182,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #737",
-      "server": "83.166.236.24",
-      "server_port": 8443,
-      "uuid": "eedd205a-f6ee-49c6-a84d-4aea2525ed20",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "9Y-_jCI3Z1x6SXK2tHdZ6V1CN9IJPNPnoxSW0cbXxD8",
-          "short_id": "50e09046c0c00159"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷 France — #623",
-      "server": "37.139.33.69",
-      "server_port": 8992,
-      "uuid": "c7b6f07d-a052-402a-b97c-69ec2d45afe2",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cms-res-web.online.sberbank.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "eP0MKUFOcNVSVFbHT8GgBLP4LIHZFq8JuVGlCAlH1HI",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "37.139.33.69",
-      "server_port": 21212,
-      "uuid": "c7b6f07d-a052-402a-b97c-69ec2d45afe2",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "sun1-91.userapi.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "4iRluJhaeflkqdEO8RLeLxTeTVIhzw9r8Y35fppsTFg",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
         }
       }
     }
