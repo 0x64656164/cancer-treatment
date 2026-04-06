@@ -48,7 +48,9 @@
       "outbounds": [
         "ALL-auto",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇸🇪 Sweden — #390"
+        "🇸🇪 Sweden — #390",
+        "🇱🇹 Lithuania — #357",
+        "🇳🇱 The Netherlands — #291"
       ]
     },
     {
@@ -56,7 +58,9 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇵🇱 Poland [*CIDR] VK",
-        "🇸🇪 Sweden — #390"
+        "🇸🇪 Sweden — #390",
+        "🇱🇹 Lithuania — #357",
+        "🇳🇱 The Netherlands — #291"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -110,6 +114,50 @@
         "utls": {
           "enabled": true,
           "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania — #357",
+      "server": "5.188.140.7",
+      "server_port": 443,
+      "uuid": "18e48126-5325-4618-a3f5-fda84003deb4",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "KvQ0JuE-17nWMSvEnG9xdlqPWv3bZBn9JlDiLmyE-SE",
+          "short_id": "6aa44564cda562bc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #291",
+      "server": "89.208.220.72",
+      "server_port": 5443,
+      "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "fNTq5EC6OsQ5y_FWhTUodJJy_ftKIA4zpdWJ3-V5dn4",
+          "short_id": "a3df"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
