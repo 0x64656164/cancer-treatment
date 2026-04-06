@@ -39,26 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
+        "ALL-auto",
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇩🇪 Germany — #455",
-        "🇩🇪 Germany — #456"
+        "🇫🇷 France — #545",
+        "🇳🇱 The Netherlands — #245"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇩🇪 Germany — #455",
-        "🇩🇪 Germany — #456"
+        "🇫🇷 France — #545",
+        "🇳🇱 The Netherlands — #245"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -95,45 +95,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #455",
-      "server": "217.16.20.222",
+      "tag": "🇫🇷 France — #545",
+      "server": "109.120.189.188",
       "server_port": 443,
-      "uuid": "ff8e8d24-83c6-40a2-b60e-17c5e3dcc935",
+      "uuid": "b2f216a3-1bed-45c8-bf58-72b7a2346c75",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "m.47news.ru",
+        "server_name": "yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "gEkBb04WCKpvyDowiwAd_6zMxYAHArFibO6KOw9FDH8",
-          "short_id": "2a11111c8b1eee9f"
+          "public_key": "pgG2grngQEtOFJImLfz0AEm-O2IodM2jCY4aMCYQI1U",
+          "short_id": "6aa2d2e950441a9a"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "random"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #456",
-      "server": "89.208.86.234",
-      "server_port": 443,
-      "uuid": "ff8e8d24-83c6-40a2-b60e-17c5e3dcc935",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇳🇱 The Netherlands — #245",
+      "server": "217.16.29.201",
+      "server_port": 4443,
+      "uuid": "df93c065-1c1b-4524-ac44-8d4fede34724",
+      "flow": "",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "static.rutube.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "kAfACVGlqkxdp5T0pF_8rP8ElZ6mYSNnpP1NDnSr9H8",
-          "short_id": "5f0a12bc43de5678"
+          "public_key": "CyOxFgG6NlP9lkJLVtY9ylIa2uPzIHhC01C377HYwFo",
+          "short_id": "b4"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
         }
       }
     }
