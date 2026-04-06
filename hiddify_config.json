@@ -51,8 +51,11 @@
         "EUROPE-auto",
         "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK-1",
+        "🇩🇪 Germany [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK-2"
+        "🇳🇱 The Netherlands [*CIDR] VK-2",
+        "🇱🇹 Lithuania — #358",
+        "🇳🇱 The Netherlands — #364"
       ]
     },
     {
@@ -61,8 +64,11 @@
       "outbounds": [
         "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK-1",
+        "🇩🇪 Germany [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK-2"
+        "🇳🇱 The Netherlands [*CIDR] VK-2",
+        "🇱🇹 Lithuania — #358",
+        "🇳🇱 The Netherlands — #364"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -78,6 +84,28 @@
     {
       "type": "vless",
       "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "212.233.97.128",
+      "server_port": 5443,
+      "uuid": "a18a8faa-d836-4111-85ab-ad4c5040fafa",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SskAaq34j0FCgo85shlAWsupaS7DfB_gfaQEqXprqWo",
+          "short_id": "0e5dcb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
       "server": "89.208.220.72",
       "server_port": 5443,
       "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
@@ -99,10 +127,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
-      "server": "212.233.97.128",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "146.185.208.51",
       "server_port": 5443,
-      "uuid": "a18a8faa-d836-4111-85ab-ad4c5040fafa",
+      "uuid": "b8dd4a70-7ef8-49d7-8b32-40c0cb707abf",
       "flow": "",
       "packet_encoding": "xudp",
       "tls": {
@@ -110,12 +138,12 @@
         "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "SskAaq34j0FCgo85shlAWsupaS7DfB_gfaQEqXprqWo",
-          "short_id": "0e5dcb"
+          "public_key": "YCNQQnzebJy3ZiEWbJEQ_pKrqmRzT3EOFJhH-w5evFg",
+          "short_id": "5a54cb053b69aa7f"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
         }
       }
     },
@@ -144,9 +172,9 @@
     {
       "type": "vless",
       "tag": "🇳🇱 The Netherlands [*CIDR] VK-2",
-      "server": "212.233.123.13",
+      "server": "89.208.221.176",
       "server_port": 5443,
-      "uuid": "7ab7bc49-5e56-43de-8b87-69bea871b12c",
+      "uuid": "1335c7d0-a928-45b7-8cc3-89101958e905",
       "flow": "",
       "packet_encoding": "xudp",
       "tls": {
@@ -154,12 +182,56 @@
         "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "KPUoULIHOqBrV81h233DrxJbn8oIQgPTLsRZ0c9CeD8",
-          "short_id": "fd"
+          "public_key": "CLmn76U5uWPyNHWv8ZKda5Z6kVIy7Ot3lhmz6q0CDyg",
+          "short_id": "2ea020f26a96bb42"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania — #358",
+      "server": "5.188.140.7",
+      "server_port": 443,
+      "uuid": "18e48126-5325-4618-a3f5-fda84003deb4",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "KvQ0JuE-17nWMSvEnG9xdlqPWv3bZBn9JlDiLmyE-SE",
+          "short_id": "6aa44564cda562bc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #364",
+      "server": "217.16.29.201",
+      "server_port": 4443,
+      "uuid": "df93c065-1c1b-4524-ac44-8d4fede34724",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "CyOxFgG6NlP9lkJLVtY9ylIa2uPzIHhC01C377HYwFo",
+          "short_id": "b4"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
