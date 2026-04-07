@@ -47,36 +47,26 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇩🇪 Germany [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇩🇪 Germany [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK-1",
         "🇵🇱 Poland [*CIDR] VK-1",
         "🇵🇱 Poland [*CIDR] VK-2",
-        "🇳🇱 The Netherlands [*CIDR] VK-1",
-        "🇳🇱 The Netherlands — #364",
-        "🇵🇱 Poland [*CIDR] VK-3",
-        "🇭🇺 Hungary [*CIDR] VK",
-        "🇱🇹 Lithuania — #358",
-        "🇳🇱 The Netherlands [*CIDR] VK-2",
-        "🇭🇺 Hungary [*CIDR] VK-1"
+        "🇳🇱 The Netherlands — #364"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇩🇪 Germany [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇩🇪 Germany [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK-1",
         "🇵🇱 Poland [*CIDR] VK-1",
         "🇵🇱 Poland [*CIDR] VK-2",
-        "🇳🇱 The Netherlands [*CIDR] VK-1",
-        "🇳🇱 The Netherlands — #364",
-        "🇵🇱 Poland [*CIDR] VK-3",
-        "🇭🇺 Hungary [*CIDR] VK",
-        "🇱🇹 Lithuania — #358",
-        "🇳🇱 The Netherlands [*CIDR] VK-2",
-        "🇭🇺 Hungary [*CIDR] VK-1"
+        "🇳🇱 The Netherlands — #364"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -88,28 +78,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "146.185.208.51",
-      "server_port": 5443,
-      "uuid": "b8dd4a70-7ef8-49d7-8b32-40c0cb707abf",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "YCNQQnzebJy3ZiEWbJEQ_pKrqmRzT3EOFJhH-w5evFg",
-          "short_id": "5a54cb053b69aa7f"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
@@ -130,6 +98,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "146.185.208.51",
+      "server_port": 5443,
+      "uuid": "b8dd4a70-7ef8-49d7-8b32-40c0cb707abf",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "YCNQQnzebJy3ZiEWbJEQ_pKrqmRzT3EOFJhH-w5evFg",
+          "short_id": "5a54cb053b69aa7f"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     },
@@ -157,50 +147,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK-1",
-      "server": "212.233.97.35",
-      "server_port": 5443,
-      "uuid": "99e2fd5e-f5b2-47f9-be5a-eb38daa4e670",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "wXpc4aufCrdxZ2_aoh6Zt0aLWLioMN2Zi0jtKdonMW4",
-          "short_id": "b027c9244d2a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK-2",
-      "server": "212.233.122.191",
-      "server_port": 5443,
-      "uuid": "7345b803-b8b6-456b-aa55-1b3b3de473c1",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "nvxPi1Lqfg6YDtokyXnYAIPHhPl_bYxl8wzGHBn8lQs",
-          "short_id": "25"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
       "server": "89.208.220.72",
       "server_port": 5443,
@@ -223,29 +169,29 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #364",
-      "server": "217.16.29.201",
-      "server_port": 4443,
-      "uuid": "df93c065-1c1b-4524-ac44-8d4fede34724",
-      "flow": "",
+      "tag": "🇵🇱 Poland [*CIDR] VK-1",
+      "server": "212.233.122.191",
+      "server_port": 5443,
+      "uuid": "7345b803-b8b6-456b-aa55-1b3b3de473c1",
+      "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "CyOxFgG6NlP9lkJLVtY9ylIa2uPzIHhC01C377HYwFo",
-          "short_id": "b4"
+          "public_key": "nvxPi1Lqfg6YDtokyXnYAIPHhPl_bYxl8wzGHBn8lQs",
+          "short_id": "25"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "chrome"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK-3",
+      "tag": "🇵🇱 Poland [*CIDR] VK-2",
       "server": "212.233.122.191",
       "server_port": 8443,
       "uuid": "7c7d32d0-8615-49c9-8787-b3c304707772",
@@ -267,54 +213,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇭🇺 Hungary [*CIDR] VK",
-      "server": "79.137.175.228",
-      "server_port": 8443,
-      "uuid": "c946273b-af9d-4ec5-8f12-8b11d4a35463",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "7zd9mJilgjOrg_ohtw23Vmio-pdnYqeP_r-kiWt87Cg",
-          "short_id": "f4b4a6365558ea2e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇱🇹 Lithuania — #358",
-      "server": "5.188.140.7",
-      "server_port": 443,
-      "uuid": "18e48126-5325-4618-a3f5-fda84003deb4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "KvQ0JuE-17nWMSvEnG9xdlqPWv3bZBn9JlDiLmyE-SE",
-          "short_id": "6aa44564cda562bc"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK-2",
-      "server": "212.233.123.13",
-      "server_port": 5443,
-      "uuid": "7ab7bc49-5e56-43de-8b87-69bea871b12c",
+      "tag": "🇳🇱 The Netherlands — #364",
+      "server": "217.16.29.201",
+      "server_port": 4443,
+      "uuid": "df93c065-1c1b-4524-ac44-8d4fede34724",
       "flow": "",
       "packet_encoding": "xudp",
       "tls": {
@@ -322,34 +224,12 @@
         "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "KPUoULIHOqBrV81h233DrxJbn8oIQgPTLsRZ0c9CeD8",
-          "short_id": "fd"
+          "public_key": "CyOxFgG6NlP9lkJLVtY9ylIa2uPzIHhC01C377HYwFo",
+          "short_id": "b4"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇭🇺 Hungary [*CIDR] VK-1",
-      "server": "79.137.175.228",
-      "server_port": 443,
-      "uuid": "c946273b-af9d-4ec5-8f12-8b11d4a35463",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "7zd9mJilgjOrg_ohtw23Vmio-pdnYqeP_r-kiWt87Cg",
-          "short_id": "f4b4a6365558ea2e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
         }
       }
     }
