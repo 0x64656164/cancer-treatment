@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #244"
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇳🇱 The Netherlands — #381"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #244"
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇳🇱 The Netherlands — #381"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,10 +73,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #244",
-      "server": "146.185.208.51",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "212.233.97.128",
       "server_port": 5443,
-      "uuid": "b8dd4a70-7ef8-49d7-8b32-40c0cb707abf",
+      "uuid": "a18a8faa-d836-4111-85ab-ad4c5040fafa",
       "flow": "",
       "packet_encoding": "xudp",
       "tls": {
@@ -82,8 +84,30 @@
         "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "YCNQQnzebJy3ZiEWbJEQ_pKrqmRzT3EOFJhH-w5evFg",
-          "short_id": "5a54cb053b69aa7f"
+          "public_key": "SskAaq34j0FCgo85shlAWsupaS7DfB_gfaQEqXprqWo",
+          "short_id": "0e5dcb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #381",
+      "server": "217.16.29.201",
+      "server_port": 4443,
+      "uuid": "df93c065-1c1b-4524-ac44-8d4fede34724",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "CyOxFgG6NlP9lkJLVtY9ylIa2uPzIHhC01C377HYwFo",
+          "short_id": "b4"
         },
         "utls": {
           "enabled": true,
