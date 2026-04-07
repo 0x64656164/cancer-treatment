@@ -47,18 +47,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany [*CIDR] VK",
         "🇱🇹 Lithuania — #282",
-        "🇳🇱 The Netherlands — #301"
+        "🇳🇱 The Netherlands — #301",
+        "🇳🇱 The Netherlands — #137"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany [*CIDR] VK",
         "🇱🇹 Lithuania — #282",
-        "🇳🇱 The Netherlands — #301"
+        "🇳🇱 The Netherlands — #301",
+        "🇳🇱 The Netherlands — #137"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,28 +70,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "146.185.208.51",
-      "server_port": 5443,
-      "uuid": "b8dd4a70-7ef8-49d7-8b32-40c0cb707abf",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "YCNQQnzebJy3ZiEWbJEQ_pKrqmRzT3EOFJhH-w5evFg",
-          "short_id": "5a54cb053b69aa7f"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
@@ -130,6 +108,28 @@
           "enabled": true,
           "public_key": "CLmn76U5uWPyNHWv8ZKda5Z6kVIy7Ot3lhmz6q0CDyg",
           "short_id": "2ea020f26a96bb42"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #137",
+      "server": "217.16.29.201",
+      "server_port": 4443,
+      "uuid": "df93c065-1c1b-4524-ac44-8d4fede34724",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "CyOxFgG6NlP9lkJLVtY9ylIa2uPzIHhC01C377HYwFo",
+          "short_id": "b4"
         },
         "utls": {
           "enabled": true,
