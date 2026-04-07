@@ -28,7 +28,7 @@
       "country": "NL",
       "first_seen": "2026-04-07T14:30:13.116441",
       "last_seen": "2026-04-07T14:30:13.116441",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         6.4222696461174325
@@ -38,6 +38,13 @@
           "timestamp": "2026-04-07T14:30:13.116441",
           "success": true,
           "speed": 6.4222696461174325,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-07T15:56:01.251668",
+          "success": false,
+          "speed": 0,
           "latency": null,
           "error": null
         }
@@ -53,10 +60,10 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 0,
       "active": false,
-      "staging_until": "2026-04-07T15:30:13.116468",
-      "consecutive_failures": 0
+      "staging_until": null,
+      "consecutive_failures": 1
     },
     "vless|217.16.29.201|4443|df93c065": {
       "outbound": {
@@ -86,7 +93,7 @@
       "country": null,
       "first_seen": "2026-04-07T14:30:13.116999",
       "last_seen": "2026-04-07T14:30:13.116999",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         1.7818548185699943
@@ -96,6 +103,71 @@
           "timestamp": "2026-04-07T14:30:13.116999",
           "success": true,
           "speed": 1.7818548185699943,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-07T15:56:05.384273",
+          "success": false,
+          "speed": 0,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 0,
+      "active": false,
+      "staging_until": null,
+      "consecutive_failures": 1
+    },
+    "vless|146.185.208.51|5443|b8dd4a70": {
+      "outbound": {
+        "type": "vless",
+        "tag": "0469 | 🇬🇧 United Kingdom | 🏳️ SNI-X5 | VLESS | 📺 YT | TG: @YoutubeUnBlockRu",
+        "server": "146.185.208.51",
+        "server_port": 5443,
+        "uuid": "b8dd4a70-7ef8-49d7-8b32-40c0cb707abf",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "ads.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "YCNQQnzebJy3ZiEWbJEQ_pKrqmRzT3EOFJhH-w5evFg",
+            "short_id": "5a54cb053b69aa7f"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
+        }
+      },
+      "link": "vless://b8dd4a70-7ef8-49d7-8b32-40c0cb707abf@146.185.208.51:5443?type=tcp&security=reality&encryption=none&fp=qq&pbk=YCNQQnzebJy3ZiEWbJEQ_pKrqmRzT3EOFJhH-w5evFg&sid=5a54cb053b69aa7f&sni=ads.x5.ru#0469 | 🇬🇧 United Kingdom | 🏳️ SNI-X5 | VLESS | 📺 YT | TG: @YoutubeUnBlockRu",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-04-07T15:55:55.657052",
+      "last_seen": "2026-04-07T15:55:55.657052",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        23.401632291894323
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-07T15:55:55.657052",
+          "success": true,
+          "speed": 23.401632291894323,
           "latency": null,
           "error": null
         }
@@ -113,11 +185,127 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-04-07T15:30:13.117010",
+      "staging_until": "2026-04-07T16:55:55.657075",
+      "consecutive_failures": 0
+    },
+    "vless|web.gukpayk.ru|2053|062165b2": {
+      "outbound": {
+        "type": "vless",
+        "tag": "0023 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+        "server": "web.gukpayk.ru",
+        "server_port": 2053,
+        "uuid": "062165b2-ddc3-4c4d-a10c-033aa82ca001",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "web.gukpayk.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "aFsY-EZjSNTomlAFShKwQIQMJ5pHiZQXXJpWvcz8WkQ",
+            "short_id": "0858af97f4e7324d"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://062165b2-ddc3-4c4d-a10c-033aa82ca001@web.gukpayk.ru:2053?type=tcp&security=reality&encryption=none&fp=chrome&pbk=aFsY-EZjSNTomlAFShKwQIQMJ5pHiZQXXJpWvcz8WkQ&sid=0858af97f4e7324d&sni=web.gukpayk.ru#0023 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+      "group": "RUSSIA",
+      "country": "RU",
+      "first_seen": "2026-04-07T15:55:55.657653",
+      "last_seen": "2026-04-07T15:55:55.657653",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        3.064890758189539
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-07T15:55:55.657653",
+          "success": true,
+          "speed": 3.064890758189539,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-04-07T16:55:55.657663",
+      "consecutive_failures": 0
+    },
+    "vless|212.233.97.35|5443|99e2fd5e": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland [*CIDR] VK",
+        "server": "212.233.97.35",
+        "server_port": 5443,
+        "uuid": "99e2fd5e-f5b2-47f9-be5a-eb38daa4e670",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "max.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "wXpc4aufCrdxZ2_aoh6Zt0aLWLioMN2Zi0jtKdonMW4",
+            "short_id": "b027c9244d2a"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://99e2fd5e-f5b2-47f9-be5a-eb38daa4e670@212.233.97.35:5443?encryption=none&flow=&fp=chrome&packetEncoding=xudp&pbk=wXpc4aufCrdxZ2_aoh6Zt0aLWLioMN2Zi0jtKdonMW4&security=reality&sid=b027c9244d2a&sni=max.ru&type=tcp#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-04-07T15:55:55.658162",
+      "last_seen": "2026-04-07T15:55:55.658162",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        2.0959852887576798
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-07T15:55:55.658162",
+          "success": true,
+          "speed": 2.0959852887576798,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-04-07T16:55:55.658176",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-04-07T14:30:22.818880"
+    "last_cleanup": "2026-04-07T15:56:05.385787"
   }
 }
