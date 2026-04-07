@@ -49,18 +49,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands — #137",
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇫🇮 Finland — #410"
+        "🇫🇮 Finland — #410",
+        "🇳🇱 The Netherlands — #444"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands — #137",
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇫🇮 Finland — #410"
+        "🇫🇮 Finland — #410",
+        "🇳🇱 The Netherlands — #444"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,28 +72,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #137",
-      "server": "217.16.29.201",
-      "server_port": 4443,
-      "uuid": "df93c065-1c1b-4524-ac44-8d4fede34724",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "CyOxFgG6NlP9lkJLVtY9ylIa2uPzIHhC01C377HYwFo",
-          "short_id": "b4"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
@@ -132,6 +110,28 @@
           "enabled": true,
           "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
           "short_id": "bad5722c72a038"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #444",
+      "server": "89.208.220.72",
+      "server_port": 5443,
+      "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "fNTq5EC6OsQ5y_FWhTUodJJy_ftKIA4zpdWJ3-V5dn4",
+          "short_id": "a3df"
         },
         "utls": {
           "enabled": true,
