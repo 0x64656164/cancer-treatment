@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands, Amsterdam | 🌐 | [IPv6] | [BL]"
+        "🇩🇪 Germany — #273",
+        "🇩🇪 Germany — #282"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands, Amsterdam | 🌐 | [IPv6] | [BL]"
+        "🇩🇪 Germany — #273",
+        "🇩🇪 Germany — #282"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,23 +73,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands, Amsterdam | 🌐 | [IPv6] | [BL]",
-      "server": "nu.serviceoda.ru",
-      "server_port": 443,
-      "uuid": "95557ad5-5d90-4f80-a1e2-a72fda60ca4b",
+      "tag": "🇩🇪 Germany — #273",
+      "server": "83.166.253.88",
+      "server_port": 8443,
+      "uuid": "36cf41f2-aa5e-42fd-8401-b2f1fc9f9b7d",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "360.yandex.ru",
+        "server_name": "rbc.ru",
         "reality": {
           "enabled": true,
-          "public_key": "V5SUdzTFbwv51a-l6f3EwLhiGzqd7i9RIbSscV5cAlg",
-          "short_id": "524669466717d4"
+          "public_key": "ISa-DZOI4LRRb9DHMFYm5oFqBXDjYzz0hVWUfWvzLmo",
+          "short_id": "5be97fb85093a3a9"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #282",
+      "server": "83.166.253.88",
+      "server_port": 443,
+      "uuid": "36cf41f2-aa5e-42fd-8401-b2f1fc9f9b7d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "ISa-DZOI4LRRb9DHMFYm5oFqBXDjYzz0hVWUfWvzLmo",
+          "short_id": "8d3293f0066e129a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
         }
       }
     }
