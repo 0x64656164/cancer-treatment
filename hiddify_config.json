@@ -49,16 +49,22 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #273",
-        "🇩🇪 Germany — #282"
+        "🇩🇪 Germany [*CIDR] VK",
+        "🇩🇪 Germany — #296",
+        "🇨🇿 Czechia [*CIDR] VK",
+        "🇭🇰 Hong Kong [*CIDR] VK",
+        "🇨🇭 Switzerland [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #273",
-        "🇩🇪 Germany — #282"
+        "🇩🇪 Germany [*CIDR] VK",
+        "🇩🇪 Germany — #296",
+        "🇨🇿 Czechia [*CIDR] VK",
+        "🇭🇰 Hong Kong [*CIDR] VK",
+        "🇨🇭 Switzerland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,10 +79,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #273",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
       "server": "83.166.253.88",
       "server_port": 8443,
-      "uuid": "36cf41f2-aa5e-42fd-8401-b2f1fc9f9b7d",
+      "uuid": "d22f755c-21ea-4aa8-8afa-cbb1c928545a",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -95,10 +101,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #282",
+      "tag": "🇩🇪 Germany — #296",
       "server": "83.166.253.88",
       "server_port": 443,
-      "uuid": "36cf41f2-aa5e-42fd-8401-b2f1fc9f9b7d",
+      "uuid": "d22f755c-21ea-4aa8-8afa-cbb1c928545a",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -107,11 +113,77 @@
         "reality": {
           "enabled": true,
           "public_key": "ISa-DZOI4LRRb9DHMFYm5oFqBXDjYzz0hVWUfWvzLmo",
-          "short_id": "8d3293f0066e129a"
+          "short_id": "dc8109baf0f607ea"
         },
         "utls": {
           "enabled": true,
           "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇿 Czechia [*CIDR] VK",
+      "server": "84.23.54.186",
+      "server_port": 9887,
+      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.io.ozone.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇭🇰 Hong Kong [*CIDR] VK",
+      "server": "217.16.17.40",
+      "server_port": 9830,
+      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "google.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇭 Switzerland [*CIDR] VK",
+      "server": "84.23.54.74",
+      "server_port": 9882,
+      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.amd.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "srYLsJ-AMYXRUMvzxveyGG2HNUiclZp7rV5Jkbhfuk8",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
