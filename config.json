@@ -39,24 +39,22 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇳🇱 The Netherlands — #361",
-        "🌐 Anycast-IP [*CIDR] VK"
+        "ALL-auto",
+        "🇳🇱 The Netherlands, Amsterdam | 🌐 | [IPv6] | [BL]"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands — #361",
-        "🌐 Anycast-IP [*CIDR] VK"
+        "🇳🇱 The Netherlands, Amsterdam | 🌐 | [IPv6] | [BL]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,41 +69,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #361",
-      "server": "89.208.230.166",
+      "tag": "🇳🇱 The Netherlands, Amsterdam | 🌐 | [IPv6] | [BL]",
+      "server": "nu.serviceoda.ru",
       "server_port": 443,
-      "uuid": "8b65efc9-03a3-4758-8a2e-4b66a1e75062",
+      "uuid": "95557ad5-5d90-4f80-a1e2-a72fda60ca4b",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "ads.x5.ru",
+        "server_name": "360.yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "L9-Bva1kUloZdyX9vReDLSfUsKXulAxSL37LscocqFE",
-          "short_id": "0f4dacf08721e29f"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP [*CIDR] VK",
-      "server": "container-truck-branch-ru1.api-yandex.net",
-      "server_port": 443,
-      "uuid": "8b65efc9-03a3-4758-8a2e-4b66a1e75062",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "L9-Bva1kUloZdyX9vReDLSfUsKXulAxSL37LscocqFE",
-          "short_id": "0f4dacf08721e29f"
+          "public_key": "V5SUdzTFbwv51a-l6f3EwLhiGzqd7i9RIbSscV5cAlg",
+          "short_id": "524669466717d4"
         },
         "utls": {
           "enabled": true,
