@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK"
+        "🇨🇿 Czechia [*CIDR] VK",
+        "🇵🇱 Poland — #367"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK"
+        "🇨🇿 Czechia [*CIDR] VK",
+        "🇵🇱 Poland — #367"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,23 +71,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "89.208.223.199",
-      "server_port": 443,
-      "uuid": "c7f3aed9-8214-4070-967a-6b43486ec01a",
+      "tag": "🇨🇿 Czechia [*CIDR] VK",
+      "server": "84.23.54.186",
+      "server_port": 9887,
+      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "www.io.ozone.ru",
         "reality": {
           "enabled": true,
-          "public_key": "BDyn_XZNoDpbe71WlthrYCpPJ_fcIC4vmflGLInCTBo",
-          "short_id": "1a3a15e264608461"
+          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #367",
+      "server": "5.188.143.135",
+      "server_port": 443,
+      "uuid": "cb8ef789-2eb0-455a-909d-879fe09cf9d4",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "m.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Mn0DIMKW6zu0_D3E1qKO7xMlIVZvB-rqO_-f7Le2vAs",
+          "short_id": "428ef87fd47a3a32"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
