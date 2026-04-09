@@ -49,16 +49,20 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇭🇺 Hungary — #322",
-        "🇵🇱 Poland — #329"
+        "🇵🇱 Poland — #329",
+        "🇨🇿 Czechia — #63",
+        "🇩🇪 Germany — #161",
+        "🇩🇪 Germany — #158"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇭🇺 Hungary — #322",
-        "🇵🇱 Poland — #329"
+        "🇵🇱 Poland — #329",
+        "🇨🇿 Czechia — #63",
+        "🇩🇪 Germany — #161",
+        "🇩🇪 Germany — #158"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,28 +74,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇭🇺 Hungary — #322",
-      "server": "212.233.97.139",
-      "server_port": 8443,
-      "uuid": "05a71055-87e8-4e46-9dfb-441a5c566908",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "7zd9mJilgjOrg_ohtw23Vmio-pdnYqeP_r-kiWt87Cg",
-          "short_id": "2715592069f36fe7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
     },
     {
       "type": "vless",
@@ -112,6 +94,72 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇿 Czechia — #63",
+      "server": "84.23.54.186",
+      "server_port": 9887,
+      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.io.ozone.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #161",
+      "server": "89.208.231.170",
+      "server_port": 443,
+      "uuid": "42ec5dd4-a953-470d-bcc1-294c13582139",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
+          "short_id": "428ef87fd47a3a32"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #158",
+      "server": "146.185.210.165",
+      "server_port": 443,
+      "uuid": "42ec5dd4-a953-470d-bcc1-294c13582139",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
+          "short_id": "428ef87fd47a3a32"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
