@@ -39,44 +39,30 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "0567 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "0232 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "🇩🇪 Germany — #317",
-        "0580 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "🇺🇸 United States — #481",
-        "🇳🇱 The Netherlands — #452",
-        "🇫🇮 Finland — #339",
+        "ALL-auto",
         "🇵🇱 Poland [*CIDR] VK",
-        "1252 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "0956 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "🇰🇿 Kazakhstan — #420",
-        "🇹🇷 Türkiye — #613"
+        "🇩🇪 Germany — #470",
+        "🇭🇺 Hungary — #559",
+        "🇩🇪 Germany — #469",
+        "🇭🇺 Hungary — #560"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "0567 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "0232 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "🇩🇪 Germany — #317",
-        "0580 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "🇺🇸 United States — #481",
-        "🇳🇱 The Netherlands — #452",
-        "🇫🇮 Finland — #339",
         "🇵🇱 Poland [*CIDR] VK",
-        "1252 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "0956 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-        "🇰🇿 Kazakhstan — #420",
-        "🇹🇷 Türkiye — #613"
+        "🇩🇪 Germany — #470",
+        "🇭🇺 Hungary — #559",
+        "🇩🇪 Germany — #469",
+        "🇭🇺 Hungary — #560"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -91,173 +77,19 @@
     },
     {
       "type": "vless",
-      "tag": "0567 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "109.nexyonn.com",
-      "server_port": 8080,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "tG2rBS22WHrR6uCfXPQtnjeXlxxdQcRVj28x516BTiU",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "0232 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "109.nexyonn.com",
-      "server_port": 7443,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Jc3N3v39OBw3SLjiJTjL7chIXlZ-LtQ4ecgTK9_avho",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #317",
-      "server": "109.120.189.168",
-      "server_port": 8080,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "tG2rBS22WHrR6uCfXPQtnjeXlxxdQcRVj28x516BTiU",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "0580 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "109.nexyonn.com",
-      "server_port": 9443,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "2dYJ227nBSpuiDTiav8uinxX11UaRPMuwibR35GIvSU",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸 United States — #481",
-      "server": "109.120.189.168",
-      "server_port": 7443,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Jc3N3v39OBw3SLjiJTjL7chIXlZ-LtQ4ecgTK9_avho",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #452",
-      "server": "109.120.189.168",
-      "server_port": 9443,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "2dYJ227nBSpuiDTiav8uinxX11UaRPMuwibR35GIvSU",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland — #339",
-      "server": "109.120.189.168",
-      "server_port": 9444,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "rftiyvo63uNCmXSTv51lyDVCAmnID0YXRSD5R1IpvGc",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "212.233.97.35",
+      "server": "212.233.97.128",
       "server_port": 5443,
-      "uuid": "99e2fd5e-f5b2-47f9-be5a-eb38daa4e670",
+      "uuid": "a18a8faa-d836-4111-85ab-ad4c5040fafa",
       "flow": "",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "wXpc4aufCrdxZ2_aoh6Zt0aLWLioMN2Zi0jtKdonMW4",
-          "short_id": "b027c9244d2a"
+          "public_key": "SskAaq34j0FCgo85shlAWsupaS7DfB_gfaQEqXprqWo",
+          "short_id": "0e5dcb"
         },
         "utls": {
           "enabled": true,
@@ -267,10 +99,10 @@
     },
     {
       "type": "vless",
-      "tag": "1252 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "109.nexyonn.com",
-      "server_port": 4443,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
+      "tag": "🇩🇪 Germany — #470",
+      "server": "185.130.112.129",
+      "server_port": 443,
+      "uuid": "735f24ba-65e2-4244-b2d5-420af6ff28de",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -278,8 +110,8 @@
         "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "FGbJJ9aaKLbDnrwydHBWskTvS0qoov5vLqa54UCFyyM",
-          "short_id": "0123456789abcdef"
+          "public_key": "gPDJl5r9DnHDpk4-mkx7LvJO989sJ35Bj8-EIWeY2lE",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
@@ -289,54 +121,10 @@
     },
     {
       "type": "vless",
-      "tag": "0956 | 🌐 Unknown | 🏳️ SNI-MAX | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "109.nexyonn.com",
-      "server_port": 9444,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "rftiyvo63uNCmXSTv51lyDVCAmnID0YXRSD5R1IpvGc",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇰🇿 Kazakhstan — #420",
-      "server": "109.120.189.168",
-      "server_port": 4443,
-      "uuid": "edd087d2-18b3-46fe-8924-4e5e6ce121c4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "FGbJJ9aaKLbDnrwydHBWskTvS0qoov5vLqa54UCFyyM",
-          "short_id": "0123456789abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇷 Türkiye — #613",
-      "server": "217.16.26.210",
+      "tag": "🇭🇺 Hungary — #559",
+      "server": "79.137.175.228",
       "server_port": 8443,
-      "uuid": "5f9a1e00-1a54-4b52-b9e3-e27a70858032",
+      "uuid": "99e8a3e0-5060-48c7-86d4-f7bd5af70969",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -344,8 +132,52 @@
         "server_name": "rbc.ru",
         "reality": {
           "enabled": true,
-          "public_key": "zii4nGNapnFKL6SN8GzWNqFlElBvUCUFUThEP0kFH04",
-          "short_id": "205748bc0f24a747"
+          "public_key": "7zd9mJilgjOrg_ohtw23Vmio-pdnYqeP_r-kiWt87Cg",
+          "short_id": "2715592069f36fe7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #469",
+      "server": "185.130.112.129",
+      "server_port": 8443,
+      "uuid": "735f24ba-65e2-4244-b2d5-420af6ff28de",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "gPDJl5r9DnHDpk4-mkx7LvJO989sJ35Bj8-EIWeY2lE",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇭🇺 Hungary — #560",
+      "server": "79.137.175.228",
+      "server_port": 8443,
+      "uuid": "e5699dba-81e0-465c-aacb-7734d2d6d7bf",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "7zd9mJilgjOrg_ohtw23Vmio-pdnYqeP_r-kiWt87Cg",
+          "short_id": "8ba12e75110b7a9c"
         },
         "utls": {
           "enabled": true,
