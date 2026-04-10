@@ -49,10 +49,7 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇨🇿 Czechia [*CIDR] VK",
         "🇸🇪 Sweden | 🌐 | [IPv6] [*CIDR] VK",
-        "🇵🇱 Poland — #367",
-        "🇭🇰 Hong Kong [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK",
         "[OpenRay] Dynamic-18204"
       ]
@@ -61,10 +58,7 @@
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇨🇿 Czechia [*CIDR] VK",
         "🇸🇪 Sweden | 🌐 | [IPv6] [*CIDR] VK",
-        "🇵🇱 Poland — #367",
-        "🇭🇰 Hong Kong [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK",
         "[OpenRay] Dynamic-18204"
       ],
@@ -78,28 +72,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇨🇿 Czechia [*CIDR] VK",
-      "server": "84.23.54.186",
-      "server_port": 9887,
-      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.io.ozone.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
     },
     {
       "type": "vless",
@@ -120,50 +92,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #367",
-      "server": "5.188.143.135",
-      "server_port": 443,
-      "uuid": "cb8ef789-2eb0-455a-909d-879fe09cf9d4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "m.vk.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "Mn0DIMKW6zu0_D3E1qKO7xMlIVZvB-rqO_-f7Le2vAs",
-          "short_id": "428ef87fd47a3a32"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇭🇰 Hong Kong [*CIDR] VK",
-      "server": "217.16.17.40",
-      "server_port": 9830,
-      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "google.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
         }
       }
     },
