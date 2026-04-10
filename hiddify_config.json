@@ -49,22 +49,24 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #183",
-        "🇩🇪 Germany — #200",
+        "🇳🇱 The Netherlands — #425",
         "🇩🇪 Germany — #225",
         "🇫🇮 Finland — #256",
-        "🇩🇪 Germany — #221"
+        "🇩🇪 Germany — #221",
+        "🇩🇪 Germany | 🌐 [*CIDR] VK",
+        "🇳🇱 The Netherlands — #430"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #183",
-        "🇩🇪 Germany — #200",
+        "🇳🇱 The Netherlands — #425",
         "🇩🇪 Germany — #225",
         "🇫🇮 Finland — #256",
-        "🇩🇪 Germany — #221"
+        "🇩🇪 Germany — #221",
+        "🇩🇪 Germany | 🌐 [*CIDR] VK",
+        "🇳🇱 The Netherlands — #430"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -79,41 +81,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #183",
+      "tag": "🇳🇱 The Netherlands — #425",
       "server": "89.208.86.234",
       "server_port": 443,
-      "uuid": "02db7a09-df9a-45c2-b795-e819fba23d8a",
+      "uuid": "4293975b-0683-4124-a715-81c678fb2ddf",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "static.rutube.ru",
+        "server_name": "5post-gate.x5.ru",
         "reality": {
           "enabled": true,
           "public_key": "kAfACVGlqkxdp5T0pF_8rP8ElZ6mYSNnpP1NDnSr9H8",
-          "short_id": "5f0a12bc43de5678"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #200",
-      "server": "217.16.20.222",
-      "server_port": 443,
-      "uuid": "02db7a09-df9a-45c2-b795-e819fba23d8a",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "m.47news.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "gEkBb04WCKpvyDowiwAd_6zMxYAHArFibO6KOw9FDH8",
-          "short_id": "2a11111c8b1eee9f"
+          "short_id": "c0ffee1234abcd11"
         },
         "utls": {
           "enabled": true,
@@ -180,6 +160,50 @@
           "enabled": true,
           "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
           "short_id": "bad5722c72a038"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany | 🌐 [*CIDR] VK",
+      "server": "217.16.31.242",
+      "server_port": 443,
+      "uuid": "4bf5667b-cdc0-4043-a40c-4d8f9c0f9cf3",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "KdKCOv7NujPSADlbE0E2xbRX_ZT9r86E1HWfplgpqAM",
+          "short_id": "a87a7e758947745b"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #430",
+      "server": "217.16.20.222",
+      "server_port": 443,
+      "uuid": "4293975b-0683-4124-a715-81c678fb2ddf",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "static.rutube.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "gEkBb04WCKpvyDowiwAd_6zMxYAHArFibO6KOw9FDH8",
+          "short_id": "2a11111c8b1eee9f"
         },
         "utls": {
           "enabled": true,
