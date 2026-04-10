@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇨🇿 Czechia — #93"
+        "🇵🇱 Poland — #408",
+        "[OpenRay] Dynamic-18204"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇨🇿 Czechia — #93"
+        "🇵🇱 Poland — #408",
+        "[OpenRay] Dynamic-18204"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,23 +73,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇨🇿 Czechia — #93",
-      "server": "84.23.54.186",
-      "server_port": 9887,
-      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
+      "tag": "🇵🇱 Poland — #408",
+      "server": "5.188.143.135",
+      "server_port": 443,
+      "uuid": "cb8ef789-2eb0-455a-909d-879fe09cf9d4",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "www.io.ozone.ru",
+        "server_name": "m.vk.com",
         "reality": {
           "enabled": true,
-          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
-          "short_id": ""
+          "public_key": "Mn0DIMKW6zu0_D3E1qKO7xMlIVZvB-rqO_-f7Le2vAs",
+          "short_id": "428ef87fd47a3a32"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "random"
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[OpenRay] Dynamic-18204",
+      "server": "ruv.nodes.rocketnetwork.ru",
+      "server_port": 443,
+      "uuid": "cb8ef789-2eb0-455a-909d-879fe09cf9d4",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "m.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Mn0DIMKW6zu0_D3E1qKO7xMlIVZvB-rqO_-f7Le2vAs",
+          "short_id": "428ef87fd47a3a32"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
