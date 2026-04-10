@@ -39,30 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "[OpenRay] Dynamic-18204",
         "🇵🇱 Poland — #408",
-        "🇺🇸 United States — #411",
-        "🇺🇳 @MrMeshkyChannel 478410",
-        "🇨🇿 Czechia — #92"
+        "🇺🇳 @MrMeshkyChannel 478410"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "[OpenRay] Dynamic-18204",
         "🇵🇱 Poland — #408",
-        "🇺🇸 United States — #411",
-        "🇺🇳 @MrMeshkyChannel 478410",
-        "🇨🇿 Czechia — #92"
+        "🇺🇳 @MrMeshkyChannel 478410"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -121,28 +117,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇺🇸 United States — #411",
-      "server": "217.16.27.162",
-      "server_port": 443,
-      "uuid": "115bc887-532b-4391-81c6-ddecc8adbbb6",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "sun6-21.userapi.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "DrWq_ysFaGPGgRFcHevMPoruwYMRXryW6i_cwE7CuCM",
-          "short_id": "d7e1a111"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "ios"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇺🇳 @MrMeshkyChannel 478410",
       "server": "217.16.31.242",
       "server_port": 443,
@@ -156,28 +130,6 @@
           "enabled": true,
           "public_key": "KdKCOv7NujPSADlbE0E2xbRX_ZT9r86E1HWfplgpqAM",
           "short_id": "a87a7e758947745b"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇨🇿 Czechia — #92",
-      "server": "84.23.54.186",
-      "server_port": 9887,
-      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.io.ozone.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
-          "short_id": ""
         },
         "utls": {
           "enabled": true,
