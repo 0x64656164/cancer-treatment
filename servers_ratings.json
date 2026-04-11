@@ -1,6 +1,73 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|84.23.54.186|9887|b59cf03c": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇨🇿 Czechia — #110",
+        "server": "84.23.54.186",
+        "server_port": 9887,
+        "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "www.io.ozone.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "random"
+          }
+        }
+      },
+      "link": "vless://b59cf03c-704f-44b0-b329-d3443e860481@84.23.54.186:9887?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=qq&sni=www.io.ozone.ru&pbk=im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4#%F0%9F%87%A8%F0%9F%87%BF%20Czechia%20%E2%80%94%20%23109",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-04-11T21:32:33.017341",
+      "last_seen": "2026-04-11T21:32:33.017673",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        0.942996179452247,
+        0.8468177006266508
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-11T21:32:33.017341",
+          "success": true,
+          "speed": 0.942996179452247,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-11T21:32:33.017673",
+          "success": true,
+          "speed": 0.8468177006266508,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-04-11T22:32:33.017681",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-11T21:03:00.006481"
+    "last_cleanup": "2026-04-11T21:32:33.018178"
   }
 }
