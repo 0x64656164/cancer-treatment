@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|89.208.85.253|443|a438140a": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #216",
+        "server": "89.208.85.253",
+        "server_port": 443,
+        "uuid": "a438140a-54b8-4f4b-a573-c4802fa82428",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "sun6-22.userapi.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "oCY1MEFpDL3Yskt26fys4QdEEMMoMR2gR0N8iagyvHE",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://a438140a-54b8-4f4b-a573-c4802fa82428@89.208.85.253:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=firefox&sni=sun6-22.userapi.com&pbk=oCY1MEFpDL3Yskt26fys4QdEEMMoMR2gR0N8iagyvHE#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%23216",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-04-11T18:00:09.271413",
+      "last_seen": "2026-04-11T18:00:09.271413",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        0.9231329670863702
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-11T18:00:09.271413",
+          "success": true,
+          "speed": 0.9231329670863702,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-04-11T19:00:09.271438",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-11T17:05:12.266583"
+    "last_cleanup": "2026-04-11T18:00:09.272109"
   }
 }
