@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #216"
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇨🇿 Czechia — #100"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #216"
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇨🇿 Czechia — #100"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,23 +71,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #216",
-      "server": "89.208.85.253",
-      "server_port": 443,
-      "uuid": "a438140a-54b8-4f4b-a573-c4802fa82428",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "212.233.98.145",
+      "server_port": 5443,
+      "uuid": "f8b269b8-e1e9-452d-b375-cf1d89913bd1",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SJwCg-2RraxdmPp82iqmwV0cY7bpnimExCU02eZck1k",
+          "short_id": "1d025360f2d2be56"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇿 Czechia — #100",
+      "server": "84.23.54.186",
+      "server_port": 9887,
+      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "sun6-22.userapi.com",
+        "server_name": "www.io.ozone.ru",
         "reality": {
           "enabled": true,
-          "public_key": "oCY1MEFpDL3Yskt26fys4QdEEMMoMR2gR0N8iagyvHE",
+          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
           "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "firefox"
+          "fingerprint": "random"
         }
       }
     }
