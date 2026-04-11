@@ -49,18 +49,18 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "[OpenRay] Dynamic-18204",
         "🇵🇱 Poland — #408",
-        "🇺🇳 @MrMeshkyChannel 478410"
+        "🇺🇳 @MrMeshkyChannel 478410",
+        "🇵🇱 Poland [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "[OpenRay] Dynamic-18204",
         "🇵🇱 Poland — #408",
-        "🇺🇳 @MrMeshkyChannel 478410"
+        "🇺🇳 @MrMeshkyChannel 478410",
+        "🇵🇱 Poland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,28 +72,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "[OpenRay] Dynamic-18204",
-      "server": "ruv.nodes.rocketnetwork.ru",
-      "server_port": 443,
-      "uuid": "cb8ef789-2eb0-455a-909d-879fe09cf9d4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "m.vk.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "Mn0DIMKW6zu0_D3E1qKO7xMlIVZvB-rqO_-f7Le2vAs",
-          "short_id": "428ef87fd47a3a32"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -132,6 +110,28 @@
           "enabled": true,
           "public_key": "KdKCOv7NujPSADlbE0E2xbRX_ZT9r86E1HWfplgpqAM",
           "short_id": "a87a7e758947745b"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "212.233.98.145",
+      "server_port": 5443,
+      "uuid": "f8b269b8-e1e9-452d-b375-cf1d89913bd1",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SJwCg-2RraxdmPp82iqmwV0cY7bpnimExCU02eZck1k",
+          "short_id": "1d025360f2d2be56"
         },
         "utls": {
           "enabled": true,
