@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|217.16.20.222|443|ec737f6c": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #157",
+        "server": "217.16.20.222",
+        "server_port": 443,
+        "uuid": "ec737f6c-3696-4954-9f1f-1a4f1384929a",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "5post-gate.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "gEkBb04WCKpvyDowiwAd_6zMxYAHArFibO6KOw9FDH8",
+            "short_id": "2a11111c8b1eee9f"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
+        }
+      },
+      "link": "vless://ec737f6c-3696-4954-9f1f-1a4f1384929a@217.16.20.222:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=qq&sni=5post-gate.x5.ru&pbk=gEkBb04WCKpvyDowiwAd_6zMxYAHArFibO6KOw9FDH8&sid=2a11111c8b1eee9f&spx=%2F#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%23157",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-04-11T11:02:54.891404",
+      "last_seen": "2026-04-11T11:02:54.891404",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        2.9000803542888893
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-11T11:02:54.891404",
+          "success": true,
+          "speed": 2.9000803542888893,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-04-11T12:02:54.891436",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-11T10:24:06.904059"
+    "last_cleanup": "2026-04-11T11:02:54.892091"
   }
 }
