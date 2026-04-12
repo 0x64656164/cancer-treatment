@@ -41,25 +41,25 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
+        "EUROPE-auto",
         "🇷🇸 Serbia [*CIDR] VK",
+        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
         "🇷🇸 Serbia [*CIDR] VK",
+        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -72,28 +72,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "217.16.21.156",
-      "server_port": 443,
-      "uuid": "d5b7d347-6488-4091-bb61-384bbe57078a",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "samsung.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "d-3qQJu3Urv7m-h-W0Hitpv5tks90XTcmEJjbsMNflA",
-          "short_id": "d5"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -114,6 +92,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "217.16.21.156",
+      "server_port": 443,
+      "uuid": "d5b7d347-6488-4091-bb61-384bbe57078a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "samsung.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "d-3qQJu3Urv7m-h-W0Hitpv5tks90XTcmEJjbsMNflA",
+          "short_id": "d5"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     },
