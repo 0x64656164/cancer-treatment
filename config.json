@@ -47,16 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #299",
-        "🇸🇪 Sweden | 🌐 [*CIDR] VK"
+        "🇸🇪 Sweden | 🌐 [*CIDR] VK",
+        "🇩🇪 Germany — #299"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #299",
-        "🇸🇪 Sweden | 🌐 [*CIDR] VK"
+        "🇸🇪 Sweden | 🌐 [*CIDR] VK",
+        "🇩🇪 Germany — #299"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -68,28 +68,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #299",
-      "server": "217.16.31.111",
-      "server_port": 443,
-      "uuid": "4bf5667b-cdc0-4043-a40c-4d8f9c0f9cf3",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rbc.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "KdKCOv7NujPSADlbE0E2xbRX_ZT9r86E1HWfplgpqAM",
-          "short_id": "a87a7e758947745b"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
@@ -106,6 +84,28 @@
           "enabled": true,
           "public_key": "tzBh0XKKUFaQJpAs01Gf8dwYmie3pWDOB8-H4Y4sTFc",
           "short_id": "23d0511104ef61ea"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #299",
+      "server": "217.16.31.111",
+      "server_port": 443,
+      "uuid": "4bf5667b-cdc0-4043-a40c-4d8f9c0f9cf3",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "KdKCOv7NujPSADlbE0E2xbRX_ZT9r86E1HWfplgpqAM",
+          "short_id": "a87a7e758947745b"
         },
         "utls": {
           "enabled": true,
