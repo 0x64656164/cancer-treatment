@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|84.23.54.186|9888|0599bdbc": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇷🇸 Serbia [*CIDR] VK",
+        "server": "84.23.54.186",
+        "server_port": 9888,
+        "uuid": "0599bdbc-b131-42cc-9b5c-03857e111eb9",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "www.io.ozone.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
+        }
+      },
+      "link": "vless://0599bdbc-b131-42cc-9b5c-03857e111eb9@84.23.54.186:9888?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=qq&sni=www.io.ozone.ru&pbk=im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4#%F0%9F%87%B7%F0%9F%87%B8%20Serbia%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-04-12T21:02:11.480671",
+      "last_seen": "2026-04-12T21:02:11.480671",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        2.9631293217094803
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-12T21:02:11.480671",
+          "success": true,
+          "speed": 2.9631293217094803,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-04-12T22:02:11.480705",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-12T20:24:50.248322"
+    "last_cleanup": "2026-04-12T21:02:11.481378"
   }
 }
