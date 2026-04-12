@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇨🇿 Czechia — #110"
+        "🇩🇪 Germany — #299",
+        "🇸🇪 Sweden | 🌐 [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇨🇿 Czechia — #110"
+        "🇩🇪 Germany — #299",
+        "🇸🇪 Sweden | 🌐 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,23 +73,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇨🇿 Czechia — #110",
-      "server": "84.23.54.186",
-      "server_port": 9887,
-      "uuid": "b59cf03c-704f-44b0-b329-d3443e860481",
+      "tag": "🇩🇪 Germany — #299",
+      "server": "217.16.31.111",
+      "server_port": 443,
+      "uuid": "4bf5667b-cdc0-4043-a40c-4d8f9c0f9cf3",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "www.io.ozone.ru",
+        "server_name": "rbc.ru",
         "reality": {
           "enabled": true,
-          "public_key": "im7-98zxWz_OGimQfeoN_Y5p1tAy8KoZCxOe2wOeWS4",
-          "short_id": ""
+          "public_key": "KdKCOv7NujPSADlbE0E2xbRX_ZT9r86E1HWfplgpqAM",
+          "short_id": "a87a7e758947745b"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "random"
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇪 Sweden | 🌐 [*CIDR] VK",
+      "server": "95.163.211.169",
+      "server_port": 443,
+      "uuid": "f3dfe9ef-4386-479d-b2dc-bee307e0b3dc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "tzBh0XKKUFaQJpAs01Gf8dwYmie3pWDOB8-H4Y4sTFc",
+          "short_id": "23d0511104ef61ea"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
