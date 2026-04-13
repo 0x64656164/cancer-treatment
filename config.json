@@ -39,26 +39,22 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇷🇸 Serbia [*CIDR] VK",
-        "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK"
+        "ALL-auto",
+        "🇷🇸 Serbia [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇷🇸 Serbia [*CIDR] VK",
-        "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK"
+        "🇷🇸 Serbia [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -90,50 +86,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "212.233.98.145",
-      "server_port": 5443,
-      "uuid": "f8b269b8-e1e9-452d-b375-cf1d89913bd1",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SJwCg-2RraxdmPp82iqmwV0cY7bpnimExCU02eZck1k",
-          "short_id": "1d025360f2d2be56"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "217.16.21.156",
-      "server_port": 443,
-      "uuid": "d5b7d347-6488-4091-bb61-384bbe57078a",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "samsung.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "d-3qQJu3Urv7m-h-W0Hitpv5tks90XTcmEJjbsMNflA",
-          "short_id": "d5"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
         }
       }
     }
