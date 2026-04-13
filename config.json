@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇪🇸 Spain — #261"
+        "🇪🇸 Spain — #261",
+        "🇫🇮 Finland — #160"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇪🇸 Spain — #261"
+        "🇪🇸 Spain — #261",
+        "🇫🇮 Finland — #160"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -86,6 +88,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #160",
+      "server": "37.139.35.129",
+      "server_port": 443,
+      "uuid": "30d9e37f-146f-45db-b3ae-264fb13eec30",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ya.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "BuhtXyl1vFs7UaFk9RBORjgCpqNtJPJMpz6YbmXbAmo",
+          "short_id": "67c95bb6066c9f0a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
