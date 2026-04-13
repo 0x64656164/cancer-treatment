@@ -50,8 +50,8 @@
       "outbounds": [
         "EUROPE-auto",
         "🇷🇸 Serbia [*CIDR] VK",
-        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
-        "🇵🇱 Poland [*CIDR] VK"
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK"
       ]
     },
     {
@@ -59,8 +59,8 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇷🇸 Serbia [*CIDR] VK",
-        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
-        "🇵🇱 Poland [*CIDR] VK"
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -97,28 +97,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "217.16.21.156",
-      "server_port": 443,
-      "uuid": "d5b7d347-6488-4091-bb61-384bbe57078a",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "samsung.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "d-3qQJu3Urv7m-h-W0Hitpv5tks90XTcmEJjbsMNflA",
-          "short_id": "d5"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇵🇱 Poland [*CIDR] VK",
       "server": "212.233.98.145",
       "server_port": 5443,
@@ -136,6 +114,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "217.16.21.156",
+      "server_port": 443,
+      "uuid": "d5b7d347-6488-4091-bb61-384bbe57078a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "samsung.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "d-3qQJu3Urv7m-h-W0Hitpv5tks90XTcmEJjbsMNflA",
+          "short_id": "d5"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
