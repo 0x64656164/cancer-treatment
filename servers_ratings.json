@@ -1,6 +1,73 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|217.16.21.156|443|d5b7d347": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #130",
+        "server": "217.16.21.156",
+        "server_port": 443,
+        "uuid": "d5b7d347-6488-4091-bb61-384bbe57078a",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "samsung.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "d-3qQJu3Urv7m-h-W0Hitpv5tks90XTcmEJjbsMNflA",
+            "short_id": "d5"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://d5b7d347-6488-4091-bb61-384bbe57078a@217.16.21.156:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=samsung.com&fp=chrome&pbk=d-3qQJu3Urv7m-h-W0Hitpv5tks90XTcmEJjbsMNflA&sid=d5&type=tcp&headerType=none#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-04-13T16:55:07.253184",
+      "last_seen": "2026-04-13T16:55:07.253587",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        7.389190119046049,
+        5.138214456447563
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-13T16:55:07.253184",
+          "success": true,
+          "speed": 7.389190119046049,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-13T16:55:07.253587",
+          "success": true,
+          "speed": 5.138214456447563,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-04-13T17:55:07.253595",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-13T15:52:49.278732"
+    "last_cleanup": "2026-04-13T16:55:07.254146"
   }
 }
