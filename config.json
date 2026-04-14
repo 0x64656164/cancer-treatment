@@ -39,30 +39,28 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇫🇮 Finland [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK",
         "🇩🇪 Germany — #114",
-        "🌐 Anycast-IP [*CIDR] VK",
-        "🇺🇳 @MrMeshkyChannel 372509"
+        "🇩🇪 Germany [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇫🇮 Finland [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK",
         "🇩🇪 Germany — #114",
-        "🌐 Anycast-IP [*CIDR] VK",
-        "🇺🇳 @MrMeshkyChannel 372509"
+        "🇩🇪 Germany [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -143,45 +141,23 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP [*CIDR] VK",
-      "server": "37.139.35.129",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "cloud-ru-01.pipecloud.tech",
       "server_port": 443,
-      "uuid": "a5620f7d-f90b-446c-8050-904d7f9e9f2b",
+      "uuid": "c6554ad3-c708-41cf-b72f-448a6b66763f",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "ya.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "BuhtXyl1vFs7UaFk9RBORjgCpqNtJPJMpz6YbmXbAmo",
-          "short_id": "67c95bb6066c9f0a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇳 @MrMeshkyChannel 372509",
-      "server": "95.163.211.125",
-      "server_port": 443,
-      "uuid": "0eca1f22-e5a1-4888-a0fa-c2345e87cf2f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdnv-img.perekrestok.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "MNbAG72pXVO11PRzMRw7puKjDnmkig2mvEmdjow53Wc",
+          "public_key": "N7bJndsaDbXVhL0W9NBZuexD30QATqaP5F5IdUSW0WU",
           "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "safari"
+          "fingerprint": "chrome"
         }
       }
     }
