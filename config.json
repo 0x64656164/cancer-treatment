@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇺🇳 @MrMeshkyChannel 372509"
+        "🇺🇳 @MrMeshkyChannel 372509",
+        "🇺🇳 @MrMeshkyChannel 453271"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇺🇳 @MrMeshkyChannel 372509"
+        "🇺🇳 @MrMeshkyChannel 372509",
+        "🇺🇳 @MrMeshkyChannel 453271"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -86,6 +88,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "safari"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇳 @MrMeshkyChannel 453271",
+      "server": "95.163.211.119",
+      "server_port": 443,
+      "uuid": "0eca1f22-e5a1-4888-a0fa-c2345e87cf2f",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "cdnv-img.perekrestok.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "MNbAG72pXVO11PRzMRw7puKjDnmkig2mvEmdjow53Wc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }

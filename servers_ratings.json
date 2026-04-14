@@ -27,12 +27,14 @@
       "group": "RUSSIA",
       "country": "RU",
       "first_seen": "2026-04-14T16:34:43.957179",
-      "last_seen": "2026-04-14T17:47:45.277261",
-      "total_tests": 2,
-      "successful_tests": 2,
+      "last_seen": "2026-04-14T19:26:40.005806",
+      "total_tests": 4,
+      "successful_tests": 4,
       "speed_history": [
         0.12946339259142572,
-        0.17252495950693905
+        0.17252495950693905,
+        0.18807857804227487,
+        0.2654041333831598
       ],
       "check_history": [
         {
@@ -48,6 +50,78 @@
           "speed": 0.17252495950693905,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-04-14T19:21:23.914409",
+          "success": true,
+          "speed": 0.18807857804227487,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-14T19:26:40.005806",
+          "success": true,
+          "speed": 0.2654041333831598,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5869564562145867,
+      "rating_components": {
+        "speed": 0.02273109253526205,
+        "stability": 1.0,
+        "uptime": 0.48058984615833333,
+        "consistency": 0.9017431668840401,
+        "freshness": 0.9999998837053131
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|95.163.211.119|443|0eca1f22": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇺🇳 @MrMeshkyChannel 453271",
+        "server": "95.163.211.119",
+        "server_port": 443,
+        "uuid": "0eca1f22-e5a1-4888-a0fa-c2345e87cf2f",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "cdnv-img.perekrestok.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "MNbAG72pXVO11PRzMRw7puKjDnmkig2mvEmdjow53Wc",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://0eca1f22-e5a1-4888-a0fa-c2345e87cf2f@95.163.211.119:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=cdnv-img.perekrestok.ru&pbk=MNbAG72pXVO11PRzMRw7puKjDnmkig2mvEmdjow53Wc#%F0%9F%87%BA%F0%9F%87%B3%20%40MrMeshkyChannel%20453271",
+      "group": "RUSSIA",
+      "country": "RU",
+      "first_seen": "2026-04-14T19:21:23.913903",
+      "last_seen": "2026-04-14T19:21:23.913903",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        8.308785228337136
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-14T19:21:23.913903",
+          "success": true,
+          "speed": 8.308785228337136,
+          "latency": null,
+          "error": null
         }
       ],
       "rating": 0.0,
@@ -61,13 +135,13 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 2,
+      "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-04-14T18:47:45.277277",
+      "staging_until": "2026-04-14T20:21:23.913928",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-04-14T17:47:45.278711"
+    "last_cleanup": "2026-04-14T19:26:40.006803"
   }
 }
