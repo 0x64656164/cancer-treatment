@@ -39,24 +39,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇫🇮 Finland [*CIDR] VK",
-        "🇺🇳 @MrMeshkyChannel 372509"
+        "🇫🇮 Finland — #346"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇫🇮 Finland [*CIDR] VK",
-        "🇺🇳 @MrMeshkyChannel 372509"
+        "🇫🇮 Finland — #346"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -93,23 +93,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇺🇳 @MrMeshkyChannel 372509",
-      "server": "95.163.211.125",
+      "tag": "🇫🇮 Finland — #346",
+      "server": "212.233.122.230",
       "server_port": 443,
-      "uuid": "0eca1f22-e5a1-4888-a0fa-c2345e87cf2f",
+      "uuid": "c6554ad3-c708-41cf-b72f-448a6b66763f",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "cdnv-img.perekrestok.ru",
+        "server_name": "avito.ru",
         "reality": {
           "enabled": true,
-          "public_key": "MNbAG72pXVO11PRzMRw7puKjDnmkig2mvEmdjow53Wc",
+          "public_key": "N7bJndsaDbXVhL0W9NBZuexD30QATqaP5F5IdUSW0WU",
           "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "safari"
+          "fingerprint": "chrome"
         }
       }
     }
