@@ -49,6 +49,7 @@
         "EUROPE-auto",
         "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands — #285",
+        "🇨🇭 Switzerland — #76",
         "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
       ]
     },
@@ -58,6 +59,7 @@
       "outbounds": [
         "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands — #285",
+        "🇨🇭 Switzerland — #76",
         "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -112,6 +114,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇭 Switzerland — #76",
+      "server": "89.208.231.223",
+      "server_port": 443,
+      "uuid": "d26d1d32-0b17-4209-aa08-57283863467d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "o_JFuLv0N6nFWnDWF7yoeJhB5hL95Xu_MyX4Fd6DsBA",
+          "short_id": "7ee6b31afd85"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     },
