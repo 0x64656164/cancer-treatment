@@ -39,28 +39,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
+        "ALL-auto",
         "🇫🇮 Finland [*CIDR] VK",
-        "🇺🇸 United States — #301",
-        "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇺🇳 @MrMeshkyChannel 372509"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
         "🇫🇮 Finland [*CIDR] VK",
-        "🇺🇸 United States — #301",
-        "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇺🇳 @MrMeshkyChannel 372509"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -97,67 +93,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇺🇸 United States — #301",
-      "server": "217.16.27.162",
+      "tag": "🇺🇳 @MrMeshkyChannel 372509",
+      "server": "95.163.211.125",
       "server_port": 443,
-      "uuid": "3644338a-227e-4ba9-aa7f-11c0d9d9ce57",
+      "uuid": "0eca1f22-e5a1-4888-a0fa-c2345e87cf2f",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "sun6-21.userapi.com",
+        "server_name": "cdnv-img.perekrestok.ru",
         "reality": {
           "enabled": true,
-          "public_key": "DrWq_ysFaGPGgRFcHevMPoruwYMRXryW6i_cwE7CuCM",
-          "short_id": "189cfa69"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "ios"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "212.233.98.145",
-      "server_port": 5443,
-      "uuid": "f8b269b8-e1e9-452d-b375-cf1d89913bd1",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SJwCg-2RraxdmPp82iqmwV0cY7bpnimExCU02eZck1k",
-          "short_id": "1d025360f2d2be56"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "cloud-ru-01.pipecloud.tech",
-      "server_port": 443,
-      "uuid": "c6554ad3-c708-41cf-b72f-448a6b66763f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "N7bJndsaDbXVhL0W9NBZuexD30QATqaP5F5IdUSW0WU",
+          "public_key": "MNbAG72pXVO11PRzMRw7puKjDnmkig2mvEmdjow53Wc",
           "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "safari"
         }
       }
     }
