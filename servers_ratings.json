@@ -1,6 +1,81 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|146.185.241.35|29737|7efa42a2": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+        "server": "146.185.241.35",
+        "server_port": 29737,
+        "uuid": "7efa42a2-85ac-4777-aebf-97aad6e6afb8",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "hUKl7SdVyRYTTvSYbqofbOYeYsmJyCCJO7DdtFp3S2E",
+            "short_id": "1f9364"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "ios"
+          }
+        }
+      },
+      "link": "vless://7efa42a2-85ac-4777-aebf-97aad6e6afb8@146.185.241.35:29737?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=ios&sni=eh.vk.com&pbk=hUKl7SdVyRYTTvSYbqofbOYeYsmJyCCJO7DdtFp3S2E&sid=1f9364#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%E2%80%94%20%23263",
+      "group": "EUROPE",
+      "country": "NL",
+      "first_seen": "2026-04-15T18:30:32.288904",
+      "last_seen": "2026-04-15T18:30:32.289509",
+      "total_tests": 3,
+      "successful_tests": 3,
+      "speed_history": [
+        0.13633837823434514,
+        0.13654405069424413,
+        0.13647982327740457
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-15T18:30:32.288904",
+          "success": true,
+          "speed": 0.13633837823434514,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-15T18:30:32.289281",
+          "success": true,
+          "speed": 0.13654405069424413,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-15T18:30:32.289509",
+          "success": true,
+          "speed": 0.13647982327740457,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.43127362646623735,
+      "rating_components": {
+        "speed": 0.13645408406866463,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.999828169305496,
+        "freshness": 0.9999999514796986
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-15T16:53:45.392007"
+    "last_cleanup": "2026-04-15T18:30:32.290021"
   }
 }
