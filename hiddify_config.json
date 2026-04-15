@@ -51,8 +51,8 @@
         "EUROPE-auto",
         "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands — #285",
-        "🇨🇭 Switzerland — #76",
-        "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
+        "🇨🇭 Switzerland | 🌐 [*CIDR] VK",
+        "🇨🇭 Switzerland — #76"
       ]
     },
     {
@@ -61,8 +61,8 @@
       "outbounds": [
         "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands — #285",
-        "🇨🇭 Switzerland — #76",
-        "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
+        "🇨🇭 Switzerland | 🌐 [*CIDR] VK",
+        "🇨🇭 Switzerland — #76"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -121,28 +121,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇨🇭 Switzerland — #76",
-      "server": "89.208.231.223",
-      "server_port": 443,
-      "uuid": "d26d1d32-0b17-4209-aa08-57283863467d",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "eh.vk.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "o_JFuLv0N6nFWnDWF7yoeJhB5hL95Xu_MyX4Fd6DsBA",
-          "short_id": "7ee6b31afd85"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇨🇭 Switzerland | 🌐 [*CIDR] VK",
       "server": "89.208.231.223",
       "server_port": 443,
@@ -156,6 +134,28 @@
           "enabled": true,
           "public_key": "o_JFuLv0N6nFWnDWF7yoeJhB5hL95Xu_MyX4Fd6DsBA",
           "short_id": "3d41b254eb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇭 Switzerland — #76",
+      "server": "89.208.231.223",
+      "server_port": 443,
+      "uuid": "d26d1d32-0b17-4209-aa08-57283863467d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "o_JFuLv0N6nFWnDWF7yoeJhB5hL95Xu_MyX4Fd6DsBA",
+          "short_id": "7ee6b31afd85"
         },
         "utls": {
           "enabled": true,
