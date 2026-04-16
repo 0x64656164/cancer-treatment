@@ -50,7 +50,9 @@
       "outbounds": [
         "EUROPE-auto",
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇱 The Netherlands — #285"
+        "🇺🇸 United States — #389",
+        "🇺🇸 United States [*CIDR] VK",
+        "🇨🇭 Switzerland [*CIDR] VK"
       ]
     },
     {
@@ -58,7 +60,9 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇱 The Netherlands — #285"
+        "🇺🇸 United States — #389",
+        "🇺🇸 United States [*CIDR] VK",
+        "🇨🇭 Switzerland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -95,23 +99,67 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #285",
-      "server": "212.233.98.145",
-      "server_port": 5443,
-      "uuid": "f8b269b8-e1e9-452d-b375-cf1d89913bd1",
-      "flow": "",
+      "tag": "🇺🇸 United States — #389",
+      "server": "217.16.27.162",
+      "server_port": 443,
+      "uuid": "c911018e-3cb0-485f-88d8-d72e2d90506a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sun6-21.userapi.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "DrWq_ysFaGPGgRFcHevMPoruwYMRXryW6i_cwE7CuCM",
+          "short_id": "d7e1abac"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "ios"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸 United States [*CIDR] VK",
+      "server": "ltei.mambo-jambo.ru",
+      "server_port": 443,
+      "uuid": "c911018e-3cb0-485f-88d8-d72e2d90506a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sun6-21.userapi.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "DrWq_ysFaGPGgRFcHevMPoruwYMRXryW6i_cwE7CuCM",
+          "short_id": "d7e1abac"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇭 Switzerland [*CIDR] VK",
+      "server": "89.208.231.223",
+      "server_port": 443,
+      "uuid": "d26d1d32-0b17-4209-aa08-57283863467d",
+      "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
         "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "SJwCg-2RraxdmPp82iqmwV0cY7bpnimExCU02eZck1k",
-          "short_id": "1d025360f2d2be56"
+          "public_key": "o_JFuLv0N6nFWnDWF7yoeJhB5hL95Xu_MyX4Fd6DsBA",
+          "short_id": "7ee6b31afd85"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "chrome"
         }
       }
     }
