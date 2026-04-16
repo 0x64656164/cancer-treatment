@@ -41,36 +41,28 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🇩🇪 Germany — #97",
+        "EUROPE-auto",
         "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK-1",
-        "🇳🇱 The Netherlands [*CIDR] VK-2",
-        "🇳🇱 The Netherlands [*CIDR] VK-3",
         "1632 | 🇬🇧 United Kingdom | VLESS | 📺 YT | TG: @YoutubeUnBlockRu",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK-1"
+        "🇳🇱 The Netherlands — #236"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🇩🇪 Germany — #97",
         "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK-1",
-        "🇳🇱 The Netherlands [*CIDR] VK-2",
-        "🇳🇱 The Netherlands [*CIDR] VK-3",
         "1632 | 🇬🇧 United Kingdom | VLESS | 📺 YT | TG: @YoutubeUnBlockRu",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK-1"
+        "🇳🇱 The Netherlands — #236"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -85,73 +77,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #97",
-      "server": "87.239.111.174",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "i.oneme.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "vk2.voxyvpn.ru",
-      "server_port": 9443,
-      "uuid": "7b2256ea-9cc0-41fd-9607-cf025a66d659",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "L7DF7bQGLb1hLQxHoDqnsd7WMAo8bklWteoXqKYwAl8",
-          "short_id": "6d021e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
-      "server": "vk1.voxyvpn.ru",
-      "server_port": 9443,
-      "uuid": "7b2256ea-9cc0-41fd-9607-cf025a66d659",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "L7DF7bQGLb1hLQxHoDqnsd7WMAo8bklWteoXqKYwAl8",
-          "short_id": "a94fbc12e3d4"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK-2",
       "server": "217.16.23.87",
       "server_port": 443,
       "uuid": "b960ed61-d7b0-4c6d-a39f-484726e2ad66",
@@ -173,7 +99,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK-3",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
       "server": "212.233.121.218",
       "server_port": 5443,
       "uuid": "66fc5cf0-3fc5-436e-93c8-3ec27391d291",
@@ -217,45 +143,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "vk2.voxyvpn.ru",
-      "server_port": 8443,
-      "uuid": "7b2256ea-9cc0-41fd-9607-cf025a66d659",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇳🇱 The Netherlands — #236",
+      "server": "89.208.222.248",
+      "server_port": 5443,
+      "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
+      "flow": "",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
         "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "L7DF7bQGLb1hLQxHoDqnsd7WMAo8bklWteoXqKYwAl8",
-          "short_id": "6d021e"
+          "public_key": "fNTq5EC6OsQ5y_FWhTUodJJy_ftKIA4zpdWJ3-V5dn4",
+          "short_id": "a3df"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK-1",
-      "server": "vk1.voxyvpn.ru",
-      "server_port": 8443,
-      "uuid": "7b2256ea-9cc0-41fd-9607-cf025a66d659",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "L7DF7bQGLb1hLQxHoDqnsd7WMAo8bklWteoXqKYwAl8",
-          "short_id": "c3d8aa"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
         }
       }
     }
