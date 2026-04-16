@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇨🇭 Switzerland — #37"
+        "🇵🇱 Poland — #266",
+        "🇩🇪 Germany — #106"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇨🇭 Switzerland — #37"
+        "🇵🇱 Poland — #266",
+        "🇩🇪 Germany — #106"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,23 +73,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇨🇭 Switzerland — #37",
-      "server": "89.208.231.223",
+      "tag": "🇵🇱 Poland — #266",
+      "server": "146.185.210.165",
       "server_port": 443,
-      "uuid": "28e149b5-e836-4dd3-9fe1-ea3bf2279e51",
+      "uuid": "243ff3dc-8bdf-462c-8709-0f806aca94f0",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "o_JFuLv0N6nFWnDWF7yoeJhB5hL95Xu_MyX4Fd6DsBA",
-          "short_id": "d8a5"
+          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
+          "short_id": "428ef87fd47a3a32"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #106",
+      "server": "89.208.229.138",
+      "server_port": 443,
+      "uuid": "243ff3dc-8bdf-462c-8709-0f806aca94f0",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
+          "short_id": "428ef87fd47a3a32"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
