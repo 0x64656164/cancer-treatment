@@ -49,16 +49,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇵🇱 Poland — #266",
-        "🇩🇪 Germany — #106"
+        "🇵🇱 Poland — #283",
+        "🇩🇪 Germany — #151",
+        "🇵🇱 Poland — #282"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇵🇱 Poland — #266",
-        "🇩🇪 Germany — #106"
+        "🇵🇱 Poland — #283",
+        "🇩🇪 Germany — #151",
+        "🇵🇱 Poland — #282"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,10 +75,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #266",
-      "server": "146.185.210.165",
+      "tag": "🇵🇱 Poland — #283",
+      "server": "217.16.24.151",
       "server_port": 443,
-      "uuid": "243ff3dc-8bdf-462c-8709-0f806aca94f0",
+      "uuid": "a936c7c2-2309-4a0e-8bea-529d6c0e3221",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -95,15 +97,37 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #106",
-      "server": "89.208.229.138",
+      "tag": "🇩🇪 Germany — #151",
+      "server": "146.185.208.99",
       "server_port": 443,
-      "uuid": "243ff3dc-8bdf-462c-8709-0f806aca94f0",
+      "uuid": "a936c7c2-2309-4a0e-8bea-529d6c0e3221",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "api-maps.yandex.ru",
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
+          "short_id": "428ef87fd47a3a32"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #282",
+      "server": "89.208.231.170",
+      "server_port": 443,
+      "uuid": "a936c7c2-2309-4a0e-8bea-529d6c0e3221",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
           "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
