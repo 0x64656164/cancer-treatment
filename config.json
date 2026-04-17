@@ -39,34 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇳🇱 The Netherlands — #236",
         "🇵🇱 Poland — #309",
-        "🇩🇪 Germany [*CIDR] VK",
-        "0405 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-        "🇳🇱 The Netherlands — #236-1",
-        "🇫🇮 Finland — #163",
-        "1019 | 🌐 Unknown | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
+        "🇳🇱 The Netherlands — #279"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇳🇱 The Netherlands — #236",
         "🇵🇱 Poland — #309",
-        "🇩🇪 Germany [*CIDR] VK",
-        "0405 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-        "🇳🇱 The Netherlands — #236-1",
-        "🇫🇮 Finland — #163",
-        "1019 | 🌐 Unknown | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu"
+        "🇳🇱 The Netherlands — #279"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -125,10 +117,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "89.208.222.126",
+      "tag": "🇳🇱 The Netherlands — #279",
+      "server": "89.208.222.248",
       "server_port": 5443,
-      "uuid": "b8dd4a70-7ef8-49d7-8b32-40c0cb707abf",
+      "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
       "flow": "",
       "packet_encoding": "xudp",
       "tls": {
@@ -136,96 +128,8 @@
         "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "YCNQQnzebJy3ZiEWbJEQ_pKrqmRzT3EOFJhH-w5evFg",
-          "short_id": "5a54cb053b69aa7f"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "0405 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "vkmsk.kuda-idem-nvrsk.ru",
-      "server_port": 25207,
-      "uuid": "a9da0525-fe34-42e6-a8a1-72cf1340c7bf",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.vk.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "C6WsAt2bsBvEd7kiESLtpKAAr11ymEl5TUpkty8ODFw",
-          "short_id": "b5d1fe16"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #236-1",
-      "server": "217.16.23.87",
-      "server_port": 443,
-      "uuid": "b960ed61-d7b0-4c6d-a39f-484726e2ad66",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "sun6-21.userapi.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "PZajgWT2dtEu0Avc2QWiZELK9wDQW9p9vvcckfQBfCE",
-          "short_id": "632cd48001bdb09a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland — #163",
-      "server": "37.139.35.129",
-      "server_port": 443,
-      "uuid": "0cec8b0b-0eed-4f15-97c4-3a7f294cedc2",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ya.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "BuhtXyl1vFs7UaFk9RBORjgCpqNtJPJMpz6YbmXbAmo",
-          "short_id": "67c95bb6066c9f0a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "1019 | 🌐 Unknown | 🏳️ SNI-OK | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "wl-ru-vk-01.ray-balance.space",
-      "server_port": 443,
-      "uuid": "0eca1f22-e5a1-4888-a0fa-c2345e87cf2f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdnv-img.perekrestok.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "MNbAG72pXVO11PRzMRw7puKjDnmkig2mvEmdjow53Wc",
-          "short_id": ""
+          "public_key": "fNTq5EC6OsQ5y_FWhTUodJJy_ftKIA4zpdWJ3-V5dn4",
+          "short_id": "a3df"
         },
         "utls": {
           "enabled": true,
