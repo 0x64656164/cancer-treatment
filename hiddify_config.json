@@ -41,27 +41,29 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇳🇱 The Netherlands — #236",
         "🇳🇱 The Netherlands — #279",
-        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇩🇪 Germany — #116",
+        "🇩🇪 Germany — #115",
         "🇳🇱 The Netherlands — #271"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇳🇱 The Netherlands — #236",
         "🇳🇱 The Netherlands — #279",
-        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇩🇪 Germany — #116",
+        "🇩🇪 Germany — #115",
         "🇳🇱 The Netherlands — #271"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -121,23 +123,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "217.16.23.87",
-      "server_port": 443,
-      "uuid": "b960ed61-d7b0-4c6d-a39f-484726e2ad66",
+      "tag": "🇩🇪 Germany — #116",
+      "server": "95.163.208.136",
+      "server_port": 5443,
+      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "sun6-21.userapi.com",
+        "server_name": "i.oneme.ru",
         "reality": {
           "enabled": true,
-          "public_key": "PZajgWT2dtEu0Avc2QWiZELK9wDQW9p9vvcckfQBfCE",
-          "short_id": "632cd48001bdb09a"
+          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+          "short_id": "91e2a4c7"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "firefox"
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #115",
+      "server": "185.130.113.39",
+      "server_port": 5443,
+      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "i.oneme.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+          "short_id": "91e2a4c7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
         }
       }
     },

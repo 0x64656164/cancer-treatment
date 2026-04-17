@@ -27,18 +27,20 @@
       "group": "EUROPE",
       "country": "NL",
       "first_seen": "2026-04-17T16:47:14.128701",
-      "last_seen": "2026-04-17T20:38:19.374683",
-      "total_tests": 8,
-      "successful_tests": 8,
+      "last_seen": "2026-04-17T21:33:57.905882",
+      "total_tests": 11,
+      "successful_tests": 11,
       "speed_history": [
-        6.828051360623681,
         8.806692434930078,
         13.789961250605783,
         14.905468361021262,
         10.127349566913768,
         19.682087079784992,
         13.333696116675343,
-        24.686573806313362
+        24.686573806313362,
+        21.461869584221937,
+        13.183498211192836,
+        18.008897608479415
       ],
       "check_history": [
         {
@@ -96,20 +98,41 @@
           "speed": 24.686573806313362,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.166270",
+          "success": true,
+          "speed": 21.461869584221937,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.177490",
+          "success": true,
+          "speed": 13.183498211192836,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:57.905882",
+          "success": true,
+          "speed": 18.008897608479415,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.7413767943724401,
+      "rating": 0.7259490511746242,
       "rating_components": {
-        "speed": 1.0,
+        "speed": 0.7046930739739546,
         "stability": 1.0,
-        "uptime": 0.5497261524027778,
-        "consistency": 0.21670617858277774,
-        "freshness": 0.9987714370203422
+        "uptime": 0.6146163509305556,
+        "consistency": 0.3931007082162361,
+        "freshness": 0.9990255012399154
       },
       "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 8,
+      "consecutive_successes": 11,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -141,18 +164,20 @@
       "group": "EUROPE",
       "country": "NL",
       "first_seen": "2026-04-17T20:02:35.107516",
-      "last_seen": "2026-04-17T20:38:25.446492",
-      "total_tests": 8,
-      "successful_tests": 8,
+      "last_seen": "2026-04-17T21:33:57.108998",
+      "total_tests": 14,
+      "successful_tests": 14,
       "speed_history": [
-        4.975498564654907,
-        4.826717201726539,
-        3.450538108552,
-        15.85402275076632,
         12.862532644224883,
         17.166059702992037,
         8.218052857794035,
-        8.846481758577557
+        8.846481758577557,
+        16.193226966880722,
+        17.37618639135616,
+        16.524543923779387,
+        12.607264362671376,
+        14.43631698965457,
+        21.581195012247196
       ],
       "check_history": [
         {
@@ -210,88 +235,64 @@
           "speed": 8.846481758577557,
           "latency": null,
           "error": null
-        }
-      ],
-      "rating": 0.527556651121308,
-      "rating_components": {
-        "speed": 0.6793864580187109,
-        "stability": 1.0,
-        "uptime": 0.22922099499999998,
-        "consistency": 0.0,
-        "freshness": 0.9999397434504386
-      },
-      "category": "B",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 8,
-      "active": true,
-      "staging_until": null,
-      "consecutive_failures": 0
-    },
-    "vless|217.16.23.87|443|b960ed61": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-        "server": "217.16.23.87",
-        "server_port": 443,
-        "uuid": "b960ed61-d7b0-4c6d-a39f-484726e2ad66",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "sun6-21.userapi.com",
-          "reality": {
-            "enabled": true,
-            "public_key": "PZajgWT2dtEu0Avc2QWiZELK9wDQW9p9vvcckfQBfCE",
-            "short_id": "632cd48001bdb09a"
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "firefox"
-          }
-        }
-      },
-      "link": "vless://b960ed61-d7b0-4c6d-a39f-484726e2ad66@217.16.23.87:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=firefox&sni=sun6-21.userapi.com&pbk=PZajgWT2dtEu0Avc2QWiZELK9wDQW9p9vvcckfQBfCE&sid=632cd48001bdb09a#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%E2%80%94%20%23269",
-      "group": "EUROPE",
-      "country": "NL",
-      "first_seen": "2026-04-17T20:38:15.879672",
-      "last_seen": "2026-04-17T20:38:15.880678",
-      "total_tests": 2,
-      "successful_tests": 2,
-      "speed_history": [
-        3.8011504423614944,
-        3.8124899186548236
-      ],
-      "check_history": [
+        },
         {
-          "timestamp": "2026-04-17T20:38:15.879672",
+          "timestamp": "2026-04-17T21:33:53.171747",
           "success": true,
-          "speed": 3.8011504423614944,
+          "speed": 16.193226966880722,
           "latency": null,
           "error": null
         },
         {
-          "timestamp": "2026-04-17T20:38:15.880678",
+          "timestamp": "2026-04-17T21:33:53.172675",
           "success": true,
-          "speed": 3.8124899186548236,
+          "speed": 17.37618639135616,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.173658",
+          "success": true,
+          "speed": 16.524543923779387,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.174616",
+          "success": true,
+          "speed": 12.607264362671376,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.175588",
+          "success": true,
+          "speed": 14.43631698965457,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:57.108998",
+          "success": true,
+          "speed": 21.581195012247196,
           "latency": null,
           "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.6314486056992703,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 0.6503902062554316,
+        "stability": 1.0,
+        "uptime": 0.3867084306944444,
+        "consistency": 0.4685635943592886,
+        "freshness": 0.9988722182298492
       },
-      "category": "C",
+      "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 2,
-      "active": false,
-      "staging_until": "2026-04-17T21:38:15.880686",
+      "consecutive_successes": 14,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     },
     "vless|212.233.98.145|5443|f8b269b8": {
@@ -321,12 +322,13 @@
       "group": "EUROPE",
       "country": "NL",
       "first_seen": "2026-04-17T20:38:15.881628",
-      "last_seen": "2026-04-17T20:38:15.882636",
-      "total_tests": 2,
-      "successful_tests": 2,
+      "last_seen": "2026-04-17T21:34:02.218263",
+      "total_tests": 3,
+      "successful_tests": 3,
       "speed_history": [
         1.9844177611919467,
-        1.9397300635686552
+        1.9397300635686552,
+        9.334996541780251
       ],
       "check_history": [
         {
@@ -342,6 +344,235 @@
           "speed": 1.9397300635686552,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:34:02.218263",
+          "success": true,
+          "speed": 9.334996541780251,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.4709759591045869,
+      "rating_components": {
+        "speed": 0.1971402875650365,
+        "stability": 1.0,
+        "uptime": 0.32892400549999995,
+        "consistency": 0.0,
+        "freshness": 0.9998553292771974
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|95.163.208.136|5443|19ef3d02": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #116",
+        "server": "95.163.208.136",
+        "server_port": 5443,
+        "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "i.oneme.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+            "short_id": "91e2a4c7"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "random"
+          }
+        }
+      },
+      "link": "vless://19ef3d02-1c55-4fec-9794-6def8cbac396@95.163.208.136:5443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=random&sni=i.oneme.ru&pbk=-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk&sid=91e2a4c7#%F0%9F%87%AB%F0%9F%87%AE%20Finland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-04-17T21:33:53.163330",
+      "last_seen": "2026-04-17T21:33:53.170833",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        25.148541082606847,
+        20.00217915116135,
+        14.244041122783603,
+        13.484659655239714
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-17T21:33:53.163330",
+          "success": true,
+          "speed": 25.148541082606847,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.168112",
+          "success": true,
+          "speed": 20.00217915116135,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.169909",
+          "success": true,
+          "speed": 14.244041122783603,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.170833",
+          "success": true,
+          "speed": 13.484659655239714,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5143572546748851,
+      "rating_components": {
+        "speed": 0.8126921476977385,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.4810156085587496,
+        "freshness": 0.9981150951964168
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|185.130.113.39|5443|19ef3d02": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #115",
+        "server": "185.130.113.39",
+        "server_port": 5443,
+        "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "i.oneme.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+            "short_id": "91e2a4c7"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "random"
+          }
+        }
+      },
+      "link": "vless://19ef3d02-1c55-4fec-9794-6def8cbac396@185.130.113.39:5443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=random&sni=i.oneme.ru&pbk=-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk&sid=91e2a4c7#%F0%9F%87%AB%F0%9F%87%AE%20Finland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-04-17T21:33:53.164370",
+      "last_seen": "2026-04-17T21:33:53.176541",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        21.748238832677032,
+        19.978863292908486,
+        15.368562107919924,
+        11.045704029387393
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-17T21:33:53.164370",
+          "success": true,
+          "speed": 21.748238832677032,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.167187",
+          "success": true,
+          "speed": 19.978863292908486,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.169001",
+          "success": true,
+          "speed": 15.368562107919924,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-17T21:33:53.176541",
+          "success": true,
+          "speed": 11.045704029387393,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5067409693453319,
+      "rating_components": {
+        "speed": 0.7598572292674092,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.5105209504427322,
+        "freshness": 0.998116189650512
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|extbalancer.onnstreaming.ru|5443|19ef3d02": {
+      "outbound": {
+        "type": "vless",
+        "tag": "1499 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+        "server": "extbalancer.onnstreaming.ru",
+        "server_port": 5443,
+        "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "i.oneme.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+            "short_id": "91e2a4c7"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "random"
+          }
+        }
+      },
+      "link": "vless://19ef3d02-1c55-4fec-9794-6def8cbac396@extbalancer.onnstreaming.ru:5443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=random&pbk=-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk&sid=91e2a4c7&sni=i.oneme.ru#1499 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-04-17T21:33:53.165219",
+      "last_seen": "2026-04-17T21:33:53.165219",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        22.419135344869012
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-17T21:33:53.165219",
+          "success": true,
+          "speed": 22.419135344869012,
+          "latency": null,
+          "error": null
         }
       ],
       "rating": 0.0,
@@ -355,13 +586,13 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 2,
+      "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-04-17T21:38:15.882644",
+      "staging_until": "2026-04-17T22:33:53.165231",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-04-17T20:38:25.760621"
+    "last_cleanup": "2026-04-17T21:34:02.970851"
   }
 }
