@@ -49,9 +49,9 @@
         "EUROPE-auto",
         "🇳🇱 The Netherlands — #236",
         "🇳🇱 The Netherlands — #279",
+        "1499 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
         "🇩🇪 Germany — #116",
-        "🇩🇪 Germany — #115",
-        "🇳🇱 The Netherlands — #271"
+        "🇩🇪 Germany — #115"
       ]
     },
     {
@@ -60,9 +60,9 @@
       "outbounds": [
         "🇳🇱 The Netherlands — #236",
         "🇳🇱 The Netherlands — #279",
+        "1499 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
         "🇩🇪 Germany — #116",
-        "🇩🇪 Germany — #115",
-        "🇳🇱 The Netherlands — #271"
+        "🇩🇪 Germany — #115"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -121,6 +121,28 @@
     },
     {
       "type": "vless",
+      "tag": "1499 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+      "server": "extbalancer.onnstreaming.ru",
+      "server_port": 5443,
+      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "i.oneme.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+          "short_id": "91e2a4c7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "🇩🇪 Germany — #116",
       "server": "95.163.208.136",
       "server_port": 5443,
@@ -160,28 +182,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #271",
-      "server": "212.233.98.145",
-      "server_port": 5443,
-      "uuid": "f8b269b8-e1e9-452d-b375-cf1d89913bd1",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SJwCg-2RraxdmPp82iqmwV0cY7bpnimExCU02eZck1k",
-          "short_id": "1d025360f2d2be56"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
         }
       }
     }
