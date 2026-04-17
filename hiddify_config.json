@@ -49,20 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇫🇮 Finland [*CIDR] VK",
-        "🇫🇮 Finland [*CIDR] VK-1",
-        "🇫🇮 Finland [*CIDR] VK-2"
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK-1"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇫🇮 Finland [*CIDR] VK",
-        "🇫🇮 Finland [*CIDR] VK-1",
-        "🇫🇮 Finland [*CIDR] VK-2"
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -77,89 +73,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "217.16.23.87",
+      "tag": "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "node2.frost-api.com",
       "server_port": 443,
-      "uuid": "b960ed61-d7b0-4c6d-a39f-484726e2ad66",
+      "uuid": "d737f30e-8537-4a03-b441-bde67a0c241b",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "sun6-21.userapi.com",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "PZajgWT2dtEu0Avc2QWiZELK9wDQW9p9vvcckfQBfCE",
-          "short_id": "632cd48001bdb09a"
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "513b0a"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "firefox"
+          "fingerprint": "chrome"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK",
-      "server": "185.130.113.39",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+      "tag": "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK-1",
+      "server": "185.130.113.145",
+      "server_port": 443,
+      "uuid": "d737f30e-8537-4a03-b441-bde67a0c241b",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "i.oneme.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "513b0a"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK-1",
-      "server": "87.239.111.174",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "i.oneme.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK-2",
-      "server": "extbalancer.onnstreaming.ru",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "i.oneme.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
+          "fingerprint": "chrome"
         }
       }
     }
