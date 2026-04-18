@@ -41,38 +41,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇵🇱 Poland [*CIDR] VK",
-        "2468 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-        "🇵🇱 Poland — #165",
-        "🇩🇪 Germany — #93",
-        "🇳🇱 The Netherlands — #156",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🇩🇪 Germany — #62",
         "🇩🇪 Germany — #63",
-        "🇳🇱 The Netherlands — #149"
+        "🇩🇪 Germany [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇵🇱 Poland [*CIDR] VK",
-        "2468 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-        "🇵🇱 Poland — #165",
-        "🇩🇪 Germany — #93",
-        "🇳🇱 The Netherlands — #156",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🇩🇪 Germany — #62",
         "🇩🇪 Germany — #63",
-        "🇳🇱 The Netherlands — #149"
+        "🇩🇪 Germany [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -109,138 +97,6 @@
     },
     {
       "type": "vless",
-      "tag": "2468 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "extbalancer.onnstreaming.ru",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "i.oneme.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #165",
-      "server": "217.16.24.151",
-      "server_port": 443,
-      "uuid": "bed19308-a1c4-49b3-9d46-5f62c794d7af",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
-          "short_id": "428ef87fd47a3a32"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #93",
-      "server": "89.208.229.138",
-      "server_port": 443,
-      "uuid": "bed19308-a1c4-49b3-9d46-5f62c794d7af",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
-          "short_id": "428ef87fd47a3a32"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #156",
-      "server": "89.208.222.248",
-      "server_port": 5443,
-      "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "fNTq5EC6OsQ5y_FWhTUodJJy_ftKIA4zpdWJ3-V5dn4",
-          "short_id": "a3df"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "ingress-ru-a.botfight.fun",
-      "server_port": 443,
-      "uuid": "321c91b8-0395-4dd5-a7d5-9df5adc5c32b",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ingress-ru-a.botfight.fun",
-        "reality": {
-          "enabled": true,
-          "public_key": "QaXG1-cz6qIUS_qFUH2eaFQNmtLah5Cb5aHqWOdjmCk",
-          "short_id": "0994af3807c8efbc"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #62",
-      "server": "89.208.231.253",
-      "server_port": 443,
-      "uuid": "321c91b8-0395-4dd5-a7d5-9df5adc5c32b",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "beeline.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "jfnel5nSNEe1bToznU1k4lNvtitjlOx-xrA2_5__xT8",
-          "short_id": "a20356d0821c1eb1"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇩🇪 Germany — #63",
       "server": "83.166.238.250",
       "server_port": 443,
@@ -263,23 +119,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #149",
-      "server": "217.16.29.243",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "ingress-ru-a.botfight.fun",
       "server_port": 443,
       "uuid": "321c91b8-0395-4dd5-a7d5-9df5adc5c32b",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "sun1-26.userapi.com",
+        "server_name": "ingress-ru-a.botfight.fun",
         "reality": {
           "enabled": true,
-          "public_key": "3BzJ7mIMm_8w9UEDlw3zDhNLlBIkfRaMBPDFW8vAJyI",
-          "short_id": "e2e32fa9a5033818"
+          "public_key": "QaXG1-cz6qIUS_qFUH2eaFQNmtLah5Cb5aHqWOdjmCk",
+          "short_id": "0994af3807c8efbc"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "random"
         }
       }
     }
