@@ -41,26 +41,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇫🇮 Finland [*CIDR] VK",
-        "🇫🇮 Finland [*CIDR] VK-1",
-        "🇩🇪 Germany — #65"
+        "ALL-auto",
+        "🇳🇱 The Netherlands — #133",
+        "🇩🇪 Germany — #69"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇮 Finland [*CIDR] VK",
-        "🇫🇮 Finland [*CIDR] VK-1",
-        "🇩🇪 Germany — #65"
+        "🇳🇱 The Netherlands — #133",
+        "🇩🇪 Germany — #69"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -75,19 +73,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK",
-      "server": "185.130.113.39",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+      "tag": "🇳🇱 The Netherlands — #133",
+      "server": "185.241.194.110",
+      "server_port": 2773,
+      "uuid": "554275cb-173a-463f-a2ec-f3547ca68869",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "i.oneme.ru",
+        "server_name": "id.vk.com",
         "reality": {
           "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
+          "public_key": "haERzggnSzKSAl4a05BD6Il_Nsu7f4paP9WE9O-bC2c",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
@@ -97,45 +95,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK-1",
-      "server": "extbalancer.onnstreaming.ru",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+      "tag": "🇩🇪 Germany — #69",
+      "server": "185.241.194.110",
+      "server_port": 443,
+      "uuid": "554275cb-173a-463f-a2ec-f3547ca68869",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "i.oneme.ru",
+        "server_name": "eh.vk.com",
         "reality": {
           "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
+          "public_key": "haERzggnSzKSAl4a05BD6Il_Nsu7f4paP9WE9O-bC2c",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #65",
-      "server": "95.163.208.136",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "i.oneme.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
+          "fingerprint": "chrome"
         }
       }
     }
