@@ -48,7 +48,9 @@
       "outbounds": [
         "ALL-auto",
         "🇩🇪 Germany — #69",
-        "🇳🇱 The Netherlands — #187"
+        "🇳🇱 The Netherlands — #187",
+        "2468 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+        "🇵🇱 Poland [*CIDR] VK"
       ]
     },
     {
@@ -56,7 +58,9 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇩🇪 Germany — #69",
-        "🇳🇱 The Netherlands — #187"
+        "🇳🇱 The Netherlands — #187",
+        "2468 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+        "🇵🇱 Poland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -106,6 +110,50 @@
           "enabled": true,
           "public_key": "haERzggnSzKSAl4a05BD6Il_Nsu7f4paP9WE9O-bC2c",
           "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "2468 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+      "server": "extbalancer.onnstreaming.ru",
+      "server_port": 5443,
+      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "i.oneme.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+          "short_id": "91e2a4c7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "212.233.121.168",
+      "server_port": 5443,
+      "uuid": "30a3d65b-2963-48ef-ac5c-9f354fadc85c",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "nxnDt_F4R6QK9mKQ7dUpvCcJPtwYNPdlNWWjeiDyYj0",
+          "short_id": "e0d4ee"
         },
         "utls": {
           "enabled": true,
