@@ -41,26 +41,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇳🇱 The Netherlands — #279",
+        "ALL-auto",
         "🇳🇱 The Netherlands — #236",
-        "🇩🇪 Germany — #116"
+        "🇳🇱 The Netherlands — #279"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands — #279",
         "🇳🇱 The Netherlands — #236",
-        "🇩🇪 Germany — #116"
+        "🇳🇱 The Netherlands — #279"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,28 +70,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #279",
-      "server": "89.208.222.248",
-      "server_port": 5443,
-      "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "fNTq5EC6OsQ5y_FWhTUodJJy_ftKIA4zpdWJ3-V5dn4",
-          "short_id": "a3df"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -119,23 +95,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #116",
-      "server": "95.163.208.136",
+      "tag": "🇳🇱 The Netherlands — #279",
+      "server": "89.208.222.248",
       "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
-      "flow": "xtls-rprx-vision",
+      "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
+      "flow": "",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "i.oneme.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
+          "public_key": "fNTq5EC6OsQ5y_FWhTUodJJy_ftKIA4zpdWJ3-V5dn4",
+          "short_id": "a3df"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "random"
+          "fingerprint": "chrome"
         }
       }
     }
