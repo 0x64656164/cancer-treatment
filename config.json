@@ -49,13 +49,15 @@
         "EUROPE-auto",
         "🇵🇱 Poland [*CIDR] VK",
         "🇳🇱 The Netherlands — #197",
-        "🇫🇮 Finland [*CIDR] VK",
         "🇩🇪 Germany — #26",
         "🇩🇪 Germany — #29",
+        "🇫🇮 Finland [*CIDR] VK",
         "🇳🇱 The Netherlands — #213",
         "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
         "🇩🇪 Germany [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK-1"
+        "🇩🇪 Germany [*CIDR] VK-1",
+        "🇳🇱 The Netherlands — #157",
+        "🇩🇪 Germany — #69"
       ]
     },
     {
@@ -64,13 +66,15 @@
       "outbounds": [
         "🇵🇱 Poland [*CIDR] VK",
         "🇳🇱 The Netherlands — #197",
-        "🇫🇮 Finland [*CIDR] VK",
         "🇩🇪 Germany — #26",
         "🇩🇪 Germany — #29",
+        "🇫🇮 Finland [*CIDR] VK",
         "🇳🇱 The Netherlands — #213",
         "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
         "🇩🇪 Germany [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK-1"
+        "🇩🇪 Germany [*CIDR] VK-1",
+        "🇳🇱 The Netherlands — #157",
+        "🇩🇪 Germany — #69"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -129,28 +133,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK",
-      "server": "extbalancer.onnstreaming.ru",
-      "server_port": 5443,
-      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "i.oneme.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
-          "short_id": "91e2a4c7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇩🇪 Germany — #26",
       "server": "185.130.113.39",
       "server_port": 5443,
@@ -190,6 +172,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland [*CIDR] VK",
+      "server": "extbalancer.onnstreaming.ru",
+      "server_port": 5443,
+      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "i.oneme.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+          "short_id": "91e2a4c7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
         }
       }
     },
@@ -278,6 +282,50 @@
         "utls": {
           "enabled": true,
           "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #157",
+      "server": "212.233.98.145",
+      "server_port": 5443,
+      "uuid": "f8b269b8-e1e9-452d-b375-cf1d89913bd1",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SJwCg-2RraxdmPp82iqmwV0cY7bpnimExCU02eZck1k",
+          "short_id": "1d025360f2d2be56"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #69",
+      "server": "89.208.231.253",
+      "server_port": 443,
+      "uuid": "321c91b8-0395-4dd5-a7d5-9df5adc5c32b",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "beeline.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "jfnel5nSNEe1bToznU1k4lNvtitjlOx-xrA2_5__xT8",
+          "short_id": "44313ab1de69e466"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
