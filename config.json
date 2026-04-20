@@ -39,38 +39,28 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇨🇦 Canada — #70",
-        "🇦🇪 United Arab Emirates — #54",
-        "🇩🇪 Germany — #176",
-        "🇳🇱 The Netherlands — #343",
-        "🇵🇱 Poland — #372",
-        "1672 | 🌐 Unknown | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu",
         "0093 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
         "🇩🇪 Germany — #137",
-        "1492 | 🌐 Unknown | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇨🇦 Canada — #70",
-        "🇦🇪 United Arab Emirates — #54",
-        "🇩🇪 Germany — #176",
-        "🇳🇱 The Netherlands — #343",
-        "🇵🇱 Poland — #372",
-        "1672 | 🌐 Unknown | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu",
         "0093 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
         "🇩🇪 Germany — #137",
-        "1492 | 🌐 Unknown | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu"
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -98,116 +88,6 @@
           "enabled": true,
           "public_key": "dkDy_40iCCrOTCDziuNidIgnqBFKEPK_SfPyKmPOJ2M",
           "short_id": "3bc180943c3372"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇦🇪 United Arab Emirates — #54",
-      "server": "217.16.27.124",
-      "server_port": 993,
-      "uuid": "55489b1c-f566-4324-a14f-8ce6c8279824",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "5d1FknwpCrOGvqiSnlCg0JuVx3BptawN1BDen38bLho",
-          "short_id": "ad7dab462a323a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #176",
-      "server": "89.208.228.124",
-      "server_port": 993,
-      "uuid": "55489b1c-f566-4324-a14f-8ce6c8279824",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #343",
-      "server": "5.188.141.35",
-      "server_port": 993,
-      "uuid": "55489b1c-f566-4324-a14f-8ce6c8279824",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #372",
-      "server": "5.188.140.245",
-      "server_port": 993,
-      "uuid": "55489b1c-f566-4324-a14f-8ce6c8279824",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "thz2uZE7rsLT609yRqqHsw9slQmCohEpFqRaoCoKLCs",
-          "short_id": "ad7dab462a323a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "1672 | 🌐 Unknown | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "vk2.voxyvpn.ru",
-      "server_port": 8443,
-      "uuid": "13d7b355-1791-4c72-b542-61c5ec64430b",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "L7DF7bQGLb1hLQxHoDqnsd7WMAo8bklWteoXqKYwAl8",
-          "short_id": "a94fbc12e3d4"
         },
         "utls": {
           "enabled": true,
@@ -261,19 +141,19 @@
     },
     {
       "type": "vless",
-      "tag": "1492 | 🌐 Unknown | 🏳️ SNI-Rutube | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "ru.x8lab.org",
-      "server_port": 443,
-      "uuid": "e08d2d8b-173f-0007-8867-fb20f3cd26bd",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "89.208.222.248",
+      "server_port": 5443,
+      "uuid": "a233d76b-f4af-4390-8455-e5ed7ac93ef1",
+      "flow": "",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "rutube.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "k9BuzZPnzofDcPTaa7ROHNIc9ww2jy3tLAJ04GuKvAQ",
-          "short_id": "cd0b563c7e0ea754"
+          "public_key": "fNTq5EC6OsQ5y_FWhTUodJJy_ftKIA4zpdWJ3-V5dn4",
+          "short_id": "a3df"
         },
         "utls": {
           "enabled": true,
