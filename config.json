@@ -48,10 +48,8 @@
       "outbounds": [
         "EUROPE-auto",
         "🇨🇦 Canada — #70",
-        "0093 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-        "🇩🇪 Germany — #137",
-        "0808 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-        "🇵🇱 Poland — #336"
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+        "🇫🇮 Finland [*CIDR] VK"
       ]
     },
     {
@@ -59,10 +57,8 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇨🇦 Canada — #70",
-        "0093 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-        "🇩🇪 Germany — #137",
-        "0808 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-        "🇵🇱 Poland — #336"
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+        "🇫🇮 Finland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -99,76 +95,10 @@
     },
     {
       "type": "vless",
-      "tag": "0093 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "ru.botfight.fun",
-      "server_port": 443,
-      "uuid": "15da07d5-7f72-47db-9bd1-e122e9698d24",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ru.botfight.fun",
-        "reality": {
-          "enabled": true,
-          "public_key": "9rF-W8XmJlJL7WTN7-AsRfs-ZSr4EZNXQpcv82Gjcxs",
-          "short_id": "fb4a4359a6dd240c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #137",
-      "server": "83.166.238.250",
-      "server_port": 443,
-      "uuid": "15da07d5-7f72-47db-9bd1-e122e9698d24",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ingress-ru-a.botfight.fun",
-        "reality": {
-          "enabled": true,
-          "public_key": "QaXG1-cz6qIUS_qFUH2eaFQNmtLah5Cb5aHqWOdjmCk",
-          "short_id": "0994af3807c8efbc"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "0808 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
-      "server": "ingress-ru-a.botfight.fun",
-      "server_port": 443,
-      "uuid": "15da07d5-7f72-47db-9bd1-e122e9698d24",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ingress-ru-a.botfight.fun",
-        "reality": {
-          "enabled": true,
-          "public_key": "QaXG1-cz6qIUS_qFUH2eaFQNmtLah5Cb5aHqWOdjmCk",
-          "short_id": "0994af3807c8efbc"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #336",
-      "server": "217.16.30.65",
-      "server_port": 8443,
-      "uuid": "13d7b355-1791-4c72-b542-61c5ec64430b",
+      "tag": "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "5.188.140.245",
+      "server_port": 993,
+      "uuid": "e104275f-0a20-4e54-af18-820b8f6887ff",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -176,8 +106,30 @@
         "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "L7DF7bQGLb1hLQxHoDqnsd7WMAo8bklWteoXqKYwAl8",
-          "short_id": "a94fbc12e3d4"
+          "public_key": "thz2uZE7rsLT609yRqqHsw9slQmCohEpFqRaoCoKLCs",
+          "short_id": "ad7dab462a323a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland [*CIDR] VK",
+      "server": "95.163.208.136",
+      "server_port": 5443,
+      "uuid": "19ef3d02-1c55-4fec-9794-6def8cbac396",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "i.oneme.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "-nZqMxt7meVxfnQeK46MAYh5scb0M6La82axD8KHJXk",
+          "short_id": "91e2a4c7"
         },
         "utls": {
           "enabled": true,
