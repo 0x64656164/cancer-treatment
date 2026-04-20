@@ -51,7 +51,9 @@
         "EUROPE-auto",
         "🇺🇦 Ukraine | 🌐 [*CIDR] VK",
         "🇺🇳 @MrMeshkyChannel 630372",
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇩🇪 Germany [*CIDR] VK",
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ]
     },
     {
@@ -60,7 +62,9 @@
       "outbounds": [
         "🇺🇦 Ukraine | 🌐 [*CIDR] VK",
         "🇺🇳 @MrMeshkyChannel 630372",
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇩🇪 Germany [*CIDR] VK",
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -132,6 +136,50 @@
           "enabled": true,
           "public_key": "jfnel5nSNEe1bToznU1k4lNvtitjlOx-xrA2_5__xT8",
           "short_id": "4fc005eb61e16634"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "5.188.140.245",
+      "server_port": 993,
+      "uuid": "e104275f-0a20-4e54-af18-820b8f6887ff",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "thz2uZE7rsLT609yRqqHsw9slQmCohEpFqRaoCoKLCs",
+          "short_id": "ad7dab462a323a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "217.16.29.243",
+      "server_port": 443,
+      "uuid": "a5aa71ac-07f6-41e8-a4bd-748c7d444877",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sun1-26.userapi.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "3BzJ7mIMm_8w9UEDlw3zDhNLlBIkfRaMBPDFW8vAJyI",
+          "short_id": "adeccb9f9f932c45"
         },
         "utls": {
           "enabled": true,
