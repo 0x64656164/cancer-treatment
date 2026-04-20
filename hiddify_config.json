@@ -41,26 +41,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
+        "ALL-auto",
         "🇺🇦 Ukraine | 🌐 [*CIDR] VK",
-        "🇷🇴 Romania | 🌐 [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK"
+        "🇩🇪 Germany [*CIDR] VK",
+        "🇵🇱 Poland [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
         "🇺🇦 Ukraine | 🌐 [*CIDR] VK",
-        "🇷🇴 Romania | 🌐 [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK"
+        "🇩🇪 Germany [*CIDR] VK",
+        "🇵🇱 Poland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -97,19 +97,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇷🇴 Romania | 🌐 [*CIDR] VK",
-      "server": "95.163.183.144",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "89.208.231.253",
       "server_port": 443,
-      "uuid": "184e78e7-16c3-4c92-bc43-6eb168d5169b",
+      "uuid": "a5aa71ac-07f6-41e8-a4bd-748c7d444877",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "music.yandex.ru",
+        "server_name": "beeline.ru",
         "reality": {
           "enabled": true,
-          "public_key": "Oc4VtwpdXGT4jlQZVEEgTTjeBx97uJ0sON2ek629plE",
-          "short_id": "d928"
+          "public_key": "jfnel5nSNEe1bToznU1k4lNvtitjlOx-xrA2_5__xT8",
+          "short_id": "4fc005eb61e16634"
         },
         "utls": {
           "enabled": true,
@@ -119,19 +119,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "217.16.29.243",
-      "server_port": 443,
-      "uuid": "a5aa71ac-07f6-41e8-a4bd-748c7d444877",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "212.233.98.145",
+      "server_port": 5443,
+      "uuid": "f8b269b8-e1e9-452d-b375-cf1d89913bd1",
+      "flow": "",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "sun1-26.userapi.com",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "3BzJ7mIMm_8w9UEDlw3zDhNLlBIkfRaMBPDFW8vAJyI",
-          "short_id": "91223858195da720"
+          "public_key": "SJwCg-2RraxdmPp82iqmwV0cY7bpnimExCU02eZck1k",
+          "short_id": "1d025360f2d2be56"
         },
         "utls": {
           "enabled": true,
