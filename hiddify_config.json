@@ -50,8 +50,10 @@
       "outbounds": [
         "ALL-auto",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇫🇮 Finland — #167",
-        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK"
+        "0821 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+        "0465 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+        "🇫🇮 Finland — #166",
+        "🇵🇱 Poland — #303"
       ]
     },
     {
@@ -59,8 +61,10 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇵🇱 Poland [*CIDR] VK",
-        "🇫🇮 Finland — #167",
-        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK"
+        "0821 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+        "0465 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+        "🇫🇮 Finland — #166",
+        "🇵🇱 Poland — #303"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -97,10 +101,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland — #167",
-      "server": "217.16.27.166",
-      "server_port": 9090,
-      "uuid": "76fe5b91-7019-49f3-a568-e3884082f5ca",
+      "tag": "0821 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+      "server": "auto5.wequ.host",
+      "server_port": 8443,
+      "uuid": "34222749-f6ff-457e-887b-ff11f3cec0a2",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -108,8 +112,52 @@
         "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "Mg0PvVj9PyzfrF50i7YG2SrR7Jk_QHh0FTlNle-tTVY",
-          "short_id": "b21d20439e49"
+          "public_key": "RDVV8uSBORVgujz5BYVvzqDTziYJZI5hiISGSNR_30M",
+          "short_id": "b44a71b9"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "0465 | 🌐 Unknown | VLESS | TG: @YoutubeUnBlockRu",
+      "server": "auto5.wequ.host",
+      "server_port": 443,
+      "uuid": "34222749-f6ff-457e-887b-ff11f3cec0a2",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "5post-gate.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mJfy_IvC0-aITj6UzrEPhk9FURZD8G-nQiZH-tUd2g0",
+          "short_id": "5404d2ea"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #166",
+      "server": "5.188.143.213",
+      "server_port": 443,
+      "uuid": "9e299679-d096-4da6-ba51-a1a853782c86",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "513b0a"
         },
         "utls": {
           "enabled": true,
@@ -119,8 +167,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "5.188.140.245.alexanderoff.ru",
+      "tag": "🇵🇱 Poland — #303",
+      "server": "5.188.140.245",
       "server_port": 993,
       "uuid": "e104275f-0a20-4e54-af18-820b8f6887ff",
       "flow": "xtls-rprx-vision",
@@ -135,7 +183,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "chrome"
         }
       }
     }
