@@ -28,7 +28,7 @@
       "country": "LT",
       "first_seen": "2026-04-21T16:49:20.917213",
       "last_seen": "2026-04-21T16:49:20.917213",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         7.98470273190187e-05
@@ -38,6 +38,71 @@
           "timestamp": "2026-04-21T16:49:20.917213",
           "success": true,
           "speed": 7.98470273190187e-05,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-21T17:55:29.891047",
+          "success": false,
+          "speed": 0,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 0,
+      "active": false,
+      "staging_until": null,
+      "consecutive_failures": 1
+    },
+    "vless|5.188.140.245|993|e104275f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+        "server": "5.188.140.245",
+        "server_port": 993,
+        "uuid": "e104275f-0a20-4e54-af18-820b8f6887ff",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "ads.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "thz2uZE7rsLT609yRqqHsw9slQmCohEpFqRaoCoKLCs",
+            "short_id": "ad7dab462a323a"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
+        }
+      },
+      "link": "vless://e104275f-0a20-4e54-af18-820b8f6887ff@5.188.140.245:993?security=reality&encryption=none&pbk=thz2uZE7rsLT609yRqqHsw9slQmCohEpFqRaoCoKLCs&headerType=none&fp=qq&type=tcp&flow=xtls-rprx-vision&sni=ads.x5.ru&sid=ad7dab462a323a#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv6%5D%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-04-21T17:55:20.190387",
+      "last_seen": "2026-04-21T17:55:20.190387",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        2.9110466370091994
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-21T17:55:20.190387",
+          "success": true,
+          "speed": 2.9110466370091994,
           "latency": null,
           "error": null
         }
@@ -55,11 +120,11 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-04-21T17:49:20.917252",
+      "staging_until": "2026-04-21T18:55:20.190409",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-04-21T16:49:20.917936"
+    "last_cleanup": "2026-04-21T17:55:29.891985"
   }
 }
