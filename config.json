@@ -39,24 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇱🇹 Lithuania [*CIDR] VK",
-        "🇫🇮 Finland — #166"
+        "🇫🇮 Finland — #166",
+        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇱🇹 Lithuania [*CIDR] VK",
-        "🇫🇮 Finland — #166"
+        "🇫🇮 Finland — #166",
+        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -106,6 +108,28 @@
           "enabled": true,
           "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
           "short_id": "513b0a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "5.188.140.245",
+      "server_port": 993,
+      "uuid": "e104275f-0a20-4e54-af18-820b8f6887ff",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "thz2uZE7rsLT609yRqqHsw9slQmCohEpFqRaoCoKLCs",
+          "short_id": "ad7dab462a323a"
         },
         "utls": {
           "enabled": true,
