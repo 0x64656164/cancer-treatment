@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|109.120.189.4|443|2983c1d0": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇱🇹 Lithuania — #246",
+        "server": "109.120.189.4",
+        "server_port": 443,
+        "uuid": "2983c1d0-2c98-4e16-a92a-a64351ec2b30",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "ads.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "YnOlmcxFiHgitIcjba45C7z6kw7txOWnImgSfMCtsiA",
+            "short_id": "1da44564cda563cc"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "random"
+          }
+        }
+      },
+      "link": "vless://2983c1d0-2c98-4e16-a92a-a64351ec2b30@109.120.189.4:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=random&sni=ads.x5.ru&pbk=YnOlmcxFiHgitIcjba45C7z6kw7txOWnImgSfMCtsiA&sid=1da44564cda563cc#%F0%9F%87%B1%F0%9F%87%B9%20Lithuania%20%E2%80%94%20%23246",
+      "group": "EUROPE",
+      "country": "LT",
+      "first_seen": "2026-04-21T16:49:20.917213",
+      "last_seen": "2026-04-21T16:49:20.917213",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        7.98470273190187e-05
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-21T16:49:20.917213",
+          "success": true,
+          "speed": 7.98470273190187e-05,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-04-21T17:49:20.917252",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-21T15:51:27.937399"
+    "last_cleanup": "2026-04-21T16:49:20.917936"
   }
 }
