@@ -49,18 +49,24 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
+        "🇨🇿 Czechia [*CIDR] VK",
         "🇳🇱 The Netherlands — #270",
-        "🇵🇱 Poland — #427",
-        "🇨🇿 Czechia [*CIDR] VK"
+        "🇱🇹 Lithuania [*CIDR] VK",
+        "🇵🇱 Poland — #479",
+        "🇵🇱 Poland — #472",
+        "🇵🇱 Poland — #428"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
+        "🇨🇿 Czechia [*CIDR] VK",
         "🇳🇱 The Netherlands — #270",
-        "🇵🇱 Poland — #427",
-        "🇨🇿 Czechia [*CIDR] VK"
+        "🇱🇹 Lithuania [*CIDR] VK",
+        "🇵🇱 Poland — #479",
+        "🇵🇱 Poland — #472",
+        "🇵🇱 Poland — #428"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,6 +78,28 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇿 Czechia [*CIDR] VK",
+      "server": "95.163.215.2",
+      "server_port": 443,
+      "uuid": "a5aa71ac-07f6-41e8-a4bd-748c7d444877",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "img.perekrestok.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "6QuXF9h6zSZaShf__6zJVSt7v2PBoHl_93srUQ1cylo",
+          "short_id": "d0c82f553d01eea8"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
     },
     {
       "type": "vless",
@@ -97,10 +125,32 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #427",
-      "server": "217.16.24.151",
+      "tag": "🇱🇹 Lithuania [*CIDR] VK",
+      "server": "109.120.189.4",
       "server_port": 443,
-      "uuid": "d7b0f48e-9311-4085-9968-cd86b339f1ee",
+      "uuid": "2983c1d0-2c98-4e16-a92a-a64351ec2b30",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "YnOlmcxFiHgitIcjba45C7z6kw7txOWnImgSfMCtsiA",
+          "short_id": "1da44564cda563cc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #479",
+      "server": "146.185.210.165",
+      "server_port": 443,
+      "uuid": "b50d201b-9c44-4470-b2a9-14129603c475",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -119,23 +169,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇨🇿 Czechia [*CIDR] VK",
-      "server": "95.163.215.2",
+      "tag": "🇵🇱 Poland — #472",
+      "server": "217.16.24.151",
       "server_port": 443,
-      "uuid": "a5aa71ac-07f6-41e8-a4bd-748c7d444877",
+      "uuid": "b50d201b-9c44-4470-b2a9-14129603c475",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "img.perekrestok.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "6QuXF9h6zSZaShf__6zJVSt7v2PBoHl_93srUQ1cylo",
-          "short_id": "d0c82f553d01eea8"
+          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
+          "short_id": "428ef87fd47a3a32"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #428",
+      "server": "5.188.140.245",
+      "server_port": 993,
+      "uuid": "e104275f-0a20-4e54-af18-820b8f6887ff",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "thz2uZE7rsLT609yRqqHsw9slQmCohEpFqRaoCoKLCs",
+          "short_id": "ad7dab462a323a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
