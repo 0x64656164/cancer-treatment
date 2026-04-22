@@ -41,26 +41,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇷🇴 Romania — #372",
         "🇸🇰 Slovakia — #385",
-        "🇨🇦 Canada — #72"
+        "🌐 Anycast-IP [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇷🇴 Romania — #372",
         "🇸🇰 Slovakia — #385",
-        "🇨🇦 Canada — #72"
+        "🌐 Anycast-IP [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -119,19 +119,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇨🇦 Canada — #72",
-      "server": "89.208.221.163",
+      "tag": "🌐 Anycast-IP [*CIDR] VK",
+      "server": "95.163.183.153",
       "server_port": 443,
-      "uuid": "33450305-9097-4c2b-85d4-d951cfac23ea",
+      "uuid": "6250865e-7b1c-4941-9bb5-a7d4e752532f",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "eh.vk.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "dkDy_40iCCrOTCDziuNidIgnqBFKEPK_SfPyKmPOJ2M",
-          "short_id": "dec215d635ae"
+          "public_key": "WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY",
+          "short_id": "cd98a095062c4ae6"
         },
         "utls": {
           "enabled": true,
