@@ -49,16 +49,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇵🇱 Poland — #332",
-        "🇵🇱 Poland — #329"
+        "🇵🇱 Poland — #329",
+        "🇫🇮 Finland — #156",
+        "🇩🇪 Germany — #89"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇵🇱 Poland — #332",
-        "🇵🇱 Poland — #329"
+        "🇵🇱 Poland — #329",
+        "🇫🇮 Finland — #156",
+        "🇩🇪 Germany — #89"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,28 +72,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #332",
-      "server": "146.185.210.165",
-      "server_port": 443,
-      "uuid": "e080d34c-8be8-4247-9d0e-6401da9c6695",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
-          "short_id": "428ef87fd47a3a32"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
@@ -112,6 +92,50 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #156",
+      "server": "89.208.230.108",
+      "server_port": 443,
+      "uuid": "179f63ac-3c41-419a-bfbd-5922e6d0ff8c",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "storage.yandexcloud.net",
+        "reality": {
+          "enabled": true,
+          "public_key": "vAObevccvU7dgH2LxOlpZMON_ZNY2ef1Mtqrim2R53s",
+          "short_id": "86f37624"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #89",
+      "server": "109.120.189.4",
+      "server_port": 443,
+      "uuid": "2983c1d0-2c98-4e16-a92a-a64351ec2b30",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "YnOlmcxFiHgitIcjba45C7z6kw7txOWnImgSfMCtsiA",
+          "short_id": "1da44564cda563cc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
         }
       }
     }
