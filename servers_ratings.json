@@ -1,6 +1,245 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|95.163.183.153|443|0400ddc8": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇸🇰 Slovakia [*CIDR] VK",
+        "server": "95.163.183.153",
+        "server_port": 443,
+        "uuid": "0400ddc8-1abd-45f4-9235-b5cd0a8711d3",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY",
+            "short_id": "9e21c031"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://0400ddc8-1abd-45f4-9235-b5cd0a8711d3@95.163.183.153:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=max.ru&pbk=WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY&sid=2592b73deaedbac7#%F0%9F%87%BA%F0%9F%87%B3%20%40MrMeshkyChannel%20647202",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-04-22T13:00:22.063551",
+      "last_seen": "2026-04-22T13:00:22.067708",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        24.195226177266793,
+        23.50939662843293,
+        23.54454027253802,
+        23.985269989705685
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-22T13:00:22.063551",
+          "success": true,
+          "speed": 24.195226177266793,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-22T13:00:22.065105",
+          "success": true,
+          "speed": 23.50939662843293,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-22T13:00:22.066382",
+          "success": true,
+          "speed": 23.54454027253802,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-22T13:00:22.067708",
+          "success": true,
+          "speed": 23.985269989705685,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5990406489203107,
+      "rating_components": {
+        "speed": 0.9874477466668992,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.975511139119719,
+        "freshness": 0.9999999044997263
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|95.163.183.144|443|787b85f3": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🌐 Anycast-IP [*CIDR] VK",
+        "server": "95.163.183.144",
+        "server_port": 443,
+        "uuid": "787b85f3-ca2b-4fba-bedc-24a5ebe52d9b",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "beeline.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "Oc4VtwpdXGT4jlQZVEEgTTjeBx97uJ0sON2ek629plE",
+            "short_id": "24ecf1b6000b8e"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://787b85f3-ca2b-4fba-bedc-24a5ebe52d9b@95.163.183.144:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=eh.vk.ru&pbk=Oc4VtwpdXGT4jlQZVEEgTTjeBx97uJ0sON2ek629plE&sid=c819b82438d315#%F0%9F%8C%90%20Anycast-IP%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-04-22T13:00:22.064036",
+      "last_seen": "2026-04-22T13:00:22.066824",
+      "total_tests": 5,
+      "successful_tests": 5,
+      "speed_history": [
+        24.286058654624153,
+        24.08792429597498,
+        23.670287036804858,
+        24.331080294862574,
+        24.18094420192824
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-22T13:00:22.064036",
+          "success": true,
+          "speed": 24.286058654624153,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-22T13:00:22.064353",
+          "success": true,
+          "speed": 24.08792429597498,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-22T13:00:22.065496",
+          "success": true,
+          "speed": 23.670287036804858,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-22T13:00:22.065971",
+          "success": true,
+          "speed": 24.331080294862574,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-22T13:00:22.066824",
+          "success": true,
+          "speed": 24.18094420192824,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.6020414776369566,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9804151882144598,
+        "freshness": 0.9999997254367379
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 5,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|95.163.183.153|443|6250865e": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇸🇰 Slovakia [*CIDR] VK",
+        "server": "95.163.183.153",
+        "server_port": 443,
+        "uuid": "6250865e-7b1c-4941-9bb5-a7d4e752532f",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "max.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY",
+            "short_id": "cd98a095062c4ae6"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://6250865e-7b1c-4941-9bb5-a7d4e752532f@95.163.183.153:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=market.yandex.ru&pbk=WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY&sid=0ef3b5f0#%F0%9F%87%B8%F0%9F%87%B0%20Slovakia%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-04-22T13:00:22.064704",
+      "last_seen": "2026-04-22T13:00:22.067239",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        24.005677197878192,
+        23.30691029715791
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-04-22T13:00:22.064704",
+          "success": true,
+          "speed": 24.005677197878192,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-04-22T13:00:22.067239",
+          "success": true,
+          "speed": 23.30691029715791,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-04-22T14:00:22.067247",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-04-22T11:51:54.522696"
+    "last_cleanup": "2026-04-22T13:00:22.068832"
   }
 }
