@@ -49,18 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇵🇱 Poland — #329",
-        "🇫🇮 Finland — #156",
-        "🇩🇪 Germany — #89"
+        "🇫🇮 Finland — #156"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇵🇱 Poland — #329",
-        "🇫🇮 Finland — #156",
-        "🇩🇪 Germany — #89"
+        "🇫🇮 Finland — #156"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,28 +68,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #329",
-      "server": "217.16.24.151",
-      "server_port": 443,
-      "uuid": "e080d34c-8be8-4247-9d0e-6401da9c6695",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
-          "short_id": "428ef87fd47a3a32"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
@@ -114,28 +88,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #89",
-      "server": "109.120.189.4",
-      "server_port": 443,
-      "uuid": "2983c1d0-2c98-4e16-a92a-a64351ec2b30",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "YnOlmcxFiHgitIcjba45C7z6kw7txOWnImgSfMCtsiA",
-          "short_id": "1da44564cda563cc"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
         }
       }
     }
