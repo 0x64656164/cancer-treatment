@@ -39,26 +39,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🌐 Anycast-IP [*CIDR] VK",
-        "🇸🇰 Slovakia [*CIDR] VK",
-        "🇸🇰 Slovakia [*CIDR] VK-1"
+        "ALL-auto",
+        "🇵🇱 Poland — #332",
+        "🇵🇱 Poland — #329"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🌐 Anycast-IP [*CIDR] VK",
-        "🇸🇰 Slovakia [*CIDR] VK",
-        "🇸🇰 Slovakia [*CIDR] VK-1"
+        "🇵🇱 Poland — #332",
+        "🇵🇱 Poland — #329"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,67 +71,45 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP [*CIDR] VK",
-      "server": "95.163.183.144",
+      "tag": "🇵🇱 Poland — #332",
+      "server": "146.185.210.165",
       "server_port": 443,
-      "uuid": "787b85f3-ca2b-4fba-bedc-24a5ebe52d9b",
+      "uuid": "e080d34c-8be8-4247-9d0e-6401da9c6695",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "beeline.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "Oc4VtwpdXGT4jlQZVEEgTTjeBx97uJ0sON2ek629plE",
-          "short_id": "24ecf1b6000b8e"
+          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
+          "short_id": "428ef87fd47a3a32"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "🇸🇰 Slovakia [*CIDR] VK",
-      "server": "95.163.183.153",
+      "tag": "🇵🇱 Poland — #329",
+      "server": "217.16.24.151",
       "server_port": 443,
-      "uuid": "6250865e-7b1c-4941-9bb5-a7d4e752532f",
+      "uuid": "e080d34c-8be8-4247-9d0e-6401da9c6695",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "api-maps.yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY",
-          "short_id": "cd98a095062c4ae6"
+          "public_key": "1vSZjvhZO01oAEH3b7eebR1qF5dLU1Dq2E7xu8pwGSs",
+          "short_id": "428ef87fd47a3a32"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇸🇰 Slovakia [*CIDR] VK-1",
-      "server": "95.163.183.153",
-      "server_port": 443,
-      "uuid": "0400ddc8-1abd-45f4-9235-b5cd0a8711d3",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "eh.vk.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY",
-          "short_id": "9e21c031"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
         }
       }
     }
