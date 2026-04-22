@@ -41,14 +41,14 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🌐 Anycast-IP [*CIDR] VK",
         "🇸🇰 Slovakia [*CIDR] VK",
         "🇸🇰 Slovakia [*CIDR] VK-1"
@@ -56,7 +56,7 @@
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🌐 Anycast-IP [*CIDR] VK",
         "🇸🇰 Slovakia [*CIDR] VK",
@@ -100,16 +100,16 @@
       "tag": "🇸🇰 Slovakia [*CIDR] VK",
       "server": "95.163.183.153",
       "server_port": 443,
-      "uuid": "0400ddc8-1abd-45f4-9235-b5cd0a8711d3",
+      "uuid": "6250865e-7b1c-4941-9bb5-a7d4e752532f",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "eh.vk.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
           "public_key": "WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY",
-          "short_id": "9e21c031"
+          "short_id": "cd98a095062c4ae6"
         },
         "utls": {
           "enabled": true,
@@ -122,16 +122,16 @@
       "tag": "🇸🇰 Slovakia [*CIDR] VK-1",
       "server": "95.163.183.153",
       "server_port": 443,
-      "uuid": "6250865e-7b1c-4941-9bb5-a7d4e752532f",
+      "uuid": "0400ddc8-1abd-45f4-9235-b5cd0a8711d3",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "eh.vk.ru",
         "reality": {
           "enabled": true,
           "public_key": "WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY",
-          "short_id": "cd98a095062c4ae6"
+          "short_id": "9e21c031"
         },
         "utls": {
           "enabled": true,
