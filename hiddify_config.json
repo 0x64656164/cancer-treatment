@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #125"
+        "🇩🇪 Germany — #125",
+        "🌐 Anycast-IP [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #125"
+        "🇩🇪 Germany — #125",
+        "🌐 Anycast-IP [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -75,6 +77,28 @@
       "server": "95.163.208.58",
       "server_port": 7443,
       "uuid": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "fbv5wVdKhLJFpmUQy2Q0ZnKHaQrFIxwkQGQTnMRaFh8",
+          "short_id": "a1"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP [*CIDR] VK",
+      "server": "95.163.208.58",
+      "server_port": 7443,
+      "uuid": "75356919-6ece-455c-ba7a-9f042a60d2c5",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
