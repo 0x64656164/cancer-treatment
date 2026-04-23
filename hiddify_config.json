@@ -49,16 +49,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #76",
-        "🌐 Anycast-IP [*CIDR] VK"
+        "🇸🇰 Slovakia — #452",
+        "🇫🇷 France — #255",
+        "🇩🇪 Germany — #109"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #76",
-        "🌐 Anycast-IP [*CIDR] VK"
+        "🇸🇰 Slovakia — #452",
+        "🇫🇷 France — #255",
+        "🇩🇪 Germany — #109"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,7 +75,51 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #76",
+      "tag": "🇸🇰 Slovakia — #452",
+      "server": "95.163.183.153",
+      "server_port": 443,
+      "uuid": "3298ad56-8062-4d79-926d-e9d4e1667fe9",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "WMxeIwYTE4Mq8Xcx02g_Q-7tO872yX_CkRqH_nJULzY",
+          "short_id": "2592b73deaedbac7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷 France — #255",
+      "server": "95.163.181.41",
+      "server_port": 443,
+      "uuid": "3e18f506-4553-48b0-9858-21774875c6d0",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "oqRus6Z_Q1jqJaTEPu7ENbRL0-XKOw54K0jwCCGLtEk",
+          "short_id": "a9c4f17e3b62d8"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #109",
       "server": "109.120.189.4",
       "server_port": 443,
       "uuid": "2983c1d0-2c98-4e16-a92a-a64351ec2b30",
@@ -90,28 +136,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP [*CIDR] VK",
-      "server": "95.163.208.58",
-      "server_port": 7443,
-      "uuid": "75356919-6ece-455c-ba7a-9f042a60d2c5",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "fbv5wVdKhLJFpmUQy2Q0ZnKHaQrFIxwkQGQTnMRaFh8",
-          "short_id": "a1"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
         }
       }
     }
