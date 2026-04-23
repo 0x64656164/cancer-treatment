@@ -41,34 +41,28 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🇷🇴 Romania — #417",
+        "EUROPE-auto",
         "🇸🇰 Slovakia — #428",
-        "🇫🇷 France — #255",
-        "🇩🇪 Germany — #109",
-        "🇨🇦 Canada — #100",
+        "🇷🇴 Romania — #417",
         "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇷 France — #236"
+        "🇨🇦 Canada — #100"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🇷🇴 Romania — #417",
         "🇸🇰 Slovakia — #428",
-        "🇫🇷 France — #255",
-        "🇩🇪 Germany — #109",
-        "🇨🇦 Canada — #100",
+        "🇷🇴 Romania — #417",
         "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇷 France — #236"
+        "🇨🇦 Canada — #100"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -80,28 +74,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇷🇴 Romania — #417",
-      "server": "95.163.183.144",
-      "server_port": 443,
-      "uuid": "12e05aeb-2c8d-4ee4-9f82-f1d58532dccf",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "beeline.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Oc4VtwpdXGT4jlQZVEEgTTjeBx97uJ0sON2ek629plE",
-          "short_id": "24ecf1b6000b8e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -127,63 +99,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France — #255",
-      "server": "95.163.181.41",
+      "tag": "🇷🇴 Romania — #417",
+      "server": "95.163.183.144",
       "server_port": 443,
-      "uuid": "3e18f506-4553-48b0-9858-21774875c6d0",
+      "uuid": "12e05aeb-2c8d-4ee4-9f82-f1d58532dccf",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "ads.x5.ru",
+        "server_name": "beeline.ru",
         "reality": {
           "enabled": true,
-          "public_key": "oqRus6Z_Q1jqJaTEPu7ENbRL0-XKOw54K0jwCCGLtEk",
-          "short_id": "a9c4f17e3b62d8"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #109",
-      "server": "109.120.189.4",
-      "server_port": 443,
-      "uuid": "2983c1d0-2c98-4e16-a92a-a64351ec2b30",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "YnOlmcxFiHgitIcjba45C7z6kw7txOWnImgSfMCtsiA",
-          "short_id": "1da44564cda563cc"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇨🇦 Canada — #100",
-      "server": "89.208.229.130",
-      "server_port": 443,
-      "uuid": "4e81e8ac-54f7-4892-8319-88387dfd4d4f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "eh.vk.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Lvz96A7lYsJsbru6sZF-FQivrpqpG3fmVhIHQYJjM20",
-          "short_id": "f5ebbb093b"
+          "public_key": "Oc4VtwpdXGT4jlQZVEEgTTjeBx97uJ0sON2ek629plE",
+          "short_id": "24ecf1b6000b8e"
         },
         "utls": {
           "enabled": true,
@@ -215,23 +143,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France — #236",
-      "server": "95.163.181.41",
+      "tag": "🇨🇦 Canada — #100",
+      "server": "89.208.229.130",
       "server_port": 443,
-      "uuid": "d3de004e-7113-4faa-bcf2-ae2341d2a3fb",
+      "uuid": "4e81e8ac-54f7-4892-8319-88387dfd4d4f",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "eh.vk.ru",
         "reality": {
           "enabled": true,
-          "public_key": "oqRus6Z_Q1jqJaTEPu7ENbRL0-XKOw54K0jwCCGLtEk",
-          "short_id": "a9c4f17e3b62d8"
+          "public_key": "Lvz96A7lYsJsbru6sZF-FQivrpqpG3fmVhIHQYJjM20",
+          "short_id": "f5ebbb093b"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "chrome"
         }
       }
     }
