@@ -50,14 +50,17 @@
       "outbounds": [
         "EUROPE-auto",
         "🇪🇪 Estonia — #443",
-        "🇵🇱 Poland — #926",
+        "🇫🇮 Finland — #456",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇫🇮 Finland — #443",
         "🇵🇱 Poland — #934",
         "🇵🇱 Poland — #914",
-        "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
-        "🇫🇮 Finland — #456",
-        "🇫🇮 Finland — #453",
+        "🇵🇱 Poland — #926",
         "🇫🇮 Finland — #442",
-        "🇫🇮 Finland — #443",
+        "🇫🇮 Finland — #453",
+        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
+        "🇫🇷 France — #556",
+        "🇫🇷 France — #316",
         "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK"
       ]
     },
@@ -66,14 +69,17 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇪🇪 Estonia — #443",
-        "🇵🇱 Poland — #926",
+        "🇫🇮 Finland — #456",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇫🇮 Finland — #443",
         "🇵🇱 Poland — #934",
         "🇵🇱 Poland — #914",
-        "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
-        "🇫🇮 Finland — #456",
-        "🇫🇮 Finland — #453",
+        "🇵🇱 Poland — #926",
         "🇫🇮 Finland — #442",
-        "🇫🇮 Finland — #443",
+        "🇫🇮 Finland — #453",
+        "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
+        "🇫🇷 France — #556",
+        "🇫🇷 France — #316",
         "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -111,8 +117,30 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #926",
-      "server": "5.188.140.166",
+      "tag": "🇫🇮 Finland — #456",
+      "server": "89.208.229.209",
+      "server_port": 993,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+      "server": "89.208.231.52",
       "server_port": 993,
       "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
       "flow": "xtls-rprx-vision",
@@ -120,6 +148,28 @@
       "tls": {
         "enabled": true,
         "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #443",
+      "server": "109.120.191.171",
+      "server_port": 993,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
         "reality": {
           "enabled": true,
           "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
@@ -177,52 +227,8 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
-      "server": "89.208.231.52",
-      "server_port": 993,
-      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland — #456",
-      "server": "89.208.229.209",
-      "server_port": 993,
-      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland — #453",
-      "server": "109.120.191.5",
+      "tag": "🇵🇱 Poland — #926",
+      "server": "5.188.140.166",
       "server_port": 993,
       "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
       "flow": "xtls-rprx-vision",
@@ -265,19 +271,85 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland — #443",
-      "server": "109.120.191.171",
+      "tag": "🇫🇮 Finland — #453",
+      "server": "109.120.191.5",
       "server_port": 993,
       "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "yandex.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
           "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
           "short_id": "ad7dab462a323acb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "5.188.140.245",
+      "server_port": 993,
+      "uuid": "8822e9a7-9b61-4b5e-9efd-a483c7322b00",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "thz2uZE7rsLT609yRqqHsw9slQmCohEpFqRaoCoKLCs",
+          "short_id": "ad7dab462a323a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷 France — #556",
+      "server": "90.156.219.234",
+      "server_port": 443,
+      "uuid": "204c7af2-6606-4e2b-85f9-4352eef78e4b",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "oqRus6Z_Q1jqJaTEPu7ENbRL0-XKOw54K0jwCCGLtEk",
+          "short_id": "a9c4f17e3b62d8"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷 France — #316",
+      "server": "90.156.219.234",
+      "server_port": 443,
+      "uuid": "16409171-7b3c-447b-ac70-e47355b1f563",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "m.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "oqRus6Z_Q1jqJaTEPu7ENbRL0-XKOw54K0jwCCGLtEk",
+          "short_id": "a9c4f17e3b62d8"
         },
         "utls": {
           "enabled": true,
