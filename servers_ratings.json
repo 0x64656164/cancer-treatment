@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|90.156.219.164|443|b1ec63ec": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇫🇷 France — #502",
+        "server": "90.156.219.164",
+        "server_port": 443,
+        "uuid": "b1ec63ec-daab-408f-ac50-d2959ec2f500",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "yandex.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "pgG2grngQEtOFJImLfz0AEm-O2IodM2jCY4aMCYQI1U",
+            "short_id": "6aa2d2e950441a9a"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
+        }
+      },
+      "link": "vless://b1ec63ec-daab-408f-ac50-d2959ec2f500@90.156.219.164:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=qq&sni=yandex.ru&pbk=pgG2grngQEtOFJImLfz0AEm-O2IodM2jCY4aMCYQI1U&sid=6aa2d2e950441a9a&spx=%2F#%F0%9F%87%AB%F0%9F%87%B7%20France%20%E2%80%94%20%23502",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-02T13:25:35.965906",
+      "last_seen": "2026-05-02T13:25:35.965906",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        0.10471586416430922
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-02T13:25:35.965906",
+          "success": true,
+          "speed": 0.10471586416430922,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-05-02T14:25:35.965958",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-05-02T11:48:07.513559"
+    "last_cleanup": "2026-05-02T13:25:35.967546"
   }
 }
