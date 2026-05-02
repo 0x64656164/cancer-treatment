@@ -47,30 +47,28 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇹🇭 Thailand — #945",
         "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK-1",
-        "🇵🇱 Poland — #1002",
         "🇵🇱 Poland [*CIDR] VK-2",
+        "🇵🇱 Poland — #1002",
         "🇵🇱 Poland — #1001",
-        "🇫🇷 France — #525",
-        "🇫🇷 France — #492",
-        "🇵🇱 Poland — #1000"
+        "🇵🇱 Poland — #1000",
+        "🇵🇱 Poland [*CIDR] VK-3",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇹🇭 Thailand — #945",
         "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK-1",
-        "🇵🇱 Poland — #1002",
         "🇵🇱 Poland [*CIDR] VK-2",
+        "🇵🇱 Poland — #1002",
         "🇵🇱 Poland — #1001",
-        "🇫🇷 France — #525",
-        "🇫🇷 France — #492",
-        "🇵🇱 Poland — #1000"
+        "🇵🇱 Poland — #1000",
+        "🇵🇱 Poland [*CIDR] VK-3",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -82,28 +80,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇭 Thailand — #945",
-      "server": "217.16.31.160",
-      "server_port": 443,
-      "uuid": "fa7048d8-6686-4763-8f44-9827cdd2ddab",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "2533f2fb6230"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -147,26 +123,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #1002",
-      "server": "146.185.241.40",
-      "server_port": 443,
-      "uuid": "b11c8d06-96bf-2040-908d-8663f919e399",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/upload/session",
-        "headers": {
-          "Host": "s2.ws.listwhite.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "w2ws.listwhite.cc"
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇵🇱 Poland [*CIDR] VK-2",
       "server": "s3.listwhite.cc",
       "server_port": 443,
@@ -183,6 +139,26 @@
       "tls": {
         "enabled": true,
         "server_name": "s3.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #1002",
+      "server": "146.185.241.40",
+      "server_port": 443,
+      "uuid": "b11c8d06-96bf-2040-908d-8663f919e399",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s2.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "w2ws.listwhite.cc"
       }
     },
     {
@@ -207,50 +183,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France — #525",
-      "server": "90.156.219.164",
-      "server_port": 443,
-      "uuid": "745bd997-5807-45e3-9b20-85e165e943d4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "pgG2grngQEtOFJImLfz0AEm-O2IodM2jCY4aMCYQI1U",
-          "short_id": "6aa2d2e950441a9a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷 France — #492",
-      "server": "90.156.219.164",
-      "server_port": 443,
-      "uuid": "c6a3379b-5301-45c1-9b3b-af63b21e3511",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "pgG2grngQEtOFJImLfz0AEm-O2IodM2jCY4aMCYQI1U",
-          "short_id": "6aa2d2e950441a9a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇵🇱 Poland — #1000",
       "server": "146.185.243.233",
       "server_port": 443,
@@ -267,6 +199,48 @@
       "tls": {
         "enabled": true,
         "server_name": "s3.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-3",
+      "server": "s1.ws.listwhite.cc",
+      "server_port": 443,
+      "uuid": "b11c8d06-96bf-2040-908d-8663f919e399",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s1.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "s1.ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+      "server": "217.16.26.248",
+      "server_port": 2091,
+      "uuid": "07e5a1f8-8317-fd7b-b7fb-975a0de32205",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "gOvNjuxZomABcAtt4uxcH948GhYyB74bDf-t62xhWXs",
+          "short_id": "7ebf"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
       }
     }
   ],
