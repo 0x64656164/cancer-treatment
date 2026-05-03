@@ -47,24 +47,22 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇰🇿 Kazakhstan [*CIDR] VK",
         "🇸🇬 Singapore [*CIDR] VK",
-        "🇹🇷 Turkey [*CIDR] VK",
         "🇩🇪 Germany [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK-1"
+        "🇫🇷 France — #554",
+        "🇫🇷 France — #526"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇰🇿 Kazakhstan [*CIDR] VK",
         "🇸🇬 Singapore [*CIDR] VK",
-        "🇹🇷 Turkey [*CIDR] VK",
         "🇩🇪 Germany [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK-1"
+        "🇫🇷 France — #554",
+        "🇫🇷 France — #526"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -76,28 +74,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "fast.shadownet.pro",
-      "server_port": 443,
-      "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdp.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "lwAdXwnwQs9L0FOGVbTbk373EgGE3J5AqTr2J3rNbh0",
-          "short_id": "def012"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -145,51 +121,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇹🇷 Turkey [*CIDR] VK",
-      "server": "91.219.227.253",
-      "server_port": 7443,
-      "uuid": "f2237d8a-2097-44db-b64c-dae1951ea84e",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
-          "short_id": "7dbf7d3233971d5c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "fast.shadownet.pro",
-      "server_port": 8443,
-      "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdp.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "lwAdXwnwQs9L0FOGVbTbk373EgGE3J5AqTr2J3rNbh0",
-          "short_id": "90abcd"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK-1",
       "server": "89.208.229.124",
       "server_port": 8443,
       "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
@@ -206,6 +138,50 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷 France — #554",
+      "server": "90.156.219.164",
+      "server_port": 443,
+      "uuid": "45c6d9c1-e077-4126-bb84-ea4c422e54f8",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "pgG2grngQEtOFJImLfz0AEm-O2IodM2jCY4aMCYQI1U",
+          "short_id": "6aa2d2e950441a9a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷 France — #526",
+      "server": "90.156.219.164",
+      "server_port": 443,
+      "uuid": "c2302a49-6f8b-4742-8d90-8e58477e876e",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "pgG2grngQEtOFJImLfz0AEm-O2IodM2jCY4aMCYQI1U",
+          "short_id": "6aa2d2e950441a9a"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
