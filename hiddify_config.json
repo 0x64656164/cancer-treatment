@@ -50,11 +50,9 @@
       "outbounds": [
         "ALL-auto",
         "🇰🇿 Kazakhstan [*CIDR] VK",
-        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇷 France — #643",
-        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇩🇪 Germany — #290",
-        "Reality, Max [V.O.I.D]"
+        "🇱🇹 Lithuania — #590",
+        "🇩🇪 Germany — #299"
       ]
     },
     {
@@ -62,11 +60,9 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇰🇿 Kazakhstan [*CIDR] VK",
-        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇷 France — #643",
-        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇩🇪 Germany — #290",
-        "Reality, Max [V.O.I.D]"
+        "🇱🇹 Lithuania — #590",
+        "🇩🇪 Germany — #299"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -103,72 +99,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "89.208.230.199",
-      "server_port": 8443,
-      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷 France — #643",
-      "server": "90.156.219.164",
-      "server_port": 443,
-      "uuid": "ad82d3c6-c326-446e-ab23-b89ceb0f72bc",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "pgG2grngQEtOFJImLfz0AEm-O2IodM2jCY4aMCYQI1U",
-          "short_id": "6aa2d2e950441a9a"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "89.208.229.107",
-      "server_port": 443,
-      "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdp.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "lwAdXwnwQs9L0FOGVbTbk373EgGE3J5AqTr2J3rNbh0",
-          "short_id": "89abcdef"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇩🇪 Germany — #290",
       "server": "89.208.229.107",
       "server_port": 8443,
@@ -191,19 +121,41 @@
     },
     {
       "type": "vless",
-      "tag": "Reality, Max [V.O.I.D]",
-      "server": "5.188.141.53",
+      "tag": "🇱🇹 Lithuania — #590",
+      "server": "89.208.231.5",
+      "server_port": 443,
+      "uuid": "177f4ae2-b309-4a94-b716-442e2db80630",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "TZJ9akxNG985EGNVGWj92CAGCLeKdlDDodPs3_UNLxM",
+          "short_id": "346a555162166bd7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #299",
+      "server": "89.208.229.124",
       "server_port": 8443,
       "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "cdp.x5.ru",
         "reality": {
           "enabled": true,
           "public_key": "lwAdXwnwQs9L0FOGVbTbk373EgGE3J5AqTr2J3rNbh0",
-          "short_id": "89abcdef"
+          "short_id": "ef1234"
         },
         "utls": {
           "enabled": true,
