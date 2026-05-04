@@ -49,30 +49,32 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-1",
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK",
         "🇩🇪 Germany — #290",
-        "🇳🇱 The Netherlands [*CIDR] VK-1",
+        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇩🇪 Germany — #289",
-        "1060 | 🌐 Unknown | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu"
+        "🇳🇱 The Netherlands [*CIDR] VK-1",
+        "🇩🇪 Germany [*CIDR] VK",
+        "1060 | 🌐 Unknown | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu",
+        "🇸🇬 Singapore — #512"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK-1",
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK",
         "🇩🇪 Germany — #290",
-        "🇳🇱 The Netherlands [*CIDR] VK-1",
+        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇩🇪 Germany — #289",
-        "1060 | 🌐 Unknown | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu"
+        "🇳🇱 The Netherlands [*CIDR] VK-1",
+        "🇩🇪 Germany [*CIDR] VK",
+        "1060 | 🌐 Unknown | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu",
+        "🇸🇬 Singapore — #512"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -84,28 +86,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "89.208.230.199",
-      "server_port": 8443,
-      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -122,6 +102,28 @@
           "enabled": true,
           "public_key": "gOvNjuxZomABcAtt4uxcH948GhYyB74bDf-t62xhWXs",
           "short_id": "7ebf"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "89.208.230.199",
+      "server_port": 8443,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
         },
         "utls": {
           "enabled": true,
@@ -153,50 +155,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "89.208.229.107",
-      "server_port": 443,
-      "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdp.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "lwAdXwnwQs9L0FOGVbTbk373EgGE3J5AqTr2J3rNbh0",
-          "short_id": "def012"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "fast.shadownet.pro",
-      "server_port": 8443,
-      "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdp.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "lwAdXwnwQs9L0FOGVbTbk373EgGE3J5AqTr2J3rNbh0",
-          "short_id": "def012"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇩🇪 Germany — #290",
       "server": "89.208.229.107",
       "server_port": 8443,
@@ -219,8 +177,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
-      "server": "89.208.229.124",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "89.208.229.107",
       "server_port": 443,
       "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
       "flow": "xtls-rprx-vision",
@@ -263,6 +221,50 @@
     },
     {
       "type": "vless",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
+      "server": "89.208.229.124",
+      "server_port": 443,
+      "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "cdp.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "lwAdXwnwQs9L0FOGVbTbk373EgGE3J5AqTr2J3rNbh0",
+          "short_id": "def012"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "fast.shadownet.pro",
+      "server_port": 8443,
+      "uuid": "4e8d48bb-3c03-4e02-b15f-a76737cca9e7",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "cdp.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "lwAdXwnwQs9L0FOGVbTbk373EgGE3J5AqTr2J3rNbh0",
+          "short_id": "def012"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "1060 | 🌐 Unknown | 🏳️ SNI-X5 | VLESS | TG: @YoutubeUnBlockRu",
       "server": "fast.shadownet.pro",
       "server_port": 443,
@@ -280,6 +282,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇬 Singapore — #512",
+      "server": "83.166.253.89",
+      "server_port": 443,
+      "uuid": "f1737c56-6e82-4fd3-88bc-93aea6052a98",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "A5U40a8jcK1PkFImKdB5vQB5fTbYGQe-kAkB-yXwYD4",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
