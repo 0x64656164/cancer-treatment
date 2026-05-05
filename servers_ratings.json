@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|109.120.191.230|8081|6c7712f4": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
+        "server": "109.120.191.230",
+        "server_port": 8081,
+        "uuid": "6c7712f4-6e28-41bf-aa9c-90ce8f23e477",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "sso.passport.yandex.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+            "short_id": "7dbf7d3233971d5c"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://6c7712f4-6e28-41bf-aa9c-90ce8f23e477@109.120.191.230:8081?type=tcp&security=reality&encryption=none&pbk=Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw&fp=chrome&sni=sso.passport.yandex.ru&sid=7dbf7d3233971d5c#%F0%9F%87%AB%F0%9F%87%B7%20France%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv6%5D%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-05T20:56:25.659968",
+      "last_seen": "2026-05-05T20:56:25.659968",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        10.737968498633972
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-05T20:56:25.659968",
+          "success": true,
+          "speed": 10.737968498633972,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-05-05T21:56:25.659992",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-05-05T19:56:41.346580"
+    "last_cleanup": "2026-05-05T20:56:25.660705"
   }
 }
