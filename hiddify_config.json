@@ -50,8 +50,8 @@
       "outbounds": [
         "EUROPE-auto",
         "🇹🇷 Türkiye — #996",
-        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK"
+        "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK"
       ]
     },
     {
@@ -59,8 +59,8 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇹🇷 Türkiye — #996",
-        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK"
+        "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -97,28 +97,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "89.208.230.199",
-      "server_port": 8443,
-      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
       "server": "90.156.218.67",
       "server_port": 443,
@@ -132,6 +110,28 @@
           "enabled": true,
           "public_key": "qB_eMu3ZO_wGITnyIqJ7Kt39-h9oHFnHlQQEqA-r3VA",
           "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "89.208.230.199",
+      "server_port": 8443,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
         },
         "utls": {
           "enabled": true,
