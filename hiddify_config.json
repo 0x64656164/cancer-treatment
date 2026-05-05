@@ -41,28 +41,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
+        "EUROPE-auto",
         "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇮 Finland — #443",
-        "TCP, VK [V.O.I.D]"
+        "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
+        "🇫🇮 Finland — #443"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
         "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇮 Finland — #443",
-        "TCP, VK [V.O.I.D]"
+        "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
+        "🇫🇮 Finland — #443"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -74,28 +72,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "109.120.191.230",
-      "server_port": 8081,
-      "uuid": "6c7712f4-6e28-41bf-aa9c-90ce8f23e477",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "sso.passport.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
-          "short_id": "7dbf7d3233971d5c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -121,9 +97,9 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland — #443",
-      "server": "109.120.191.233",
-      "server_port": 8083,
+      "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "109.120.191.230",
+      "server_port": 8081,
       "uuid": "6c7712f4-6e28-41bf-aa9c-90ce8f23e477",
       "flow": "",
       "packet_encoding": "xudp",
@@ -143,19 +119,19 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, VK [V.O.I.D]",
-      "server": "cloud1.ummaadmin.cloud",
-      "server_port": 443,
-      "uuid": "735f24ba-65e2-4244-b2d5-420af6ff28de",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇫🇮 Finland — #443",
+      "server": "109.120.191.233",
+      "server_port": 8083,
+      "uuid": "6c7712f4-6e28-41bf-aa9c-90ce8f23e477",
+      "flow": "",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "eh.vk.com",
+        "server_name": "sso.passport.yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "0t6b8m_PBAG3rF2HPOEL4yiyb-2JglciiANPKvyb2Ho",
-          "short_id": ""
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
         },
         "utls": {
           "enabled": true,
