@@ -39,34 +39,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
+        "EUROPE-auto",
         "🇪🇪 Estonia — #429",
-        "🇫🇮 Finland — #467",
-        "🇫🇷 France — #496",
-        "🇵🇱 Poland — #929",
-        "🇺🇸 United States — #1003",
         "4Nika-6555",
         "🇸🇪 Sweden — #1008"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
         "🇪🇪 Estonia — #429",
-        "🇫🇮 Finland — #467",
-        "🇫🇷 France — #496",
-        "🇵🇱 Poland — #929",
-        "🇺🇸 United States — #1003",
         "4Nika-6555",
         "🇸🇪 Sweden — #1008"
       ],
@@ -80,28 +70,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "90.156.218.67",
-      "server_port": 443,
-      "uuid": "cf5718f5-c0f3-4b63-8fbf-1de69c1299c5",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "sun2-11.userapi.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "qB_eMu3ZO_wGITnyIqJ7Kt39-h9oHFnHlQQEqA-r3VA",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
     },
     {
       "type": "vless",
@@ -122,94 +90,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland — #467",
-      "server": "91.219.227.253",
-      "server_port": 8083,
-      "uuid": "82f3f990-a767-4578-9994-f9f8660609ff",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
-          "short_id": "7dbf7d3233971d5c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷 France — #496",
-      "server": "91.219.227.253",
-      "server_port": 8081,
-      "uuid": "82f3f990-a767-4578-9994-f9f8660609ff",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
-          "short_id": "7dbf7d3233971d5c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #929",
-      "server": "91.219.227.253",
-      "server_port": 8444,
-      "uuid": "82f3f990-a767-4578-9994-f9f8660609ff",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
-          "short_id": "7dbf7d3233971d5c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸 United States — #1003",
-      "server": "91.219.227.253",
-      "server_port": 8080,
-      "uuid": "82f3f990-a767-4578-9994-f9f8660609ff",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "sso.passport.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
-          "short_id": "7dbf7d3233971d5c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
         }
       }
     },
