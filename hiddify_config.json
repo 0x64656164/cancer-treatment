@@ -50,8 +50,13 @@
       "outbounds": [
         "EUROPE-auto",
         "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇮 Finland — #443"
+        "🇫🇮 Finland — #443",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-1",
+        "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-2",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-3",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-4",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-5"
       ]
     },
     {
@@ -59,8 +64,13 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇮 Finland — #443"
+        "🇫🇮 Finland — #443",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-1",
+        "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-2",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-3",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-4",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-5"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -97,9 +107,9 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "109.120.191.230",
-      "server_port": 8081,
+      "tag": "🇫🇮 Finland — #443",
+      "server": "109.120.191.233",
+      "server_port": 8083,
       "uuid": "6c7712f4-6e28-41bf-aa9c-90ce8f23e477",
       "flow": "",
       "packet_encoding": "xudp",
@@ -119,19 +129,129 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland — #443",
-      "server": "109.120.191.233",
-      "server_port": 8083,
-      "uuid": "6c7712f4-6e28-41bf-aa9c-90ce8f23e477",
-      "flow": "",
+      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-1",
+      "server": "89.208.228.75",
+      "server_port": 443,
+      "uuid": "54f66df9-4b66-4527-976f-0b05a2cf4447",
+      "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "sso.passport.yandex.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
-          "short_id": "7dbf7d3233971d5c"
+          "public_key": "1ZNcu6FOn9xF-YfkFLhDI3vuO8w3VWq32zYVJ4JWBxQ",
+          "short_id": "dc4aa6635008a9ae"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇬🇧 United Kingdom | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "90.156.218.67",
+      "server_port": 443,
+      "uuid": "cf5718f5-c0f3-4b63-8fbf-1de69c1299c5",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sun2-11.userapi.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "qB_eMu3ZO_wGITnyIqJ7Kt39-h9oHFnHlQQEqA-r3VA",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-2",
+      "server": "5.188.142.207",
+      "server_port": 443,
+      "uuid": "54f66df9-4b66-4527-976f-0b05a2cf4447",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1ZNcu6FOn9xF-YfkFLhDI3vuO8w3VWq32zYVJ4JWBxQ",
+          "short_id": "dc4aa6635008a9ae"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-3",
+      "server": "5.188.143.75",
+      "server_port": 443,
+      "uuid": "54f66df9-4b66-4527-976f-0b05a2cf4447",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1ZNcu6FOn9xF-YfkFLhDI3vuO8w3VWq32zYVJ4JWBxQ",
+          "short_id": "dc4aa6635008a9ae"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-4",
+      "server": "89.208.231.215",
+      "server_port": 443,
+      "uuid": "54f66df9-4b66-4527-976f-0b05a2cf4447",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1ZNcu6FOn9xF-YfkFLhDI3vuO8w3VWq32zYVJ4JWBxQ",
+          "short_id": "dc4aa6635008a9ae"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK-5",
+      "server": "5.188.142.181",
+      "server_port": 443,
+      "uuid": "54f66df9-4b66-4527-976f-0b05a2cf4447",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "-MmLgQXUM0GieSxdWfD3uQtamjLhYZ9ee07zmtxlKWg",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
