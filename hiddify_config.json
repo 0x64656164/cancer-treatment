@@ -41,30 +41,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "4Jadi-6612",
-        "🇸🇪 Sweden — #1008",
-        "Reality, VK [V.O.I.D]",
-        "🇱🇻 Latvia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK"
+        "ALL-auto",
+        "4Mohsen-6719",
+        "🇩🇪 Germany — #182"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "4Jadi-6612",
-        "🇸🇪 Sweden — #1008",
-        "Reality, VK [V.O.I.D]",
-        "🇱🇻 Latvia | 🌐 | [IPv6] [*CIDR] VK",
-        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK"
+        "4Mohsen-6719",
+        "🇩🇪 Germany — #182"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -79,8 +73,8 @@
     },
     {
       "type": "vless",
-      "tag": "4Jadi-6612",
-      "server": "83.166.232.135",
+      "tag": "4Mohsen-6719",
+      "server": "94.139.245.230",
       "server_port": 8443,
       "uuid": "5ad9f8f3-40dc-457b-942b-d210825d7627",
       "flow": "xtls-rprx-vision",
@@ -92,72 +86,6 @@
           "enabled": true,
           "public_key": "3JGwSDrfkiCPdU3rvQP5m0z4Ag_UB_2w8Qq3VMXmo28",
           "short_id": "abc323"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇸🇪 Sweden — #1008",
-      "server": "109.120.188.54",
-      "server_port": 443,
-      "uuid": "119a2ebd-a026-4647-a22b-cc02bdb74f45",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "4woJiVyGtLro6qRQdUcM2EJDHI3CLOeeE-knmSHk8lE",
-          "short_id": "1ca44564cda56661"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Reality, VK [V.O.I.D]",
-      "server": "germany.boot-lee.ru",
-      "server_port": 8443,
-      "uuid": "5ad9f8f3-40dc-457b-942b-d210825d7627",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "sun6-22.userapi.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "3JGwSDrfkiCPdU3rvQP5m0z4Ag_UB_2w8Qq3VMXmo28",
-          "short_id": "abc323"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇱🇻 Latvia | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "217.16.29.243",
-      "server_port": 443,
-      "uuid": "a50e7f86-41e6-40be-bc8c-844251e8847c",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "sun1-26.userapi.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "Qwkf29sKc9rfmb6WmoP9LLSphUZBiwYH4JK0sVV33Qw",
-          "short_id": "e744e5618fcb234a"
         },
         "utls": {
           "enabled": true,
@@ -167,19 +95,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "89.208.230.199",
-      "server_port": 8443,
-      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "tag": "🇩🇪 Germany — #182",
+      "server": "212.233.123.196",
+      "server_port": 443,
+      "uuid": "bdf9687c-9d7b-4a67-8c87-723a9f3de723",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "api-maps.yandex.ru",
+        "server_name": "eh.vk.ru",
         "reality": {
           "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
+          "public_key": "LHcascaxOxugVSALgsYx46nB-vuhT7ANOneu0xb6SzQ",
+          "short_id": "5391b442b5339dc0"
         },
         "utls": {
           "enabled": true,
