@@ -49,14 +49,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇺🇸 United States — #967"
+        "🇺🇸 United States — #967",
+        "2787 | 🇺🇸 USA | 🏳️ SNI-VK | VLESS | 📺 YT | TG: @YoutubeUnBlockRu",
+        "TCP, Яндекс Карты [V.O.I.D]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇺🇸 United States — #967"
+        "🇺🇸 United States — #967",
+        "2787 | 🇺🇸 USA | 🏳️ SNI-VK | VLESS | 📺 YT | TG: @YoutubeUnBlockRu",
+        "TCP, Яндекс Карты [V.O.I.D]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -88,6 +92,50 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "2787 | 🇺🇸 USA | 🏳️ SNI-VK | VLESS | 📺 YT | TG: @YoutubeUnBlockRu",
+      "server": "usa.boot-lee.ru",
+      "server_port": 8443,
+      "uuid": "5ad9f8f3-40dc-457b-942b-d210825d7627",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sun6-22.userapi.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "3JGwSDrfkiCPdU3rvQP5m0z4Ag_UB_2w8Qq3VMXmo28",
+          "short_id": "abc323"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, Яндекс Карты [V.O.I.D]",
+      "server": "95.163.215.131",
+      "server_port": 443,
+      "uuid": "769d6219-be8b-400d-9dd7-bbec4cca3593",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Cb0_DJDHGB9GXjk1ue1GOWnXfXoQlkvaSpLX81687BI",
+          "short_id": "8d"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
         }
       }
     }
