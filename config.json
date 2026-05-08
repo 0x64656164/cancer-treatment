@@ -47,16 +47,24 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
+        "TCP, VK [V.O.I.D]",
         "4Jadi-6833",
-        "TCP, VK [V.O.I.D]"
+        "4Mohsen-6858",
+        "🇱🇹 Lithuania — #704",
+        "TCP, Max [V.O.I.D]",
+        "TCP, Max [V.O.I.D]-1"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
+        "TCP, VK [V.O.I.D]",
         "4Jadi-6833",
-        "TCP, VK [V.O.I.D]"
+        "4Mohsen-6858",
+        "🇱🇹 Lithuania — #704",
+        "TCP, Max [V.O.I.D]",
+        "TCP, Max [V.O.I.D]-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -68,6 +76,28 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, VK [V.O.I.D]",
+      "server": "usa.boot-lee.ru",
+      "server_port": 8443,
+      "uuid": "5ad9f8f3-40dc-457b-942b-d210825d7627",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sun6-22.userapi.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "3JGwSDrfkiCPdU3rvQP5m0z4Ag_UB_2w8Qq3VMXmo28",
+          "short_id": "abc323"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
     },
     {
       "type": "vless",
@@ -93,8 +123,8 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, VK [V.O.I.D]",
-      "server": "usa.boot-lee.ru",
+      "tag": "4Mohsen-6858",
+      "server": "212.233.94.98",
       "server_port": 8443,
       "uuid": "5ad9f8f3-40dc-457b-942b-d210825d7627",
       "flow": "xtls-rprx-vision",
@@ -110,6 +140,72 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania — #704",
+      "server": "212.233.94.155",
+      "server_port": 8443,
+      "uuid": "5ad9f8f3-40dc-457b-942b-d210825d7627",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sun6-22.userapi.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "3JGwSDrfkiCPdU3rvQP5m0z4Ag_UB_2w8Qq3VMXmo28",
+          "short_id": "abc323"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, Max [V.O.I.D]",
+      "server": "89.208.208.58",
+      "server_port": 443,
+      "uuid": "46917323-63d4-4797-9543-21b5d4ff7d7b",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1ZNcu6FOn9xF-YfkFLhDI3vuO8w3VWq32zYVJ4JWBxQ",
+          "short_id": "dc4aa6635008a9ae"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, Max [V.O.I.D]-1",
+      "server": "thaelen.kaguya.sbs",
+      "server_port": 443,
+      "uuid": "46917323-63d4-4797-9543-21b5d4ff7d7b",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1ZNcu6FOn9xF-YfkFLhDI3vuO8w3VWq32zYVJ4JWBxQ",
+          "short_id": "dc4aa6635008a9ae"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
