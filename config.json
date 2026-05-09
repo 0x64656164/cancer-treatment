@@ -47,14 +47,20 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #93"
+        "🇩🇪 Germany — #93",
+        "🇸🇪 Sweden — #544",
+        "🇫🇮 Finland — #218",
+        "🇫🇮 Finland — #216"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #93"
+        "🇩🇪 Germany — #93",
+        "🇸🇪 Sweden — #544",
+        "🇫🇮 Finland — #218",
+        "🇫🇮 Finland — #216"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -86,6 +92,72 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇪 Sweden — #544",
+      "server": "5.188.141.35",
+      "server_port": 6443,
+      "uuid": "fd802b87-8557-4fc7-a71a-19eb2b825556",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
+          "short_id": "bad5722c72a038"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #218",
+      "server": "217.16.27.32",
+      "server_port": 6443,
+      "uuid": "fd802b87-8557-4fc7-a71a-19eb2b825556",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "JCnvoBX8E2brxjn8OB1XUnTJ0jCvLgLbkyErIIjZYnA",
+          "short_id": "a1b2c3d4e5f6a7b8"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #216",
+      "server": "217.16.27.155",
+      "server_port": 6443,
+      "uuid": "fd802b87-8557-4fc7-a71a-19eb2b825556",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
+          "short_id": "bad5722c72a038"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
