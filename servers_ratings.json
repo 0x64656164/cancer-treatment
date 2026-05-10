@@ -27,20 +27,20 @@
       "group": "EUROPE",
       "country": "PL",
       "first_seen": "2026-05-10T18:23:59.767289",
-      "last_seen": "2026-05-10T21:53:54.237519",
-      "total_tests": 16,
-      "successful_tests": 16,
+      "last_seen": "2026-05-10T22:44:34.551957",
+      "total_tests": 23,
+      "successful_tests": 23,
       "speed_history": [
-        1.066763420609033,
-        1.0645201281748147,
-        1.1449287041344658,
-        0.0001216607173547959,
-        0.00012499463255470446,
-        0.00010781147039168389,
-        0.00011663036565096769,
         0.00010524574578236436,
         8.50950169725937e-05,
-        0.0001206724594227982
+        0.0001206724594227982,
+        2.63161635911606,
+        2.6746790136581593,
+        2.5024685968070814,
+        2.48213798842104,
+        2.476563845688125,
+        2.462637332190393,
+        2.541339421285752
       ],
       "check_history": [
         {
@@ -154,20 +154,69 @@
           "speed": 0.0001206724594227982,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.428030",
+          "success": true,
+          "speed": 2.63161635911606,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.429095",
+          "success": true,
+          "speed": 2.6746790136581593,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.430125",
+          "success": true,
+          "speed": 2.5024685968070814,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.431190",
+          "success": true,
+          "speed": 2.48213798842104,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.432272",
+          "success": true,
+          "speed": 2.476563845688125,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.433304",
+          "success": true,
+          "speed": 2.462637332190393,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:34.551957",
+          "success": true,
+          "speed": 2.541339421285752,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.513557672647651,
+      "rating": 0.5494906660749668,
       "rating_components": {
-        "speed": 0.01879640211682825,
+        "speed": 0.089371935097209,
         "stability": 1.0,
-        "uptime": 0.5250387528166667,
+        "uptime": 0.585864222125,
         "consistency": 0.0,
-        "freshness": 0.9985526073174581
+        "freshness": 0.9818039347035
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 16,
+      "consecutive_successes": 23,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -199,14 +248,17 @@
       "group": "EUROPE",
       "country": "FR",
       "first_seen": "2026-05-10T20:42:06.286995",
-      "last_seen": "2026-05-10T21:54:00.030012",
-      "total_tests": 4,
-      "successful_tests": 4,
+      "last_seen": "2026-05-10T22:44:04.826110",
+      "total_tests": 7,
+      "successful_tests": 7,
       "speed_history": [
         16.918856363574623,
         17.398750357341633,
         15.431719132240774,
-        11.331033223762445
+        11.331033223762445,
+        26.01546109417542,
+        25.90285598986746,
+        26.197453874054037
       ],
       "check_history": [
         {
@@ -236,88 +288,44 @@
           "speed": 11.331033223762445,
           "latency": null,
           "error": null
-        }
-      ],
-      "rating": 0.6894249095166046,
-      "rating_components": {
-        "speed": 0.8758719602164831,
-        "stability": 1.0,
-        "uptime": 0.3639119817277778,
-        "consistency": 0.687356903196566,
-        "freshness": 0.9996668964169354
-      },
-      "category": "B",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 4,
-      "active": true,
-      "staging_until": null,
-      "consecutive_failures": 0
-    },
-    "vless|146.185.211.132|7261|3462877f": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇩🇪 Germany [*CIDR] VK",
-        "server": "146.185.211.132",
-        "server_port": 7261,
-        "uuid": "3462877f-e054-43ee-b03b-d91d448ac5f0",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "cdn.yandex.ru",
-          "reality": {
-            "enabled": true,
-            "public_key": "MEK-NUsOv98VElJAZbabpunRMsK-wXSu6NYOc56gPkU",
-            "short_id": ""
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "firefox"
-          }
-        }
-      },
-      "link": "vless://3462877f-e054-43ee-b03b-d91d448ac5f0@146.185.211.132:7261?encryption=none&flow=xtls-rprx-vision&type=tcp&security=reality&sni=cdn.yandex.ru&fp=firefox&pbk=MEK-NUsOv98VElJAZbabpunRMsK-wXSu6NYOc56gPkU#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%5B%2ACIDR%5D%20VK",
-      "group": "EUROPE",
-      "country": "DE",
-      "first_seen": "2026-05-10T20:42:06.288269",
-      "last_seen": "2026-05-10T20:42:06.288269",
-      "total_tests": 2,
-      "successful_tests": 1,
-      "speed_history": [
-        17.434157574191175
-      ],
-      "check_history": [
+        },
         {
-          "timestamp": "2026-05-10T20:42:06.288269",
+          "timestamp": "2026-05-10T22:44:01.425003",
           "success": true,
-          "speed": 17.434157574191175,
+          "speed": 26.01546109417542,
           "latency": null,
           "error": null
         },
         {
-          "timestamp": "2026-05-10T21:53:54.405625",
-          "success": false,
-          "speed": 0,
+          "timestamp": "2026-05-10T22:44:01.426029",
+          "success": true,
+          "speed": 25.90285598986746,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:04.826110",
+          "success": true,
+          "speed": 26.197453874054037,
           "latency": null,
           "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.7097321841177273,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.4247374509388888,
+        "consistency": 0.43407101783323376,
+        "freshness": 0.9762006797256559
       },
-      "category": "C",
+      "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 0,
-      "active": false,
+      "consecutive_successes": 7,
+      "active": true,
       "staging_until": null,
-      "consecutive_failures": 1
+      "consecutive_failures": 0
     },
     "vless|217.16.21.98|27472|39e282e0": {
       "outbound": {
@@ -346,16 +354,18 @@
       "group": "EUROPE",
       "country": "DE",
       "first_seen": "2026-05-10T20:42:06.289382",
-      "last_seen": "2026-05-10T21:53:57.169851",
-      "total_tests": 6,
-      "successful_tests": 6,
+      "last_seen": "2026-05-10T22:44:05.066562",
+      "total_tests": 8,
+      "successful_tests": 8,
       "speed_history": [
         5.835406516862419,
         4.39637235623433,
         15.028257964660634,
         7.38530494965296,
         6.593244538111618,
-        18.492309225868965
+        18.492309225868965,
+        10.474086805696,
+        23.743622006671348
       ],
       "check_history": [
         {
@@ -399,20 +409,34 @@
           "speed": 18.492309225868965,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.427032",
+          "success": true,
+          "speed": 10.474086805696,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:05.066562",
+          "success": true,
+          "speed": 23.743622006671348,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.5558111566762025,
+      "rating": 0.5819313622767023,
       "rating_components": {
-        "speed": 0.551894514219349,
+        "speed": 0.5779975980513904,
         "stability": 1.0,
-        "uptime": 0.3639119356055555,
+        "uptime": 0.4247374050111111,
         "consistency": 0.0,
-        "freshness": 0.9991165306007367
+        "freshness": 0.9762458710798655
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 6,
+      "consecutive_successes": 8,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -444,11 +468,13 @@
       "group": "RUSSIA",
       "country": "RU",
       "first_seen": "2026-05-10T21:53:52.532803",
-      "last_seen": "2026-05-10T21:53:52.532803",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-05-10T22:44:04.277599",
+      "total_tests": 3,
+      "successful_tests": 3,
       "speed_history": [
-        22.596251459703275
+        22.596251459703275,
+        30.58953145497985,
+        30.66894402144721
       ],
       "check_history": [
         {
@@ -457,22 +483,36 @@
           "speed": 22.596251459703275,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.423835",
+          "success": true,
+          "speed": 30.58953145497985,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:04.277599",
+          "success": true,
+          "speed": 30.66894402144721,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.6938981313721966,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.311449547,
+        "consistency": 0.729036754671333,
+        "freshness": 0.976097580700422
       },
-      "category": "C",
+      "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
-      "active": false,
-      "staging_until": "2026-05-10T22:53:52.532816",
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     },
     "vless|89.208.231.81|443|b6ce8a51": {
@@ -502,14 +542,20 @@
       "group": "EUROPE",
       "country": "PL",
       "first_seen": "2026-05-10T21:53:52.538500",
-      "last_seen": "2026-05-10T21:53:52.540851",
-      "total_tests": 4,
-      "successful_tests": 4,
+      "last_seen": "2026-05-10T22:45:02.093674",
+      "total_tests": 12,
+      "successful_tests": 12,
       "speed_history": [
-        0.7569515941058703,
-        0.7538468314672508,
         0.7511120735755304,
-        0.7408717143998683
+        0.7408717143998683,
+        1.3764792761214057,
+        1.2893739120701457,
+        1.2615489804754316,
+        1.2237396716829558,
+        1.2192174899080446,
+        1.2134667190950519,
+        1.2032945707332436,
+        1.3846622225310636
       ],
       "check_history": [
         {
@@ -539,20 +585,76 @@
           "speed": 0.7408717143998683,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.434355",
+          "success": true,
+          "speed": 1.3764792761214057,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.435419",
+          "success": true,
+          "speed": 1.2893739120701457,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.436544",
+          "success": true,
+          "speed": 1.2615489804754316,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.437624",
+          "success": true,
+          "speed": 1.2237396716829558,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.438712",
+          "success": true,
+          "speed": 1.2192174899080446,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.439812",
+          "success": true,
+          "speed": 1.2134667190950519,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.440914",
+          "success": true,
+          "speed": 1.2032945707332436,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:45:02.093674",
+          "success": true,
+          "speed": 1.3846622225310636,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.41113847569874457,
+      "rating": 0.49683059193661505,
       "rating_components": {
-        "speed": 0.04305889459771945,
+        "speed": 0.05865562957361681,
         "stability": 1.0,
-        "uptime": 0.01,
-        "consistency": 0.9879273076520697,
-        "freshness": 0.9982264400932913
+        "uptime": 0.3114490730833333,
+        "consistency": 0.6246621271075886,
+        "freshness": 0.987024160518663
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 4,
+      "consecutive_successes": 12,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -584,12 +686,16 @@
       "group": "EUROPE",
       "country": "FI",
       "first_seen": "2026-05-10T21:53:52.541651",
-      "last_seen": "2026-05-10T21:53:52.542504",
-      "total_tests": 2,
-      "successful_tests": 2,
+      "last_seen": "2026-05-10T22:46:09.925445",
+      "total_tests": 6,
+      "successful_tests": 6,
       "speed_history": [
         0.3087514297109067,
-        0.2937995384934453
+        0.2937995384934453,
+        0.5986472224285977,
+        0.5871989758079156,
+        0.569399470736036,
+        0.6532902798442948
       ],
       "check_history": [
         {
@@ -605,26 +711,54 @@
           "speed": 0.2937995384934453,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.441996",
+          "success": true,
+          "speed": 0.5986472224285977,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.443126",
+          "success": true,
+          "speed": 0.5871989758079156,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:44:01.444256",
+          "success": true,
+          "speed": 0.569399470736036,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-10T22:46:09.925445",
+          "success": true,
+          "speed": 0.6532902798442948,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.5007913845764016,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 0.025237301752864892,
+        "stability": 1.0,
+        "uptime": 0.3114488115,
+        "consistency": 0.7116445577073978,
+        "freshness": 0.9999996257005925
       },
-      "category": "C",
+      "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 2,
-      "active": false,
-      "staging_until": "2026-05-10T22:53:52.542510",
+      "consecutive_successes": 6,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-05-10T21:54:01.761376"
+    "last_cleanup": "2026-05-10T22:46:09.928673"
   }
 }
