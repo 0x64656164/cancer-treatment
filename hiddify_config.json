@@ -50,9 +50,10 @@
       "outbounds": [
         "EUROPE-auto",
         "🇳🇱 The Netherlands — #705",
-        "🇳🇱 The Netherlands — #676",
+        "🇳🇱 The Netherlands — #508",
         "TCP, Яндекс [V.O.I.D]",
-        "TCP, Max [V.O.I.D]"
+        "TCP, Max [V.O.I.D]",
+        "🇱🇹 Lithuania — #418"
       ]
     },
     {
@@ -60,9 +61,10 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇳🇱 The Netherlands — #705",
-        "🇳🇱 The Netherlands — #676",
+        "🇳🇱 The Netherlands — #508",
         "TCP, Яндекс [V.O.I.D]",
-        "TCP, Max [V.O.I.D]"
+        "TCP, Max [V.O.I.D]",
+        "🇱🇹 Lithuania — #418"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -99,23 +101,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #676",
-      "server": "109.120.190.175",
-      "server_port": 443,
-      "uuid": "a192a3f8-8f94-4a6f-ba1d-bf5cfe383a53",
+      "tag": "🇳🇱 The Netherlands — #508",
+      "server": "90.156.218.189",
+      "server_port": 5443,
+      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "music.yandex.ru",
+        "server_name": "yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "UPvZNz9XxdLDAHK_gixihQEBpQ5O2TlJKXmMtBI3tiI",
-          "short_id": "d230"
+          "public_key": "XtdL-37-fMg79jlyMqpIHNgnL77458UVldAj6t2ogho",
+          "short_id": "646d0719715d735c"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
         }
       }
     },
@@ -160,6 +162,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania — #418",
+      "server": "89.208.221.163",
+      "server_port": 443,
+      "uuid": "58270e09-1834-4bf6-b0de-3e25ebcdca16",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "dkDy_40iCCrOTCDziuNidIgnqBFKEPK_SfPyKmPOJ2M",
+          "short_id": "dec215d635ae"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
