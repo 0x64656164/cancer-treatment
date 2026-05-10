@@ -39,28 +39,38 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇳🇱 The Netherlands — #779",
-        "🇸🇪 Sweden — #962",
+        "ALL-auto",
+        "TCP, Яндекс [V.O.I.D]",
+        "🇳🇱 The Netherlands — #372",
         "TCP, Max [V.O.I.D]",
-        "🇳🇱 The Netherlands — #490"
+        "[OpenRay] Dynamic-23645",
+        "🇳🇱 The Netherlands — #451",
+        "🇵🇱 Poland — #492",
+        "🇫🇮 Finland — #315",
+        "🇳🇱 The Netherlands — #618",
+        "🇫🇮 Finland — #317"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands — #779",
-        "🇸🇪 Sweden — #962",
+        "TCP, Яндекс [V.O.I.D]",
+        "🇳🇱 The Netherlands — #372",
         "TCP, Max [V.O.I.D]",
-        "🇳🇱 The Netherlands — #490"
+        "[OpenRay] Dynamic-23645",
+        "🇳🇱 The Netherlands — #451",
+        "🇵🇱 Poland — #492",
+        "🇫🇮 Finland — #315",
+        "🇳🇱 The Netherlands — #618",
+        "🇫🇮 Finland — #317"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -75,19 +85,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #779",
-      "server": "5.188.141.252",
-      "server_port": 8443,
+      "tag": "TCP, Яндекс [V.O.I.D]",
+      "server": "hype3.snichvpn.ru",
+      "server_port": 5443,
       "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "1A0F4VsSyBFBj-1Lu_WyUA8OdF8rKAhFSgKl1ZxoNxs",
-          "short_id": "f8b31c3be2f0fdee"
+          "public_key": "XtdL-37-fMg79jlyMqpIHNgnL77458UVldAj6t2ogho",
+          "short_id": "646d0719715d735c"
         },
         "utls": {
           "enabled": true,
@@ -97,8 +107,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇸🇪 Sweden — #962",
-      "server": "5.188.141.252",
+      "tag": "🇳🇱 The Netherlands — #372",
+      "server": "90.156.218.203",
       "server_port": 5443,
       "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
       "flow": "xtls-rprx-vision",
@@ -120,7 +130,7 @@
     {
       "type": "vless",
       "tag": "TCP, Max [V.O.I.D]",
-      "server": "hype1.snichvpn.ru",
+      "server": "hype3.snichvpn.ru",
       "server_port": 8443,
       "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
       "flow": "xtls-rprx-vision",
@@ -141,8 +151,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #490",
-      "server": "90.156.218.234",
+      "tag": "[OpenRay] Dynamic-23645",
+      "server": "hype2.snichvpn.ru",
       "server_port": 5443,
       "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
       "flow": "xtls-rprx-vision",
@@ -154,6 +164,116 @@
           "enabled": true,
           "public_key": "XtdL-37-fMg79jlyMqpIHNgnL77458UVldAj6t2ogho",
           "short_id": "646d0719715d735c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #451",
+      "server": "90.156.218.234",
+      "server_port": 8443,
+      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1A0F4VsSyBFBj-1Lu_WyUA8OdF8rKAhFSgKl1ZxoNxs",
+          "short_id": "f8b31c3be2f0fdee"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #492",
+      "server": "5.188.140.166",
+      "server_port": 443,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #315",
+      "server": "217.16.27.32",
+      "server_port": 6443,
+      "uuid": "c2704fbe-58f2-47b6-8dcc-f86031ce3105",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "JCnvoBX8E2brxjn8OB1XUnTJ0jCvLgLbkyErIIjZYnA",
+          "short_id": "a1b2c3d4e5f6a7b8"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #618",
+      "server": "5.188.141.35",
+      "server_port": 6443,
+      "uuid": "c2704fbe-58f2-47b6-8dcc-f86031ce3105",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
+          "short_id": "bad5722c72a038"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #317",
+      "server": "217.16.27.155",
+      "server_port": 6443,
+      "uuid": "c2704fbe-58f2-47b6-8dcc-f86031ce3105",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
+          "short_id": "bad5722c72a038"
         },
         "utls": {
           "enabled": true,
