@@ -47,30 +47,26 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "TCP, Яндекс [V.O.I.D]",
-        "🇳🇱 The Netherlands — #372",
-        "TCP, Max [V.O.I.D]",
-        "[OpenRay] Dynamic-23645",
-        "🇳🇱 The Netherlands — #451",
         "🇵🇱 Poland — #492",
         "🇫🇮 Finland — #315",
         "🇳🇱 The Netherlands — #618",
-        "🇫🇮 Finland — #317"
+        "🇫🇮 Finland — #317",
+        "🇫🇷 France [*CIDR] VK",
+        "🇩🇪 Germany [*CIDR] VK",
+        "🇦🇹 Austria — #131"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "TCP, Яндекс [V.O.I.D]",
-        "🇳🇱 The Netherlands — #372",
-        "TCP, Max [V.O.I.D]",
-        "[OpenRay] Dynamic-23645",
-        "🇳🇱 The Netherlands — #451",
         "🇵🇱 Poland — #492",
         "🇫🇮 Finland — #315",
         "🇳🇱 The Netherlands — #618",
-        "🇫🇮 Finland — #317"
+        "🇫🇮 Finland — #317",
+        "🇫🇷 France [*CIDR] VK",
+        "🇩🇪 Germany [*CIDR] VK",
+        "🇦🇹 Austria — #131"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -82,116 +78,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "TCP, Яндекс [V.O.I.D]",
-      "server": "hype3.snichvpn.ru",
-      "server_port": 5443,
-      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "XtdL-37-fMg79jlyMqpIHNgnL77458UVldAj6t2ogho",
-          "short_id": "646d0719715d735c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #372",
-      "server": "90.156.218.203",
-      "server_port": 5443,
-      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "XtdL-37-fMg79jlyMqpIHNgnL77458UVldAj6t2ogho",
-          "short_id": "646d0719715d735c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "TCP, Max [V.O.I.D]",
-      "server": "hype3.snichvpn.ru",
-      "server_port": 8443,
-      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "1A0F4VsSyBFBj-1Lu_WyUA8OdF8rKAhFSgKl1ZxoNxs",
-          "short_id": "f8b31c3be2f0fdee"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[OpenRay] Dynamic-23645",
-      "server": "hype2.snichvpn.ru",
-      "server_port": 5443,
-      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "XtdL-37-fMg79jlyMqpIHNgnL77458UVldAj6t2ogho",
-          "short_id": "646d0719715d735c"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #451",
-      "server": "90.156.218.234",
-      "server_port": 8443,
-      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "1A0F4VsSyBFBj-1Lu_WyUA8OdF8rKAhFSgKl1ZxoNxs",
-          "short_id": "f8b31c3be2f0fdee"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
@@ -278,6 +164,72 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷 France [*CIDR] VK",
+      "server": "146.185.211.132",
+      "server_port": 8992,
+      "uuid": "3462877f-e054-43ee-b03b-d91d448ac5f0",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "cms-res-web.online.sberbank.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "eP0MKUFOcNVSVFbHT8GgBLP4LIHZFq8JuVGlCAlH1HI",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "146.185.211.132",
+      "server_port": 7261,
+      "uuid": "3462877f-e054-43ee-b03b-d91d448ac5f0",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "cdn.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "MEK-NUsOv98VElJAZbabpunRMsK-wXSu6NYOc56gPkU",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇦🇹 Austria — #131",
+      "server": "217.16.21.98",
+      "server_port": 27472,
+      "uuid": "39e282e0-5ae4-4ff4-8848-4b9346505c78",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.samsung.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "tfBYj32NRb7oc8lmVjr0nlote_rqpe_vd367HlcwxVs",
+          "short_id": "b0"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
