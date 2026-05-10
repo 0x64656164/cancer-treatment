@@ -50,9 +50,10 @@
       "outbounds": [
         "EUROPE-auto",
         "🇳🇱 The Netherlands — #705",
-        "TCP, Max [V.O.I.D]",
+        "🇳🇱 The Netherlands — #779",
         "🇳🇱 The Netherlands — #508",
-        "🇷🇴 Romania — #954"
+        "TCP, Max [V.O.I.D]",
+        "🇸🇪 Sweden — #962"
       ]
     },
     {
@@ -60,9 +61,10 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇳🇱 The Netherlands — #705",
-        "TCP, Max [V.O.I.D]",
+        "🇳🇱 The Netherlands — #779",
         "🇳🇱 The Netherlands — #508",
-        "🇷🇴 Romania — #954"
+        "TCP, Max [V.O.I.D]",
+        "🇸🇪 Sweden — #962"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -99,8 +101,8 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, Max [V.O.I.D]",
-      "server": "hype1.snichvpn.ru",
+      "tag": "🇳🇱 The Netherlands — #779",
+      "server": "5.188.141.252",
       "server_port": 8443,
       "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
       "flow": "xtls-rprx-vision",
@@ -143,23 +145,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇷🇴 Romania — #954",
-      "server": "212.233.95.244",
-      "server_port": 443,
-      "uuid": "f7d89977-68b1-4755-99c5-e56e4211717e",
+      "tag": "TCP, Max [V.O.I.D]",
+      "server": "hype1.snichvpn.ru",
+      "server_port": 8443,
+      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "music.yandex.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "G_zOhKQTfUgheQNQHAIGkuEEHMy3Ut1Ojl6JvzWytWA",
-          "short_id": "eb2c817ef9"
+          "public_key": "1A0F4VsSyBFBj-1Lu_WyUA8OdF8rKAhFSgKl1ZxoNxs",
+          "short_id": "f8b31c3be2f0fdee"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇪 Sweden — #962",
+      "server": "5.188.141.252",
+      "server_port": 5443,
+      "uuid": "bb04531b-5826-496e-9160-feb3139a99cf",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "XtdL-37-fMg79jlyMqpIHNgnL77458UVldAj6t2ogho",
+          "short_id": "646d0719715d735c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
