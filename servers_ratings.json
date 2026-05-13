@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|212.233.79.115|52006|3dae19c4": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇫🇮 Finland — #137",
+        "server": "212.233.79.115",
+        "server_port": 52006,
+        "uuid": "3dae19c4-f3d1-4dab-9bb2-1d0121813f52",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "ads.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "DaIRouGSxxQDEv9WKRxD79b2Vt0fsw4yQOTeAmXUYCM",
+            "short_id": "08"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://3dae19c4-f3d1-4dab-9bb2-1d0121813f52@212.233.79.115:52006?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=ads.x5.ru&pbk=DaIRouGSxxQDEv9WKRxD79b2Vt0fsw4yQOTeAmXUYCM&sid=08#%F0%9F%87%AB%F0%9F%87%AE%20Finland%20%E2%80%94%20%23137",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-13T16:17:14.396981",
+      "last_seen": "2026-05-13T16:17:14.396981",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        7.6597163975283316
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-13T16:17:14.396981",
+          "success": true,
+          "speed": 7.6597163975283316,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-05-13T17:17:14.397014",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-05-13T13:34:44.933487"
+    "last_cleanup": "2026-05-13T16:17:14.398136"
   }
 }
