@@ -39,22 +39,50 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🇫🇮 Finland — #164"
+        "EUROPE-auto",
+        "🇵🇱 Poland — #309",
+        "🇹🇷 Türkiye — #391",
+        "🇹🇷 Türkiye — #393",
+        "🇫🇮 Finland — #174",
+        "🇫🇷 France — #207",
+        "🇵🇱 Poland — #306",
+        "🇵🇱 Poland — #304",
+        "🇹🇷 Türkiye — #392",
+        "🇹🇷 Türkiye — #394",
+        "🇫🇮 Finland — #185",
+        "🇩🇪 Germany — #119",
+        "🇫🇮 Finland — #184",
+        "🇺🇸 United States — #414",
+        "🇺🇸 United States — #411",
+        "🇳🇱 The Netherlands — #282"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🇫🇮 Finland — #164"
+        "🇵🇱 Poland — #309",
+        "🇹🇷 Türkiye — #391",
+        "🇹🇷 Türkiye — #393",
+        "🇫🇮 Finland — #174",
+        "🇫🇷 France — #207",
+        "🇵🇱 Poland — #306",
+        "🇵🇱 Poland — #304",
+        "🇹🇷 Türkiye — #392",
+        "🇹🇷 Türkiye — #394",
+        "🇫🇮 Finland — #185",
+        "🇩🇪 Germany — #119",
+        "🇫🇮 Finland — #184",
+        "🇺🇸 United States — #414",
+        "🇺🇸 United States — #411",
+        "🇳🇱 The Netherlands — #282"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,23 +97,331 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland — #164",
-      "server": "217.16.27.32",
-      "server_port": 6443,
-      "uuid": "8b86c505-0622-4cdf-adfb-29793e2c6ed5",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇵🇱 Poland — #309",
+      "server": "91.219.227.200",
+      "server_port": 8444,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sso.passport.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇹🇷 Türkiye — #391",
+      "server": "91.219.227.200",
+      "server_port": 7443,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇹🇷 Türkiye — #393",
+      "server": "95.163.211.237",
+      "server_port": 7443,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #174",
+      "server": "91.219.227.200",
+      "server_port": 8083,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷 France — #207",
+      "server": "95.163.211.240",
+      "server_port": 8081,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #306",
+      "server": "91.219.227.189",
+      "server_port": 8444,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #304",
+      "server": "95.163.211.240",
+      "server_port": 8444,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sso.passport.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇹🇷 Türkiye — #392",
+      "server": "91.219.227.189",
+      "server_port": 7443,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇹🇷 Türkiye — #394",
+      "server": "95.163.211.240",
+      "server_port": 7443,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
         "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "JCnvoBX8E2brxjn8OB1XUnTJ0jCvLgLbkyErIIjZYnA",
-          "short_id": "a1b2c3d4e5f6a7b8"
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #185",
+      "server": "95.163.211.240",
+      "server_port": 8083,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sso.passport.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #119",
+      "server": "95.163.211.240",
+      "server_port": 7433,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #184",
+      "server": "91.219.227.189",
+      "server_port": 8083,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸 United States — #414",
+      "server": "91.219.227.189",
+      "server_port": 8080,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸 United States — #411",
+      "server": "95.163.211.240",
+      "server_port": 8080,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #282",
+      "server": "95.163.211.240",
+      "server_port": 8181,
+      "uuid": "bf9372b5-4031-4dbd-b15f-22fe7e69a367",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "Z84J2IelR9ch3k8VtlVhhs5ycBUlXA7wHBWcBrjqnAw",
+          "short_id": "7dbf7d3233971d5c"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
@@ -105,30 +441,30 @@
       },
       {
         "rule_set": [
-          "gemini",
-          "supercell",
-          "discord-voice-chats-no-cidr",
-          "anime-ru",
-          "youtube",
-          "linkedin",
-          "discord-voice-chats",
-          "whatsapp",
           "grok",
+          "anime-ru",
+          "linkedin",
+          "x",
+          "rkn",
+          "instagram",
+          "roblox",
           "copilot",
           "telegram-voice-chats",
-          "rkn",
-          "telegram",
-          "capcut",
-          "openai",
-          "netflix",
-          "discord-domains",
-          "instagram",
-          "x",
-          "roblox",
           "discord-full",
-          "spotify",
+          "telegram",
           "unavailable-in-russia",
+          "capcut",
+          "youtube",
+          "openai",
+          "supercell",
+          "netflix",
           "tiktok",
+          "whatsapp",
+          "discord-voice-chats",
+          "discord-voice-chats-no-cidr",
+          "discord-domains",
+          "spotify",
+          "gemini",
           "geosite-ru-blocked",
           "geoip-ru-blocked-all"
         ],
@@ -138,23 +474,9 @@
     "rule_set": [
       {
         "type": "remote",
-        "tag": "gemini",
+        "tag": "grok",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/gemini.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "supercell",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/supercell.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "discord-voice-chats-no-cidr",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats-no-cidr.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/grok.srs",
         "download_detour": "direct"
       },
       {
@@ -166,13 +488,6 @@
       },
       {
         "type": "remote",
-        "tag": "youtube",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/youtube.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
         "tag": "linkedin",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/linkedin.srs",
@@ -180,23 +495,30 @@
       },
       {
         "type": "remote",
-        "tag": "discord-voice-chats",
+        "tag": "x",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/x.srs",
         "download_detour": "direct"
       },
       {
         "type": "remote",
-        "tag": "whatsapp",
+        "tag": "rkn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/whatsapp.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/rkn.srs",
         "download_detour": "direct"
       },
       {
         "type": "remote",
-        "tag": "grok",
+        "tag": "instagram",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/grok.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/instagram.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "roblox",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/roblox.srs",
         "download_detour": "direct"
       },
       {
@@ -215,9 +537,9 @@
       },
       {
         "type": "remote",
-        "tag": "rkn",
+        "tag": "discord-full",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/rkn.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-full.srs",
         "download_detour": "direct"
       },
       {
@@ -229,9 +551,23 @@
       },
       {
         "type": "remote",
+        "tag": "unavailable-in-russia",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/unavailable-in-russia.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
         "tag": "capcut",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/capcut.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "youtube",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/youtube.srs",
         "download_detour": "direct"
       },
       {
@@ -243,9 +579,44 @@
       },
       {
         "type": "remote",
+        "tag": "supercell",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/supercell.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
         "tag": "netflix",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/netflix.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "tiktok",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/tiktok.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "whatsapp",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/whatsapp.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "discord-voice-chats",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "discord-voice-chats-no-cidr",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats-no-cidr.srs",
         "download_detour": "direct"
       },
       {
@@ -257,34 +628,6 @@
       },
       {
         "type": "remote",
-        "tag": "instagram",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/instagram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "x",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/x.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "roblox",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/roblox.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "discord-full",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-full.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
         "tag": "spotify",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/spotify.srs",
@@ -292,16 +635,9 @@
       },
       {
         "type": "remote",
-        "tag": "unavailable-in-russia",
+        "tag": "gemini",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/unavailable-in-russia.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "tiktok",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/tiktok.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/gemini.srs",
         "download_detour": "direct"
       },
       {
