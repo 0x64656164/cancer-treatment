@@ -49,20 +49,24 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland — #382",
+        "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK-1",
-        "🇵🇱 Poland [*CIDR] VK-2"
+        "🇵🇱 Poland [*CIDR] VK-2",
+        "🇵🇱 Poland [*CIDR] VK-3",
+        "🇵🇱 Poland [*CIDR] VK-4"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland — #382",
+        "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK-1",
-        "🇵🇱 Poland [*CIDR] VK-2"
+        "🇵🇱 Poland [*CIDR] VK-2",
+        "🇵🇱 Poland [*CIDR] VK-3",
+        "🇵🇱 Poland [*CIDR] VK-4"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -77,8 +81,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "w2ws.listwhite.cc",
+      "tag": "🇵🇱 Poland — #382",
+      "server": "146.185.241.40",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
       "flow": "",
@@ -97,8 +101,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #382",
-      "server": "146.185.241.40",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "w2ws.listwhite.cc",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
       "flow": "",
@@ -153,6 +157,44 @@
       "tls": {
         "enabled": true,
         "server_name": "s1.ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-3",
+      "server": "146.185.241.45",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s1.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "w1ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-4",
+      "server": "146.185.243.233",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "s3.listwhite.cc"
       }
     }
   ],
