@@ -41,24 +41,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇮 Finland — #194"
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK-1",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
-        "🇫🇮 Finland — #194"
+        "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK-1",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -95,23 +97,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland — #194",
-      "server": "5.188.140.245",
-      "server_port": 6443,
-      "uuid": "3f3d203a-2591-4065-8450-fbc931b044e2",
+      "tag": "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK-1",
+      "server": "89.208.231.52",
+      "server_port": 443,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "yandex.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "NQHJZ88t5mdW_YiTrgzsCwoJO0tgK2CP8Cd1HP-_6Gw",
-          "short_id": "bad5722c72a038"
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+      "server": "5.188.140.166",
+      "server_port": 443,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
