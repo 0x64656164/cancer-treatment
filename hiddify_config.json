@@ -49,18 +49,24 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland — #421",
-        "TCP, Avito [V.O.I.D]"
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇵🇱 Poland [*CIDR] VK-1",
+        "🇵🇱 Poland — #382",
+        "🇵🇱 Poland — #381",
+        "🇵🇱 Poland [*CIDR] VK-2"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland — #421",
-        "TCP, Avito [V.O.I.D]"
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇵🇱 Poland [*CIDR] VK-1",
+        "🇵🇱 Poland — #382",
+        "🇵🇱 Poland — #381",
+        "🇵🇱 Poland [*CIDR] VK-2"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,26 +78,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "s3.listwhite.cc",
-      "server_port": 443,
-      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/upload/session",
-        "headers": {
-          "Host": "s2.ws.listwhite.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "s3.listwhite.cc"
-      }
     },
     {
       "type": "vless",
@@ -115,24 +101,102 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, Avito [V.O.I.D]",
-      "server": "146.185.243.104",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "s3.listwhite.cc",
       "server_port": 443,
-      "uuid": "280cebf8-116e-4f73-ac4e-ef108343a6cd",
-      "flow": "xtls-rprx-vision",
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
       "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s2.ws.listwhite.cc"
+        }
+      },
       "tls": {
         "enabled": true,
-        "server_name": "avito.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "0t6b8m_PBAG3rF2HPOEL4yiyb-2JglciiANPKvyb2Ho",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
+        "server_name": "s3.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-1",
+      "server": "w2ws.listwhite.cc",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s2.ws.listwhite.cc"
         }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "w2ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #382",
+      "server": "146.185.241.40",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s2.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "w2ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland — #381",
+      "server": "146.185.241.45",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s1.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "w1ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-2",
+      "server": "w1ws.listwhite.cc",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s1.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "w1ws.listwhite.cc"
       }
     }
   ],

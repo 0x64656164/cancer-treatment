@@ -1,70 +1,5 @@
 {
   "servers": {
-    "vless|146.185.243.104|443|280cebf8": {
-      "outbound": {
-        "type": "vless",
-        "tag": "TCP, Avito [V.O.I.D]",
-        "server": "146.185.243.104",
-        "server_port": 443,
-        "uuid": "280cebf8-116e-4f73-ac4e-ef108343a6cd",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "avito.ru",
-          "reality": {
-            "enabled": true,
-            "public_key": "0t6b8m_PBAG3rF2HPOEL4yiyb-2JglciiANPKvyb2Ho",
-            "short_id": ""
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "chrome"
-          }
-        }
-      },
-      "link": "vless://280cebf8-116e-4f73-ac4e-ef108343a6cd@146.185.243.104:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=avito.ru&pbk=0t6b8m_PBAG3rF2HPOEL4yiyb-2JglciiANPKvyb2Ho#TCP, Avito [V.O.I.D]",
-      "group": "RUSSIA",
-      "country": "RU",
-      "first_seen": "2026-05-15T09:30:30.267715",
-      "last_seen": "2026-05-15T09:30:30.267715",
-      "total_tests": 2,
-      "successful_tests": 1,
-      "speed_history": [
-        18.917317881829423
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-05-15T09:30:30.267715",
-          "success": true,
-          "speed": 18.917317881829423,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-05-15T11:36:28.693571",
-          "success": false,
-          "speed": 0,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.0,
-      "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
-      },
-      "category": "C",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 0,
-      "active": false,
-      "staging_until": null,
-      "consecutive_failures": 1
-    },
     "vless|s3.listwhite.cc|443|25f1947f": {
       "outbound": {
         "type": "vless",
@@ -90,11 +25,13 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-05-15T11:36:26.602851",
-      "last_seen": "2026-05-15T11:36:26.602851",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-05-15T13:31:02.616484",
+      "total_tests": 3,
+      "successful_tests": 3,
       "speed_history": [
-        0.0003573964084798004
+        0.0003573964084798004,
+        2.9794004782668058,
+        1.5978372375401115
       ],
       "check_history": [
         {
@@ -103,22 +40,36 @@
           "speed": 0.0003573964084798004,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-05-15T13:30:10.078751",
+          "success": true,
+          "speed": 2.9794004782668058,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-15T13:31:02.616484",
+          "success": true,
+          "speed": 1.5978372375401115,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.4865637001274911,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
+        "speed": 0.10541812114315807,
+        "stability": 1.0,
+        "uptime": 0.41370029285277776,
         "consistency": 0.0,
-        "freshness": 0.0
+        "freshness": 0.9999997250516561
       },
-      "category": "C",
+      "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
-      "active": false,
-      "staging_until": "2026-05-15T12:36:26.602894",
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     },
     "vless|146.185.243.233|443|25f1947f": {
@@ -146,17 +97,97 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-05-15T11:36:26.604347",
-      "last_seen": "2026-05-15T11:36:26.604347",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-05-15T13:30:51.476255",
+      "total_tests": 4,
+      "successful_tests": 4,
       "speed_history": [
-        5.306566358154913
+        5.306566358154913,
+        0.0001256761729364104,
+        0.00023190664872690633,
+        2.029066968325099
       ],
       "check_history": [
         {
           "timestamp": "2026-05-15T11:36:26.604347",
           "success": true,
           "speed": 5.306566358154913,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-15T13:30:10.078039",
+          "success": true,
+          "speed": 0.0001256761729364104,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-15T13:30:10.079522",
+          "success": true,
+          "speed": 0.00023190664872690633,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-15T13:30:51.476255",
+          "success": true,
+          "speed": 2.029066968325099,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.4904999104337189,
+      "rating_components": {
+        "speed": 0.12670622227785847,
+        "stability": 1.0,
+        "uptime": 0.41370026446388886,
+        "consistency": 0.0,
+        "freshness": 0.9978570679506107
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|w2ws.listwhite.cc|443|25f1947f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland [*CIDR] VK",
+        "server": "w2ws.listwhite.cc",
+        "server_port": 443,
+        "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/upload/session",
+          "headers": {
+            "Host": "s2.ws.listwhite.cc"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "w2ws.listwhite.cc"
+        }
+      },
+      "link": "vless://25f1947f-63a8-2040-8f3b-b101eed550e7@w2ws.listwhite.cc:443?type=ws&headerType=none&security=tls&encryption=none&sni=w2ws.listwhite.cc&fp=chrome&path=%2Fupload%2Fsession&host=s2.ws.listwhite.cc&insecure=0#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-15T13:30:10.075507",
+      "last_seen": "2026-05-15T13:30:10.075507",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        0.00020577259222260262
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-15T13:30:10.075507",
+          "success": true,
+          "speed": 0.00020577259222260262,
           "latency": null,
           "error": null
         }
@@ -174,11 +205,179 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-05-15T12:36:26.604358",
+      "staging_until": "2026-05-15T14:30:10.075541",
+      "consecutive_failures": 0
+    },
+    "vless|146.185.241.40|443|25f1947f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland — #382",
+        "server": "146.185.241.40",
+        "server_port": 443,
+        "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/upload/session",
+          "headers": {
+            "Host": "s2.ws.listwhite.cc"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "w2ws.listwhite.cc"
+        }
+      },
+      "link": "vless://25f1947f-63a8-2040-8f3b-b101eed550e7@146.185.241.40:443?encryption=none&type=ws&security=tls&path=%2Fupload%2Fsession&host=s2.ws.listwhite.cc&fp=chrome&sni=w2ws.listwhite.cc#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%E2%80%94%20%23382",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-15T13:30:10.076147",
+      "last_seen": "2026-05-15T13:30:10.076147",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        0.00028269152722839496
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-15T13:30:10.076147",
+          "success": true,
+          "speed": 0.00028269152722839496,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-05-15T14:30:10.076157",
+      "consecutive_failures": 0
+    },
+    "vless|146.185.241.45|443|25f1947f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland — #381",
+        "server": "146.185.241.45",
+        "server_port": 443,
+        "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/upload/session",
+          "headers": {
+            "Host": "s1.ws.listwhite.cc"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "w1ws.listwhite.cc"
+        }
+      },
+      "link": "vless://25f1947f-63a8-2040-8f3b-b101eed550e7@146.185.241.45:443?encryption=none&type=ws&security=tls&path=%2Fupload%2Fsession&host=s1.ws.listwhite.cc&fp=chrome&sni=w1ws.listwhite.cc#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%E2%80%94%20%23381",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-15T13:30:10.076727",
+      "last_seen": "2026-05-15T13:30:10.076727",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        0.00030670714293448925
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-15T13:30:10.076727",
+          "success": true,
+          "speed": 0.00030670714293448925,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-05-15T14:30:10.076738",
+      "consecutive_failures": 0
+    },
+    "vless|w1ws.listwhite.cc|443|25f1947f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland [*CIDR] VK",
+        "server": "w1ws.listwhite.cc",
+        "server_port": 443,
+        "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/upload/session",
+          "headers": {
+            "Host": "s1.ws.listwhite.cc"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "w1ws.listwhite.cc"
+        }
+      },
+      "link": "vless://25f1947f-63a8-2040-8f3b-b101eed550e7@w1ws.listwhite.cc:443?type=ws&headerType=none&security=tls&encryption=none&sni=w1ws.listwhite.cc&fp=chrome&path=%2Fupload%2Fsession&host=s1.ws.listwhite.cc&insecure=0#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-15T13:30:10.077342",
+      "last_seen": "2026-05-15T13:30:10.077342",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        14.474409341189112
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-15T13:30:10.077342",
+          "success": true,
+          "speed": 14.474409341189112,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-05-15T14:30:10.077352",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-05-15T11:36:31.335285"
+    "last_cleanup": "2026-05-15T13:31:02.619062"
   }
 }
