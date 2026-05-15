@@ -48,9 +48,9 @@
       "outbounds": [
         "EUROPE-auto",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇵🇱 Poland — #382",
         "🇵🇱 Poland [*CIDR] VK-1",
         "🇵🇱 Poland [*CIDR] VK-2",
+        "🇵🇱 Poland — #382",
         "🇵🇱 Poland — #411",
         "🇵🇱 Poland [*CIDR] VK-3",
         "🇵🇱 Poland [*CIDR] VK-4",
@@ -62,9 +62,9 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇵🇱 Poland [*CIDR] VK",
-        "🇵🇱 Poland — #382",
         "🇵🇱 Poland [*CIDR] VK-1",
         "🇵🇱 Poland [*CIDR] VK-2",
+        "🇵🇱 Poland — #382",
         "🇵🇱 Poland — #411",
         "🇵🇱 Poland [*CIDR] VK-3",
         "🇵🇱 Poland [*CIDR] VK-4",
@@ -103,8 +103,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #382",
-      "server": "146.185.241.40",
+      "tag": "🇵🇱 Poland [*CIDR] VK-1",
+      "server": "s1.ws.listwhite.cc",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
       "flow": "",
@@ -113,17 +113,17 @@
         "type": "ws",
         "path": "/upload/session",
         "headers": {
-          "Host": "s2.ws.listwhite.cc"
+          "Host": "s1.ws.listwhite.cc"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "w2ws.listwhite.cc"
+        "server_name": "s1.ws.listwhite.cc"
       }
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK-1",
+      "tag": "🇵🇱 Poland [*CIDR] VK-2",
       "server": "146.185.241.45",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
@@ -143,8 +143,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK-2",
-      "server": "s1.ws.listwhite.cc",
+      "tag": "🇵🇱 Poland — #382",
+      "server": "146.185.241.40",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
       "flow": "",
@@ -153,12 +153,12 @@
         "type": "ws",
         "path": "/upload/session",
         "headers": {
-          "Host": "s1.ws.listwhite.cc"
+          "Host": "s2.ws.listwhite.cc"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "s1.ws.listwhite.cc"
+        "server_name": "w2ws.listwhite.cc"
       }
     },
     {
