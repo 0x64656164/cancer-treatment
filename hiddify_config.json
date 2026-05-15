@@ -50,11 +50,9 @@
       "outbounds": [
         "EUROPE-auto",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇵🇱 Poland — #381",
-        "🇵🇱 Poland [*CIDR] VK-1",
-        "🇵🇱 Poland [*CIDR] VK-2",
         "🇵🇱 Poland — #382",
-        "🇵🇱 Poland — #421"
+        "🇵🇱 Poland [*CIDR] VK-1",
+        "🇫🇮 Finland — #158"
       ]
     },
     {
@@ -62,11 +60,9 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇵🇱 Poland [*CIDR] VK",
-        "🇵🇱 Poland — #381",
-        "🇵🇱 Poland [*CIDR] VK-1",
-        "🇵🇱 Poland [*CIDR] VK-2",
         "🇵🇱 Poland — #382",
-        "🇵🇱 Poland — #421"
+        "🇵🇱 Poland [*CIDR] VK-1",
+        "🇫🇮 Finland — #158"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -82,46 +78,6 @@
     {
       "type": "vless",
       "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "w1ws.listwhite.cc",
-      "server_port": 443,
-      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/upload/session",
-        "headers": {
-          "Host": "s1.ws.listwhite.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "w1ws.listwhite.cc"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #381",
-      "server": "146.185.241.45",
-      "server_port": 443,
-      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/upload/session",
-        "headers": {
-          "Host": "s1.ws.listwhite.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "w1ws.listwhite.cc"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK-1",
       "server": "w2ws.listwhite.cc",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
@@ -137,26 +93,6 @@
       "tls": {
         "enabled": true,
         "server_name": "w2ws.listwhite.cc"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK-2",
-      "server": "s3.listwhite.cc",
-      "server_port": 443,
-      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/upload/session",
-        "headers": {
-          "Host": "s2.ws.listwhite.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "s3.listwhite.cc"
       }
     },
     {
@@ -181,8 +117,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #421",
-      "server": "146.185.243.233",
+      "tag": "🇵🇱 Poland [*CIDR] VK-1",
+      "server": "s3.listwhite.cc",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
       "flow": "",
@@ -197,6 +133,28 @@
       "tls": {
         "enabled": true,
         "server_name": "s3.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮 Finland — #158",
+      "server": "5.188.140.166",
+      "server_port": 443,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
       }
     }
   ],
