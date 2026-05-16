@@ -49,7 +49,9 @@
         "EUROPE-auto",
         "🇵🇱 Poland — #411",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK"
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇵🇱 Poland [*CIDR] VK-1",
+        "🇵🇱 Poland [*CIDR] VK-2"
       ]
     },
     {
@@ -58,7 +60,9 @@
       "outbounds": [
         "🇵🇱 Poland — #411",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK"
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+        "🇵🇱 Poland [*CIDR] VK-1",
+        "🇵🇱 Poland [*CIDR] VK-2"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -109,24 +113,64 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France | 🌐 | [IPv6] [*CIDR] VK",
-      "server": "217.16.23.28",
-      "server_port": 5444,
-      "uuid": "ed855dcd-3e76-4b0e-8953-a5fe96c7867f",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
+      "server": "89.208.231.81",
+      "server_port": 443,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "ozon.ru",
         "reality": {
           "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": "6ba85179e30d4fc2"
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
         },
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
         }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-1",
+      "server": "146.185.241.40",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s2.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "w2ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-2",
+      "server": "146.185.243.233",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s2.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "s3.listwhite.cc"
       }
     }
   ],
