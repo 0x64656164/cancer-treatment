@@ -49,8 +49,11 @@
         "EUROPE-auto",
         "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland — #411",
+        "🇷🇴 Romania — #334",
         "🇵🇱 Poland [*CIDR] VK-1",
-        "🇵🇱 Poland [*CIDR] VK-2"
+        "🇵🇱 Poland [*CIDR] VK-2",
+        "🇵🇱 Poland [*CIDR] VK-3",
+        "🇵🇱 Poland [*CIDR] VK-4"
       ]
     },
     {
@@ -59,8 +62,11 @@
       "outbounds": [
         "🇵🇱 Poland [*CIDR] VK",
         "🇵🇱 Poland — #411",
+        "🇷🇴 Romania — #334",
         "🇵🇱 Poland [*CIDR] VK-1",
-        "🇵🇱 Poland [*CIDR] VK-2"
+        "🇵🇱 Poland [*CIDR] VK-2",
+        "🇵🇱 Poland [*CIDR] VK-3",
+        "🇵🇱 Poland [*CIDR] VK-4"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -113,7 +119,49 @@
     },
     {
       "type": "vless",
+      "tag": "🇷🇴 Romania — #334",
+      "server": "212.233.94.51",
+      "server_port": 443,
+      "uuid": "35887d0b-f4f8-4e33-abc9-2af4acbd1461",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "EBjxLDa78dbDuNtoYShQeIEAH2Jy2cmPUxcXt8DfsBo",
+          "short_id": "aa54452ac54156b1"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "🇵🇱 Poland [*CIDR] VK-1",
+      "server": "w1ws.listwhite.cc",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s1.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "w1ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-2",
       "server": "146.185.241.45",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
@@ -131,7 +179,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK-2",
+      "tag": "🇵🇱 Poland [*CIDR] VK-3",
       "server": "146.185.241.40",
       "server_port": 443,
       "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
@@ -145,6 +193,26 @@
       "tls": {
         "enabled": true,
         "server_name": "w2ws.listwhite.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK-4",
+      "server": "s3.listwhite.cc",
+      "server_port": 443,
+      "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s2.ws.listwhite.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "s3.listwhite.cc"
       }
     }
   ],
