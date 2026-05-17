@@ -51,7 +51,8 @@
         "EUROPE-auto",
         "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
-        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-1"
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-1",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2"
       ]
     },
     {
@@ -60,7 +61,8 @@
       "outbounds": [
         "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
         "🌐 Anycast-IP | [IPv6] [*CIDR] VK",
-        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-1"
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-1",
+        "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -132,6 +134,28 @@
           "enabled": true,
           "public_key": "zjv3djnsCKDqP7zZFIrJ9ImzgdPE3zFMCYrOvdWqkEE",
           "short_id": "149752e367ffc637"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | [IPv6] [*CIDR] VK-2",
+      "server": "89.208.231.52",
+      "server_port": 443,
+      "uuid": "b6ce8a51-19b9-4979-91ba-b4298c26d5fc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
+          "short_id": "ad7dab462a323acb"
         },
         "utls": {
           "enabled": true,
