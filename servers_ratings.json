@@ -27,17 +27,25 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-05-17T16:46:18.704432",
-      "last_seen": "2026-05-17T16:46:18.704432",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-05-17T17:50:02.378864",
+      "total_tests": 2,
+      "successful_tests": 2,
       "speed_history": [
-        0.0004925590840303816
+        0.0004925590840303816,
+        26.322001562124527
       ],
       "check_history": [
         {
           "timestamp": "2026-05-17T16:46:18.704432",
           "success": true,
           "speed": 0.0004925590840303816,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-17T17:50:02.378864",
+          "success": true,
+          "speed": 26.322001562124527,
           "latency": null,
           "error": null
         }
@@ -53,9 +61,9 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 2,
       "active": false,
-      "staging_until": "2026-05-17T17:46:18.704456",
+      "staging_until": "2026-05-17T18:50:02.378888",
       "consecutive_failures": 0
     },
     "vless|5.188.143.251|8443|66036ae7": {
@@ -85,17 +93,95 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-05-17T16:46:18.705442",
-      "last_seen": "2026-05-17T16:46:18.705442",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-05-17T17:50:25.224130",
+      "total_tests": 4,
+      "successful_tests": 4,
       "speed_history": [
-        9.612948943364783
+        9.612948943364783,
+        4.394365247726419,
+        3.985777783629667,
+        3.222858001738032
       ],
       "check_history": [
         {
           "timestamp": "2026-05-17T16:46:18.705442",
           "success": true,
           "speed": 9.612948943364783,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-17T17:49:59.160870",
+          "success": true,
+          "speed": 4.394365247726419,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-17T17:49:59.161542",
+          "success": true,
+          "speed": 3.985777783629667,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-17T17:50:25.224130",
+          "success": true,
+          "speed": 3.222858001738032,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.527379168767277,
+      "rating_components": {
+        "speed": 0.4030003744851212,
+        "stability": 1.0,
+        "uptime": 0.3547934369,
+        "consistency": 0.04861745796416794,
+        "freshness": 0.9999998220922395
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|87.239.107.130|443|25f1947f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland [*CIDR] VK",
+        "server": "87.239.107.130",
+        "server_port": 443,
+        "uuid": "25f1947f-63a8-2040-8f3b-b101eed550e7",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/upload/session",
+          "headers": {}
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "s1.ws.listwhite.cc"
+        }
+      },
+      "link": "vless://25f1947f-63a8-2040-8f3b-b101eed550e7@87.239.107.130:443?encryption=none&type=ws&security=tls&path=/upload/session&fp=chrome&sni=s1.ws.listwhite.cc#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-17T17:49:59.159329",
+      "last_seen": "2026-05-17T17:49:59.159329",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        0.00019663473151747027
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-17T17:49:59.159329",
+          "success": true,
+          "speed": 0.00019663473151747027,
           "latency": null,
           "error": null
         }
@@ -113,11 +199,69 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-05-17T17:46:18.705454",
+      "staging_until": "2026-05-17T18:49:59.159359",
+      "consecutive_failures": 0
+    },
+    "vless|109.120.191.92|443|66036ae7": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland | 🌐 | [IPv6] [*CIDR] VK",
+        "server": "109.120.191.92",
+        "server_port": 443,
+        "uuid": "66036ae7-f4b4-4dd9-b72f-88b571c6ba26",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "ads.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "zjv3djnsCKDqP7zZFIrJ9ImzgdPE3zFMCYrOvdWqkEE",
+            "short_id": "6f3cc9d9"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://66036ae7-f4b4-4dd9-b72f-88b571c6ba26@109.120.191.92:443?type=tcp&security=reality&sni=ads.x5.ru&fp=chrome&pbk=zjv3djnsCKDqP7zZFIrJ9ImzgdPE3zFMCYrOvdWqkEE&sid=6f3cc9d9#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv6%5D%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-05-17T17:49:59.160160",
+      "last_seen": "2026-05-17T17:49:59.160160",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        6.945085240277022
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-05-17T17:49:59.160160",
+          "success": true,
+          "speed": 6.945085240277022,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-05-17T18:49:59.160173",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-05-17T16:46:22.904634"
+    "last_cleanup": "2026-05-17T17:50:25.225837"
   }
 }
