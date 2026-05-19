@@ -47,18 +47,18 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇵🇱 Poland — #233",
+        "🇵🇱 Poland — #231",
         "🇵🇱 Poland — #230",
-        "🇵🇱 Poland — #231"
+        "🇵🇱 Poland — #233"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇵🇱 Poland — #233",
+        "🇵🇱 Poland — #231",
         "🇵🇱 Poland — #230",
-        "🇵🇱 Poland — #231"
+        "🇵🇱 Poland — #233"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,8 +73,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #233",
-      "server": "146.185.243.233",
+      "tag": "🇵🇱 Poland — #231",
+      "server": "146.185.241.45",
       "server_port": 443,
       "uuid": "92f3b80e-90a2-2040-b766-2e5cdeffbfa0",
       "flow": "",
@@ -83,12 +83,12 @@
         "type": "ws",
         "path": "/upload/session",
         "headers": {
-          "Host": "s2.ws.listwhite.cc"
+          "Host": "s1.ws.listwhite.cc"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "s3.listwhite.cc"
+        "server_name": "w1ws.listwhite.cc"
       }
     },
     {
@@ -113,8 +113,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #231",
-      "server": "146.185.241.45",
+      "tag": "🇵🇱 Poland — #233",
+      "server": "146.185.243.233",
       "server_port": 443,
       "uuid": "92f3b80e-90a2-2040-b766-2e5cdeffbfa0",
       "flow": "",
@@ -123,12 +123,12 @@
         "type": "ws",
         "path": "/upload/session",
         "headers": {
-          "Host": "s1.ws.listwhite.cc"
+          "Host": "s2.ws.listwhite.cc"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "w1ws.listwhite.cc"
+        "server_name": "s3.listwhite.cc"
       }
     }
   ],
