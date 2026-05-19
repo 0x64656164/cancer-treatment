@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "TCP, Max [V.O.I.D]"
+        "TCP, Max [V.O.I.D]",
+        "TCP, Max [V.O.I.D]-1"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "TCP, Max [V.O.I.D]"
+        "TCP, Max [V.O.I.D]",
+        "TCP, Max [V.O.I.D]-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,6 +73,28 @@
       "type": "vless",
       "tag": "TCP, Max [V.O.I.D]",
       "server": "84.23.53.16",
+      "server_port": 443,
+      "uuid": "76491f61-c8fe-4a42-a2d1-06b9415d54e6",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "bcda713784d56483"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, Max [V.O.I.D]-1",
+      "server": "spark.frost-api.com",
       "server_port": 443,
       "uuid": "76491f61-c8fe-4a42-a2d1-06b9415d54e6",
       "flow": "xtls-rprx-vision",
