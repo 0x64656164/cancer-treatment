@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇷 France — #200"
+        "🇫🇷 France — #200",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇷 France — #200"
+        "🇫🇷 France — #200",
+        "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -84,6 +86,28 @@
           "enabled": true,
           "public_key": "U-R-JprLaSn2fx_coK9ySbFnbLAZoa5fpf1o-4kPNTg",
           "short_id": "a06b946aac938640"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇪 Estonia | 🌐 | [IPv6] [*CIDR] VK",
+      "server": "89.208.231.215",
+      "server_port": 443,
+      "uuid": "a2b2a4fb-7b34-472b-b4c0-e206fef1edfc",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "1ZNcu6FOn9xF-YfkFLhDI3vuO8w3VWq32zYVJ4JWBxQ",
+          "short_id": "dc4aa6635008a9ae"
         },
         "utls": {
           "enabled": true,
