@@ -39,28 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇵🇱 Poland — #233",
-        "🇵🇱 Poland — #231",
         "🇵🇱 Poland — #230",
-        "🇫🇷 France — #119"
+        "🇵🇱 Poland — #231"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇵🇱 Poland — #233",
-        "🇵🇱 Poland — #231",
         "🇵🇱 Poland — #230",
-        "🇫🇷 France — #119"
+        "🇵🇱 Poland — #231"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -95,26 +93,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland — #231",
-      "server": "146.185.241.45",
-      "server_port": 443,
-      "uuid": "92f3b80e-90a2-2040-b766-2e5cdeffbfa0",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/upload/session",
-        "headers": {
-          "Host": "s1.ws.listwhite.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "w1ws.listwhite.cc"
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇵🇱 Poland — #230",
       "server": "146.185.241.40",
       "server_port": 443,
@@ -135,24 +113,22 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France — #119",
-      "server": "217.16.23.28",
-      "server_port": 5444,
-      "uuid": "a617e8b5-2894-41a5-823a-657ffac915d4",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇵🇱 Poland — #231",
+      "server": "146.185.241.45",
+      "server_port": 443,
+      "uuid": "92f3b80e-90a2-2040-b766-2e5cdeffbfa0",
+      "flow": "",
       "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s1.ws.listwhite.cc"
+        }
+      },
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
+        "server_name": "w1ws.listwhite.cc"
       }
     }
   ],
