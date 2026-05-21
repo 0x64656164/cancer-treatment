@@ -49,16 +49,20 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
+        "TCP, РБК [V.O.I.D]",
         "🇫🇮 Finland — #258",
-        "TCP, РБК [V.O.I.D]"
+        "🇩🇪 Germany — #160",
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 🇫🇮 [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
+        "TCP, РБК [V.O.I.D]",
         "🇫🇮 Finland — #258",
-        "TCP, РБК [V.O.I.D]"
+        "🇩🇪 Germany — #160",
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 🇫🇮 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,6 +74,28 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, РБК [V.O.I.D]",
+      "server": "217.16.30.246",
+      "server_port": 443,
+      "uuid": "be0e7d89-9c35-4950-a460-d3bf5aae5f91",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rbc.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "29J6_MGnPXmNFGewSymns-TShTvkd3rGTgUGMKWjGTk",
+          "short_id": "1e13c1eb4bab16db"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
     },
     {
       "type": "vless",
@@ -95,23 +121,45 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, РБК [V.O.I.D]",
-      "server": "217.16.30.246",
+      "tag": "🇩🇪 Germany — #160",
+      "server": "89.208.209.11",
       "server_port": 443,
-      "uuid": "be0e7d89-9c35-4950-a460-d3bf5aae5f91",
+      "uuid": "cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "rbc.ru",
+        "server_name": "cdp.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "29J6_MGnPXmNFGewSymns-TShTvkd3rGTgUGMKWjGTk",
-          "short_id": "1e13c1eb4bab16db"
+          "public_key": "DK98HQGIBGOFbAqKggMXduwYNjlKfOBiARKfO8wEeXk",
+          "short_id": "0fb689ad101948ba"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 🇫🇮 [*CIDR] VK",
+      "server": "89.208.208.240",
+      "server_port": 443,
+      "uuid": "cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "lk.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "gs8bT5NMOtrvvHxmCi_siXbVY6WhQcBV4tEgFk4ohgA",
+          "short_id": "46ceaa0ac75f90dc"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
         }
       }
     }
