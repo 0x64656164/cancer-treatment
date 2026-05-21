@@ -50,8 +50,8 @@
       "outbounds": [
         "ALL-auto",
         "🇳🇱 The Netherlands — #445",
-        "🇩🇪 Germany — #265",
-        "🇳🇱 The Netherlands — #202"
+        "🇳🇱 The Netherlands — #202",
+        "🇱🇹 Lithuania — #346"
       ]
     },
     {
@@ -59,8 +59,8 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇳🇱 The Netherlands — #445",
-        "🇩🇪 Germany — #265",
-        "🇳🇱 The Netherlands — #202"
+        "🇳🇱 The Netherlands — #202",
+        "🇱🇹 Lithuania — #346"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -97,28 +97,6 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #265",
-      "server": "89.208.85.227",
-      "server_port": 443,
-      "uuid": "fecabaa5-1c02-4fd0-b961-824db47e3bdd",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "48b65fa924db296e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇳🇱 The Netherlands — #202",
       "server": "89.208.228.8",
       "server_port": 443,
@@ -132,6 +110,28 @@
           "enabled": true,
           "public_key": "VbHm0VbqW1992faNSxDoh_zEfoBkpifWUudV8mf5y3M",
           "short_id": "226509f017e4c36d"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇱🇹 Lithuania — #346",
+      "server": "89.208.222.191",
+      "server_port": 443,
+      "uuid": "48fb77ef-24ac-4def-84f3-eef8ed03f649",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "dkDy_40iCCrOTCDziuNidIgnqBFKEPK_SfPyKmPOJ2M",
+          "short_id": "3c1794a20033a7b8"
         },
         "utls": {
           "enabled": true,
