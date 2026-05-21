@@ -41,30 +41,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇳🇱 The Netherlands — #445",
-        "🇩🇪 Germany — #95",
-        "🇩🇪 Germany — #220",
-        "🇩🇪 Germany — #222",
-        "🇩🇪 Germany — #229"
+        "ALL-auto",
+        "🇫🇮 Finland — #258",
+        "TCP, РБК [V.O.I.D]"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands — #445",
-        "🇩🇪 Germany — #95",
-        "🇩🇪 Germany — #220",
-        "🇩🇪 Germany — #222",
-        "🇩🇪 Germany — #229"
+        "🇫🇮 Finland — #258",
+        "TCP, РБК [V.O.I.D]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -79,63 +73,19 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #445",
-      "server": "83.166.234.109",
-      "server_port": 443,
-      "uuid": "ae226b50-c843-4723-902b-63f61d263e19",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "B0S7A-ceRt0c3aRqbeQG69FVSkK-si6NWLBEM_QuC3U",
-          "short_id": "16"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #95",
-      "server": "89.208.208.240",
+      "tag": "🇫🇮 Finland — #258",
+      "server": "89.208.209.53",
       "server_port": 443,
       "uuid": "cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "lk.x5.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "gs8bT5NMOtrvvHxmCi_siXbVY6WhQcBV4tEgFk4ohgA",
-          "short_id": "46ceaa0ac75f90dc"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #220",
-      "server": "89.208.85.227",
-      "server_port": 443,
-      "uuid": "379efbac-ed1d-49e3-9120-99ef5a74dc67",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "48b65fa924db296e"
+          "public_key": "2x8y-JiSEl8JJoiUm-V9aI0oY0vlgkYQxBeGriObc04",
+          "short_id": "0492027673ee8c08"
         },
         "utls": {
           "enabled": true,
@@ -145,45 +95,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #222",
-      "server": "89.208.85.199",
+      "tag": "TCP, РБК [V.O.I.D]",
+      "server": "217.16.30.246",
       "server_port": 443,
-      "uuid": "379efbac-ed1d-49e3-9120-99ef5a74dc67",
+      "uuid": "be0e7d89-9c35-4950-a460-d3bf5aae5f91",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "ads.x5.ru",
+        "server_name": "rbc.ru",
         "reality": {
           "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "8341ca869ed81124"
+          "public_key": "29J6_MGnPXmNFGewSymns-TShTvkd3rGTgUGMKWjGTk",
+          "short_id": "1e13c1eb4bab16db"
         },
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #229",
-      "server": "89.208.85.81",
-      "server_port": 443,
-      "uuid": "379efbac-ed1d-49e3-9120-99ef5a74dc67",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "8341ca869ed81124"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
         }
       }
     }
