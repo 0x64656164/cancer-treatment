@@ -49,24 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #230",
-        "🇩🇪 Germany — #224",
-        "🇩🇪 Germany — #233",
-        "🇵🇱 Poland — #511",
-        "🇩🇪 Germany — #227",
-        "🇵🇱 Poland — #510"
+        "🇵🇱 Poland — #510",
+        "🇵🇱 Poland — #511"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #230",
-        "🇩🇪 Germany — #224",
-        "🇩🇪 Germany — #233",
-        "🇵🇱 Poland — #511",
-        "🇩🇪 Germany — #227",
-        "🇵🇱 Poland — #510"
+        "🇵🇱 Poland — #510",
+        "🇵🇱 Poland — #511"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -81,68 +73,22 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #230",
-      "server": "89.208.85.81",
+      "tag": "🇵🇱 Poland — #510",
+      "server": "146.185.241.40",
       "server_port": 443,
-      "uuid": "f58cc7d2-8035-47f5-8975-b409fef5934f",
-      "flow": "xtls-rprx-vision",
+      "uuid": "bf82ceb0-8512-2040-8457-1357c23294aa",
+      "flow": "",
       "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/upload/session",
+        "headers": {
+          "Host": "s2.ws.listwhite.cc"
+        }
+      },
       "tls": {
         "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "48b65fa924db296e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #224",
-      "server": "89.208.85.227",
-      "server_port": 443,
-      "uuid": "f58cc7d2-8035-47f5-8975-b409fef5934f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "fd8ab74160501169"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #233",
-      "server": "89.208.85.227",
-      "server_port": 443,
-      "uuid": "a8476f4c-48f5-4307-8c86-6e875b9534d3",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "48b65fa924db296e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
+        "server_name": "w2ws.listwhite.cc"
       }
     },
     {
@@ -163,48 +109,6 @@
       "tls": {
         "enabled": true,
         "server_name": "w1ws.listwhite.cc"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #227",
-      "server": "89.208.85.199",
-      "server_port": 443,
-      "uuid": "f58cc7d2-8035-47f5-8975-b409fef5934f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "fd8ab74160501169"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland — #510",
-      "server": "146.185.241.40",
-      "server_port": 443,
-      "uuid": "bf82ceb0-8512-2040-8457-1357c23294aa",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/upload/session",
-        "headers": {
-          "Host": "s2.ws.listwhite.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "w2ws.listwhite.cc"
       }
     }
   ],
