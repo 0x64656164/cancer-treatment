@@ -50,6 +50,7 @@
       "outbounds": [
         "EUROPE-auto",
         "🇩🇪 Germany [*CIDR] VK",
+        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
         "🇬🇧 United Kingdom — #201",
         "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK",
         "🇬🇧 United Kingdom — #222",
@@ -61,6 +62,7 @@
       "tag": "EUROPE-auto",
       "outbounds": [
         "🇩🇪 Germany [*CIDR] VK",
+        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
         "🇬🇧 United Kingdom — #201",
         "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK",
         "🇬🇧 United Kingdom — #222",
@@ -96,6 +98,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
+      "server": "89.208.229.122",
+      "server_port": 443,
+      "uuid": "ae226b50-c843-4723-902b-63f61d263e19",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "api-maps.yandex.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "B0S7A-ceRt0c3aRqbeQG69FVSkK-si6NWLBEM_QuC3U",
+          "short_id": "0123456789abcdef"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     },
