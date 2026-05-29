@@ -49,24 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇷 France | 🌐 [*CIDR] VK",
-        "🇩🇪 Germany — #68",
-        "🇩🇪 Germany — #87",
-        "🇩🇪 Germany — #72",
-        "🇩🇪 Germany — #82",
-        "🇪🇸 Spain — #242"
+        "🇫🇷 France — #140"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇷 France | 🌐 [*CIDR] VK",
-        "🇩🇪 Germany — #68",
-        "🇩🇪 Germany — #87",
-        "🇩🇪 Germany — #72",
-        "🇩🇪 Germany — #82",
-        "🇪🇸 Spain — #242"
+        "🇫🇷 France — #140"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -81,8 +71,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France | 🌐 [*CIDR] VK",
-      "server": "ru5.cleanersaz.help",
+      "tag": "🇫🇷 France — #140",
+      "server": "217.16.29.23",
       "server_port": 7443,
       "uuid": "9beef3b2-5749-4529-a91a-29af1c043d6b",
       "flow": "",
@@ -90,116 +80,6 @@
       "tls": {
         "enabled": true,
         "server_name": "ru5.cleanersaz.help"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #68",
-      "server": "89.208.85.199",
-      "server_port": 443,
-      "uuid": "23d48397-5250-43ad-b397-6974299b2faa",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "fd8ab74160501169"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #87",
-      "server": "89.208.85.81",
-      "server_port": 443,
-      "uuid": "a62afc85-a6e0-4cfe-be55-0cf3a5701fbf",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "48b65fa924db296e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #72",
-      "server": "89.208.85.81",
-      "server_port": 443,
-      "uuid": "23d48397-5250-43ad-b397-6974299b2faa",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "8341ca869ed81124"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #82",
-      "server": "89.208.85.227",
-      "server_port": 443,
-      "uuid": "d26a91a8-8b94-4405-92b3-441e090822a9",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "xiBnF5t8koXllU1GwzSRmU0Vcbs21DEHCg399WUg1EM",
-          "short_id": "48b65fa924db296e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇪🇸 Spain — #242",
-      "server": "89.208.86.87",
-      "server_port": 8443,
-      "uuid": "4accc4fb-9ec3-41ae-ac3e-cc5d3dabe156",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "FGCQJa66btmmsTEqC-vhSUN9INHarHwKNyhLi131fAQ",
-          "short_id": "63992a9a07179bb2"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
       }
     }
   ],
