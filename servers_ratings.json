@@ -1,63 +1,81 @@
 {
   "servers": {
-    "vless|217.16.29.23|7443|9beef3b2": {
+    "vless|89.208.210.51|443|60c5bfb0": {
       "outbound": {
         "type": "vless",
-        "tag": "🇫🇷 France — #140",
-        "server": "217.16.29.23",
-        "server_port": 7443,
-        "uuid": "9beef3b2-5749-4529-a91a-29af1c043d6b",
-        "flow": "",
+        "tag": "🇩🇪 Germany — #80",
+        "server": "89.208.210.51",
+        "server_port": 443,
+        "uuid": "60c5bfb0-f921-4c8f-9284-45ce7274f140",
+        "flow": "xtls-rprx-vision",
         "packet_encoding": "xudp",
         "tls": {
           "enabled": true,
-          "server_name": "ru5.cleanersaz.help"
+          "server_name": "yandex.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "Ec54Eop0jZft7rcJsPN4RHc4xG9smXhtenM52pJFUQI",
+            "short_id": "27e53bbcab7593d7"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "random"
+          }
         }
       },
-      "link": "vless://9beef3b2-5749-4529-a91a-29af1c043d6b@217.16.29.23:7443?encryption=none&type=tcp&security=tls&fp=chrome&sni=ru5.cleanersaz.help#%F0%9F%87%AB%F0%9F%87%B7%20France%20%E2%80%94%20%23140",
+      "link": "vless://60c5bfb0-f921-4c8f-9284-45ce7274f140@89.208.210.51:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=random&sni=max.ru&pbk=BjG7XoEMR2uxHbBk_rtkR7P_S_luG2VcvQlvZ4YHzH8&sid=27e53bbcab7593d7&spx=%2F#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%2384",
       "group": "EUROPE",
       "country": null,
-      "first_seen": "2026-05-29T16:37:59.725544",
-      "last_seen": "2026-05-29T16:37:59.725544",
-      "total_tests": 2,
-      "successful_tests": 1,
+      "first_seen": "2026-05-29T21:23:45.165464",
+      "last_seen": "2026-05-29T21:23:45.166288",
+      "total_tests": 3,
+      "successful_tests": 3,
       "speed_history": [
-        1.6866235405323367
+        13.868261044966491,
+        14.424807822670667,
+        14.505325930840531
       ],
       "check_history": [
         {
-          "timestamp": "2026-05-29T16:37:59.725544",
+          "timestamp": "2026-05-29T21:23:45.165464",
           "success": true,
-          "speed": 1.6866235405323367,
+          "speed": 13.868261044966491,
           "latency": null,
           "error": null
         },
         {
-          "timestamp": "2026-05-29T19:27:59.137168",
-          "success": false,
-          "speed": 0,
+          "timestamp": "2026-05-29T21:23:45.165961",
+          "success": true,
+          "speed": 14.424807822670667,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-05-29T21:23:45.166288",
+          "success": true,
+          "speed": 14.505325930840531,
           "latency": null,
           "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.5999087254488993,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9602904543821786,
+        "freshness": 0.9991978667378763
       },
-      "category": "C",
+      "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 0,
-      "active": false,
+      "consecutive_successes": 3,
+      "active": true,
       "staging_until": null,
-      "consecutive_failures": 1
+      "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-05-29T19:27:59.138132"
+    "last_cleanup": "2026-05-29T21:23:49.334412"
   }
 }
