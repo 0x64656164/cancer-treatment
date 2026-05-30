@@ -47,18 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #158",
-        "TCP, VK [V.O.I.D]",
-        "🇺🇸 United States — #615"
+        "🇩🇪 Germany — #97"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #158",
-        "TCP, VK [V.O.I.D]",
-        "🇺🇸 United States — #615"
+        "🇩🇪 Germany — #97"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,67 +69,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #158",
+      "tag": "🇩🇪 Germany — #97",
       "server": "89.208.210.51",
       "server_port": 443,
-      "uuid": "09782455-a749-4fd9-8920-1ddb08af26e4",
+      "uuid": "1b66b270-19cb-4da6-b7a4-01c499a40567",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "www.vk.com",
+        "server_name": "yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "bwuT_tpimT_uUeWpSn-HbRztfol4o4uCcUHcdvkeFx0",
+          "public_key": "Ec54Eop0jZft7rcJsPN4RHc4xG9smXhtenM52pJFUQI",
           "short_id": "27e53bbcab7593d7"
         },
         "utls": {
           "enabled": true,
           "fingerprint": "random"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "TCP, VK [V.O.I.D]",
-      "server": "cdn17.cloud-vk.com",
-      "server_port": 8443,
-      "uuid": "b7bd4eed-b927-441c-8008-88226dec1d45",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "id.vk.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "92RIPs8Z6XN-E91ttKImXAihigKzrbkCApCpdJzO4VA",
-          "short_id": "6f40751b960a53b1"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸 United States — #615",
-      "server": "217.16.27.113",
-      "server_port": 443,
-      "uuid": "2308ae79-dd56-4453-a635-30542350174e",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "AiG06E-jizo9xtBbulKQvdQqhZfobZJBTQIKkaDjaiU",
-          "short_id": "a1b2c3d4e5"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
         }
       }
     }
