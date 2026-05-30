@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #97"
+        "🇩🇪 Germany — #88",
+        "🇫🇷 France — #128"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #97"
+        "🇩🇪 Germany — #88",
+        "🇫🇷 France — #128"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,10 +71,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #97",
+      "tag": "🇩🇪 Germany — #88",
       "server": "89.208.210.51",
       "server_port": 443,
-      "uuid": "1b66b270-19cb-4da6-b7a4-01c499a40567",
+      "uuid": "913a8f59-9d11-490c-b3dc-d8f7e9e0885c",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -87,6 +89,19 @@
           "enabled": true,
           "fingerprint": "random"
         }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷 France — #128",
+      "server": "217.16.29.23",
+      "server_port": 7443,
+      "uuid": "9beef3b2-5749-4529-a91a-29af1c043d6b",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ru5.cleanersaz.help"
       }
     }
   ],
