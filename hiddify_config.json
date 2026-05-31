@@ -49,8 +49,6 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #55",
-        "🇩🇪 Germany — #133",
         "🇬🇧 United Kingdom — #188"
       ]
     },
@@ -58,8 +56,6 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #55",
-        "🇩🇪 Germany — #133",
         "🇬🇧 United Kingdom — #188"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -72,50 +68,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #55",
-      "server": "89.208.198.75",
-      "server_port": 4455,
-      "uuid": "69b578b6-6167-447d-a82c-033928da5e03",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "apple.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "wV_xLCx6wT8mn5x5-pC3I6F4FVHE7nzog-pFaesWYAI",
-          "short_id": "f2296809dfdd68b0"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #133",
-      "server": "89.208.210.51",
-      "server_port": 443,
-      "uuid": "6f905df5-193e-409d-b2ab-1f2a24ec9cb3",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "BjG7XoEMR2uxHbBk_rtkR7P_S_luG2VcvQlvZ4YHzH8",
-          "short_id": "27e53bbcab7593d7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "random"
-        }
-      }
     },
     {
       "type": "vless",
