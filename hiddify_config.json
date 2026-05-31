@@ -49,16 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #88",
-        "🇫🇷 France — #128"
+        "🇩🇪 Germany — #55",
+        "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #88",
-        "🇫🇷 France — #128"
+        "🇩🇪 Germany — #55",
+        "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,37 +73,46 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #88",
-      "server": "89.208.210.51",
-      "server_port": 443,
-      "uuid": "913a8f59-9d11-490c-b3dc-d8f7e9e0885c",
+      "tag": "🇩🇪 Germany — #55",
+      "server": "89.208.198.75",
+      "server_port": 4455,
+      "uuid": "69b578b6-6167-447d-a82c-033928da5e03",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "yandex.ru",
+        "server_name": "apple.com",
         "reality": {
           "enabled": true,
-          "public_key": "Ec54Eop0jZft7rcJsPN4RHc4xG9smXhtenM52pJFUQI",
-          "short_id": "27e53bbcab7593d7"
+          "public_key": "wV_xLCx6wT8mn5x5-pC3I6F4FVHE7nzog-pFaesWYAI",
+          "short_id": "f2296809dfdd68b0"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "random"
+          "fingerprint": "firefox"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France — #128",
-      "server": "217.16.29.23",
-      "server_port": 7443,
-      "uuid": "9beef3b2-5749-4529-a91a-29af1c043d6b",
-      "flow": "",
+      "tag": "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK",
+      "server": "89.208.208.92",
+      "server_port": 9443,
+      "uuid": "cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4",
+      "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "ru5.cleanersaz.help"
+        "server_name": "loadtest.dev.urent.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "aVu6XB9_RKR1xLtusyQ1_YOWCs4Ofi9GEJd6oERNH2Q",
+          "short_id": "689def22fcb54e86"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
       }
     }
   ],
