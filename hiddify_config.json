@@ -49,18 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "TCP, Max [V.O.I.D]",
-        "TCP, Max [V.O.I.D]-1",
-        "🇵🇱 Poland [*CIDR] VK"
+        "TCP, Max [V.O.I.D]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "TCP, Max [V.O.I.D]",
-        "TCP, Max [V.O.I.D]-1",
-        "🇵🇱 Poland [*CIDR] VK"
+        "TCP, Max [V.O.I.D]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -88,50 +84,6 @@
           "enabled": true,
           "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
           "short_id": "e7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "TCP, Max [V.O.I.D]-1",
-      "server": "node5.frost-api.com",
-      "server_port": 443,
-      "uuid": "248891a9-1ac5-42ad-a68b-2cecef897b0a",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "01e7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "89.208.231.84",
-      "server_port": 8443,
-      "uuid": "81ee0ab0-99a4-4f04-9ff2-e51e0164150a",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "one.one.one.one",
-        "reality": {
-          "enabled": true,
-          "public_key": "6jBxU8MoNrWnQtRA2rh5e7FM8reB3xCIctt_0j9M9Us",
-          "short_id": ""
         },
         "utls": {
           "enabled": true,
