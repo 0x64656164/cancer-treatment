@@ -47,14 +47,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇬🇧 United Kingdom — #188"
+        "TCP, Max [V.O.I.D]",
+        "TCP, Max [V.O.I.D]-1",
+        "🇵🇱 Poland [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇬🇧 United Kingdom — #188"
+        "TCP, Max [V.O.I.D]",
+        "TCP, Max [V.O.I.D]-1",
+        "🇵🇱 Poland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,18 +73,62 @@
     },
     {
       "type": "vless",
-      "tag": "🇬🇧 United Kingdom — #188",
-      "server": "37.139.43.57",
+      "tag": "TCP, Max [V.O.I.D]",
+      "server": "node5.frost-api.com",
       "server_port": 443,
-      "uuid": "97836028-9cb2-4a7a-8511-8a59d1e57e15",
+      "uuid": "248891a9-1ac5-42ad-a68b-2cecef897b0a",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "eh.vk.com",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "RiSs_VVhep71TZU8buuMedhJ9wenvWJ2sSp8HfaYnGw",
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "01e7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, Max [V.O.I.D]-1",
+      "server": "kaz1.frost-api.com",
+      "server_port": 443,
+      "uuid": "248891a9-1ac5-42ad-a68b-2cecef897b0a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "e7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "89.208.231.84",
+      "server_port": 8443,
+      "uuid": "81ee0ab0-99a4-4f04-9ff2-e51e0164150a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "one.one.one.one",
+        "reality": {
+          "enabled": true,
+          "public_key": "6jBxU8MoNrWnQtRA2rh5e7FM8reB3xCIctt_0j9M9Us",
           "short_id": ""
         },
         "utls": {
