@@ -50,7 +50,8 @@
       "outbounds": [
         "ALL-auto",
         "🇩🇪 Germany — #55",
-        "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK"
+        "🇩🇪 Germany — #133",
+        "🇬🇧 United Kingdom — #188"
       ]
     },
     {
@@ -58,7 +59,8 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇩🇪 Germany — #55",
-        "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK"
+        "🇩🇪 Germany — #133",
+        "🇬🇧 United Kingdom — #188"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -95,23 +97,45 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK",
-      "server": "89.208.208.92",
-      "server_port": 9443,
-      "uuid": "cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4",
+      "tag": "🇩🇪 Germany — #133",
+      "server": "89.208.210.51",
+      "server_port": 443,
+      "uuid": "6f905df5-193e-409d-b2ab-1f2a24ec9cb3",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "loadtest.dev.urent.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "aVu6XB9_RKR1xLtusyQ1_YOWCs4Ofi9GEJd6oERNH2Q",
-          "short_id": "689def22fcb54e86"
+          "public_key": "BjG7XoEMR2uxHbBk_rtkR7P_S_luG2VcvQlvZ4YHzH8",
+          "short_id": "27e53bbcab7593d7"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇬🇧 United Kingdom — #188",
+      "server": "37.139.43.57",
+      "server_port": 443,
+      "uuid": "97836028-9cb2-4a7a-8511-8a59d1e57e15",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "RiSs_VVhep71TZU8buuMedhJ9wenvWJ2sSp8HfaYnGw",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
