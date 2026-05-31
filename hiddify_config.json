@@ -49,14 +49,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "TCP, Max [V.O.I.D]"
+        "TCP, Max [V.O.I.D]",
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇺🇳 @MrMeshkyChannel 520945"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "TCP, Max [V.O.I.D]"
+        "TCP, Max [V.O.I.D]",
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇺🇳 @MrMeshkyChannel 520945"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,6 +77,50 @@
       "type": "vless",
       "tag": "TCP, Max [V.O.I.D]",
       "server": "kaz1.frost-api.com",
+      "server_port": 443,
+      "uuid": "248891a9-1ac5-42ad-a68b-2cecef897b0a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "e7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "node5.frost-api.com",
+      "server_port": 443,
+      "uuid": "248891a9-1ac5-42ad-a68b-2cecef897b0a",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "01e7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇳 @MrMeshkyChannel 520945",
+      "server": "89.208.199.29",
       "server_port": 443,
       "uuid": "248891a9-1ac5-42ad-a68b-2cecef897b0a",
       "flow": "xtls-rprx-vision",
