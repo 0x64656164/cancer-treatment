@@ -1,6 +1,81 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|89.208.210.51|443|2286f702": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #104",
+        "server": "89.208.210.51",
+        "server_port": 443,
+        "uuid": "2286f702-51d0-45cb-833d-1ebe3d17ff6d",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "yandex.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "Ec54Eop0jZft7rcJsPN4RHc4xG9smXhtenM52pJFUQI",
+            "short_id": "27e53bbcab7593d7"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "random"
+          }
+        }
+      },
+      "link": "vless://2286f702-51d0-45cb-833d-1ebe3d17ff6d@89.208.210.51:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=random&sni=max.ru&pbk=BjG7XoEMR2uxHbBk_rtkR7P_S_luG2VcvQlvZ4YHzH8&sid=27e53bbcab7593d7&spx=%2F#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%2398",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-06-02T22:17:44.135461",
+      "last_seen": "2026-06-02T22:17:44.136097",
+      "total_tests": 3,
+      "successful_tests": 3,
+      "speed_history": [
+        17.83650894964759,
+        17.73947524987241,
+        18.10295339742904
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-06-02T22:17:44.135461",
+          "success": true,
+          "speed": 17.83650894964759,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-06-02T22:17:44.135826",
+          "success": true,
+          "speed": 17.73947524987241,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-06-02T22:17:44.136097",
+          "success": true,
+          "speed": 18.10295339742904,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.6022823591080364,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9828236598174577,
+        "freshness": 0.9999999541752708
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-06-02T19:37:06.089193"
+    "last_cleanup": "2026-06-02T22:17:44.136582"
   }
 }
