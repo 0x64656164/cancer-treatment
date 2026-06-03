@@ -47,6 +47,7 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
+        "🇩🇪 Germany — #58",
         "🇩🇪 Germany — #75"
       ]
     },
@@ -54,6 +55,7 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
+        "🇩🇪 Germany — #58",
         "🇩🇪 Germany — #75"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -69,10 +71,23 @@
     },
     {
       "type": "vless",
+      "tag": "🇩🇪 Germany — #58",
+      "server": "89.208.231.191",
+      "server_port": 52006,
+      "uuid": "bc600a87-b8e6-0bb8-a604-1e1d9a8501b4",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "89.208.231.191"
+      }
+    },
+    {
+      "type": "vless",
       "tag": "🇩🇪 Germany — #75",
       "server": "89.208.210.51",
       "server_port": 443,
-      "uuid": "aa2eedfb-6643-406d-bf6a-69c61ede8dad",
+      "uuid": "1d98c9f2-922f-4910-9c81-9087e94ccdf4",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
