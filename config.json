@@ -39,22 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🇩🇪 Germany — #106"
+        "EUROPE-auto",
+        "🇩🇪 Germany — #78",
+        "🇩🇪 Germany — #61",
+        "🇳🇱 The Netherlands — #285"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🇩🇪 Germany — #106"
+        "🇩🇪 Germany — #78",
+        "🇩🇪 Germany — #61",
+        "🇳🇱 The Netherlands — #285"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,24 +73,59 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #106",
+      "tag": "🇩🇪 Germany — #78",
       "server": "89.208.210.51",
       "server_port": 443,
-      "uuid": "89327514-5fe9-4c21-b312-29c6319085d6",
+      "uuid": "2cac43f2-4469-4d51-974e-a6743ce323d1",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "BjG7XoEMR2uxHbBk_rtkR7P_S_luG2VcvQlvZ4YHzH8",
+          "public_key": "Ec54Eop0jZft7rcJsPN4RHc4xG9smXhtenM52pJFUQI",
           "short_id": "27e53bbcab7593d7"
         },
         "utls": {
           "enabled": true,
           "fingerprint": "random"
         }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #61",
+      "server": "217.16.27.113",
+      "server_port": 443,
+      "uuid": "cc432c84-f2f0-4b21-89b2-571212212ce5",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "AiG06E-jizo9xtBbulKQvdQqhZfobZJBTQIKkaDjaiU",
+          "short_id": "a1b2c3d4e5"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #285",
+      "server": "89.208.231.191",
+      "server_port": 52006,
+      "uuid": "973c344c-afe9-1f40-be12-17420debde7d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "89.208.231.191"
       }
     }
   ],
