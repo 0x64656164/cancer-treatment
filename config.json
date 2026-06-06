@@ -47,16 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇪🇪 Estonia — #85",
-        "🇬🇧 United Kingdom — #99"
+        "🇵🇱 Poland — #261"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇪🇪 Estonia — #85",
-        "🇬🇧 United Kingdom — #99"
+        "🇵🇱 Poland — #261"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,36 +69,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇪🇪 Estonia — #85",
-      "server": "89.208.231.191",
-      "server_port": 52006,
-      "uuid": "7dfed75a-8467-2328-9797-94a6e5596c1b",
+      "tag": "🇵🇱 Poland — #261",
+      "server": "89.208.86.30",
+      "server_port": 8443,
+      "uuid": "f4e98990-648f-448a-9264-64040b413811",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "89.208.231.191"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇬🇧 United Kingdom — #99",
-      "server": "89.208.208.92",
-      "server_port": 9443,
-      "uuid": "cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "loadtest.dev.urent.ru",
+        "server_name": "rbc.ru",
         "reality": {
           "enabled": true,
-          "public_key": "aVu6XB9_RKR1xLtusyQ1_YOWCs4Ofi9GEJd6oERNH2Q",
-          "short_id": "689def22fcb54e86"
+          "public_key": "7zsja5u9_tXdfEDIHNPdhIwyoawk7WUFLcthOwFt10k",
+          "short_id": "99fc"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "firefox"
         }
       }
     }
