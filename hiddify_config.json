@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇪🇪 Estonia — #49"
+        "🇪🇪 Estonia — #49",
+        "🇩🇪 Germany — #27"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇪🇪 Estonia — #49"
+        "🇪🇪 Estonia — #49",
+        "🇩🇪 Germany — #27"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -88,6 +90,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #27",
+      "server": "185.130.114.138",
+      "server_port": 8443,
+      "uuid": "f1b7982e-64b8-48d3-b088-1b33d8b2f16d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "n7SozQLXoCxDya7vBJwS5ebj39r4KCUZrfsnBfcCLGs",
+          "short_id": "cc020304"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
         }
       }
     }
