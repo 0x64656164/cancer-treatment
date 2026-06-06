@@ -47,6 +47,7 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
+        "🇪🇪 Estonia — #85",
         "🇬🇧 United Kingdom — #99"
       ]
     },
@@ -54,6 +55,7 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
+        "🇪🇪 Estonia — #85",
         "🇬🇧 United Kingdom — #99"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -66,6 +68,19 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇪🇪 Estonia — #85",
+      "server": "89.208.231.191",
+      "server_port": 52006,
+      "uuid": "7dfed75a-8467-2328-9797-94a6e5596c1b",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "89.208.231.191"
+      }
     },
     {
       "type": "vless",
