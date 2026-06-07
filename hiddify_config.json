@@ -49,16 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇪🇪 Estonia — #86",
-        "🇩🇪 Germany — #76"
+        "🇬🇧 United Kingdom — #126",
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇪🇪 Estonia — #86",
-        "🇩🇪 Germany — #76"
+        "🇬🇧 United Kingdom — #126",
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,36 +73,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇪🇪 Estonia — #86",
-      "server": "89.208.231.191",
-      "server_port": 52006,
-      "uuid": "8b3d9a6a-435b-2328-8056-ba29f89c7acd",
+      "tag": "🇬🇧 United Kingdom — #126",
+      "server": "89.208.208.92",
+      "server_port": 9443,
+      "uuid": "cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "89.208.231.191"
+        "server_name": "loadtest.dev.urent.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "aVu6XB9_RKR1xLtusyQ1_YOWCs4Ofi9GEJd6oERNH2Q",
+          "short_id": "689def22fcb54e86"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
       }
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #76",
-      "server": "89.208.210.51",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "94.139.247.211",
       "server_port": 443,
-      "uuid": "b7bb459f-72f1-4f67-b61f-36d241c0539c",
+      "uuid": "c65ca957-329a-0001-8e62-eaaa48468833",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "yandex.ru",
+        "server_name": "b02.connectv.net",
         "reality": {
           "enabled": true,
-          "public_key": "Ec54Eop0jZft7rcJsPN4RHc4xG9smXhtenM52pJFUQI",
-          "short_id": "27e53bbcab7593d7"
+          "public_key": "0RegtdcQHk9Fg95kgn5jmRglN6N3sdk3ZhrFXvmbrgk",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "random"
+          "fingerprint": "edge"
         }
       }
     }
