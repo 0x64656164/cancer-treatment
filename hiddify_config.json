@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK"
+        "TCP, Max [V.O.I.D]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK"
+        "TCP, Max [V.O.I.D]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,19 +71,19 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇩🇪 🇬🇧 [*CIDR] VK",
-      "server": "89.208.208.92",
-      "server_port": 9443,
-      "uuid": "cbc27e56-38a1-4b0d-bce3-f9e7dcb807a4",
+      "tag": "TCP, Max [V.O.I.D]",
+      "server": "217.16.21.116",
+      "server_port": 5443,
+      "uuid": "a6bd2cf2-cb83-4ac3-82a3-350cc9d0d469",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "loadtest.dev.urent.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "aVu6XB9_RKR1xLtusyQ1_YOWCs4Ofi9GEJd6oERNH2Q",
-          "short_id": "689def22fcb54e86"
+          "public_key": "LGcG8Sqv5vPDypbaEgHV0ZGqQOBkgDepPWXyDohbVXQ",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,

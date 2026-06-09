@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|217.16.21.116|5443|a6bd2cf2": {
+      "outbound": {
+        "type": "vless",
+        "tag": "TCP, Max [V.O.I.D]",
+        "server": "217.16.21.116",
+        "server_port": 5443,
+        "uuid": "a6bd2cf2-cb83-4ac3-82a3-350cc9d0d469",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "max.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "LGcG8Sqv5vPDypbaEgHV0ZGqQOBkgDepPWXyDohbVXQ",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://a6bd2cf2-cb83-4ac3-82a3-350cc9d0d469@217.16.21.116:5443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=chrome&sni=max.ru&pbk=LGcG8Sqv5vPDypbaEgHV0ZGqQOBkgDepPWXyDohbVXQ#TCP, Max [V.O.I.D]",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-06-09T21:30:43.214472",
+      "last_seen": "2026-06-09T21:30:43.214472",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        14.871480238466363
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-06-09T21:30:43.214472",
+          "success": true,
+          "speed": 14.871480238466363,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-06-09T22:30:43.214569",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-06-09T11:59:04.219867"
+    "last_cleanup": "2026-06-09T21:30:43.215294"
   }
 }
