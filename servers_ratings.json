@@ -28,7 +28,7 @@
       "country": "DE",
       "first_seen": "2026-06-09T01:41:23.906641",
       "last_seen": "2026-06-09T01:41:23.906641",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         13.123166982557121
@@ -38,6 +38,13 @@
           "timestamp": "2026-06-09T01:41:23.906641",
           "success": true,
           "speed": 13.123166982557121,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-06-09T05:37:39.443209",
+          "success": false,
+          "speed": 0,
           "latency": null,
           "error": null
         }
@@ -53,87 +60,13 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 0,
       "active": false,
-      "staging_until": "2026-06-09T02:41:23.906664",
-      "consecutive_failures": 0
-    },
-    "vless|89.208.210.51|443|6b7f10c5": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇩🇪 Germany — #139",
-        "server": "89.208.210.51",
-        "server_port": 443,
-        "uuid": "6b7f10c5-033b-4a87-accb-5c90a09f1c16",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "www.vk.com",
-          "reality": {
-            "enabled": true,
-            "public_key": "bwuT_tpimT_uUeWpSn-HbRztfol4o4uCcUHcdvkeFx0",
-            "short_id": "27e53bbcab7593d7"
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "random"
-          }
-        }
-      },
-      "link": "vless://6b7f10c5-033b-4a87-accb-5c90a09f1c16@89.208.210.51:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=random&sni=max.ru&pbk=BjG7XoEMR2uxHbBk_rtkR7P_S_luG2VcvQlvZ4YHzH8&sid=27e53bbcab7593d7&spx=%2F#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%23137",
-      "group": "EUROPE",
-      "country": null,
-      "first_seen": "2026-06-09T01:41:23.907122",
-      "last_seen": "2026-06-09T01:41:23.907905",
-      "total_tests": 3,
-      "successful_tests": 3,
-      "speed_history": [
-        25.325475773953546,
-        24.776777108301474,
-        24.53378298500261
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-06-09T01:41:23.907122",
-          "success": true,
-          "speed": 25.325475773953546,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-06-09T01:41:23.907481",
-          "success": true,
-          "speed": 24.776777108301474,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-06-09T01:41:23.907905",
-          "success": true,
-          "speed": 24.53378298500261,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.6012795045370852,
-      "rating_components": {
-        "speed": 1.0,
-        "stability": 1.0,
-        "uptime": 0.01,
-        "consistency": 0.9733794729039977,
-        "freshness": 0.9996103816445696
-      },
-      "category": "B",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 3,
-      "active": true,
       "staging_until": null,
-      "consecutive_failures": 0
+      "consecutive_failures": 1
     }
   },
   "metadata": {
-    "last_cleanup": "2026-06-09T01:41:25.932330"
+    "last_cleanup": "2026-06-09T05:37:39.444166"
   }
 }
