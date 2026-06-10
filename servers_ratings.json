@@ -28,7 +28,7 @@
       "country": "DE",
       "first_seen": "2026-06-10T04:55:38.657345",
       "last_seen": "2026-06-10T04:55:38.657345",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         26.96757360459725
@@ -38,6 +38,71 @@
           "timestamp": "2026-06-10T04:55:38.657345",
           "success": true,
           "speed": 26.96757360459725,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-06-10T08:45:00.225891",
+          "success": false,
+          "speed": 0,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 0,
+      "active": false,
+      "staging_until": null,
+      "consecutive_failures": 1
+    },
+    "vless|109.120.188.54|443|9f5ce1f6": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇸🇪 Sweden — #302",
+        "server": "109.120.188.54",
+        "server_port": 443,
+        "uuid": "9f5ce1f6-d223-4f80-b848-72b7d662f189",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "ads.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "4woJiVyGtLro6qRQdUcM2EJDHI3CLOeeE-knmSHk8lE",
+            "short_id": "1ca44564cda56661"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://9f5ce1f6-d223-4f80-b848-72b7d662f189@109.120.188.54:443?flow=xtls-rprx-vision&encryption=none&type=tcp&security=reality&fp=firefox&sni=ads.x5.ru&pbk=4woJiVyGtLro6qRQdUcM2EJDHI3CLOeeE-knmSHk8lE&sid=1ca44564cda56661#%F0%9F%87%B8%F0%9F%87%AA%20Sweden%20%E2%80%94%20%23302",
+      "group": "EUROPE",
+      "country": "SE",
+      "first_seen": "2026-06-10T08:44:09.075453",
+      "last_seen": "2026-06-10T08:44:09.075453",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        16.224589028145562
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-06-10T08:44:09.075453",
+          "success": true,
+          "speed": 16.224589028145562,
           "latency": null,
           "error": null
         }
@@ -55,11 +120,11 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-06-10T05:55:38.657372",
+      "staging_until": "2026-06-10T09:44:09.075473",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-06-10T04:55:42.389456"
+    "last_cleanup": "2026-06-10T08:45:00.226900"
   }
 }
