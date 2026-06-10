@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "TCP, Max [V.O.I.D]"
+        "🇩🇪 Germany — #106",
+        "🇩🇪 Germany — #114"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "TCP, Max [V.O.I.D]"
+        "🇩🇪 Germany — #106",
+        "🇩🇪 Germany — #114"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,23 +73,36 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, Max [V.O.I.D]",
-      "server": "217.16.21.116",
-      "server_port": 5443,
-      "uuid": "a6bd2cf2-cb83-4ac3-82a3-350cc9d0d469",
+      "tag": "🇩🇪 Germany — #106",
+      "server": "89.208.231.191",
+      "server_port": 52006,
+      "uuid": "ecd9d335-8b30-0bb8-a337-1da6bdecb5bb",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "89.208.231.191"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #114",
+      "server": "89.208.210.51",
+      "server_port": 443,
+      "uuid": "9aec0b4f-bd1a-4b86-acca-e16dc258b63d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "LGcG8Sqv5vPDypbaEgHV0ZGqQOBkgDepPWXyDohbVXQ",
-          "short_id": ""
+          "public_key": "Ec54Eop0jZft7rcJsPN4RHc4xG9smXhtenM52pJFUQI",
+          "short_id": "27e53bbcab7593d7"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "random"
         }
       }
     }
