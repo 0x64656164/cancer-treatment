@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #50"
+        "🇩🇪 Germany [*CIDR] VK",
+        "4Mohsen-6240"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #50"
+        "🇩🇪 Germany [*CIDR] VK",
+        "4Mohsen-6240"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,10 +71,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #50",
-      "server": "109.120.189.114",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "37.139.34.124",
       "server_port": 443,
-      "uuid": "e0d4db18-400f-4741-9762-f7673ef48c11",
+      "uuid": "1902fd7c-7e82-42e1-9ed6-fc37bd40551f",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -80,12 +82,34 @@
         "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "mAu8QDi3pbmMCFg9kKC-ZBIHdtnXeCuZt3VnAw6vlH4",
-          "short_id": "ad7dab462a323acb"
+          "public_key": "FOVEr4SzLDQGUn1yY8-Y_C5mIV6WBJL2sTZKQvK83z4",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "4Mohsen-6240",
+      "server": "185.86.147.210",
+      "server_port": 443,
+      "uuid": "47ab09c5-b2cc-441f-b5e5-6782b722d3ee",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "download.max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "uAEnruG3uui3vI_hofiVrBFbRiLM-DKKWYTnZdj8lDE",
+          "short_id": "a72b4a844f7197b2"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
