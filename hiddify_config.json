@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #82"
+        "🇸🇪 Sweden — #220"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #82"
+        "🇸🇪 Sweden — #220"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,15 +71,24 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #82",
-      "server": "89.208.231.191",
-      "server_port": 52006,
-      "uuid": "8079433e-a4bc-0bb8-a5ae-67590de9a3aa",
+      "tag": "🇸🇪 Sweden — #220",
+      "server": "109.120.188.54",
+      "server_port": 443,
+      "uuid": "4e5017e0-07da-48ef-a882-fa26a845ead6",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "89.208.231.191"
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "4woJiVyGtLro6qRQdUcM2EJDHI3CLOeeE-knmSHk8lE",
+          "short_id": "1ca44564cda56661"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
       }
     }
   ],
