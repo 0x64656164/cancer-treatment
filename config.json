@@ -47,14 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇩🇪 Germany — #82"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany [*CIDR] VK"
+        "🇩🇪 Germany — #82"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,24 +69,15 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "37.139.34.124",
-      "server_port": 443,
-      "uuid": "1902fd7c-7e82-42e1-9ed6-fc37bd40551f",
+      "tag": "🇩🇪 Germany — #82",
+      "server": "89.208.231.191",
+      "server_port": 52006,
+      "uuid": "8079433e-a4bc-0bb8-a5ae-67590de9a3aa",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "FOVEr4SzLDQGUn1yY8-Y_C5mIV6WBJL2sTZKQvK83z4",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
+        "server_name": "89.208.231.191"
       }
     }
   ],

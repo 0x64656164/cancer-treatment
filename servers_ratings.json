@@ -1,6 +1,80 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|89.208.231.191|52006|8079433e": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #82",
+        "server": "89.208.231.191",
+        "server_port": 52006,
+        "uuid": "8079433e-a4bc-0bb8-a5ae-67590de9a3aa",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "89.208.231.191"
+        }
+      },
+      "link": "vless://8079433e-a4bc-03e8-a5ae-67590de9a3aa@89.208.231.191:52006?flow=xtls-rprx-vision&encryption=none&type=tcp&security=tls&fp=chrome&alpn=h2%2Chttp%2F1.1#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%2383",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-06-14T15:07:25.278828",
+      "last_seen": "2026-06-14T15:07:25.279811",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        26.23875986513485,
+        25.066917850773418,
+        24.47945667566511,
+        8.352933559359283
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-06-14T15:07:25.278828",
+          "success": true,
+          "speed": 26.23875986513485,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-06-14T15:07:25.279319",
+          "success": true,
+          "speed": 25.066917850773418,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-06-14T15:07:25.279565",
+          "success": true,
+          "speed": 24.47945667566511,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-06-14T15:07:25.279811",
+          "success": true,
+          "speed": 8.352933559359283,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5341238232381338,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.30123831902473286,
+        "freshness": 0.9999999422377366
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-06-14T12:57:19.319590"
+    "last_cleanup": "2026-06-14T15:07:25.280406"
   }
 }
