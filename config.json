@@ -47,7 +47,6 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
         "🇳🇱 The Netherlands | 🌐 [*CIDR] VK"
       ]
     },
@@ -55,7 +54,6 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
         "🇳🇱 The Netherlands | 🌐 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -68,28 +66,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-      "server": "90.156.218.234",
-      "server_port": 3443,
-      "uuid": "2797a040-443c-4249-ab49-546b37519642",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "A5xVPTq9yMt18VxQ0u9GWGnnvGzlu2VraUYOMKNTMyA",
-          "short_id": "777481f61ca7487e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        }
-      }
     },
     {
       "type": "vless",
