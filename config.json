@@ -39,26 +39,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
+        "ALL-auto",
         "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
-        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-1",
-        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-2"
+        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-1"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
         "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
-        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-1",
-        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-2"
+        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -74,28 +72,6 @@
     {
       "type": "vless",
       "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
-      "server": "90.156.218.131",
-      "server_port": 3443,
-      "uuid": "2797a040-443c-4249-ab49-546b37519642",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "api-maps.yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "A5xVPTq9yMt18VxQ0u9GWGnnvGzlu2VraUYOMKNTMyA",
-          "short_id": "777481f61ca7487e"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-1",
       "server": "90.156.218.234",
       "server_port": 3443,
       "uuid": "2797a040-443c-4249-ab49-546b37519642",
@@ -117,7 +93,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-2",
+      "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK-1",
       "server": "90.156.218.234",
       "server_port": 443,
       "uuid": "2797a040-443c-4249-ab49-546b37519642",
