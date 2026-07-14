@@ -47,16 +47,20 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇩🇪 🇳🇱 [*CIDR] VK"
+        "TCP, Max [V.O.I.D]",
+        "TCP, Max [V.O.I.D]-1",
+        "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
+        "TCP, Max [V.O.I.D]-2"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇩🇪 🇳🇱 [*CIDR] VK"
+        "TCP, Max [V.O.I.D]",
+        "TCP, Max [V.O.I.D]-1",
+        "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
+        "TCP, Max [V.O.I.D]-2"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,18 +75,62 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
-      "server": "83.166.253.148",
+      "tag": "TCP, Max [V.O.I.D]",
+      "server": "node5.frost-api.com",
       "server_port": 443,
-      "uuid": "a3e03930-7645-4bf0-ad4d-40d44341fa88",
+      "uuid": "e1ecf270-6429-4d22-a884-6ab014173178",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "kookas.fi",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "qB_eMu3ZO_wGITnyIqJ7Kt39-h9oHFnHlQQEqA-r3VA",
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "66c17371"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, Max [V.O.I.D]-1",
+      "server": "denode1.frost-api.com",
+      "server_port": 443,
+      "uuid": "e1ecf270-6429-4d22-a884-6ab014173178",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "66c17371"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
+      "server": "95.163.211.106",
+      "server_port": 443,
+      "uuid": "b7675c4a-b148-4b02-9cfe-3275e4fee305",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "gb.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
           "short_id": ""
         },
         "utls": {
@@ -93,23 +141,23 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇩🇪 🇳🇱 [*CIDR] VK",
-      "server": "90.156.218.131",
-      "server_port": 3443,
-      "uuid": "2797a040-443c-4249-ab49-546b37519642",
+      "tag": "TCP, Max [V.O.I.D]-2",
+      "server": "msknode1.frost-api.com",
+      "server_port": 443,
+      "uuid": "e1ecf270-6429-4d22-a884-6ab014173178",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "api-maps.yandex.ru",
+        "server_name": "max.ru",
         "reality": {
           "enabled": true,
-          "public_key": "A5xVPTq9yMt18VxQ0u9GWGnnvGzlu2VraUYOMKNTMyA",
-          "short_id": "777481f61ca7487e"
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "4f61d0728e062b"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "firefox"
+          "fingerprint": "chrome"
         }
       }
     }
