@@ -47,24 +47,28 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
         "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
-        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2"
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2",
+        "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK-1",
+        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK-1"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🇩🇪 Germany [*CIDR] VK",
-        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
         "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
-        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2"
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2",
+        "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK-1",
+        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -76,72 +80,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "37.139.34.124",
-      "server_port": 443,
-      "uuid": "d407defe-cd4f-4d32-a3b1-47c2c813c50d",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "FOVEr4SzLDQGUn1yY8-Y_C5mIV6WBJL2sTZKQvK83z4",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
-      "server": "95.163.211.21",
-      "server_port": 443,
-      "uuid": "44e084a7-4928-4492-b646-7dc417066576",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "at.sellflow.org",
-        "reality": {
-          "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
-      "server": "95.163.211.152",
-      "server_port": 443,
-      "uuid": "44e084a7-4928-4492-b646-7dc417066576",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ai.sellflow.org",
-        "reality": {
-          "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
     },
     {
       "type": "vless",
@@ -167,10 +105,32 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
+      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
       "server": "95.163.211.116",
       "server_port": 443,
       "uuid": "b7675c4a-b148-4b02-9cfe-3275e4fee305",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "at.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
+      "server": "95.163.211.21",
+      "server_port": 443,
+      "uuid": "44e084a7-4928-4492-b646-7dc417066576",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -208,6 +168,94 @@
           "fingerprint": "firefox"
         }
       }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK-1",
+      "server": "95.163.211.152",
+      "server_port": 443,
+      "uuid": "b7675c4a-b148-4b02-9cfe-3275e4fee305",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "gb.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
+      "server": "95.163.211.116",
+      "server_port": 443,
+      "uuid": "54244201-1f12-45fa-95f3-af46a3a7fc0b",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ai.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
+      "server": "95.163.211.21",
+      "server_port": 443,
+      "uuid": "b7675c4a-b148-4b02-9cfe-3275e4fee305",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "fr.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK-1",
+      "server": "95.163.211.31",
+      "server_port": 443,
+      "uuid": "44e084a7-4928-4492-b646-7dc417066576",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "fr.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
     }
   ],
   "route": {
@@ -225,30 +273,30 @@
       },
       {
         "rule_set": [
-          "openai",
-          "unavailable-in-russia",
-          "copilot",
-          "discord-domains",
-          "gemini",
-          "spotify",
           "rkn",
-          "tiktok",
-          "whatsapp",
-          "youtube",
-          "telegram",
-          "instagram",
-          "netflix",
-          "telegram-voice-chats",
-          "discord-voice-chats-no-cidr",
-          "discord-full",
-          "grok",
           "discord-voice-chats",
+          "anime-ru",
+          "openai",
+          "x",
+          "gemini",
+          "discord-voice-chats-no-cidr",
+          "unavailable-in-russia",
+          "tiktok",
+          "netflix",
+          "discord-full",
+          "discord-domains",
+          "instagram",
+          "capcut",
+          "telegram",
+          "spotify",
           "supercell",
           "linkedin",
-          "anime-ru",
-          "x",
+          "whatsapp",
+          "youtube",
+          "copilot",
           "roblox",
-          "capcut",
+          "telegram-voice-chats",
+          "grok",
           "geosite-ru-blocked",
           "geoip-ru-blocked-all"
         ],
@@ -258,6 +306,27 @@
     "rule_set": [
       {
         "type": "remote",
+        "tag": "rkn",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/rkn.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "discord-voice-chats",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "anime-ru",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/anime-ru.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
         "tag": "openai",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/openai.srs",
@@ -265,23 +334,9 @@
       },
       {
         "type": "remote",
-        "tag": "unavailable-in-russia",
+        "tag": "x",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/unavailable-in-russia.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "copilot",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/copilot.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "discord-domains",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-domains.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/x.srs",
         "download_detour": "direct"
       },
       {
@@ -293,16 +348,16 @@
       },
       {
         "type": "remote",
-        "tag": "spotify",
+        "tag": "discord-voice-chats-no-cidr",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/spotify.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats-no-cidr.srs",
         "download_detour": "direct"
       },
       {
         "type": "remote",
-        "tag": "rkn",
+        "tag": "unavailable-in-russia",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/rkn.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/unavailable-in-russia.srs",
         "download_detour": "direct"
       },
       {
@@ -314,51 +369,9 @@
       },
       {
         "type": "remote",
-        "tag": "whatsapp",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/whatsapp.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "youtube",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/youtube.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "telegram",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/telegram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "instagram",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/instagram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
         "tag": "netflix",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "telegram-voice-chats",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/telegram-voice-chats.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "discord-voice-chats-no-cidr",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats-no-cidr.srs",
         "download_detour": "direct"
       },
       {
@@ -370,16 +383,37 @@
       },
       {
         "type": "remote",
-        "tag": "grok",
+        "tag": "discord-domains",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/grok.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-domains.srs",
         "download_detour": "direct"
       },
       {
         "type": "remote",
-        "tag": "discord-voice-chats",
+        "tag": "instagram",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/instagram.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "capcut",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/capcut.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "telegram",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/telegram.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "spotify",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/spotify.srs",
         "download_detour": "direct"
       },
       {
@@ -398,16 +432,23 @@
       },
       {
         "type": "remote",
-        "tag": "anime-ru",
+        "tag": "whatsapp",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/anime-ru.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/whatsapp.srs",
         "download_detour": "direct"
       },
       {
         "type": "remote",
-        "tag": "x",
+        "tag": "youtube",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/x.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/youtube.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "copilot",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/copilot.srs",
         "download_detour": "direct"
       },
       {
@@ -419,9 +460,16 @@
       },
       {
         "type": "remote",
-        "tag": "capcut",
+        "tag": "telegram-voice-chats",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/capcut.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/telegram-voice-chats.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "grok",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/grok.srs",
         "download_detour": "direct"
       },
       {
