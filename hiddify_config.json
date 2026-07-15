@@ -53,10 +53,10 @@
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2",
+        "🇫🇷 France | 🌐 [*CIDR] VK",
         "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK-1",
-        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
         "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK-1"
+        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK"
       ]
     },
     {
@@ -67,10 +67,10 @@
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2",
+        "🇫🇷 France | 🌐 [*CIDR] VK",
         "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK-1",
-        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
         "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK-1"
+        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -130,6 +130,28 @@
     {
       "type": "vless",
       "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
+      "server": "95.163.211.31",
+      "server_port": 443,
+      "uuid": "0f8923d5-77b8-4046-9899-6892dde4ef32",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "at.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2",
       "server": "95.163.211.21",
       "server_port": 443,
       "uuid": "44e084a7-4928-4492-b646-7dc417066576",
@@ -151,15 +173,15 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2",
-      "server": "95.163.211.31",
+      "tag": "🇫🇷 France | 🌐 [*CIDR] VK",
+      "server": "95.163.211.152",
       "server_port": 443,
       "uuid": "0f8923d5-77b8-4046-9899-6892dde4ef32",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "at.sellflow.org",
+        "server_name": "fr.sellflow.org",
         "reality": {
           "enabled": true,
           "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
@@ -195,28 +217,6 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
-      "server": "95.163.211.116",
-      "server_port": 443,
-      "uuid": "54244201-1f12-45fa-95f3-af46a3a7fc0b",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ai.sellflow.org",
-        "reality": {
-          "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
       "server": "95.163.211.21",
       "server_port": 443,
@@ -239,15 +239,15 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK-1",
-      "server": "95.163.211.31",
+      "tag": "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
+      "server": "95.163.211.116",
       "server_port": 443,
-      "uuid": "44e084a7-4928-4492-b646-7dc417066576",
+      "uuid": "54244201-1f12-45fa-95f3-af46a3a7fc0b",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "fr.sellflow.org",
+        "server_name": "ai.sellflow.org",
         "reality": {
           "enabled": true,
           "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
