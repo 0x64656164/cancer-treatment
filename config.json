@@ -47,6 +47,7 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
+        "🇩🇪 Germany [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
         "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
         "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
@@ -58,6 +59,7 @@
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
+        "🇩🇪 Germany [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
         "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
         "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
@@ -74,6 +76,28 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "server": "37.139.34.124",
+      "server_port": 443,
+      "uuid": "d407defe-cd4f-4d32-a3b1-47c2c813c50d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ads.x5.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "FOVEr4SzLDQGUn1yY8-Y_C5mIV6WBJL2sTZKQvK83z4",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
     },
     {
       "type": "vless",
