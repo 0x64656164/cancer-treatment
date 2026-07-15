@@ -47,22 +47,22 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "TCP, Max [V.O.I.D]",
-        "TCP, Max [V.O.I.D]-1",
-        "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1"
+        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "TCP, Max [V.O.I.D]",
-        "TCP, Max [V.O.I.D]-1",
-        "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1"
+        "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇬🇧 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
+        "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -77,45 +77,45 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, Max [V.O.I.D]",
-      "server": "node5.frost-api.com",
+      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
+      "server": "95.163.211.21",
       "server_port": 443,
-      "uuid": "e1ecf270-6429-4d22-a884-6ab014173178",
+      "uuid": "44e084a7-4928-4492-b646-7dc417066576",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "at.sellflow.org",
         "reality": {
           "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "66c17371"
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "firefox"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "TCP, Max [V.O.I.D]-1",
-      "server": "denode1.frost-api.com",
+      "tag": "🌐 Anycast-IP | 🇺🇸 [*CIDR] VK",
+      "server": "95.163.211.152",
       "server_port": 443,
-      "uuid": "e1ecf270-6429-4d22-a884-6ab014173178",
+      "uuid": "44e084a7-4928-4492-b646-7dc417066576",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "ai.sellflow.org",
         "reality": {
           "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "66c17371"
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "firefox"
         }
       }
     },
@@ -143,10 +143,10 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK",
-      "server": "95.163.211.31",
+      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
+      "server": "95.163.211.116",
       "server_port": 443,
-      "uuid": "0f8923d5-77b8-4046-9899-6892dde4ef32",
+      "uuid": "b7675c4a-b148-4b02-9cfe-3275e4fee305",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -165,10 +165,10 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-1",
-      "server": "95.163.211.116",
+      "tag": "🌐 Anycast-IP | 🇦🇹 🇩🇪 [*CIDR] VK-2",
+      "server": "95.163.211.31",
       "server_port": 443,
-      "uuid": "b7675c4a-b148-4b02-9cfe-3275e4fee305",
+      "uuid": "0f8923d5-77b8-4046-9899-6892dde4ef32",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
