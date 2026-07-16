@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|secget.ru|8443|68d3fcbe": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
+        "server": "secget.ru",
+        "server_port": 8443,
+        "uuid": "68d3fcbe-f025-1f40-82d6-9455c5e5f6b5",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "secget.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "vV3mxSgZ-8x3Gp373AXdMDM3FAdmLP0v5zIfI486SDI",
+            "short_id": "f8a8ee8381529673"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://68d3fcbe-f025-1f40-82d6-9455c5e5f6b5@secget.ru:8443?type=tcp&security=reality&flow=xtls-rprx-vision&encryption=none&sni=secget.ru&pbk=vV3mxSgZ-8x3Gp373AXdMDM3FAdmLP0v5zIfI486SDI&sid=f8a8ee8381529673&fp=firefox#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%F0%9F%8C%90%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "NL",
+      "first_seen": "2026-07-16T10:49:57.292743",
+      "last_seen": "2026-07-16T10:49:57.292743",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        14.475566465639567
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-07-16T10:49:57.292743",
+          "success": true,
+          "speed": 14.475566465639567,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-07-16T11:49:57.292778",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-07-16T08:38:41.440425"
+    "last_cleanup": "2026-07-16T10:49:57.293478"
   }
 }
