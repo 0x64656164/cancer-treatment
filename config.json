@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇷 France | [*CIDR] VK"
+        "🇸🇪 Sweden | 🌐 [*CIDR] VK",
+        " By EbraSha"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇷 France | [*CIDR] VK"
+        "🇸🇪 Sweden | 🌐 [*CIDR] VK",
+        " By EbraSha"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,19 +71,41 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇷 France | [*CIDR] VK",
-      "server": "91.219.227.142",
-      "server_port": 1337,
-      "uuid": "0bb3239a-1e0f-4f44-9957-09e70d536125",
+      "tag": "🇸🇪 Sweden | 🌐 [*CIDR] VK",
+      "server": "109.120.188.54",
+      "server_port": 443,
+      "uuid": "4401809f-4d60-4df7-ab14-da48955c2cb3",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "yandex.ru",
+        "server_name": "ads.x5.ru",
         "reality": {
           "enabled": true,
-          "public_key": "U5AJ4Kkp4Cc7IOzDXz3B6RNOsb0FNd6flX3KxpEN6Fo",
-          "short_id": "7eb1c0a5"
+          "public_key": "4woJiVyGtLro6qRQdUcM2EJDHI3CLOeeE-knmSHk8lE",
+          "short_id": "1ca44564cda56661"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": " By EbraSha",
+      "server": "lte1.belka.network",
+      "server_port": 443,
+      "uuid": "fb6b3497-2026-4a86-b9a5-3e5f18e77a37",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "_qSbW4JL4Ffqvj25vX-6a2ul9Qlj6PBdlF0ghsf_0RQ",
+          "short_id": "a9dc98a7dc87a7dc"
         },
         "utls": {
           "enabled": true,
