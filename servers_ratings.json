@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|node2.frost-api.com|443|217145c8": {
+      "outbound": {
+        "type": "vless",
+        "tag": "TCP, Max [V.O.I.D]",
+        "server": "node2.frost-api.com",
+        "server_port": 443,
+        "uuid": "217145c8-86d1-47c2-800f-1a85dec46a3c",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "max.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+            "short_id": "01e7"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "edge"
+          }
+        }
+      },
+      "link": "vless://217145c8-86d1-47c2-800f-1a85dec46a3c@node2.frost-api.com:443?type=tcp&security=reality&flow=xtls-rprx-vision&encryption=none&sni=max.ru&pbk=SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw&sid=01e7&fp=edge#TCP, Max [V.O.I.D]",
+      "group": "RUSSIA",
+      "country": "RU",
+      "first_seen": "2026-07-19T23:48:42.634877",
+      "last_seen": "2026-07-19T23:48:42.634877",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        3.558471708381692
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-07-19T23:48:42.634877",
+          "success": true,
+          "speed": 3.558471708381692,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-07-20T00:48:42.634896",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-07-19T22:40:47.618151"
+    "last_cleanup": "2026-07-19T23:48:42.635582"
   }
 }
