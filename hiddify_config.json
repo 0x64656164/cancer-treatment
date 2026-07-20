@@ -49,7 +49,6 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇸🇪 Sweden | 🌐 [*CIDR] VK",
         "🇬🇧 United Kingdom | 🌐 [*CIDR] VK"
       ]
     },
@@ -57,7 +56,6 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇸🇪 Sweden | 🌐 [*CIDR] VK",
         "🇬🇧 United Kingdom | 🌐 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -70,28 +68,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇸🇪 Sweden | 🌐 [*CIDR] VK",
-      "server": "109.120.188.54",
-      "server_port": 443,
-      "uuid": "a17945f1-e8d3-4b7a-89a2-b2d4fecfaa92",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ads.x5.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "4woJiVyGtLro6qRQdUcM2EJDHI3CLOeeE-knmSHk8lE",
-          "short_id": "1ca44564cda56661"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
     },
     {
       "type": "vless",
