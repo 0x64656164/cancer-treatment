@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇸🇪 Sweden | 🌐 [*CIDR] VK"
+        "🇸🇪 Sweden | 🌐 [*CIDR] VK",
+        "🇬🇧 United Kingdom | 🌐 [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇸🇪 Sweden | 🌐 [*CIDR] VK"
+        "🇸🇪 Sweden | 🌐 [*CIDR] VK",
+        "🇬🇧 United Kingdom | 🌐 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -82,6 +84,28 @@
           "enabled": true,
           "public_key": "4woJiVyGtLro6qRQdUcM2EJDHI3CLOeeE-knmSHk8lE",
           "short_id": "1ca44564cda56661"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇬🇧 United Kingdom | 🌐 [*CIDR] VK",
+      "server": "90.156.218.67",
+      "server_port": 443,
+      "uuid": "0217ae6b-bdeb-49fe-b10d-692a2adcc94b",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "sun2-11.userapi.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "qB_eMu3ZO_wGITnyIqJ7Kt39-h9oHFnHlQQEqA-r3VA",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,

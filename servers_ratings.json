@@ -27,13 +27,14 @@
       "group": "EUROPE",
       "country": "SE",
       "first_seen": "2026-07-20T11:20:25.189530",
-      "last_seen": "2026-07-20T15:25:49.005179",
-      "total_tests": 3,
-      "successful_tests": 3,
+      "last_seen": "2026-07-20T16:51:53.595173",
+      "total_tests": 4,
+      "successful_tests": 4,
       "speed_history": [
         21.506865409665185,
         33.391147618587524,
-        35.96829527157106
+        35.96829527157106,
+        20.24099879303674
       ],
       "check_history": [
         {
@@ -56,26 +57,91 @@
           "speed": 35.96829527157106,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-07-20T16:51:53.595173",
+          "success": true,
+          "speed": 20.24099879303674,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.7849305743122376,
+      "rating": 0.8164504644690732,
       "rating_components": {
         "speed": 1.0,
         "stability": 1.0,
-        "uptime": 0.5662964292416666,
-        "consistency": 0.5841202317893585,
-        "freshness": 0.9999998629109004
+        "uptime": 0.6667190118555555,
+        "consistency": 0.4976287939490103,
+        "freshness": 0.999999868879667
       },
       "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 3,
+      "consecutive_successes": 4,
       "active": true,
       "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|90.156.218.67|443|0217ae6b": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇬🇧 United Kingdom | 🌐 [*CIDR] VK",
+        "server": "90.156.218.67",
+        "server_port": 443,
+        "uuid": "0217ae6b-bdeb-49fe-b10d-692a2adcc94b",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "sun2-11.userapi.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "qB_eMu3ZO_wGITnyIqJ7Kt39-h9oHFnHlQQEqA-r3VA",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://0217ae6b-bdeb-49fe-b10d-692a2adcc94b@90.156.218.67:443?encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=qB_eMu3ZO_wGITnyIqJ7Kt39-h9oHFnHlQQEqA-r3VA&security=reality&sni=sun2-11.userapi.com&type=tcp#%F0%9F%87%AC%F0%9F%87%A7%20United%20Kingdom%20%7C%20%F0%9F%8C%90%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "GB",
+      "first_seen": "2026-07-20T16:51:49.424869",
+      "last_seen": "2026-07-20T16:51:49.424869",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        21.99045634538591
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-07-20T16:51:49.424869",
+          "success": true,
+          "speed": 21.99045634538591,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-07-20T17:51:49.424886",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-07-20T15:25:49.006204"
+    "last_cleanup": "2026-07-20T16:51:53.596322"
   }
 }
