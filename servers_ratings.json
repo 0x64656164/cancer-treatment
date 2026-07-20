@@ -27,17 +27,91 @@
       "group": "RUSSIA",
       "country": "RU",
       "first_seen": "2026-07-19T23:48:42.634877",
-      "last_seen": "2026-07-19T23:48:42.634877",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-07-20T01:57:52.672956",
+      "total_tests": 3,
+      "successful_tests": 3,
       "speed_history": [
-        3.558471708381692
+        3.558471708381692,
+        1.8753776404515368,
+        1.634983876408147
       ],
       "check_history": [
         {
           "timestamp": "2026-07-19T23:48:42.634877",
           "success": true,
           "speed": 3.558471708381692,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-20T01:57:01.340769",
+          "success": true,
+          "speed": 1.8753776404515368,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-20T01:57:52.672956",
+          "success": true,
+          "speed": 1.634983876408147,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.6996443591437773,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.430695200425,
+        "consistency": 0.2736630207868149,
+        "freshness": 0.9999998459673051
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|37.139.34.124|443|d407defe": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany [*CIDR] VK",
+        "server": "37.139.34.124",
+        "server_port": 443,
+        "uuid": "d407defe-cd4f-4d32-a3b1-47c2c813c50d",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "ads.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "FOVEr4SzLDQGUn1yY8-Y_C5mIV6WBJL2sTZKQvK83z4",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "ios"
+          }
+        }
+      },
+      "link": "vless://d407defe-cd4f-4d32-a3b1-47c2c813c50d@37.139.34.124:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=ios&pbk=FOVEr4SzLDQGUn1yY8-Y_C5mIV6WBJL2sTZKQvK83z4&sni=ads.x5.ru#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-07-20T01:57:01.340275",
+      "last_seen": "2026-07-20T01:57:01.340275",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        32.2227299263283
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-07-20T01:57:01.340275",
+          "success": true,
+          "speed": 32.2227299263283,
           "latency": null,
           "error": null
         }
@@ -55,11 +129,11 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-07-20T00:48:42.634896",
+      "staging_until": "2026-07-20T02:57:01.340311",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-07-19T23:48:42.635582"
+    "last_cleanup": "2026-07-20T01:57:52.674353"
   }
 }
