@@ -49,16 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 | [*CIDR] VK",
-        "Reality, Max [V.O.I.D]"
+        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 | [*CIDR] VK",
-        "Reality, Max [V.O.I.D]"
+        "🇳🇱 The Netherlands | 🌐 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,45 +71,23 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 | [*CIDR] VK",
-      "server": "217.16.31.162",
+      "tag": "🇳🇱 The Netherlands | 🌐 [*CIDR] VK",
+      "server": "217.16.16.11",
       "server_port": 443,
-      "uuid": "e97d3554-cde3-4391-9103-ea601b362763",
+      "uuid": "d7fc372d-c057-43ce-8070-9b96abbc60f3",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
+        "server_name": "rutube.ru",
         "reality": {
           "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "e7"
+          "public_key": "JaP4bhvIMW-l7T0_RkLra59DeBYI6W9XemKa8MyRPSY",
+          "short_id": "6c6082a2223c1d03"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "ios"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Reality, Max [V.O.I.D]",
-      "server": "denode1.frost-api.com",
-      "server_port": 443,
-      "uuid": "e97d3554-cde3-4391-9103-ea601b362763",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "66c17371"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "edge"
         }
       }
     }
