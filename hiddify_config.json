@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany [*CIDR] VK"
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 | [*CIDR] VK",
+        "Reality, Max [V.O.I.D]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany [*CIDR] VK"
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 | [*CIDR] VK",
+        "Reality, Max [V.O.I.D]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,7 +73,29 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
+      "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 | [*CIDR] VK",
+      "server": "217.16.31.162",
+      "server_port": 443,
+      "uuid": "e97d3554-cde3-4391-9103-ea601b362763",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "e7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "ios"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Reality, Max [V.O.I.D]",
       "server": "denode1.frost-api.com",
       "server_port": 443,
       "uuid": "e97d3554-cde3-4391-9103-ea601b362763",
