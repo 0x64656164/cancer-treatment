@@ -49,8 +49,8 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇦🇹 Austria | 🌐 | [*CIDR] VK",
         "Reality, Max [V.O.I.D]",
+        "🇦🇹 Austria | 🌐 | [*CIDR] VK",
         "🌐 Anycast-IP | 🇨🇭 🇩🇪 🇺🇸 [*CIDR] VK",
         "TCP, VK [V.O.I.D]"
       ]
@@ -59,8 +59,8 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇦🇹 Austria | 🌐 | [*CIDR] VK",
         "Reality, Max [V.O.I.D]",
+        "🇦🇹 Austria | 🌐 | [*CIDR] VK",
         "🌐 Anycast-IP | 🇨🇭 🇩🇪 🇺🇸 [*CIDR] VK",
         "TCP, VK [V.O.I.D]"
       ],
@@ -74,28 +74,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇦🇹 Austria | 🌐 | [*CIDR] VK",
-      "server": "95.163.211.106",
-      "server_port": 443,
-      "uuid": "0108c657-a9bd-4c99-9179-74050cf78889",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "at.sellflow.org",
-        "reality": {
-          "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        }
-      }
     },
     {
       "type": "vless",
@@ -116,6 +94,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇦🇹 Austria | 🌐 | [*CIDR] VK",
+      "server": "95.163.211.106",
+      "server_port": 443,
+      "uuid": "0108c657-a9bd-4c99-9179-74050cf78889",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "at.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "safari"
         }
       }
     },
