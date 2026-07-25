@@ -41,28 +41,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
         "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
-        "27. 🇩🇪 VLESS | SNI: m.vk.ru | CIDR: VK | TG: @wlrustg",
-        ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK"
+        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
         "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
-        "27. 🇩🇪 VLESS | SNI: m.vk.ru | CIDR: VK | TG: @wlrustg",
-        ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK"
+        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -121,37 +119,15 @@
     },
     {
       "type": "vless",
-      "tag": "27. 🇩🇪 VLESS | SNI: m.vk.ru | CIDR: VK | TG: @wlrustg",
-      "server": "185.130.114.9",
-      "server_port": 443,
-      "uuid": "439c8516-b796-47ca-991a-7e18540213d1",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "m.vk.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "2aVI6zoPOZ9imH13iEtxkWeN3J5jgKdGSpApFtUCjWE",
-          "short_id": "D1aaddff4f"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK",
-      "server": "95.163.211.150",
+      "tag": "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1",
+      "server": "95.163.211.106",
       "server_port": 443,
       "uuid": "0108c657-a9bd-4c99-9179-74050cf78889",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "sellflow.org",
+        "server_name": "at.sellflow.org",
         "reality": {
           "enabled": true,
           "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
@@ -159,7 +135,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "edge"
+          "fingerprint": "firefox"
         }
       }
     }
