@@ -47,9 +47,9 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
-        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
         "TCP, Max [V.O.I.D]",
         "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1"
       ]
     },
@@ -57,9 +57,9 @@
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
-        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
         "TCP, Max [V.O.I.D]",
         "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
         "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -72,28 +72,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
-      "server": "95.163.211.106",
-      "server_port": 443,
-      "uuid": "1bf44cb7-f947-441c-abb5-242c47e78292",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "at.sellflow.org",
-        "reality": {
-          "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "ios"
-        }
-      }
     },
     {
       "type": "vless",
@@ -141,7 +119,7 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1",
+      "tag": "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
       "server": "95.163.211.106",
       "server_port": 443,
       "uuid": "0108c657-a9bd-4c99-9179-74050cf78889",
@@ -158,6 +136,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "safari"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1",
+      "server": "95.163.211.106",
+      "server_port": 443,
+      "uuid": "1bf44cb7-f947-441c-abb5-242c47e78292",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "at.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "ios"
         }
       }
     }
