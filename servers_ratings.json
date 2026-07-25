@@ -25,18 +25,22 @@
       },
       "link": "vless://0108c657-a9bd-4c99-9179-74050cf78889@95.163.211.106:443?encryption=none&security=reality&type=tcp&sni=abuse.sellflow.org&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision&fp=firefox#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%A8%F0%9F%87%AD%20%F0%9F%87%BA%F0%9F%87%B8%20%7C%20%5B%2ACIDR%5D%20VK",
       "group": "EUROPE",
-      "country": "NL",
+      "country": "GB",
       "first_seen": "2026-07-24T23:56:19.891491",
-      "last_seen": "2026-07-24T23:56:19.893058",
-      "total_tests": 6,
-      "successful_tests": 6,
+      "last_seen": "2026-07-25T01:31:48.471421",
+      "total_tests": 13,
+      "successful_tests": 13,
       "speed_history": [
-        32.500058531767216,
-        33.062285582965295,
-        28.55924444609776,
         27.540706321926745,
         30.244059262893146,
-        19.324243333314328
+        19.324243333314328,
+        20.800965248506444,
+        21.751534788410087,
+        20.68998048706451,
+        10.986095651882453,
+        10.98644274986647,
+        13.793839033104971,
+        10.088936551246427
       ],
       "check_history": [
         {
@@ -80,20 +84,69 @@
           "speed": 19.324243333314328,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-07-25T01:31:40.115659",
+          "success": true,
+          "speed": 20.800965248506444,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-25T01:31:40.116231",
+          "success": true,
+          "speed": 21.751534788410087,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-25T01:31:40.117219",
+          "success": true,
+          "speed": 20.68998048706451,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-25T01:31:40.118310",
+          "success": true,
+          "speed": 10.986095651882453,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-25T01:31:40.118717",
+          "success": true,
+          "speed": 10.98644274986647,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-25T01:31:40.119131",
+          "success": true,
+          "speed": 13.793839033104971,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-25T01:31:48.471421",
+          "success": true,
+          "speed": 10.088936551246427,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.5720169001450495,
+      "rating": 0.6775094531841592,
       "rating_components": {
-        "speed": 1.0,
+        "speed": 0.9636854843303793,
         "stability": 1.0,
-        "uptime": 0.01,
-        "consistency": 0.6801691940876371,
-        "freshness": 0.999999871575239
+        "uptime": 0.3913890732111111,
+        "consistency": 0.28216755279383776,
+        "freshness": 0.9999998116950337
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 6,
+      "consecutive_successes": 13,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -125,17 +178,83 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-07-24T23:56:19.893335",
-      "last_seen": "2026-07-24T23:56:19.893335",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-07-25T01:31:43.687698",
+      "total_tests": 2,
+      "successful_tests": 2,
       "speed_history": [
-        14.843367409009604
+        14.843367409009604,
+        23.801357754118108
       ],
       "check_history": [
         {
           "timestamp": "2026-07-24T23:56:19.893335",
           "success": true,
           "speed": 14.843367409009604,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-25T01:31:43.687698",
+          "success": true,
+          "speed": 23.801357754118108,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-07-25T02:31:43.687722",
+      "consecutive_failures": 0
+    },
+    "vless|95.163.211.21|443|0108c657": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🌐 Anycast-IP | 🇨🇭 🇩🇪 🇺🇸 [*CIDR] VK",
+        "server": "95.163.211.21",
+        "server_port": 443,
+        "uuid": "0108c657-a9bd-4c99-9179-74050cf78889",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "abuse.sellflow.org",
+          "reality": {
+            "enabled": true,
+            "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://0108c657-a9bd-4c99-9179-74050cf78889@95.163.211.21:443?encryption=none&security=reality&type=tcp&sni=abuse.sellflow.org&fp=firefox&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&flow=xtls-rprx-vision#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%A8%F0%9F%87%AD%20%F0%9F%87%A9%F0%9F%87%AA%20%F0%9F%87%BA%F0%9F%87%B8%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "GB",
+      "first_seen": "2026-07-25T01:31:40.117511",
+      "last_seen": "2026-07-25T01:31:40.117511",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        15.159197327879827
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-07-25T01:31:40.117511",
+          "success": true,
+          "speed": 15.159197327879827,
           "latency": null,
           "error": null
         }
@@ -153,11 +272,69 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-07-25T00:56:19.893344",
+      "staging_until": "2026-07-25T02:31:40.117520",
+      "consecutive_failures": 0
+    },
+    "vless|37.139.43.57|443|ceeba701": {
+      "outbound": {
+        "type": "vless",
+        "tag": "TCP, VK [V.O.I.D]",
+        "server": "37.139.43.57",
+        "server_port": 443,
+        "uuid": "ceeba701-bb9f-4f2c-8142-677d27a2acb1",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo",
+            "short_id": "7f2e9c4b1a8d6a53"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://ceeba701-bb9f-4f2c-8142-677d27a2acb1@37.139.43.57:443?type=tcp&security=reality&sni=eh.vk.com&fp=chrome&flow=xtls-rprx-vision&pbk=3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo&sid=7f2e9c4b1a8d6a53#TCP, VK [V.O.I.D]",
+      "group": "RUSSIA",
+      "country": "RU",
+      "first_seen": "2026-07-25T01:31:40.117867",
+      "last_seen": "2026-07-25T01:31:40.117867",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        14.015476372833456
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-07-25T01:31:40.117867",
+          "success": true,
+          "speed": 14.015476372833456,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-07-25T02:31:40.117874",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-07-24T23:56:19.894226"
+    "last_cleanup": "2026-07-25T01:31:48.472970"
   }
 }
