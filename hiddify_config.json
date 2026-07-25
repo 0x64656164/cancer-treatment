@@ -41,26 +41,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "Reality, Max [V.O.I.D]",
-        "🌐 Anycast-IP | 🇨🇭 🇩🇪 🇺🇸 [*CIDR] VK",
-        "🇦🇹 Austria | 🌐 | [*CIDR] VK"
+        "ALL-auto",
+        "🇦🇹 Austria | 🌐 | [*CIDR] VK",
+        "🇨🇭 Switzerland | 🌐 | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "Reality, Max [V.O.I.D]",
-        "🌐 Anycast-IP | 🇨🇭 🇩🇪 🇺🇸 [*CIDR] VK",
-        "🇦🇹 Austria | 🌐 | [*CIDR] VK"
+        "🇦🇹 Austria | 🌐 | [*CIDR] VK",
+        "🇨🇭 Switzerland | 🌐 | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,50 +70,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "Reality, Max [V.O.I.D]",
-      "server": "95.163.250.241",
-      "server_port": 8442,
-      "uuid": "873f1046-0210-4b2e-a0ec-dc1826886071",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg",
-          "short_id": "a7f9106ba66e4796"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇨🇭 🇩🇪 🇺🇸 [*CIDR] VK",
-      "server": "95.163.211.21",
-      "server_port": 443,
-      "uuid": "0108c657-a9bd-4c99-9179-74050cf78889",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "abuse.sellflow.org",
-        "reality": {
-          "enabled": true,
-          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
     },
     {
       "type": "vless",
@@ -136,6 +90,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "safari"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇨🇭 Switzerland | 🌐 | [*CIDR] VK",
+      "server": "95.163.211.106",
+      "server_port": 443,
+      "uuid": "1bf44cb7-f947-441c-abb5-242c47e78292",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "abuse.sellflow.org",
+        "reality": {
+          "enabled": true,
+          "public_key": "SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
         }
       }
     }
