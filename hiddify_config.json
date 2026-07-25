@@ -51,7 +51,8 @@
         "EUROPE-auto",
         "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
         "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1"
+        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1",
+        "27. 🇩🇪 VLESS | SNI: m.vk.ru | CIDR: VK | TG: @wlrustg"
       ]
     },
     {
@@ -60,7 +61,8 @@
       "outbounds": [
         "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK",
         "🌐 Anycast-IP | 🇫🇷 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1"
+        "🌐 Anycast-IP | 🇦🇹 [*CIDR] VK-1",
+        "27. 🇩🇪 VLESS | SNI: m.vk.ru | CIDR: VK | TG: @wlrustg"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -136,6 +138,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "27. 🇩🇪 VLESS | SNI: m.vk.ru | CIDR: VK | TG: @wlrustg",
+      "server": "185.130.114.9",
+      "server_port": 443,
+      "uuid": "439c8516-b796-47ca-991a-7e18540213d1",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "m.vk.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "2aVI6zoPOZ9imH13iEtxkWeN3J5jgKdGSpApFtUCjWE",
+          "short_id": "D1aaddff4f"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
         }
       }
     }
