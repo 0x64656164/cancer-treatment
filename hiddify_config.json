@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
+        "🇪🇪[openproxylist.com] vless-EE"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
+        "🇪🇪[openproxylist.com] vless-EE"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,15 +70,25 @@
       "tag": "block"
     },
     {
-      "type": "hysteria2",
-      "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
-      "server": "217.150.197.54",
-      "server_port": 8443,
-      "password": "2996a658-be2d-412c-9ba3-5b73d65a3df6",
+      "type": "vless",
+      "tag": "🇪🇪[openproxylist.com] vless-EE",
+      "server": "95sub.ghost-lan.com",
+      "server_port": 8442,
+      "uuid": "873f1046-0210-4b2e-a0ec-dc1826886071",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "quic.tyr-agentstvo.tech",
-        "insecure": false
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg",
+          "short_id": "a7f9106ba66e4796"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
       }
     }
   ],
