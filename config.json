@@ -47,9 +47,6 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇵🇱 Poland | [*CIDR] VK",
-        "🇳🇱 The Netherlands | [*CIDR] VK",
-        "🇦🇪 United Arab Emirates | [*CIDR] VK",
         "TCP, Max [V.O.I.D]"
       ]
     },
@@ -57,9 +54,6 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇵🇱 Poland | [*CIDR] VK",
-        "🇳🇱 The Netherlands | [*CIDR] VK",
-        "🇦🇪 United Arab Emirates | [*CIDR] VK",
         "TCP, Max [V.O.I.D]"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -72,72 +66,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland | [*CIDR] VK",
-      "server": "rude.go-bull.pro",
-      "server_port": 2089,
-      "uuid": "7f967c17-c037-4a61-b73d-404468e5add8",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "proshkola.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "I1v1juarLekOXUXIO1eh3-gUntqQQgnKYAbax8OKVU0",
-          "short_id": "45d6167db76a82c1"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
-      "server": "rude.go-bull.pro",
-      "server_port": 2095,
-      "uuid": "7f967c17-c037-4a61-b73d-404468e5add8",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "proshkola.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "I1v1juarLekOXUXIO1eh3-gUntqQQgnKYAbax8OKVU0",
-          "short_id": "8f2a1c4b9d7e6053"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇦🇪 United Arab Emirates | [*CIDR] VK",
-      "server": "rude.go-bull.pro",
-      "server_port": 2096,
-      "uuid": "7f967c17-c037-4a61-b73d-404468e5add8",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "proshkola.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "I1v1juarLekOXUXIO1eh3-gUntqQQgnKYAbax8OKVU0",
-          "short_id": "a1b2c3d4e5f60718"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
