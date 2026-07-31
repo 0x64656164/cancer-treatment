@@ -47,7 +47,6 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "TCP, Max [V.O.I.D]",
         " By EbraSha"
       ]
     },
@@ -55,7 +54,6 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "TCP, Max [V.O.I.D]",
         " By EbraSha"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -68,28 +66,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "TCP, Max [V.O.I.D]",
-      "server": "95sub.ghost-lan.com",
-      "server_port": 8442,
-      "uuid": "873f1046-0210-4b2e-a0ec-dc1826886071",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg",
-          "short_id": "a7f9106ba66e4796"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        }
-      }
     },
     {
       "type": "vless",
