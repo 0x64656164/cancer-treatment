@@ -27,15 +27,17 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-07-31T08:15:13.736302",
-      "last_seen": "2026-07-31T13:12:47.554423",
-      "total_tests": 5,
-      "successful_tests": 5,
+      "last_seen": "2026-07-31T15:36:12.976184",
+      "total_tests": 7,
+      "successful_tests": 7,
       "speed_history": [
         6.768085669329787,
         12.421278829221954,
         27.38872771704524,
         23.274098309501596,
-        22.519267540998655
+        22.519267540998655,
+        11.279541751179243,
+        11.227242535859176
       ],
       "check_history": [
         {
@@ -72,108 +74,40 @@
           "speed": 22.519267540998655,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-07-31T15:36:05.470239",
+          "success": true,
+          "speed": 11.279541751179243,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-07-31T15:36:12.976184",
+          "success": true,
+          "speed": 11.227242535859176,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.7680540504171907,
+      "rating": 0.7976918973084225,
       "rating_components": {
         "speed": 1.0,
         "stability": 1.0,
-        "uptime": 0.6271587323555555,
-        "consistency": 0.17192277134384892,
-        "freshness": 0.9999885356038911
+        "uptime": 0.7150045463333333,
+        "consistency": 0.11754560235058786,
+        "freshness": 0.999570123600202
       },
       "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 5,
-      "active": true,
-      "staging_until": null,
-      "consecutive_failures": 0
-    },
-    "vless|lte1.belka.network|443|fb6b3497": {
-      "outbound": {
-        "type": "vless",
-        "tag": " By EbraSha",
-        "server": "lte1.belka.network",
-        "server_port": 443,
-        "uuid": "fb6b3497-2026-4a86-b9a5-3e5f18e77a37",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "vk.com",
-          "reality": {
-            "enabled": true,
-            "public_key": "_qSbW4JL4Ffqvj25vX-6a2ul9Qlj6PBdlF0ghsf_0RQ",
-            "short_id": "a9dc98a7dc87a7dc"
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "firefox"
-          }
-        }
-      },
-      "link": "vless://fb6b3497-2026-4a86-b9a5-3e5f18e77a37@lte1.belka.network:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=vk.com&fp=firefox&pbk=_qSbW4JL4Ffqvj25vX-6a2ul9Qlj6PBdlF0ghsf_0RQ&sid=a9dc98a7dc87a7dc&allowinsecure=0&type=tcp&headerType=none# By EbraSha",
-      "group": "EUROPE",
-      "country": "NL",
-      "first_seen": "2026-07-31T08:15:13.736720",
-      "last_seen": "2026-07-31T13:12:47.613287",
-      "total_tests": 4,
-      "successful_tests": 4,
-      "speed_history": [
-        16.199129964611508,
-        11.988447766908042,
-        14.574391697594963,
-        22.16263470084271
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-07-31T08:15:13.736720",
-          "success": true,
-          "speed": 16.199129964611508,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-07-31T11:04:51.882312",
-          "success": true,
-          "speed": 11.988447766908042,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-07-31T13:12:43.793286",
-          "success": true,
-          "speed": 14.574391697594963,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-07-31T13:12:47.613287",
-          "success": true,
-          "speed": 22.16263470084271,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.7805041830774935,
-      "rating_components": {
-        "speed": 0.878580427997302,
-        "stability": 1.0,
-        "uptime": 0.6271587253361111,
-        "consistency": 0.5392462860010075,
-        "freshness": 0.9999998582899198
-      },
-      "category": "A",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 4,
+      "consecutive_successes": 7,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-07-31T13:12:47.614531"
+    "last_cleanup": "2026-07-31T15:36:15.209853"
   }
 }
