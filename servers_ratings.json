@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|lte1.belka.network|443|fb6b3497": {
+      "outbound": {
+        "type": "vless",
+        "tag": " By EbraSha",
+        "server": "lte1.belka.network",
+        "server_port": 443,
+        "uuid": "fb6b3497-2026-4a86-b9a5-3e5f18e77a37",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "vk.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "_qSbW4JL4Ffqvj25vX-6a2ul9Qlj6PBdlF0ghsf_0RQ",
+            "short_id": "a9dc98a7dc87a7dc"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://fb6b3497-2026-4a86-b9a5-3e5f18e77a37@lte1.belka.network:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=vk.com&fp=firefox&pbk=_qSbW4JL4Ffqvj25vX-6a2ul9Qlj6PBdlF0ghsf_0RQ&sid=a9dc98a7dc87a7dc&allowinsecure=0&type=tcp&headerType=none# By EbraSha",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-07-31T21:37:07.937258",
+      "last_seen": "2026-07-31T21:37:07.937258",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        6.363382423534288
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-07-31T21:37:07.937258",
+          "success": true,
+          "speed": 6.363382423534288,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-07-31T22:37:07.937283",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-07-31T20:15:43.195042"
+    "last_cleanup": "2026-07-31T21:37:07.938023"
   }
 }
