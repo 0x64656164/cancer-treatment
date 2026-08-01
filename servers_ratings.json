@@ -27,15 +27,17 @@
       "group": "EUROPE",
       "country": "NL",
       "first_seen": "2026-07-31T21:37:07.937258",
-      "last_seen": "2026-07-31T23:54:06.111055",
-      "total_tests": 5,
-      "successful_tests": 5,
+      "last_seen": "2026-08-01T01:48:50.405172",
+      "total_tests": 7,
+      "successful_tests": 7,
       "speed_history": [
         6.363382423534288,
         27.05532301820354,
         27.704749767872993,
         10.73860172348418,
-        10.560041486061419
+        10.560041486061419,
+        9.087467008402962,
+        8.331134234197856
       ],
       "check_history": [
         {
@@ -72,26 +74,164 @@
           "speed": 10.560041486061419,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-01T01:48:40.311437",
+          "success": true,
+          "speed": 9.087467008402962,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-01T01:48:50.405172",
+          "success": true,
+          "speed": 8.331134234197856,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.6758826475482546,
+      "rating": 0.6687925432245392,
       "rating_components": {
-        "speed": 1.0,
+        "speed": 0.696644618652895,
         "stability": 1.0,
-        "uptime": 0.43983144566666665,
+        "uptime": 0.5736591166055556,
         "consistency": 0.0,
-        "freshness": 0.9996671285439197
+        "freshness": 0.9999998190115859
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 5,
+      "consecutive_successes": 7,
       "active": true,
       "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|217sub.ghost-lan.com|8442|873f1046": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇪🇪 Estonia [*CIDR] VK",
+        "server": "217sub.ghost-lan.com",
+        "server_port": 8442,
+        "uuid": "873f1046-0210-4b2e-a0ec-dc1826886071",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "max.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg",
+            "short_id": "a7f9106ba66e4796"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://873f1046-0210-4b2e-a0ec-dc1826886071@217sub.ghost-lan.com:8442?type=tcp&headerType=none&security=reality&encryption=none&sni=max.ru&pbk=TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg&sid=a7f9106ba66e4796&flow=xtls-rprx-vision&fp=firefox#TCP, Max [V.O.I.D]",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-08-01T01:48:40.309846",
+      "last_seen": "2026-08-01T01:48:40.310905",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        23.607642182864613,
+        17.339942030495415
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-01T01:48:40.309846",
+          "success": true,
+          "speed": 23.607642182864613,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-01T01:48:40.310905",
+          "success": true,
+          "speed": 17.339942030495415,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-08-01T02:48:40.310914",
+      "consecutive_failures": 0
+    },
+    "vless|95sub.ghost-lan.com|8442|873f1046": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇪🇪[openproxylist.com] vless-EE",
+        "server": "95sub.ghost-lan.com",
+        "server_port": 8442,
+        "uuid": "873f1046-0210-4b2e-a0ec-dc1826886071",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "max.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg",
+            "short_id": "a7f9106ba66e4796"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://873f1046-0210-4b2e-a0ec-dc1826886071@95sub.ghost-lan.com:8442?type=tcp&security=reality&sni=max.ru&pbk=TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg&sid=a7f9106ba66e4796&fp=chrome&encryption=none&flow=xtls-rprx-vision#🇪🇪[openproxylist.com] vless-EE",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-08-01T01:48:40.310413",
+      "last_seen": "2026-08-01T01:48:40.310413",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        18.970283996752382
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-01T01:48:40.310413",
+          "success": true,
+          "speed": 18.970283996752382,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-01T02:48:40.310424",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-07-31T23:54:07.840555"
+    "last_cleanup": "2026-08-01T01:48:50.406740"
   }
 }
