@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|213.219.212.24|443|e9c18abb": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇧🇷 Brazil [*CIDR] VK",
+        "server": "213.219.212.24",
+        "server_port": 443,
+        "uuid": "e9c18abb-df58-44b3-9282-b8df9a22d4b2",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "pro-ru-213.emrata.top",
+          "reality": {
+            "enabled": true,
+            "public_key": "AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://e9c18abb-df58-44b3-9282-b8df9a22d4b2@213.219.212.24:443?flow=xtls-rprx-vision&fp=firefox&pbk=AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk&security=reality&sni=pro-ru-213.emrata.top&type=tcp#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "BR",
+      "first_seen": "2026-08-01T16:04:48.398201",
+      "last_seen": "2026-08-01T16:04:48.398201",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        0.13923475942613267
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-01T16:04:48.398201",
+          "success": true,
+          "speed": 0.13923475942613267,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-01T17:04:48.398233",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-01T14:21:40.113352"
+    "last_cleanup": "2026-08-01T16:04:48.402657"
   }
 }
