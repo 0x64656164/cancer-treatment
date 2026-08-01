@@ -1,111 +1,5 @@
 {
   "servers": {
-    "vless|lte1.belka.network|443|fb6b3497": {
-      "outbound": {
-        "type": "vless",
-        "tag": " By EbraSha",
-        "server": "lte1.belka.network",
-        "server_port": 443,
-        "uuid": "fb6b3497-2026-4a86-b9a5-3e5f18e77a37",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "vk.com",
-          "reality": {
-            "enabled": true,
-            "public_key": "_qSbW4JL4Ffqvj25vX-6a2ul9Qlj6PBdlF0ghsf_0RQ",
-            "short_id": "a9dc98a7dc87a7dc"
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "firefox"
-          }
-        }
-      },
-      "link": "vless://fb6b3497-2026-4a86-b9a5-3e5f18e77a37@lte1.belka.network:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=vk.com&fp=firefox&pbk=_qSbW4JL4Ffqvj25vX-6a2ul9Qlj6PBdlF0ghsf_0RQ&sid=a9dc98a7dc87a7dc&allowinsecure=0&type=tcp&headerType=none# By EbraSha",
-      "group": "EUROPE",
-      "country": "NL",
-      "first_seen": "2026-07-31T21:37:07.937258",
-      "last_seen": "2026-08-01T01:48:50.405172",
-      "total_tests": 7,
-      "successful_tests": 7,
-      "speed_history": [
-        6.363382423534288,
-        27.05532301820354,
-        27.704749767872993,
-        10.73860172348418,
-        10.560041486061419,
-        9.087467008402962,
-        8.331134234197856
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-07-31T21:37:07.937258",
-          "success": true,
-          "speed": 6.363382423534288,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-07-31T22:51:54.321156",
-          "success": true,
-          "speed": 27.05532301820354,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-07-31T22:51:57.375592",
-          "success": true,
-          "speed": 27.704749767872993,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-07-31T23:53:58.139208",
-          "success": true,
-          "speed": 10.73860172348418,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-07-31T23:54:06.111055",
-          "success": true,
-          "speed": 10.560041486061419,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-01T01:48:40.311437",
-          "success": true,
-          "speed": 9.087467008402962,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-01T01:48:50.405172",
-          "success": true,
-          "speed": 8.331134234197856,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.6687925432245392,
-      "rating_components": {
-        "speed": 0.696644618652895,
-        "stability": 1.0,
-        "uptime": 0.5736591166055556,
-        "consistency": 0.0,
-        "freshness": 0.9999998190115859
-      },
-      "category": "B",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 7,
-      "active": true,
-      "staging_until": null,
-      "consecutive_failures": 0
-    },
     "vless|217sub.ghost-lan.com|8442|873f1046": {
       "outbound": {
         "type": "vless",
@@ -133,12 +27,13 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-08-01T01:48:40.309846",
-      "last_seen": "2026-08-01T01:48:40.310905",
-      "total_tests": 2,
-      "successful_tests": 2,
+      "last_seen": "2026-08-01T05:17:38.700811",
+      "total_tests": 3,
+      "successful_tests": 3,
       "speed_history": [
         23.607642182864613,
-        17.339942030495415
+        17.339942030495415,
+        9.805274290279943
       ],
       "check_history": [
         {
@@ -154,22 +49,29 @@
           "speed": 17.339942030495415,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-01T05:17:38.700811",
+          "success": true,
+          "speed": 9.805274290279943,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.7211478959484943,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 0.8917957951557043,
+        "stability": 1.0,
+        "uptime": 0.5238242613138888,
+        "consistency": 0.3329202470595497,
+        "freshness": 0.9997800512389531
       },
-      "category": "C",
+      "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 2,
-      "active": false,
-      "staging_until": "2026-08-01T02:48:40.310914",
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     },
     "vless|95sub.ghost-lan.com|8442|873f1046": {
@@ -200,7 +102,7 @@
       "country": null,
       "first_seen": "2026-08-01T01:48:40.310413",
       "last_seen": "2026-08-01T01:48:40.310413",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         18.970283996752382
@@ -210,6 +112,13 @@
           "timestamp": "2026-08-01T01:48:40.310413",
           "success": true,
           "speed": 18.970283996752382,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-01T05:17:39.840433",
+          "success": false,
+          "speed": 0,
           "latency": null,
           "error": null
         }
@@ -225,13 +134,13 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 0,
       "active": false,
-      "staging_until": "2026-08-01T02:48:40.310424",
-      "consecutive_failures": 0
+      "staging_until": null,
+      "consecutive_failures": 1
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-01T01:48:50.406740"
+    "last_cleanup": "2026-08-01T05:17:39.843886"
   }
 }
