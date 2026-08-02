@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|217sub.ghost-lan.com|8442|873f1046": {
+      "outbound": {
+        "type": "vless",
+        "tag": "TCP, Max [V.O.I.D]",
+        "server": "217sub.ghost-lan.com",
+        "server_port": 8442,
+        "uuid": "873f1046-0210-4b2e-a0ec-dc1826886071",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "max.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg",
+            "short_id": "a7f9106ba66e4796"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://873f1046-0210-4b2e-a0ec-dc1826886071@217sub.ghost-lan.com:8442?security=reality&sni=max.ru&fp=chrome&pbk=TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg&sid=a7f9106ba66e4796&type=tcp&flow=xtls-rprx-vision&packetEncoding=xudp&encryption=none#TCP, Max [V.O.I.D]",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-08-02T16:46:24.005133",
+      "last_seen": "2026-08-02T16:46:24.005133",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        16.809734141569386
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-02T16:46:24.005133",
+          "success": true,
+          "speed": 16.809734141569386,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-02T17:46:24.005157",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-02T15:52:33.209113"
+    "last_cleanup": "2026-08-02T16:46:24.005926"
   }
 }
