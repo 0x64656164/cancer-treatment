@@ -1,63 +1,5 @@
 {
   "servers": {
-    "vless|213.219.212.30|443|fdac0300": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇧🇷 Brazil [*CIDR] VK",
-        "server": "213.219.212.30",
-        "server_port": 443,
-        "uuid": "fdac0300-5963-4e68-adb6-fc89a2de99a2",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "pro-ru-213.emrata.top",
-          "reality": {
-            "enabled": true,
-            "public_key": "AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk",
-            "short_id": ""
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "firefox"
-          }
-        }
-      },
-      "link": "vless://fdac0300-5963-4e68-adb6-fc89a2de99a2@213.219.212.30:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk&sni=pro-ru-213.emrata.top#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%5B%2ACIDR%5D%20VK",
-      "group": "EUROPE",
-      "country": "BR",
-      "first_seen": "2026-08-02T22:31:04.929941",
-      "last_seen": "2026-08-02T22:31:04.929941",
-      "total_tests": 1,
-      "successful_tests": 1,
-      "speed_history": [
-        0.7404714286047076
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-08-02T22:31:04.929941",
-          "success": true,
-          "speed": 0.7404714286047076,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.0,
-      "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
-      },
-      "category": "C",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 1,
-      "active": false,
-      "staging_until": "2026-08-02T23:31:04.929979",
-      "consecutive_failures": 0
-    },
     "vless|213.219.212.14|443|fdac0300": {
       "outbound": {
         "type": "vless",
@@ -86,7 +28,7 @@
       "country": "BR",
       "first_seen": "2026-08-02T22:31:04.930538",
       "last_seen": "2026-08-02T22:31:04.930538",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         0.6819694059023982
@@ -96,6 +38,13 @@
           "timestamp": "2026-08-02T22:31:04.930538",
           "success": true,
           "speed": 0.6819694059023982,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-02T23:30:04.975796",
+          "success": false,
+          "speed": 0,
           "latency": null,
           "error": null
         }
@@ -111,10 +60,10 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 0,
       "active": false,
-      "staging_until": "2026-08-02T23:31:04.930548",
-      "consecutive_failures": 0
+      "staging_until": null,
+      "consecutive_failures": 1
     },
     "vless|213.219.212.30|443|caeb0482": {
       "outbound": {
@@ -143,17 +92,91 @@
       "group": "EUROPE",
       "country": "BR",
       "first_seen": "2026-08-02T22:31:04.930963",
-      "last_seen": "2026-08-02T22:31:04.930963",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-08-02T23:31:09.738495",
+      "total_tests": 3,
+      "successful_tests": 3,
       "speed_history": [
-        0.6726334792166149
+        0.6726334792166149,
+        1.4518503017945685,
+        1.126693418266976
       ],
       "check_history": [
         {
           "timestamp": "2026-08-02T22:31:04.930963",
           "success": true,
           "speed": 0.6726334792166149,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-02T23:29:55.243510",
+          "success": true,
+          "speed": 1.4518503017945685,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-02T23:31:09.738495",
+          "success": true,
+          "speed": 1.126693418266976,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.6306122919388762,
+      "rating_components": {
+        "speed": 0.747747681039069,
+        "stability": 1.0,
+        "uptime": 0.3500934967444444,
+        "consistency": 0.410253822176302,
+        "freshness": 0.9999998321043637
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|213.219.212.24|443|12e05835": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇧🇷 Brazil [*CIDR] VK",
+        "server": "213.219.212.24",
+        "server_port": 443,
+        "uuid": "12e05835-011f-4c8b-bc05-1b883f0503f2",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
+        }
+      },
+      "link": "vless://12e05835-011f-4c8b-bc05-1b883f0503f2@213.219.212.24:443?flow=xtls-rprx-vision&fp=qq&pbk=AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk&security=reality&sni=eh.vk.ru&type=tcp#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "BR",
+      "first_seen": "2026-08-02T23:29:55.242870",
+      "last_seen": "2026-08-02T23:29:55.242870",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        1.4493200856026411
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-02T23:29:55.242870",
+          "success": true,
+          "speed": 1.4493200856026411,
           "latency": null,
           "error": null
         }
@@ -171,11 +194,11 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-08-02T23:31:04.930973",
+      "staging_until": "2026-08-03T00:29:55.242905",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-02T22:31:14.630296"
+    "last_cleanup": "2026-08-02T23:31:09.739948"
   }
 }
