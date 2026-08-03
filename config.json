@@ -39,26 +39,22 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇧🇷 Brazil [*CIDR] VK",
-        "🇧🇷 Brazil [*CIDR] VK-1",
-        "🇧🇷 Brazil [*CIDR] VK-2"
+        "ALL-auto",
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇧🇷 Brazil [*CIDR] VK",
-        "🇧🇷 Brazil [*CIDR] VK-1",
-        "🇧🇷 Brazil [*CIDR] VK-2"
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,69 +68,15 @@
       "tag": "block"
     },
     {
-      "type": "vless",
-      "tag": "🇧🇷 Brazil [*CIDR] VK",
-      "server": "213.219.212.14",
-      "server_port": 443,
-      "uuid": "9ea12baf-29ae-493e-a9f0-2916ff22448e",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
+      "type": "hysteria2",
+      "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+      "server": "217.150.197.54",
+      "server_port": 8443,
+      "password": "12a9c8a7-4b08-4514-82f3-9a64bb9bd201",
       "tls": {
         "enabled": true,
-        "server_name": "pro-ru-213.emrata.top",
-        "reality": {
-          "enabled": true,
-          "public_key": "AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇧🇷 Brazil [*CIDR] VK-1",
-      "server": "213.219.212.30",
-      "server_port": 443,
-      "uuid": "fdac0300-5963-4e68-adb6-fc89a2de99a2",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "pro-ru-213.emrata.top",
-        "reality": {
-          "enabled": true,
-          "public_key": "AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇧🇷 Brazil [*CIDR] VK-2",
-      "server": "213.219.212.24",
-      "server_port": 443,
-      "uuid": "12e05835-011f-4c8b-bc05-1b883f0503f2",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "eh.vk.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
+        "server_name": "quic.tyr-agentstvo.tech",
+        "insecure": false
       }
     }
   ],
