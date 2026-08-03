@@ -41,14 +41,14 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇧🇷 Brazil [*CIDR] VK",
         "🇧🇷 Brazil [*CIDR] VK-1",
         "🇧🇷 Brazil [*CIDR] VK-2",
@@ -57,7 +57,7 @@
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇧🇷 Brazil [*CIDR] VK",
         "🇧🇷 Brazil [*CIDR] VK-1",
@@ -78,14 +78,14 @@
     {
       "type": "vless",
       "tag": "🇧🇷 Brazil [*CIDR] VK",
-      "server": "213.219.212.24",
+      "server": "213.219.212.14",
       "server_port": 443,
-      "uuid": "12e05835-011f-4c8b-bc05-1b883f0503f2",
+      "uuid": "9ea12baf-29ae-493e-a9f0-2916ff22448e",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "eh.vk.ru",
+        "server_name": "pro-ru-213.emrata.top",
         "reality": {
           "enabled": true,
           "public_key": "AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk",
@@ -93,7 +93,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "firefox"
         }
       }
     },
@@ -122,9 +122,9 @@
     {
       "type": "vless",
       "tag": "🇧🇷 Brazil [*CIDR] VK-2",
-      "server": "213.219.212.14",
+      "server": "213.219.212.30",
       "server_port": 443,
-      "uuid": "9ea12baf-29ae-493e-a9f0-2916ff22448e",
+      "uuid": "fdac0300-5963-4e68-adb6-fc89a2de99a2",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
@@ -144,14 +144,14 @@
     {
       "type": "vless",
       "tag": "🇧🇷 Brazil [*CIDR] VK-3",
-      "server": "213.219.212.30",
+      "server": "213.219.212.24",
       "server_port": 443,
-      "uuid": "fdac0300-5963-4e68-adb6-fc89a2de99a2",
+      "uuid": "12e05835-011f-4c8b-bc05-1b883f0503f2",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "pro-ru-213.emrata.top",
+        "server_name": "eh.vk.ru",
         "reality": {
           "enabled": true,
           "public_key": "AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk",
@@ -159,7 +159,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "firefox"
+          "fingerprint": "qq"
         }
       }
     }
