@@ -1,40 +1,43 @@
 {
   "servers": {
-    "hysteria2|217.150.197.54|8443|12a9c8a7": {
+    "vless|95sub.ghost-lan.com|8442|873f1046": {
       "outbound": {
-        "type": "hysteria2",
-        "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
-        "server": "217.150.197.54",
-        "server_port": 8443,
-        "password": "12a9c8a7-4b08-4514-82f3-9a64bb9bd201",
+        "type": "vless",
+        "tag": "Join+Telegram:@Farah_VPN",
+        "server": "95sub.ghost-lan.com",
+        "server_port": 8442,
+        "uuid": "873f1046-0210-4b2e-a0ec-dc1826886071",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
         "tls": {
           "enabled": true,
-          "server_name": "quic.tyr-agentstvo.tech",
-          "insecure": false
+          "server_name": "max.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg",
+            "short_id": "a7f9106ba66e4796"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
         }
       },
-      "link": "hysteria2://12a9c8a7-4b08-4514-82f3-9a64bb9bd201@217.150.197.54:8443?sni=quic.tyr-agentstvo.tech&alpn=h3#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%A9%F0%9F%87%AA%20%F0%9F%87%B5%F0%9F%87%B1%20%5B%2ACIDR%5D",
+      "link": "vless://873f1046-0210-4b2e-a0ec-dc1826886071@95sub.ghost-lan.com:8442?type=tcp&security=reality&sni=max.ru&pbk=TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg&sid=a7f9106ba66e4796&fp=chrome&encryption=none&flow=xtls-rprx-vision#Join+Telegram:@Farah_VPN",
       "group": "EUROPE",
       "country": null,
-      "first_seen": "2026-08-04T15:18:23.619794",
-      "last_seen": "2026-08-04T15:18:23.619794",
-      "total_tests": 2,
+      "first_seen": "2026-08-04T19:03:38.774804",
+      "last_seen": "2026-08-04T19:03:38.774804",
+      "total_tests": 1,
       "successful_tests": 1,
       "speed_history": [
-        1.770566316971741
+        11.67545164687554
       ],
       "check_history": [
         {
-          "timestamp": "2026-08-04T15:18:23.619794",
+          "timestamp": "2026-08-04T19:03:38.774804",
           "success": true,
-          "speed": 1.770566316971741,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-04T17:10:54.857354",
-          "success": false,
-          "speed": 0,
+          "speed": 11.67545164687554,
           "latency": null,
           "error": null
         }
@@ -50,13 +53,13 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 0,
+      "consecutive_successes": 1,
       "active": false,
-      "staging_until": null,
-      "consecutive_failures": 1
+      "staging_until": "2026-08-04T20:03:38.774827",
+      "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-04T17:10:54.858370"
+    "last_cleanup": "2026-08-04T19:03:40.971566"
   }
 }
