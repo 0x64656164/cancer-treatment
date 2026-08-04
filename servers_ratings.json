@@ -1,6 +1,63 @@
 {
-  "servers": {},
+  "servers": {
+    "hysteria2|217.150.197.54|8443|12a9c8a7": {
+      "outbound": {
+        "type": "hysteria2",
+        "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+        "server": "217.150.197.54",
+        "server_port": 8443,
+        "password": "12a9c8a7-4b08-4514-82f3-9a64bb9bd201",
+        "tls": {
+          "enabled": true,
+          "server_name": "quic.tyr-agentstvo.tech",
+          "insecure": false
+        }
+      },
+      "link": "hysteria2://12a9c8a7-4b08-4514-82f3-9a64bb9bd201@217.150.197.54:8443?sni=quic.tyr-agentstvo.tech&alpn=h3#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%B5%F0%9F%87%B1%20%5B%2ACIDR%5D",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-08-04T00:00:40.038513",
+      "last_seen": "2026-08-04T00:00:40.038955",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        9.476991915237042,
+        8.314735370798523
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-04T00:00:40.038513",
+          "success": true,
+          "speed": 9.476991915237042,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-04T00:00:40.038955",
+          "success": true,
+          "speed": 8.314735370798523,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-08-04T01:00:40.038964",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-03T22:53:07.879386"
+    "last_cleanup": "2026-08-04T00:00:40.039482"
   }
 }
