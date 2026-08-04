@@ -27,17 +27,91 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-08-04T19:03:38.774804",
-      "last_seen": "2026-08-04T19:03:38.774804",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-08-04T20:52:37.358512",
+      "total_tests": 3,
+      "successful_tests": 3,
       "speed_history": [
-        11.67545164687554
+        11.67545164687554,
+        27.59172665361793,
+        25.771159041092233
       ],
       "check_history": [
         {
           "timestamp": "2026-08-04T19:03:38.774804",
           "success": true,
           "speed": 11.67545164687554,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-04T20:52:34.083170",
+          "success": true,
+          "speed": 27.59172665361793,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-04T20:52:37.358512",
+          "success": true,
+          "speed": 25.771159041092233,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.6972374426980598,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.4071391384083333,
+        "consistency": 0.343818033059918,
+        "freshness": 0.9999998935248972
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|37.139.43.57|443|ceeba701": {
+      "outbound": {
+        "type": "vless",
+        "tag": " By EbraSha",
+        "server": "37.139.43.57",
+        "server_port": 443,
+        "uuid": "ceeba701-bb9f-4f2c-8142-677d27a2acb1",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo",
+            "short_id": "7f2e9c4b1a8d6a53"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://ceeba701-bb9f-4f2c-8142-677d27a2acb1@37.139.43.57:443?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo&security=reality&sid=7f2e9c4b1a8d6a53&sni=eh.vk.com&type=tcp# By EbraSha",
+      "group": "RUSSIA",
+      "country": "RU",
+      "first_seen": "2026-08-04T20:52:34.083606",
+      "last_seen": "2026-08-04T20:52:34.083606",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        9.459653920120182
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-04T20:52:34.083606",
+          "success": true,
+          "speed": 9.459653920120182,
           "latency": null,
           "error": null
         }
@@ -55,11 +129,11 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-08-04T20:03:38.774827",
+      "staging_until": "2026-08-04T21:52:34.083618",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-04T19:03:40.971566"
+    "last_cleanup": "2026-08-04T20:52:37.359439"
   }
 }

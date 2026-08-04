@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "Join+Telegram:@Farah_VPN"
+        "Join+Telegram:@Farah_VPN",
+        " By EbraSha"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "Join+Telegram:@Farah_VPN"
+        "Join+Telegram:@Farah_VPN",
+        " By EbraSha"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -82,6 +84,28 @@
           "enabled": true,
           "public_key": "TRB-7JE8MNZDBFSduYp9syU1AdpLez1MJ7dPrHeGFwg",
           "short_id": "a7f9106ba66e4796"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": " By EbraSha",
+      "server": "37.139.43.57",
+      "server_port": 443,
+      "uuid": "ceeba701-bb9f-4f2c-8142-677d27a2acb1",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo",
+          "short_id": "7f2e9c4b1a8d6a53"
         },
         "utls": {
           "enabled": true,
