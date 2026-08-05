@@ -41,26 +41,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "filembad-371",
+        "EUROPE-auto",
+        "TCP, Яндекс Карты [V.O.I.D]",
         "TCP, VK [V.O.I.D]",
-        "TCP, Яндекс Карты [V.O.I.D]"
+        "filembad-371"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "filembad-371",
+        "TCP, Яндекс Карты [V.O.I.D]",
         "TCP, VK [V.O.I.D]",
-        "TCP, Яндекс Карты [V.O.I.D]"
+        "filembad-371"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -75,10 +75,10 @@
     },
     {
       "type": "vless",
-      "tag": "filembad-371",
-      "server": "89.208.198.151",
-      "server_port": 9443,
-      "uuid": "bdba330b-dfc6-001f-93e4-b10f906bf4fb",
+      "tag": "TCP, Яндекс Карты [V.O.I.D]",
+      "server": "185.86.145.253",
+      "server_port": 443,
+      "uuid": "bdba330b-dfc6-0023-93e4-b10f906bf4fb",
       "flow": "",
       "packet_encoding": "xudp",
       "tls": {
@@ -86,12 +86,12 @@
         "server_name": "api-maps.yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "0J8o7RTIGJzUV6gOjCtpPvgzCZz7Yowfla_I0a01GRY",
-          "short_id": "ddd6"
+          "public_key": "Mkxs9LT0tRg208EbLXmP-_dQYlsPOgaTwZ3acwgVVWs",
+          "short_id": ""
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "edge"
+          "fingerprint": "firefox"
         }
       }
     },
@@ -119,10 +119,10 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, Яндекс Карты [V.O.I.D]",
-      "server": "185.86.145.253",
-      "server_port": 443,
-      "uuid": "bdba330b-dfc6-0023-93e4-b10f906bf4fb",
+      "tag": "filembad-371",
+      "server": "89.208.198.151",
+      "server_port": 9443,
+      "uuid": "bdba330b-dfc6-001f-93e4-b10f906bf4fb",
       "flow": "",
       "packet_encoding": "xudp",
       "tls": {
@@ -130,12 +130,12 @@
         "server_name": "api-maps.yandex.ru",
         "reality": {
           "enabled": true,
-          "public_key": "Mkxs9LT0tRg208EbLXmP-_dQYlsPOgaTwZ3acwgVVWs",
-          "short_id": ""
+          "public_key": "0J8o7RTIGJzUV6gOjCtpPvgzCZz7Yowfla_I0a01GRY",
+          "short_id": "ddd6"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "firefox"
+          "fingerprint": "edge"
         }
       }
     }
