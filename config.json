@@ -47,16 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "TCP, VK [V.O.I.D]",
-        "TCP, Яндекс Карты [V.O.I.D]"
+        "🇳🇱 The Netherlands | [*CIDR]",
+        "🇸🇪 Sweden | [*CIDR]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "TCP, VK [V.O.I.D]",
-        "TCP, Яндекс Карты [V.O.I.D]"
+        "🇳🇱 The Netherlands | [*CIDR]",
+        "🇸🇪 Sweden | [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,45 +71,45 @@
     },
     {
       "type": "vless",
-      "tag": "TCP, VK [V.O.I.D]",
-      "server": "212.233.93.223",
-      "server_port": 443,
-      "uuid": "bdba330b-dfc6-001f-93e4-b10f906bf4fb",
-      "flow": "",
+      "tag": "🇳🇱 The Netherlands | [*CIDR]",
+      "server": "178.248.236.155",
+      "server_port": 18443,
+      "uuid": "b668547d-d997-4f59-957b-5da1d9a5de15",
+      "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "eh.vk.com",
+        "server_name": "rutube.ru",
         "reality": {
           "enabled": true,
-          "public_key": "0J8o7RTIGJzUV6gOjCtpPvgzCZz7Yowfla_I0a01GRY",
-          "short_id": "ddd6"
+          "public_key": "JScNgNDPXbQKa-5VKPNZAaC-RqQuvuf4uEEHbJWrVSc",
+          "short_id": "000443436f"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "safari"
+          "fingerprint": "edge"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "TCP, Яндекс Карты [V.O.I.D]",
-      "server": "185.86.145.253",
-      "server_port": 443,
-      "uuid": "bdba330b-dfc6-0023-93e4-b10f906bf4fb",
-      "flow": "",
+      "tag": "🇸🇪 Sweden | [*CIDR]",
+      "server": "178.248.236.155",
+      "server_port": 14443,
+      "uuid": "aa8b4a23-655f-480c-aef6-27b0c45e7877",
+      "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "api-maps.yandex.ru",
+        "server_name": "rutube.ru",
         "reality": {
           "enabled": true,
-          "public_key": "Mkxs9LT0tRg208EbLXmP-_dQYlsPOgaTwZ3acwgVVWs",
-          "short_id": ""
+          "public_key": "szC_0ZhoT_nwOrJcYXRrMw3EGJkiOAYCU-6atQo6mXQ",
+          "short_id": "0dacf3306f"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "firefox"
+          "fingerprint": "edge"
         }
       }
     }
