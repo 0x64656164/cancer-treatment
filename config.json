@@ -39,26 +39,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
         "🇳🇱 The Netherlands | [*CIDR]",
-        "🇸🇪 Sweden | [*CIDR]",
-        " By EbraSha"
+        "🇸🇪 Sweden | [*CIDR]"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
         "🇳🇱 The Netherlands | [*CIDR]",
-        "🇸🇪 Sweden | [*CIDR]",
-        " By EbraSha"
+        "🇸🇪 Sweden | [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -112,28 +110,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "edge"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": " By EbraSha",
-      "server": "37.139.43.57",
-      "server_port": 443,
-      "uuid": "ceeba701-bb9f-4f2c-8142-677d27a2acb1",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "eh.vk.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo",
-          "short_id": "7f2e9c4b1a8d6a53"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
         }
       }
     }
