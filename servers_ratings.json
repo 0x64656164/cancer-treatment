@@ -1,6 +1,73 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|178.248.236.155|18443|c099de6a": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | [*CIDR]",
+        "server": "178.248.236.155",
+        "server_port": 18443,
+        "uuid": "c099de6a-0805-4052-b959-fd4ab4fc209e",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "rutube.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "JScNgNDPXbQKa-5VKPNZAaC-RqQuvuf4uEEHbJWrVSc",
+            "short_id": "000443436f"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "edge"
+          }
+        }
+      },
+      "link": "vless://c099de6a-0805-4052-b959-fd4ab4fc209e@178.248.236.155:18443?allowInsecure=1&flow=xtls-rprx-vision&pbk=JScNgNDPXbQKa-5VKPNZAaC-RqQuvuf4uEEHbJWrVSc&security=reality&sid=000443436f&sni=rutube.ru&type=tcp&fp=firefox#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%5B%2ACIDR%5D",
+      "group": "EUROPE",
+      "country": "NL",
+      "first_seen": "2026-08-07T23:55:53.726555",
+      "last_seen": "2026-08-07T23:55:53.727030",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        45.43525701689854,
+        43.99384664815332
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-07T23:55:53.726555",
+          "success": true,
+          "speed": 45.43525701689854,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-07T23:55:53.727030",
+          "success": true,
+          "speed": 43.99384664815332,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-08-08T00:55:53.727038",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-07T23:02:40.014769"
+    "last_cleanup": "2026-08-07T23:55:53.727655"
   }
 }
