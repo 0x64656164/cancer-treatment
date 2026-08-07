@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|37.139.43.57|443|ceeba701": {
+      "outbound": {
+        "type": "vless",
+        "tag": " By EbraSha",
+        "server": "37.139.43.57",
+        "server_port": 443,
+        "uuid": "ceeba701-bb9f-4f2c-8142-677d27a2acb1",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo",
+            "short_id": "7f2e9c4b1a8d6a53"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://ceeba701-bb9f-4f2c-8142-677d27a2acb1@37.139.43.57:443?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo&security=reality&sid=7f2e9c4b1a8d6a53&sni=eh.vk.com&type=tcp# By EbraSha",
+      "group": "RUSSIA",
+      "country": "RU",
+      "first_seen": "2026-08-07T17:41:08.587255",
+      "last_seen": "2026-08-07T17:41:08.587255",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        8.837945051512065
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-07T17:41:08.587255",
+          "success": true,
+          "speed": 8.837945051512065,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-07T18:41:08.587288",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-07T16:40:53.313022"
+    "last_cleanup": "2026-08-07T17:41:08.588075"
   }
 }

@@ -49,16 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | [*CIDR]",
-        "🇸🇪 Sweden | [*CIDR]"
+        " By EbraSha"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | [*CIDR]",
-        "🇸🇪 Sweden | [*CIDR]"
+        " By EbraSha"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,45 +71,23 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands | [*CIDR]",
-      "server": "178.248.236.155",
-      "server_port": 18443,
-      "uuid": "b668547d-d997-4f59-957b-5da1d9a5de15",
+      "tag": " By EbraSha",
+      "server": "37.139.43.57",
+      "server_port": 443,
+      "uuid": "ceeba701-bb9f-4f2c-8142-677d27a2acb1",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "rutube.ru",
+        "server_name": "eh.vk.com",
         "reality": {
           "enabled": true,
-          "public_key": "JScNgNDPXbQKa-5VKPNZAaC-RqQuvuf4uEEHbJWrVSc",
-          "short_id": "000443436f"
+          "public_key": "3v-9P94hjSE1fw6we1J4RvyIYnFhySQUAe1DUKqkaBo",
+          "short_id": "7f2e9c4b1a8d6a53"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "edge"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇸🇪 Sweden | [*CIDR]",
-      "server": "178.248.236.155",
-      "server_port": 14443,
-      "uuid": "aa8b4a23-655f-480c-aef6-27b0c45e7877",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rutube.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "szC_0ZhoT_nwOrJcYXRrMw3EGJkiOAYCU-6atQo6mXQ",
-          "short_id": "0dacf3306f"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
+          "fingerprint": "chrome"
         }
       }
     }
