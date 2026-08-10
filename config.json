@@ -47,16 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | [*CIDR]",
-        "🇵🇱 Poland [*CIDR]"
+        "🇳🇱 The Netherlands | [*CIDR]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | [*CIDR]",
-        "🇵🇱 Poland [*CIDR]"
+        "🇳🇱 The Netherlands | [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -89,18 +87,6 @@
           "enabled": true,
           "fingerprint": "edge"
         }
-      }
-    },
-    {
-      "type": "hysteria2",
-      "tag": "🇵🇱 Poland [*CIDR]",
-      "server": "217.150.197.54",
-      "server_port": 8443,
-      "password": "8e9b2c52-e083-40fb-92c1-8a8cd4c6a02c",
-      "tls": {
-        "enabled": true,
-        "server_name": "quic.tyr-agentstvo.tech",
-        "insecure": false
       }
     }
   ],
