@@ -27,12 +27,10 @@
       "group": "EUROPE",
       "country": "NL",
       "first_seen": "2026-08-07T23:55:53.726555",
-      "last_seen": "2026-08-10T03:22:46.106107",
-      "total_tests": 33,
-      "successful_tests": 33,
+      "last_seen": "2026-08-10T05:03:07.571733",
+      "total_tests": 35,
+      "successful_tests": 35,
       "speed_history": [
-        7.701637941941476,
-        8.489146676348875,
         12.078139758627639,
         11.702019220815641,
         73.19468902125664,
@@ -40,7 +38,9 @@
         7.574729867575656,
         7.589700257322855,
         65.75551760350952,
-        67.07637574522201
+        67.07637574522201,
+        6.433115359984513,
+        6.494945634233151
       ],
       "check_history": [
         {
@@ -273,26 +273,88 @@
           "speed": 67.07637574522201,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-10T05:02:54.629561",
+          "success": true,
+          "speed": 6.433115359984513,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-10T05:03:07.571733",
+          "success": true,
+          "speed": 6.494945634233151,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.8828732064982698,
+      "rating": 0.8842670651129059,
       "rating_components": {
         "speed": 1.0,
         "stability": 1.0,
-        "uptime": 0.9571830906145834,
+        "uptime": 0.9606677350572916,
         "consistency": 0.0,
-        "freshness": 0.9999998016829097
+        "freshness": 0.9999998072665942
       },
       "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 33,
+      "consecutive_successes": 35,
       "active": true,
       "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "hysteria2|217.150.197.54|8443|8e9b2c52": {
+      "outbound": {
+        "type": "hysteria2",
+        "tag": "🇵🇱 Poland [*CIDR]",
+        "server": "217.150.197.54",
+        "server_port": 8443,
+        "password": "8e9b2c52-e083-40fb-92c1-8a8cd4c6a02c",
+        "tls": {
+          "enabled": true,
+          "server_name": "quic.tyr-agentstvo.tech",
+          "insecure": false
+        }
+      },
+      "link": "hysteria2://8e9b2c52-e083-40fb-92c1-8a8cd4c6a02c@217.150.197.54:8443?sni=quic.tyr-agentstvo.tech#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-08-10T05:02:54.628732",
+      "last_seen": "2026-08-10T05:02:54.628732",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        27.847281645608355
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-10T05:02:54.628732",
+          "success": true,
+          "speed": 27.847281645608355,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-10T06:02:54.628753",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-10T03:22:46.107805"
+    "last_cleanup": "2026-08-10T05:03:07.573521"
   }
 }
