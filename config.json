@@ -39,26 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
+        "🇧🇬 Bulgaria [*CIDR] VK",
         "TCP, Max [V.O.I.D]",
-        "🇫🇷 France [*CIDR] VK",
-        "🇧🇬 Bulgaria [*CIDR] VK"
+        "🇫🇷 France [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
+        "🇧🇬 Bulgaria [*CIDR] VK",
         "TCP, Max [V.O.I.D]",
-        "🇫🇷 France [*CIDR] VK",
-        "🇧🇬 Bulgaria [*CIDR] VK"
+        "🇫🇷 France [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,6 +70,28 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇧🇬 Bulgaria [*CIDR] VK",
+      "server": "90.156.218.143",
+      "server_port": 59843,
+      "uuid": "c99e66e0-b662-4d77-9559-a1f1d9d3ff26",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "smartcaptcha.yandexcloud.net",
+        "reality": {
+          "enabled": true,
+          "public_key": "1kpwQNJzgJg4EM1ahJrq1dDWM8briCR53o5LKJkA7UA",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
     },
     {
       "type": "vless",
@@ -108,28 +130,6 @@
           "enabled": true,
           "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
           "short_id": "e7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇧🇬 Bulgaria [*CIDR] VK",
-      "server": "90.156.218.143",
-      "server_port": 59843,
-      "uuid": "c99e66e0-b662-4d77-9559-a1f1d9d3ff26",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "smartcaptcha.yandexcloud.net",
-        "reality": {
-          "enabled": true,
-          "public_key": "1kpwQNJzgJg4EM1ahJrq1dDWM8briCR53o5LKJkA7UA",
-          "short_id": ""
         },
         "utls": {
           "enabled": true,
