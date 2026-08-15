@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | [*CIDR]"
+        "TCP, VK [V.O.I.D]",
+        "TCP, Max [V.O.I.D]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | [*CIDR]"
+        "TCP, VK [V.O.I.D]",
+        "TCP, Max [V.O.I.D]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,23 +73,45 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands | [*CIDR]",
-      "server": "178.248.236.155",
-      "server_port": 18443,
-      "uuid": "c099de6a-0805-4052-b959-fd4ab4fc209e",
+      "tag": "TCP, VK [V.O.I.D]",
+      "server": "finnode3.frost-api.com",
+      "server_port": 443,
+      "uuid": "34a38f21-310e-4da5-b549-35076e16993c",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "rutube.ru",
+        "server_name": "eh.vk.com",
         "reality": {
           "enabled": true,
-          "public_key": "JScNgNDPXbQKa-5VKPNZAaC-RqQuvuf4uEEHbJWrVSc",
-          "short_id": "000443436f"
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "e7"
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "edge"
+          "fingerprint": "ios"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "TCP, Max [V.O.I.D]",
+      "server": "frabridge1.frost-api.com",
+      "server_port": 443,
+      "uuid": "34a38f21-310e-4da5-b549-35076e16993c",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+          "short_id": "e7"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
     }
