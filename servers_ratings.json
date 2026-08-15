@@ -1,6 +1,73 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|finnode3.frost-api.com|443|34a38f21": {
+      "outbound": {
+        "type": "vless",
+        "tag": "TCP, VK [V.O.I.D]",
+        "server": "finnode3.frost-api.com",
+        "server_port": 443,
+        "uuid": "34a38f21-310e-4da5-b549-35076e16993c",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
+            "short_id": "e7"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "ios"
+          }
+        }
+      },
+      "link": "vless://34a38f21-310e-4da5-b549-35076e16993c@finnode3.frost-api.com:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=eh.vk.com&pbk=SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw&sid=e7&type=tcp&headerType=none&fp=ios#%F0%9F%87%AB%F0%9F%87%AE%20Finland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "FI",
+      "first_seen": "2026-08-15T21:14:47.236634",
+      "last_seen": "2026-08-15T21:14:47.237025",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        19.876798746386708,
+        13.480492844010739
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-15T21:14:47.236634",
+          "success": true,
+          "speed": 19.876798746386708,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-15T21:14:47.237025",
+          "success": true,
+          "speed": 13.480492844010739,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-08-15T22:14:47.237033",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-15T20:45:21.782342"
+    "last_cleanup": "2026-08-15T21:14:47.237664"
   }
 }
