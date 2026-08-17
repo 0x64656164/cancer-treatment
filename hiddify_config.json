@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇷 France | [*CIDR] VK"
+        "🇵🇱 Poland | 🌐 [*CIDR]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇷 France | [*CIDR] VK"
+        "🇵🇱 Poland | 🌐 [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,25 +70,15 @@
       "tag": "block"
     },
     {
-      "type": "vless",
-      "tag": "🇫🇷 France | [*CIDR] VK",
-      "server": "frabridge1.frost-api.com",
-      "server_port": 443,
-      "uuid": "34a38f21-310e-4da5-b549-35076e16993c",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
+      "type": "hysteria2",
+      "tag": "🇵🇱 Poland | 🌐 [*CIDR]",
+      "server": "217.150.197.54",
+      "server_port": 8443,
+      "password": "5ca83936-136d-4314-8453-4ba10a86cf60",
       "tls": {
         "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "e7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
+        "server_name": "quic.tyr-agentstvo.tech",
+        "insecure": false
       }
     }
   ],
