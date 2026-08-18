@@ -27,11 +27,10 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-08-18T14:04:21.709489",
-      "last_seen": "2026-08-18T19:47:12.312011",
-      "total_tests": 14,
-      "successful_tests": 14,
+      "last_seen": "2026-08-18T20:15:10.241816",
+      "total_tests": 15,
+      "successful_tests": 15,
       "speed_history": [
-        21.267495427192458,
         18.327413962530347,
         21.521003769773035,
         27.593113172742203,
@@ -40,7 +39,8 @@
         16.734285509187867,
         21.085652997126928,
         12.902540812899767,
-        17.666073782597838
+        17.666073782597838,
+        20.78866004621528
       ],
       "check_history": [
         {
@@ -140,26 +140,81 @@
           "speed": 17.666073782597838,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-18T20:15:10.241816",
+          "success": true,
+          "speed": 20.78866004621528,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.824601820430846,
+      "rating": 0.8335414626191417,
       "rating_components": {
         "speed": 1.0,
         "stability": 1.0,
-        "uptime": 0.6799839563222222,
-        "consistency": 0.5260826522350592,
-        "freshness": 0.9999998178563408
+        "uptime": 0.702001645441358,
+        "consistency": 0.5274082743197823,
+        "freshness": 0.9999998467374684
       },
       "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 14,
+      "consecutive_successes": 15,
       "active": true,
       "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "hysteria2|217.150.197.54|8443|391f093f": {
+      "outbound": {
+        "type": "hysteria2",
+        "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+        "server": "217.150.197.54",
+        "server_port": 8443,
+        "password": "391f093f-85fc-473d-abe2-ea607b9ff567",
+        "tls": {
+          "enabled": true,
+          "server_name": "quic.tyr-agentstvo.tech",
+          "insecure": false
+        }
+      },
+      "link": "hysteria2://391f093f-85fc-473d-abe2-ea607b9ff567@217.150.197.54:8443?sni=quic.tyr-agentstvo.tech#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%A9%F0%9F%87%AA%20%F0%9F%87%B5%F0%9F%87%B1%20%5B%2ACIDR%5D",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-08-18T20:15:06.181080",
+      "last_seen": "2026-08-18T20:15:06.181080",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        1.4610347674359774
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-18T20:15:06.181080",
+          "success": true,
+          "speed": 1.4610347674359774,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-18T21:15:06.181116",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-18T19:47:12.313431"
+    "last_cleanup": "2026-08-18T20:15:10.243147"
   }
 }
