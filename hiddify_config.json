@@ -49,6 +49,7 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
+        "🇩🇪 Germany | 🌐 | [*CIDR] VK",
         "🇪🇪 Estonia | [*CIDR] VK"
       ]
     },
@@ -56,6 +57,7 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
+        "🇩🇪 Germany | 🌐 | [*CIDR] VK",
         "🇪🇪 Estonia | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -68,6 +70,28 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany | 🌐 | [*CIDR] VK",
+      "server": "212.233.91.170",
+      "server_port": 20031,
+      "uuid": "fca74439-d3f4-4247-8be2-d5654bb418a9",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "dzen.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "4raAAZ8J0PHOu1Vkj2dYIJ0zUgewHdtcq_0sj2WSgjU",
+          "short_id": "abcd1234"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
     },
     {
       "type": "vless",
@@ -87,7 +111,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "qq"
+          "fingerprint": "safari"
         }
       }
     }
