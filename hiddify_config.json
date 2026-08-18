@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇵🇱 Poland | 🌐 [*CIDR]"
+        "🇪🇪 Estonia | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇵🇱 Poland | 🌐 [*CIDR]"
+        "🇪🇪 Estonia | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,15 +70,25 @@
       "tag": "block"
     },
     {
-      "type": "hysteria2",
-      "tag": "🇵🇱 Poland | 🌐 [*CIDR]",
-      "server": "217.150.197.54",
-      "server_port": 8443,
-      "password": "5ca83936-136d-4314-8453-4ba10a86cf60",
+      "type": "vless",
+      "tag": "🇪🇪 Estonia | [*CIDR] VK",
+      "server": "212.233.91.170",
+      "server_port": 20032,
+      "uuid": "fca74439-d3f4-4247-8be2-d5654bb418a9",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "quic.tyr-agentstvo.tech",
-        "insecure": false
+        "server_name": "dzen.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "HMa1cz_J76Q5wyrwtVaGCZpZtZQkyUhUKisKG6KsRWU",
+          "short_id": "abcd1234"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
       }
     }
   ],
