@@ -27,13 +27,16 @@
       "group": "EUROPE",
       "country": "TR",
       "first_seen": "2026-08-19T17:49:37.263218",
-      "last_seen": "2026-08-19T17:49:37.263974",
-      "total_tests": 3,
-      "successful_tests": 3,
+      "last_seen": "2026-08-19T18:26:13.901769",
+      "total_tests": 6,
+      "successful_tests": 6,
       "speed_history": [
         14.367401327215097,
         8.1119544147146,
-        8.239042916325793
+        8.239042916325793,
+        13.18065973589495,
+        0.5548497114617404,
+        15.935745993616564
       ],
       "check_history": [
         {
@@ -56,20 +59,41 @@
           "speed": 8.239042916325793,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-19T18:26:08.597536",
+          "success": true,
+          "speed": 13.18065973589495,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T18:26:08.600022",
+          "success": true,
+          "speed": 0.5548497114617404,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T18:26:13.901769",
+          "success": true,
+          "speed": 15.935745993616564,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.5469783982397207,
+      "rating": 0.5933879274485823,
       "rating_components": {
         "speed": 1.0,
         "stability": 1.0,
-        "uptime": 0.01,
-        "consistency": 0.42978434081201955,
-        "freshness": 0.9999997610567921
+        "uptime": 0.2361027845,
+        "consistency": 0.0,
+        "freshness": 0.9929787576572159
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 3,
+      "consecutive_successes": 6,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -101,13 +125,16 @@
       "group": "EUROPE",
       "country": "NO",
       "first_seen": "2026-08-19T17:49:37.264207",
-      "last_seen": "2026-08-19T17:49:37.264859",
-      "total_tests": 3,
-      "successful_tests": 3,
+      "last_seen": "2026-08-19T18:26:50.495781",
+      "total_tests": 6,
+      "successful_tests": 6,
       "speed_history": [
         3.491271616123856,
         2.5581785769833036,
-        2.404179552437992
+        2.404179552437992,
+        4.6733350821447175,
+        3.2936345710459074,
+        2.0039075868282654
       ],
       "check_history": [
         {
@@ -130,26 +157,113 @@
           "speed": 2.404179552437992,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-19T18:26:08.598683",
+          "success": true,
+          "speed": 4.6733350821447175,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T18:26:08.599583",
+          "success": true,
+          "speed": 3.2936345710459074,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T18:26:50.495781",
+          "success": true,
+          "speed": 2.0039075868282654,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.42495038308698907,
+      "rating": 0.4981843714215245,
       "rating_components": {
-        "speed": 0.2751976051744241,
+        "speed": 0.30509376581773384,
         "stability": 1.0,
-        "uptime": 0.01,
-        "consistency": 0.659108735179134,
-        "freshness": 0.9999999235612722
+        "uptime": 0.2361027056666667,
+        "consistency": 0.4272456181104126,
+        "freshness": 0.999999827868465
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 3,
+      "consecutive_successes": 6,
       "active": true,
       "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|212.233.99.132|6443|fe0138b5": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+        "server": "212.233.99.132",
+        "server_port": 6443,
+        "uuid": "fe0138b5-ca60-4a67-91aa-b5a49266eeb5",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "www.oracle.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc",
+            "short_id": "89e0494514ec"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://fe0138b5-ca60-4a67-91aa-b5a49266eeb5@212.233.99.132:6443?encryption=none&flow=xtls-rprx-vision&pbk=aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc&security=reality&sid=89e0494514ec&sni=www.oracle.com&type=tcp&fp=edge#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "ES",
+      "first_seen": "2026-08-19T18:26:08.598122",
+      "last_seen": "2026-08-19T18:26:08.599114",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        7.8564782129103214,
+        5.516450255063944
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-19T18:26:08.598122",
+          "success": true,
+          "speed": 7.8564782129103214,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T18:26:08.599114",
+          "success": true,
+          "speed": 5.516450255063944,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-08-19T19:26:08.599121",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-19T17:49:37.265611"
+    "last_cleanup": "2026-08-19T18:26:50.497259"
   }
 }
