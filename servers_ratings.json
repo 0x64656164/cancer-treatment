@@ -27,17 +27,20 @@
       "group": "EUROPE",
       "country": "TR",
       "first_seen": "2026-08-19T19:51:36.378210",
-      "last_seen": "2026-08-19T20:17:23.776410",
-      "total_tests": 7,
-      "successful_tests": 7,
+      "last_seen": "2026-08-19T20:54:36.455446",
+      "total_tests": 12,
+      "successful_tests": 12,
       "speed_history": [
-        6.9106248596350905,
-        4.88426322905421,
         2.803130922148614,
         6.20312346555712,
         5.129836661974849,
         4.5066918025621865,
-        5.941883541117913
+        5.941883541117913,
+        11.780943428391927,
+        8.688370332051148,
+        8.987760378104305,
+        7.196477297473287,
+        16.18592633245403
       ],
       "check_history": [
         {
@@ -88,20 +91,55 @@
           "speed": 5.941883541117913,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-19T20:54:31.230039",
+          "success": true,
+          "speed": 11.780943428391927,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T20:54:31.230739",
+          "success": true,
+          "speed": 8.688370332051148,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T20:54:31.231275",
+          "success": true,
+          "speed": 8.987760378104305,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T20:54:31.231765",
+          "success": true,
+          "speed": 7.196477297473287,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-19T20:54:36.455446",
+          "success": true,
+          "speed": 16.18592633245403,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.623780884207233,
+      "rating": 0.6453680121630083,
       "rating_components": {
         "speed": 1.0,
         "stability": 1.0,
-        "uptime": 0.17951895691666664,
-        "consistency": 0.5217040924940489,
-        "freshness": 0.9986859479410763
+        "uptime": 0.3536803073611111,
+        "consistency": 0.04161236878157337,
+        "freshness": 0.9982310156027105
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 7,
+      "consecutive_successes": 12,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -133,13 +171,14 @@
       "group": "EUROPE",
       "country": "ES",
       "first_seen": "2026-08-19T19:51:36.378977",
-      "last_seen": "2026-08-19T20:17:22.519398",
-      "total_tests": 3,
-      "successful_tests": 3,
+      "last_seen": "2026-08-19T20:54:39.499353",
+      "total_tests": 4,
+      "successful_tests": 4,
       "speed_history": [
         3.857935825510046,
         2.488927505386011,
-        6.523647128824645
+        6.523647128824645,
+        10.206973957718645
       ],
       "check_history": [
         {
@@ -162,59 +201,69 @@
           "speed": 6.523647128824645,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-19T20:54:39.499353",
+          "success": true,
+          "speed": 10.206973957718645,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.5585747954607548,
+      "rating": 0.5903274173952616,
       "rating_components": {
-        "speed": 0.8254963948912379,
+        "speed": 0.7451643368895936,
         "stability": 1.0,
-        "uptime": 0.17951889866666665,
-        "consistency": 0.21901318623317767,
-        "freshness": 0.9984442559501518
+        "uptime": 0.35368029336111106,
+        "consistency": 0.0,
+        "freshness": 0.9988162178193231
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 3,
+      "consecutive_successes": 4,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
     },
-    "hysteria2|217.150.197.54|8443|5ca83936": {
+    "vless|212.233.99.132|6447|fe0138b5": {
       "outbound": {
-        "type": "hysteria2",
-        "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
-        "server": "217.150.197.54",
-        "server_port": 8443,
-        "password": "5ca83936-136d-4314-8453-4ba10a86cf60",
+        "type": "vless",
+        "tag": "🇳🇴 Norway [*CIDR] VK",
+        "server": "212.233.99.132",
+        "server_port": 6447,
+        "uuid": "fe0138b5-ca60-4a67-91aa-b5a49266eeb5",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
         "tls": {
           "enabled": true,
-          "server_name": "quic.tyr-agentstvo.tech",
-          "insecure": false
+          "server_name": "www.oracle.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc",
+            "short_id": "89e0494514ec"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
         }
       },
-      "link": "hysteria2://5ca83936-136d-4314-8453-4ba10a86cf60@217.150.197.54:8443/?sni=quic.tyr-agentstvo.tech#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%A9%F0%9F%87%AA%20%F0%9F%87%B5%F0%9F%87%B1%20%5B%2ACIDR%5D",
+      "link": "vless://fe0138b5-ca60-4a67-91aa-b5a49266eeb5@212.233.99.132:6447?encryption=none&flow=xtls-rprx-vision&pbk=aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc&security=reality&sid=89e0494514ec&sni=www.oracle.com&type=tcp&fp=firefox#%F0%9F%87%B3%F0%9F%87%B4%20Norway%20%5B%2ACIDR%5D%20VK",
       "group": "EUROPE",
-      "country": "DE",
-      "first_seen": "2026-08-19T19:51:36.379613",
-      "last_seen": "2026-08-19T19:51:36.379613",
-      "total_tests": 2,
+      "country": null,
+      "first_seen": "2026-08-19T20:54:31.232300",
+      "last_seen": "2026-08-19T20:54:31.232300",
+      "total_tests": 1,
       "successful_tests": 1,
       "speed_history": [
-        2.5750710789809697
+        1.5898346246266597
       ],
       "check_history": [
         {
-          "timestamp": "2026-08-19T19:51:36.379613",
+          "timestamp": "2026-08-19T20:54:31.232300",
           "success": true,
-          "speed": 2.5750710789809697,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-19T20:17:30.604777",
-          "success": false,
-          "speed": 0,
+          "speed": 1.5898346246266597,
           "latency": null,
           "error": null
         }
@@ -230,13 +279,13 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 0,
+      "consecutive_successes": 1,
       "active": false,
-      "staging_until": null,
-      "consecutive_failures": 1
+      "staging_until": "2026-08-19T21:54:31.232314",
+      "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-19T20:17:30.606326"
+    "last_cleanup": "2026-08-19T20:54:45.651854"
   }
 }

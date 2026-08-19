@@ -49,7 +49,7 @@
         "ALL-auto",
         "🇹🇷 Turkey [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
+        "🇳🇴 Norway [*CIDR] VK"
       ]
     },
     {
@@ -58,7 +58,7 @@
       "outbounds": [
         "🇹🇷 Turkey [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
+        "🇳🇴 Norway [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -116,15 +116,25 @@
       }
     },
     {
-      "type": "hysteria2",
-      "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
-      "server": "217.150.197.54",
-      "server_port": 8443,
-      "password": "5ca83936-136d-4314-8453-4ba10a86cf60",
+      "type": "vless",
+      "tag": "🇳🇴 Norway [*CIDR] VK",
+      "server": "212.233.99.132",
+      "server_port": 6447,
+      "uuid": "fe0138b5-ca60-4a67-91aa-b5a49266eeb5",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "quic.tyr-agentstvo.tech",
-        "insecure": false
+        "server_name": "www.oracle.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc",
+          "short_id": "89e0494514ec"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
       }
     }
   ],
