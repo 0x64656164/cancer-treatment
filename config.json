@@ -39,30 +39,24 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇹🇷 Turkey [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇴 Norway [*CIDR] VK",
-        "🇫🇷 France | [*CIDR] VK",
-        "🇫🇷 France [*CIDR] VK"
+        "ALL-auto",
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+        "🇫🇷 France | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇹🇷 Turkey [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇴 Norway [*CIDR] VK",
-        "🇫🇷 France | [*CIDR] VK",
-        "🇫🇷 France [*CIDR] VK"
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+        "🇫🇷 France | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -76,69 +70,15 @@
       "tag": "block"
     },
     {
-      "type": "vless",
-      "tag": "🇹🇷 Turkey [*CIDR] VK",
-      "server": "212.233.99.132",
-      "server_port": 6448,
-      "uuid": "fe0138b5-ca60-4a67-91aa-b5a49266eeb5",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
+      "type": "hysteria2",
+      "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+      "server": "217.150.197.54",
+      "server_port": 8443,
+      "password": "5ca83936-136d-4314-8453-4ba10a86cf60",
       "tls": {
         "enabled": true,
-        "server_name": "www.oracle.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc",
-          "short_id": "89e0494514ec"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "212.233.99.132",
-      "server_port": 6443,
-      "uuid": "fe0138b5-ca60-4a67-91aa-b5a49266eeb5",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.oracle.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc",
-          "short_id": "89e0494514ec"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇴 Norway [*CIDR] VK",
-      "server": "212.233.99.132",
-      "server_port": 6447,
-      "uuid": "fe0138b5-ca60-4a67-91aa-b5a49266eeb5",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.oracle.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc",
-          "short_id": "89e0494514ec"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
+        "server_name": "quic.tyr-agentstvo.tech",
+        "insecure": false
       }
     },
     {
@@ -160,28 +100,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "ios"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷 France [*CIDR] VK",
-      "server": "146.185.211.2",
-      "server_port": 443,
-      "uuid": "cbe5611f-392b-4ec3-9d8b-5bbe59c0fa68",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "e7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
         }
       }
     }
