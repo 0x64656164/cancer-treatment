@@ -49,16 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
-        "🇫🇷 France | [*CIDR] VK"
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
-        "🇫🇷 France | [*CIDR] VK"
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -81,28 +79,6 @@
         "enabled": true,
         "server_name": "quic.tyr-agentstvo.tech",
         "insecure": false
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷 France | [*CIDR] VK",
-      "server": "frabridge1.frost-api.com",
-      "server_port": 443,
-      "uuid": "cbe5611f-392b-4ec3-9d8b-5bbe59c0fa68",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "SHIYN7zN9aFVxwKK-bIvDbhUgtHvlBhDi1qSl2sWwRw",
-          "short_id": "e7"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "ios"
-        }
       }
     }
   ],
