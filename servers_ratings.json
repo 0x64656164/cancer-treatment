@@ -1,6 +1,128 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|90.156.218.229|443|8e85752d": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+        "server": "90.156.218.229",
+        "server_port": 443,
+        "uuid": "8e85752d-c04f-427d-9d70-b10d144c8492",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "skys3.greatecloud.com"
+        }
+      },
+      "link": "vless://8e85752d-c04f-427d-9d70-b10d144c8492@90.156.218.229:443?alpn=h2%2Chttp%2F1.1&encryption=none&flow=xtls-rprx-vision&security=tls&sni=skys3.greatecloud.com&type=tcp&fp=android#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "NL",
+      "first_seen": "2026-08-20T22:53:05.783313",
+      "last_seen": "2026-08-20T22:53:05.784205",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        22.85727233960076,
+        22.559198991812767,
+        22.445318180869204,
+        21.708327615484553
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-20T22:53:05.783313",
+          "success": true,
+          "speed": 22.85727233960076,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-20T22:53:05.783739",
+          "success": true,
+          "speed": 22.559198991812767,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-20T22:53:05.783974",
+          "success": true,
+          "speed": 22.445318180869204,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-20T22:53:05.784205",
+          "success": true,
+          "speed": 21.708327615484553,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.6002246625697054,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9622468038936322,
+        "freshness": 0.9999998812022819
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "hysteria2|217.150.197.54|8443|5ca83936": {
+      "outbound": {
+        "type": "hysteria2",
+        "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+        "server": "217.150.197.54",
+        "server_port": 8443,
+        "password": "5ca83936-136d-4314-8453-4ba10a86cf60",
+        "tls": {
+          "enabled": true,
+          "server_name": "quic.tyr-agentstvo.tech",
+          "insecure": false
+        }
+      },
+      "link": "hysteria2://5ca83936-136d-4314-8453-4ba10a86cf60@217.150.197.54:8443/?sni=quic.tyr-agentstvo.tech#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%A9%F0%9F%87%AA%20%F0%9F%87%B5%F0%9F%87%B1%20%5B%2ACIDR%5D",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-08-20T22:53:05.784476",
+      "last_seen": "2026-08-20T22:53:05.784476",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        5.748887387040219
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-20T22:53:05.784476",
+          "success": true,
+          "speed": 5.748887387040219,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-20T23:53:05.784487",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-20T22:16:09.756341"
+    "last_cleanup": "2026-08-20T22:53:05.785169"
   }
 }

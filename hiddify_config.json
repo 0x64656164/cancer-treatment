@@ -49,6 +49,7 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
+        "🇳🇱 The Netherlands | [*CIDR] VK",
         "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
       ]
     },
@@ -56,6 +57,7 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
+        "🇳🇱 The Netherlands | [*CIDR] VK",
         "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -68,6 +70,19 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+      "server": "90.156.218.229",
+      "server_port": 443,
+      "uuid": "8e85752d-c04f-427d-9d70-b10d144c8492",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "skys3.greatecloud.com"
+      }
     },
     {
       "type": "hysteria2",
