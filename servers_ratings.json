@@ -18,12 +18,10 @@
       "group": "EUROPE",
       "country": "NL",
       "first_seen": "2026-08-20T22:53:05.783313",
-      "last_seen": "2026-08-21T02:17:56.921882",
-      "total_tests": 24,
-      "successful_tests": 24,
+      "last_seen": "2026-08-21T03:31:25.077171",
+      "total_tests": 26,
+      "successful_tests": 26,
       "speed_history": [
-        23.36555622672081,
-        22.393304183307617,
         23.521969150534215,
         20.872816233490347,
         23.58988648622193,
@@ -31,7 +29,9 @@
         22.253063651039092,
         20.701683873942848,
         14.443512727029857,
-        17.293241216390957
+        17.293241216390957,
+        10.181605123122212,
+        10.383820131044605
       ],
       "check_history": [
         {
@@ -201,26 +201,88 @@
           "speed": 17.293241216390957,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-21T03:31:16.972248",
+          "success": true,
+          "speed": 10.181605123122212,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-21T03:31:25.077171",
+          "success": true,
+          "speed": 10.383820131044605,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.7805205928808354,
+      "rating": 0.7886943601234355,
       "rating_components": {
         "speed": 1.0,
         "stability": 1.0,
-        "uptime": 0.5190884177305555,
-        "consistency": 0.7302486456586186,
-        "freshness": 0.9990690748183424
+        "uptime": 0.604708509125,
+        "consistency": 0.4681098237980922,
+        "freshness": 0.9999998272908425
       },
       "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 24,
+      "consecutive_successes": 26,
       "active": true,
       "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "hysteria2|217.150.197.54|8443|5ca83936": {
+      "outbound": {
+        "type": "hysteria2",
+        "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+        "server": "217.150.197.54",
+        "server_port": 8443,
+        "password": "5ca83936-136d-4314-8453-4ba10a86cf60",
+        "tls": {
+          "enabled": true,
+          "server_name": "quic.tyr-agentstvo.tech",
+          "insecure": false
+        }
+      },
+      "link": "hysteria2://5ca83936-136d-4314-8453-4ba10a86cf60@217.150.197.54:8443/?sni=quic.tyr-agentstvo.tech#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%A9%F0%9F%87%AA%20%F0%9F%87%B5%F0%9F%87%B1%20%5B%2ACIDR%5D",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-08-21T03:31:16.972877",
+      "last_seen": "2026-08-21T03:31:16.972877",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        1.6725796496441165
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-21T03:31:16.972877",
+          "success": true,
+          "speed": 1.6725796496441165,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-21T04:31:16.972919",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-21T02:18:01.759793"
+    "last_cleanup": "2026-08-21T03:31:25.078732"
   }
 }
