@@ -1,71 +1,171 @@
 {
   "servers": {
-    "hysteria2|217.150.197.54|8443|5ca83936": {
+    "vless|in-ru-vk-01.ray-balance.space|443|710fc22f": {
       "outbound": {
-        "type": "hysteria2",
-        "tag": "🇵🇱 Poland | 🌐 [*CIDR]",
-        "server": "217.150.197.54",
-        "server_port": 8443,
-        "password": "5ca83936-136d-4314-8453-4ba10a86cf60",
+        "type": "vless",
+        "tag": "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK",
+        "server": "in-ru-vk-01.ray-balance.space",
+        "server_port": 443,
+        "uuid": "710fc22f-06b2-03f6-bb3e-f57c17b670a6",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
         "tls": {
           "enabled": true,
-          "server_name": "quic.tyr-agentstvo.tech",
-          "insecure": false
+          "server_name": "www.ray-balance.space",
+          "reality": {
+            "enabled": true,
+            "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
         }
       },
-      "link": "hysteria2://5ca83936-136d-4314-8453-4ba10a86cf60@217.150.197.54:8443/?sni=quic.tyr-agentstvo.tech#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%7C%20%F0%9F%8C%90%20%5B%2ACIDR%5D",
+      "link": "vless://710fc22f-06b2-03f6-bb3e-f57c17b670a6@in-ru-vk-01.ray-balance.space:443?flow=xtls-rprx-vision&encryption=none&security=reality&sni=www.ray-balance.space&pbk=3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis&type=tcp&headerType=none&fp=chrome#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%AA%F0%9F%87%B8%20%F0%9F%87%B5%F0%9F%87%B1%20%7C%20%5B%2ACIDR%5D%20VK",
       "group": "EUROPE",
-      "country": "DE",
-      "first_seen": "2026-08-21T05:55:52.907599",
-      "last_seen": "2026-08-21T06:33:17.135430",
-      "total_tests": 3,
-      "successful_tests": 3,
+      "country": "PL",
+      "first_seen": "2026-08-21T07:16:55.896482",
+      "last_seen": "2026-08-21T07:16:55.899167",
+      "total_tests": 4,
+      "successful_tests": 4,
       "speed_history": [
-        6.778453159598675,
-        0.6589909720452555,
-        5.584733328634379
+        32.57285667728265,
+        30.632092624851186,
+        30.338355779622187,
+        29.59289329479563
       ],
       "check_history": [
         {
-          "timestamp": "2026-08-21T05:55:52.907599",
+          "timestamp": "2026-08-21T07:16:55.896482",
           "success": true,
-          "speed": 6.778453159598675,
+          "speed": 32.57285667728265,
           "latency": null,
           "error": null
         },
         {
-          "timestamp": "2026-08-21T06:33:02.089234",
+          "timestamp": "2026-08-21T07:16:55.898276",
           "success": true,
-          "speed": 0.6589909720452555,
+          "speed": 30.632092624851186,
           "latency": null,
           "error": null
         },
         {
-          "timestamp": "2026-08-21T06:33:17.135430",
+          "timestamp": "2026-08-21T07:16:55.898746",
           "success": true,
-          "speed": 5.584733328634379,
+          "speed": 30.338355779622187,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-21T07:16:55.899167",
+          "success": true,
+          "speed": 29.59289329479563,
           "latency": null,
           "error": null
         }
       ],
-      "rating": 0.5948075972917638,
+      "rating": 0.5956268813569109,
       "rating_components": {
-        "speed": 1.0,
+        "speed": 0.9967199442498941,
         "stability": 1.0,
-        "uptime": 0.23701904066666668,
-        "consistency": 0.0,
-        "freshness": 0.9999998735006476
+        "uptime": 0.01,
+        "consistency": 0.9285313326692696,
+        "freshness": 0.9961983949333674
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 3,
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|84.23.54.213|443|710fc22f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK",
+        "server": "84.23.54.213",
+        "server_port": 443,
+        "uuid": "710fc22f-06b2-03f6-bb3e-f57c17b670a6",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "www.ray-balance.space",
+          "reality": {
+            "enabled": true,
+            "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://710fc22f-06b2-03f6-bb3e-f57c17b670a6@84.23.54.213:443?encryption=none&flow=xtls-rprx-vision&pbk=3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis&security=reality&sni=www.ray-balance.space&type=tcp&fp=ios#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%AA%F0%9F%87%B8%20%F0%9F%87%B5%F0%9F%87%B1%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-08-21T07:16:55.896977",
+      "last_seen": "2026-08-21T07:16:55.899703",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        31.84568972445794,
+        31.168651604363877,
+        30.913641100657443,
+        29.613438695810668
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-21T07:16:55.896977",
+          "success": true,
+          "speed": 31.84568972445794,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-21T07:16:55.897436",
+          "success": true,
+          "speed": 31.168651604363877,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-21T07:16:55.897870",
+          "success": true,
+          "speed": 30.913641100657443,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-21T07:16:55.899703",
+          "success": true,
+          "speed": 29.613438695810668,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5981878971380669,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9475812348362076,
+        "freshness": 0.9961984910296405
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-21T06:33:17.136452"
+    "last_cleanup": "2026-08-21T07:17:15.681806"
   }
 }
