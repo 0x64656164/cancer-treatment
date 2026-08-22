@@ -27,20 +27,20 @@
       "group": "EUROPE",
       "country": "PL",
       "first_seen": "2026-08-22T20:50:24.579849",
-      "last_seen": "2026-08-22T22:45:29.208598",
-      "total_tests": 18,
-      "successful_tests": 18,
+      "last_seen": "2026-08-22T23:12:02.239772",
+      "total_tests": 25,
+      "successful_tests": 25,
       "speed_history": [
-        30.54938943903896,
-        30.536795042378188,
-        28.234825936131006,
-        33.65099595576675,
-        34.41703593694809,
-        32.704177822529516,
-        30.807894863875003,
         13.78090871030099,
         19.849811076551944,
-        34.49539800490627
+        34.49539800490627,
+        19.439832331409043,
+        16.278230163673,
+        18.875509056138903,
+        13.02735387168699,
+        13.063928632921382,
+        12.729188034170386,
+        19.975163451323134
       ],
       "check_history": [
         {
@@ -168,95 +168,79 @@
           "speed": 34.49539800490627,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-22T23:11:57.987769",
+          "success": true,
+          "speed": 19.439832331409043,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-22T23:11:57.988470",
+          "success": true,
+          "speed": 16.278230163673,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-22T23:11:57.988979",
+          "success": true,
+          "speed": 18.875509056138903,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-22T23:11:57.989420",
+          "success": true,
+          "speed": 13.02735387168699,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-22T23:11:57.991142",
+          "success": true,
+          "speed": 13.063928632921382,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-22T23:11:57.991754",
+          "success": true,
+          "speed": 12.729188034170386,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-22T23:12:02.239772",
+          "success": true,
+          "speed": 19.975163451323134,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.720770477730845,
+      "rating": 0.7100848807422296,
       "rating_components": {
         "speed": 1.0,
         "stability": 1.0,
-        "uptime": 0.4143977720166666,
-        "consistency": 0.5522080339767912,
-        "freshness": 0.9986037701766616
+        "uptime": 0.44533908931944444,
+        "consistency": 0.32107812193689467,
+        "freshness": 0.9989428854717493
       },
       "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 18,
+      "consecutive_successes": 25,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
     },
-    "vless|212.233.99.132|6447|663836b2": {
+    "vless|ru.chick-team.ru|6448|663836b2": {
       "outbound": {
         "type": "vless",
-        "tag": "🇳🇴 Norway [*CIDR] VK",
-        "server": "212.233.99.132",
-        "server_port": 6447,
-        "uuid": "663836b2-f676-43fb-977f-47c495b1b383",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "www.oracle.com",
-          "reality": {
-            "enabled": true,
-            "public_key": "aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc",
-            "short_id": "89e0494514ec"
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "ios"
-          }
-        }
-      },
-      "link": "vless://663836b2-f676-43fb-977f-47c495b1b383@212.233.99.132:6447?encryption=none&flow=xtls-rprx-vision&pbk=aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc&security=reality&sid=89e0494514ec&sni=www.oracle.com&type=tcp&fp=ios#%F0%9F%87%B3%F0%9F%87%B4%20Norway%20%5B%2ACIDR%5D%20VK",
-      "group": "EUROPE",
-      "country": "NO",
-      "first_seen": "2026-08-22T22:14:56.818055",
-      "last_seen": "2026-08-22T22:14:56.818055",
-      "total_tests": 2,
-      "successful_tests": 1,
-      "speed_history": [
-        1.7142002236631784
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-08-22T22:14:56.818055",
-          "success": true,
-          "speed": 1.7142002236631784,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-22T22:45:36.461178",
-          "success": false,
-          "speed": 0,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.0,
-      "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
-      },
-      "category": "C",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 0,
-      "active": false,
-      "staging_until": null,
-      "consecutive_failures": 1
-    },
-    "vless|ru.chick-team.ru|6447|663836b2": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇳🇴 Norway | [*CIDR] VK",
+        "tag": "🇹🇷 Turkey [*CIDR] VK",
         "server": "ru.chick-team.ru",
-        "server_port": 6447,
+        "server_port": 6448,
         "uuid": "663836b2-f676-43fb-977f-47c495b1b383",
         "flow": "xtls-rprx-vision",
         "packet_encoding": "xudp",
@@ -270,32 +254,25 @@
           },
           "utls": {
             "enabled": true,
-            "fingerprint": "qq"
+            "fingerprint": "firefox"
           }
         }
       },
-      "link": "vless://663836b2-f676-43fb-977f-47c495b1b383@ru.chick-team.ru:6447?type=tcp&security=reality&sni=www.oracle.com&pbk=aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc&sid=89e0494514ec&encryption=none&flow=xtls-rprx-vision&fp=qq#%F0%9F%87%B3%F0%9F%87%B4%20Norway%20%7C%20%5B%2ACIDR%5D%20VK",
+      "link": "vless://663836b2-f676-43fb-977f-47c495b1b383@ru.chick-team.ru:6448?type=tcp&security=reality&sni=www.oracle.com&pbk=aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc&sid=89e0494514ec&encryption=none&flow=xtls-rprx-vision&fp=firefox#%F0%9F%87%B9%F0%9F%87%B7%20Turkey%20%5B%2ACIDR%5D%20VK",
       "group": "EUROPE",
-      "country": null,
-      "first_seen": "2026-08-22T22:14:56.818556",
-      "last_seen": "2026-08-22T22:14:56.818556",
-      "total_tests": 2,
+      "country": "TR",
+      "first_seen": "2026-08-22T23:11:57.989897",
+      "last_seen": "2026-08-22T23:11:57.989897",
+      "total_tests": 1,
       "successful_tests": 1,
       "speed_history": [
-        1.320676405955025
+        12.952737859614773
       ],
       "check_history": [
         {
-          "timestamp": "2026-08-22T22:14:56.818556",
+          "timestamp": "2026-08-22T23:11:57.989897",
           "success": true,
-          "speed": 1.320676405955025,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-22T22:45:36.464479",
-          "success": false,
-          "speed": 0,
+          "speed": 12.952737859614773,
           "latency": null,
           "error": null
         }
@@ -311,13 +288,79 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 0,
+      "consecutive_successes": 1,
       "active": false,
-      "staging_until": null,
-      "consecutive_failures": 1
+      "staging_until": "2026-08-23T00:11:57.989906",
+      "consecutive_failures": 0
+    },
+    "vless|212.233.99.132|6448|663836b2": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇹🇷 Turkey | [*CIDR] VK",
+        "server": "212.233.99.132",
+        "server_port": 6448,
+        "uuid": "663836b2-f676-43fb-977f-47c495b1b383",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "www.oracle.com",
+          "reality": {
+            "enabled": true,
+            "public_key": "aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc",
+            "short_id": "89e0494514ec"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://663836b2-f676-43fb-977f-47c495b1b383@212.233.99.132:6448?encryption=none&flow=xtls-rprx-vision&pbk=aFbCyrLOre-V3ORpBjqenGfDt62Ng_i1sSq-DmZHVgc&security=reality&sid=89e0494514ec&sni=www.oracle.com&type=tcp&fp=chrome#%F0%9F%87%B9%F0%9F%87%B7%20Turkey%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "TR",
+      "first_seen": "2026-08-22T23:11:57.990412",
+      "last_seen": "2026-08-22T23:11:57.992324",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        12.941901680028236,
+        7.219924404007079
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-22T23:11:57.990412",
+          "success": true,
+          "speed": 12.941901680028236,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-22T23:11:57.992324",
+          "success": true,
+          "speed": 7.219924404007079,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-08-23T00:11:57.992329",
+      "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-22T22:45:36.465994"
+    "last_cleanup": "2026-08-22T23:12:07.733820"
   }
 }
