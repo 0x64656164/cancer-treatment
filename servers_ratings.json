@@ -17,13 +17,15 @@
       "group": "EUROPE",
       "country": "DE",
       "first_seen": "2026-08-23T20:12:49.023334",
-      "last_seen": "2026-08-23T20:48:15.656530",
-      "total_tests": 3,
-      "successful_tests": 3,
+      "last_seen": "2026-08-23T21:14:46.416792",
+      "total_tests": 5,
+      "successful_tests": 5,
       "speed_history": [
         2.491996818859505,
         1.9271689061258366,
-        7.212524300867349
+        7.212524300867349,
+        2.375202020918096,
+        1.719252381565735
       ],
       "check_history": [
         {
@@ -46,29 +48,43 @@
           "speed": 7.212524300867349,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-23T21:13:57.590954",
+          "success": true,
+          "speed": 2.375202020918096,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T21:14:46.416792",
+          "success": true,
+          "speed": 1.719252381565735,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.5908877766504572,
+      "rating": 0.5480423062531632,
       "rating_components": {
-        "speed": 1.0,
+        "speed": 0.5356463128465135,
         "stability": 1.0,
-        "uptime": 0.22721949758333337,
+        "uptime": 0.3522826658166667,
         "consistency": 0.0,
-        "freshness": 0.9999998507808264
+        "freshness": 0.9999998490479587
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 3,
+      "consecutive_successes": 5,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
     },
-    "vless|84.23.54.213|443|710fc22f": {
+    "vless|in-ru-vk-01.ray-balance.space|443|710fc22f": {
       "outbound": {
         "type": "vless",
-        "tag": "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK",
-        "server": "84.23.54.213",
+        "tag": "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK",
+        "server": "in-ru-vk-01.ray-balance.space",
         "server_port": 443,
         "uuid": "710fc22f-06b2-03ef-bb3e-f57c17b670a6",
         "flow": "xtls-rprx-vision",
@@ -83,47 +99,71 @@
           },
           "utls": {
             "enabled": true,
-            "fingerprint": "qq"
+            "fingerprint": "ios"
           }
         }
       },
-      "link": "vless://710fc22f-06b2-03ef-bb3e-f57c17b670a6@84.23.54.213:443?encryption=none&flow=xtls-rprx-vision&pbk=3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis&security=reality&sni=www.ray-balance.space&type=tcp&fp=qq#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%B5%F0%9F%87%B1%20%F0%9F%87%BB%F0%9F%87%AE%20%5B%2ACIDR%5D%20VK",
+      "link": "vless://710fc22f-06b2-03ef-bb3e-f57c17b670a6@in-ru-vk-01.ray-balance.space:443?flow=xtls-rprx-vision&type=tcp&headerType=none&security=reality&sni=www.ray-balance.space&pbk=3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis&fp=firefox#%F0%9F%87%BB%F0%9F%87%AE%20U.S.%20Virgin%20Islands%20%7C%20%F0%9F%8C%90%20%7C%20%5B%2ACIDR%5D%20VK",
       "group": "EUROPE",
-      "country": null,
-      "first_seen": "2026-08-23T20:48:03.998648",
-      "last_seen": "2026-08-23T20:48:03.998648",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "country": "PL",
+      "first_seen": "2026-08-23T21:13:57.588591",
+      "last_seen": "2026-08-23T21:13:57.590516",
+      "total_tests": 4,
+      "successful_tests": 4,
       "speed_history": [
-        7.881311362760557e-05
+        6.220491172862922,
+        6.214818642106913,
+        6.266040001846495,
+        4.786006001638094
       ],
       "check_history": [
         {
-          "timestamp": "2026-08-23T20:48:03.998648",
+          "timestamp": "2026-08-23T21:13:57.588591",
           "success": true,
-          "speed": 7.881311362760557e-05,
+          "speed": 6.220491172862922,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T21:13:57.589163",
+          "success": true,
+          "speed": 6.214818642106913,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T21:13:57.589600",
+          "success": true,
+          "speed": 6.266040001846495,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T21:13:57.590516",
+          "success": true,
+          "speed": 4.786006001638094,
           "latency": null,
           "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.5812327509858605,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.7863632563185963,
+        "freshness": 0.9906428356933391
       },
-      "category": "C",
+      "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
-      "active": false,
-      "staging_until": "2026-08-23T21:48:03.998676",
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-23T20:48:15.657699"
+    "last_cleanup": "2026-08-23T21:14:46.418191"
   }
 }
