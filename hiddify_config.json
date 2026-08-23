@@ -41,24 +41,22 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
-        "🇱🇻 Latvia | 🌐 | [*CIDR]",
+        "ALL-auto",
         "🇳🇱 The Netherlands | [*CIDR]",
         "🇳🇱 The Netherlands | [*CIDR]-1"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
-        "🇱🇻 Latvia | 🌐 | [*CIDR]",
         "🇳🇱 The Netherlands | [*CIDR]",
         "🇳🇱 The Netherlands | [*CIDR]-1"
       ],
@@ -72,28 +70,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇱🇻 Latvia | 🌐 | [*CIDR]",
-      "server": "178.248.236.228",
-      "server_port": 16443,
-      "uuid": "2a6a619b-3a18-0006-b40f-d028ea60465d",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rutube.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
-          "short_id": "43dcff53849b81e6"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
-        }
-      }
     },
     {
       "type": "vless",
