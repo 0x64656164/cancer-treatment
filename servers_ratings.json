@@ -17,9 +17,9 @@
       "group": "EUROPE",
       "country": "DE",
       "first_seen": "2026-08-23T20:12:49.023334",
-      "last_seen": "2026-08-23T21:44:38.691456",
-      "total_tests": 7,
-      "successful_tests": 7,
+      "last_seen": "2026-08-23T22:13:41.583621",
+      "total_tests": 9,
+      "successful_tests": 9,
       "speed_history": [
         2.491996818859505,
         1.9271689061258366,
@@ -27,7 +27,9 @@
         2.375202020918096,
         1.719252381565735,
         3.2324357604246416,
-        5.259142837865335
+        5.259142837865335,
+        2.170451941901998,
+        4.308756333934788
       ],
       "check_history": [
         {
@@ -78,20 +80,34 @@
           "speed": 5.259142837865335,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-23T22:13:22.078799",
+          "success": true,
+          "speed": 2.170451941901998,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T22:13:41.583621",
+          "success": true,
+          "speed": 4.308756333934788,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.5961599097410414,
+      "rating": 0.5319518773262526,
       "rating_components": {
-        "speed": 0.7065347699378123,
+        "speed": 0.31771546326009803,
         "stability": 1.0,
-        "uptime": 0.38713245277777775,
+        "uptime": 0.4210220217583333,
         "consistency": 0.0,
-        "freshness": 0.9999998309491186
+        "freshness": 0.9999998398059977
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 7,
+      "consecutive_successes": 9,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -123,12 +139,15 @@
       "group": "EUROPE",
       "country": "PL",
       "first_seen": "2026-08-23T21:44:22.707793",
-      "last_seen": "2026-08-23T21:44:22.708960",
-      "total_tests": 2,
-      "successful_tests": 2,
+      "last_seen": "2026-08-23T22:13:37.100685",
+      "total_tests": 5,
+      "successful_tests": 5,
       "speed_history": [
         4.301648798137716,
-        3.5752432282049216
+        3.5752432282049216,
+        11.124853377177834,
+        7.972574458721598,
+        5.595493140195926
       ],
       "check_history": [
         {
@@ -142,6 +161,93 @@
           "timestamp": "2026-08-23T21:44:22.708960",
           "success": true,
           "speed": 3.5752432282049216,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T22:13:22.076707",
+          "success": true,
+          "speed": 11.124853377177834,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T22:13:22.078268",
+          "success": true,
+          "speed": 7.972574458721598,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T22:13:37.100685",
+          "success": true,
+          "speed": 5.595493140195926,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5154783082457436,
+      "rating_components": {
+        "speed": 0.6067798642127189,
+        "stability": 1.0,
+        "uptime": 0.196573059,
+        "consistency": 0.15622553604554767,
+        "freshness": 0.9991370546576337
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 5,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|in-ru-vk-01.ray-balance.space|443|710fc22f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK",
+        "server": "in-ru-vk-01.ray-balance.space",
+        "server_port": 443,
+        "uuid": "710fc22f-06b2-03ef-bb3e-f57c17b670a6",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "www.ray-balance.space",
+          "reality": {
+            "enabled": true,
+            "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
+        }
+      },
+      "link": "vless://710fc22f-06b2-03ef-bb3e-f57c17b670a6@in-ru-vk-01.ray-balance.space:443?flow=xtls-rprx-vision&type=tcp&headerType=none&security=reality&sni=www.ray-balance.space&pbk=3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis&fp=edge#%F0%9F%87%BB%F0%9F%87%AE%20U.S.%20Virgin%20Islands%20%7C%20%F0%9F%8C%90%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-08-23T22:13:22.077268",
+      "last_seen": "2026-08-23T22:13:22.077812",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        10.080828234674197,
+        11.389767560192187
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-23T22:13:22.077268",
+          "success": true,
+          "speed": 10.080828234674197,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-23T22:13:22.077812",
+          "success": true,
+          "speed": 11.389767560192187,
           "latency": null,
           "error": null
         }
@@ -159,11 +265,11 @@
       "bad_hours": [],
       "consecutive_successes": 2,
       "active": false,
-      "staging_until": "2026-08-23T22:44:22.708968",
+      "staging_until": "2026-08-23T23:13:22.077821",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-23T21:44:38.692960"
+    "last_cleanup": "2026-08-23T22:13:41.585072"
   }
 }
