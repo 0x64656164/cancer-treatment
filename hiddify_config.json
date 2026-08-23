@@ -49,18 +49,20 @@
       "tag": "EUROPE",
       "outbounds": [
         "EUROPE-auto",
+        "🇳🇱 The Netherlands | [*CIDR]",
+        "🇳🇱 The Netherlands | [*CIDR]-1",
         "🌐 Anycast-IP | 🇪🇸 🇵🇱 [*CIDR] VK",
-        "🇹🇷 Turkey | [*CIDR] VK",
-        "🇳🇱 The Netherlands | [*CIDR]"
+        "🇹🇷 Turkey | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "EUROPE-auto",
       "outbounds": [
+        "🇳🇱 The Netherlands | [*CIDR]",
+        "🇳🇱 The Netherlands | [*CIDR]-1",
         "🌐 Anycast-IP | 🇪🇸 🇵🇱 [*CIDR] VK",
-        "🇹🇷 Turkey | [*CIDR] VK",
-        "🇳🇱 The Netherlands | [*CIDR]"
+        "🇹🇷 Turkey | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,6 +74,50 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands | [*CIDR]",
+      "server": "178.248.236.228",
+      "server_port": 63443,
+      "uuid": "2a6a619b-3a18-40f6-b40f-d028ea60465d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rutube.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
+          "short_id": "43dcff53849b81e6"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "safari"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands | [*CIDR]-1",
+      "server": "178.248.236.228",
+      "server_port": 59443,
+      "uuid": "2a6a619b-3a18-40f6-b40f-d028ea60465d",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rutube.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
+          "short_id": "43dcff53849b81e6"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
     },
     {
       "type": "vless",
@@ -114,28 +160,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands | [*CIDR]",
-      "server": "178.248.236.228",
-      "server_port": 63443,
-      "uuid": "2a6a619b-3a18-40f6-b40f-d028ea60465d",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rutube.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
-          "short_id": "43dcff53849b81e6"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
         }
       }
     }
