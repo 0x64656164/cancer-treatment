@@ -41,26 +41,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+        "EUROPE-auto",
+        "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK",
         "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK",
-        "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK"
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
-        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+        "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK",
         "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK",
-        "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK"
+        "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -74,15 +74,25 @@
       "tag": "block"
     },
     {
-      "type": "hysteria2",
-      "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
-      "server": "217.150.197.54",
-      "server_port": 8443,
-      "password": "391f093f-85fc-473d-abe2-ea607b9ff567",
+      "type": "vless",
+      "tag": "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK",
+      "server": "in-ru-vk-01.ray-balance.space",
+      "server_port": 443,
+      "uuid": "710fc22f-06b2-03ef-bb3e-f57c17b670a6",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "quic.tyr-agentstvo.tech",
-        "insecure": true
+        "server_name": "www.ray-balance.space",
+        "reality": {
+          "enabled": true,
+          "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
       }
     },
     {
@@ -108,25 +118,15 @@
       }
     },
     {
-      "type": "vless",
-      "tag": "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK",
-      "server": "in-ru-vk-01.ray-balance.space",
-      "server_port": 443,
-      "uuid": "710fc22f-06b2-03ef-bb3e-f57c17b670a6",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
+      "type": "hysteria2",
+      "tag": "🌐 Anycast-IP | 🇩🇪 🇵🇱 [*CIDR]",
+      "server": "217.150.197.54",
+      "server_port": 8443,
+      "password": "391f093f-85fc-473d-abe2-ea607b9ff567",
       "tls": {
         "enabled": true,
-        "server_name": "www.ray-balance.space",
-        "reality": {
-          "enabled": true,
-          "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
+        "server_name": "quic.tyr-agentstvo.tech",
+        "insecure": true
       }
     }
   ],
