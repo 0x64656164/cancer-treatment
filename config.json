@@ -39,26 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "EUROPE"
+        "ALL"
       ]
     },
     {
       "type": "selector",
-      "tag": "EUROPE",
+      "tag": "ALL",
       "outbounds": [
-        "EUROPE-auto",
+        "ALL-auto",
         "🇳🇱 The Netherlands | [*CIDR]",
         "🇳🇱 The Netherlands | [*CIDR]-1",
-        "🇪🇸 Spain | [*CIDR] VK"
+        "🇪🇸 Spain [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
-      "tag": "EUROPE-auto",
+      "tag": "ALL-auto",
       "outbounds": [
         "🇳🇱 The Netherlands | [*CIDR]",
         "🇳🇱 The Netherlands | [*CIDR]-1",
-        "🇪🇸 Spain | [*CIDR] VK"
+        "🇪🇸 Spain [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -117,8 +117,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇪🇸 Spain | [*CIDR] VK",
-      "server": "84.23.54.213",
+      "tag": "🇪🇸 Spain [*CIDR] VK",
+      "server": "in-ru-vk-01.ray-balance.space",
       "server_port": 443,
       "uuid": "710fc22f-06b2-03f6-bb3e-f57c17b670a6",
       "flow": "xtls-rprx-vision",
@@ -133,7 +133,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "safari"
+          "fingerprint": "qq"
         }
       }
     }
