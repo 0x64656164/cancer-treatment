@@ -1,127 +1,5 @@
 {
   "servers": {
-    "vless|in-ru-vk-01.ray-balance.space|443|710fc22f": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇻🇮 U.S. Virgin Islands | 🌐 | [*CIDR] VK",
-        "server": "in-ru-vk-01.ray-balance.space",
-        "server_port": 443,
-        "uuid": "710fc22f-06b2-03ef-bb3e-f57c17b670a6",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "www.ray-balance.space",
-          "reality": {
-            "enabled": true,
-            "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
-            "short_id": ""
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "qq"
-          }
-        }
-      },
-      "link": "vless://710fc22f-06b2-03ef-bb3e-f57c17b670a6@in-ru-vk-01.ray-balance.space:443?flow=xtls-rprx-vision&type=tcp&headerType=none&security=reality&sni=www.ray-balance.space&pbk=3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis&fp=edge#%F0%9F%87%BB%F0%9F%87%AE%20U.S.%20Virgin%20Islands%20%7C%20%F0%9F%8C%90%20%7C%20%5B%2ACIDR%5D%20VK",
-      "group": "EUROPE",
-      "country": "PL",
-      "first_seen": "2026-08-23T22:13:22.077268",
-      "last_seen": "2026-08-24T04:15:20.380199",
-      "total_tests": 9,
-      "successful_tests": 9,
-      "speed_history": [
-        10.080828234674197,
-        11.389767560192187,
-        10.411862070552257,
-        12.403777827043234,
-        23.63354843850926,
-        16.526814612434595,
-        5.688724076919947,
-        13.479944029685402,
-        10.228723142394147
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-08-23T22:13:22.077268",
-          "success": true,
-          "speed": 10.080828234674197,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-23T22:13:22.077812",
-          "success": true,
-          "speed": 11.389767560192187,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-23T22:47:53.174150",
-          "success": true,
-          "speed": 10.411862070552257,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-23T23:13:31.978798",
-          "success": true,
-          "speed": 12.403777827043234,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-23T23:44:02.835145",
-          "success": true,
-          "speed": 23.63354843850926,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-24T00:38:21.571531",
-          "success": true,
-          "speed": 16.526814612434595,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-24T02:17:44.832698",
-          "success": true,
-          "speed": 5.688724076919947,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-24T03:31:28.257040",
-          "success": true,
-          "speed": 13.479944029685402,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-08-24T04:15:20.380199",
-          "success": true,
-          "speed": 10.228723142394147,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.7339956403743436,
-      "rating_components": {
-        "speed": 0.646918730292096,
-        "stability": 1.0,
-        "uptime": 0.7003952760987654,
-        "consistency": 0.2473558713697036,
-        "freshness": 0.9981213115963201
-      },
-      "category": "A",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 9,
-      "active": true,
-      "staging_until": null,
-      "consecutive_failures": 0
-    },
     "hysteria2|217.150.197.54|8443|391f093f": {
       "outbound": {
         "type": "hysteria2",
@@ -139,11 +17,10 @@
       "group": "EUROPE",
       "country": "DE",
       "first_seen": "2026-08-23T23:43:59.247284",
-      "last_seen": "2026-08-24T04:15:30.145766",
-      "total_tests": 9,
-      "successful_tests": 9,
+      "last_seen": "2026-08-24T05:11:54.197229",
+      "total_tests": 11,
+      "successful_tests": 11,
       "speed_history": [
-        3.8336853073046693,
         15.003067878177964,
         10.556324811473868,
         8.963289677073483,
@@ -151,7 +28,9 @@
         2.7340707931227355,
         2.0859223966237694,
         4.259602571599595,
-        4.668400416523809
+        4.668400416523809,
+        2.1317080907775137,
+        1.8313571144723195
       ],
       "check_history": [
         {
@@ -216,20 +95,34 @@
           "speed": 4.668400416523809,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-24T05:11:08.331309",
+          "success": true,
+          "speed": 2.1317080907775137,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-24T05:11:54.197229",
+          "success": true,
+          "speed": 1.8313571144723195,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.605382259800834,
+      "rating": 0.6579352161132717,
       "rating_components": {
-        "speed": 0.3333764650314976,
+        "speed": 0.46481959147893365,
         "stability": 1.0,
-        "uptime": 0.5967674902,
+        "uptime": 0.6626201706833332,
         "consistency": 0.0,
-        "freshness": 0.9999998047635632
+        "freshness": 0.9994881969610108
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 9,
+      "consecutive_successes": 11,
       "active": true,
       "staging_until": null,
       "consecutive_failures": 0
@@ -261,12 +154,18 @@
       "group": "EUROPE",
       "country": "PL",
       "first_seen": "2026-08-24T04:15:12.143525",
-      "last_seen": "2026-08-24T04:15:12.144372",
-      "total_tests": 2,
-      "successful_tests": 2,
+      "last_seen": "2026-08-24T05:11:56.854956",
+      "total_tests": 8,
+      "successful_tests": 8,
       "speed_history": [
         25.397992261469902,
-        13.708410534030993
+        13.708410534030993,
+        4.799337423534305,
+        4.237720273595472,
+        3.8503456691873517,
+        3.8742784690877246,
+        3.1462212201225155,
+        1.7304096426508657
       ],
       "check_history": [
         {
@@ -282,26 +181,68 @@
           "speed": 13.708410534030993,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-08-24T05:11:08.327989",
+          "success": true,
+          "speed": 4.799337423534305,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-24T05:11:08.328851",
+          "success": true,
+          "speed": 4.237720273595472,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-24T05:11:08.329450",
+          "success": true,
+          "speed": 3.8503456691873517,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-24T05:11:08.330080",
+          "success": true,
+          "speed": 3.8742784690877246,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-24T05:11:08.330671",
+          "success": true,
+          "speed": 3.1462212201225155,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-24T05:11:56.854956",
+          "success": true,
+          "speed": 1.7304096426508657,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.5535455686679092,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
+        "speed": 0.600275912105224,
+        "stability": 1.0,
+        "uptime": 0.3337260501666667,
         "consistency": 0.0,
-        "freshness": 0.0
+        "freshness": 0.9999997745346508
       },
-      "category": "C",
+      "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 2,
-      "active": false,
-      "staging_until": "2026-08-24T05:15:12.144382",
+      "consecutive_successes": 8,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-24T04:15:30.147378"
+    "last_cleanup": "2026-08-24T05:11:56.856873"
   }
 }
