@@ -27,12 +27,15 @@
       "group": "EUROPE",
       "country": "PL",
       "first_seen": "2026-08-24T09:36:52.381255",
-      "last_seen": "2026-08-24T09:36:52.382442",
-      "total_tests": 2,
-      "successful_tests": 2,
+      "last_seen": "2026-08-24T10:29:01.129922",
+      "total_tests": 5,
+      "successful_tests": 5,
       "speed_history": [
         3.32723181327357e-05,
-        1.7990347988281215e-05
+        1.7990347988281215e-05,
+        9.296079695278263e-05,
+        7.449214397902483e-05,
+        3.282590448374124e-05
       ],
       "check_history": [
         {
@@ -48,92 +51,47 @@
           "speed": 1.7990347988281215e-05,
           "latency": null,
           "error": null
-        }
-      ],
-      "rating": 0.0,
-      "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
-      },
-      "category": "C",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 2,
-      "active": false,
-      "staging_until": "2026-08-24T10:36:52.382450",
-      "consecutive_failures": 0
-    },
-    "vless|84.23.54.213|443|710fc22f": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🌐 Anycast-IP | 🇪🇸 🇵🇱 [*CIDR] VK",
-        "server": "84.23.54.213",
-        "server_port": 443,
-        "uuid": "710fc22f-06b2-03f6-bb3e-f57c17b670a6",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "www.ray-balance.space",
-          "reality": {
-            "enabled": true,
-            "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
-            "short_id": ""
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "safari"
-          }
-        }
-      },
-      "link": "vless://710fc22f-06b2-03f6-bb3e-f57c17b670a6@84.23.54.213:443?flow=xtls-rprx-vision&pbk=3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis&security=reality&sni=www.ray-balance.space&type=tcp&fp=edge#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%AA%F0%9F%87%B8%20%F0%9F%87%B5%F0%9F%87%B1%20%7C%20%5B%2ACIDR%5D%20VK",
-      "group": "EUROPE",
-      "country": null,
-      "first_seen": "2026-08-24T09:36:52.381697",
-      "last_seen": "2026-08-24T09:36:52.382020",
-      "total_tests": 2,
-      "successful_tests": 2,
-      "speed_history": [
-        2.6593187451478315e-05,
-        2.251211021205394e-05
-      ],
-      "check_history": [
+        },
         {
-          "timestamp": "2026-08-24T09:36:52.381697",
+          "timestamp": "2026-08-24T10:28:55.242479",
           "success": true,
-          "speed": 2.6593187451478315e-05,
+          "speed": 9.296079695278263e-05,
           "latency": null,
           "error": null
         },
         {
-          "timestamp": "2026-08-24T09:36:52.382020",
+          "timestamp": "2026-08-24T10:28:55.243060",
           "success": true,
-          "speed": 2.251211021205394e-05,
+          "speed": 7.449214397902483e-05,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-24T10:29:01.129922",
+          "success": true,
+          "speed": 3.282590448374124e-05,
           "latency": null,
           "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.5243130978320723,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 5.0308302307313114e-05,
+        "stability": 1.0,
+        "uptime": 0.3110483973333333,
+        "consistency": 0.9999431183498179,
+        "freshness": 0.9992624360219714
       },
-      "category": "C",
+      "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 2,
-      "active": false,
-      "staging_until": "2026-08-24T10:36:52.382137",
+      "consecutive_successes": 5,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-08-24T09:36:52.383242"
+    "last_cleanup": "2026-08-24T10:29:04.962535"
   }
 }
