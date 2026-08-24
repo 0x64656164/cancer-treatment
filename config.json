@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK"
+        "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK"
+        "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK",
+        "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -86,6 +88,28 @@
         "utls": {
           "enabled": true,
           "fingerprint": "ios"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK",
+      "server": "84.23.54.213",
+      "server_port": 443,
+      "uuid": "710fc22f-06b2-03f6-bb3e-f57c17b670a6",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.ray-balance.space",
+        "reality": {
+          "enabled": true,
+          "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "safari"
         }
       }
     }
