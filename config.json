@@ -39,26 +39,26 @@
       "type": "selector",
       "tag": "proxy",
       "outbounds": [
-        "ALL"
+        "EUROPE"
       ]
     },
     {
       "type": "selector",
-      "tag": "ALL",
+      "tag": "EUROPE",
       "outbounds": [
-        "ALL-auto",
+        "EUROPE-auto",
+        "🇳🇱 The Netherlands | [*CIDR]",
         "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK-1",
-        "🇳🇱 The Netherlands | [*CIDR]"
+        "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK-1"
       ]
     },
     {
       "type": "urltest",
-      "tag": "ALL-auto",
+      "tag": "EUROPE-auto",
       "outbounds": [
+        "🇳🇱 The Netherlands | [*CIDR]",
         "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK",
-        "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK-1",
-        "🇳🇱 The Netherlands | [*CIDR]"
+        "🌐 Anycast-IP | 🇵🇱 🇻🇮 [*CIDR] VK-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,6 +70,28 @@
     {
       "type": "block",
       "tag": "block"
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands | [*CIDR]",
+      "server": "178.248.236.138",
+      "server_port": 18443,
+      "uuid": "c7a30b74-560c-4561-8f0b-7d70e85c9b5e",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rutube.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "VUc_2yzS6cjaq_MB8TScaCftgT3oJtP6zpotM5yM_Xg",
+          "short_id": "dde21fff"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "safari"
+        }
+      }
     },
     {
       "type": "vless",
@@ -112,28 +134,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands | [*CIDR]",
-      "server": "178.248.236.138",
-      "server_port": 18443,
-      "uuid": "c7a30b74-560c-4561-8f0b-7d70e85c9b5e",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rutube.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "VUc_2yzS6cjaq_MB8TScaCftgT3oJtP6zpotM5yM_Xg",
-          "short_id": "dde21fff"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
         }
       }
     }
