@@ -1,6 +1,73 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|109.120.191.142|443|72cb684a": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
+        "server": "109.120.191.142",
+        "server_port": 443,
+        "uuid": "72cb684a-2227-4bcb-b40a-ad99904b5979",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "ads.x5.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "_KOPwSi3ejhLJoYOFT4bz0qB_0r064ae-XuG5sKAZS4",
+            "short_id": "6Da46894f6a521A1"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "qq"
+          }
+        }
+      },
+      "link": "vless://72cb684a-2227-4bcb-b40a-ad99904b5979@109.120.191.142:443?encryption=none&flow=xtls-rprx-vision&pbk=_KOPwSi3ejhLJoYOFT4bz0qB_0r064ae-XuG5sKAZS4&security=reality&sid=6Da46894f6a521A1&sni=ads.x5.ru&type=tcp&fp=chrome#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%F0%9F%8C%90%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "NL",
+      "first_seen": "2026-08-26T07:38:22.162118",
+      "last_seen": "2026-08-26T07:38:22.162666",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        29.504906664593502,
+        25.652320671981236
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-26T07:38:22.162118",
+          "success": true,
+          "speed": 29.504906664593502,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-26T07:38:22.162666",
+          "success": true,
+          "speed": 25.652320671981236,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-08-26T08:38:22.162676",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-26T06:35:12.191900"
+    "last_cleanup": "2026-08-26T07:38:22.163247"
   }
 }
