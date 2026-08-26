@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|in-ru-vk-01.ray-balance.space|443|bc6a863f": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK",
+        "server": "in-ru-vk-01.ray-balance.space",
+        "server_port": 443,
+        "uuid": "bc6a863f-f482-03f2-a950-3dc3d3b17249",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "www.ray-balance.space",
+          "reality": {
+            "enabled": true,
+            "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
+            "short_id": ""
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://bc6a863f-f482-03f2-a950-3dc3d3b17249@in-ru-vk-01.ray-balance.space:443?type=tcp&security=reality&flow=xtls-rprx-vision&pbk=3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis&sni=www.ray-balance.space&fp=chrome#%F0%9F%8C%90%20Anycast-IP%20%7C%20%F0%9F%87%AA%F0%9F%87%B8%20%F0%9F%87%B5%F0%9F%87%B1%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-08-26T18:11:27.989678",
+      "last_seen": "2026-08-26T18:11:27.989678",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        12.829071674247912
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-26T18:11:27.989678",
+          "success": true,
+          "speed": 12.829071674247912,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-08-26T19:11:27.989701",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-26T16:09:49.870892"
+    "last_cleanup": "2026-08-26T18:11:27.990364"
   }
 }
