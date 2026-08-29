@@ -1,6 +1,86 @@
 {
-  "servers": {},
+  "servers": {
+    "trojan|90.156.218.126|2223|47SXGr72": {
+      "outbound": {
+        "type": "trojan",
+        "tag": "🇨🇭 Switzerland | 🌐 [*CIDR] VK",
+        "server": "90.156.218.126",
+        "server_port": 2223,
+        "password": "47SXGr72f1wpGNkZzLUUExRDHuVQypaW",
+        "tls": {
+          "enabled": true,
+          "server_name": "vkc7.secured-by-tenzo.sbs"
+        }
+      },
+      "link": "trojan://47SXGr72f1wpGNkZzLUUExRDHuVQypaW@90.156.218.126:2223?alpn=h2%2Chttp%2F1.1&security=tls&sni=vkc7.secured-by-tenzo.sbs&type=tcp&allowInsecure=1&fp=android#%F0%9F%87%A8%F0%9F%87%AD%20Switzerland%20%7C%20%F0%9F%8C%90%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "CH",
+      "first_seen": "2026-08-29T21:33:14.258773",
+      "last_seen": "2026-08-29T21:33:14.259883",
+      "total_tests": 5,
+      "successful_tests": 5,
+      "speed_history": [
+        2.5272624890095985,
+        2.525535852726754,
+        2.5229598840540297,
+        2.5264801096250666,
+        2.5216083325529515
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-08-29T21:33:14.258773",
+          "success": true,
+          "speed": 2.5272624890095985,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-29T21:33:14.259177",
+          "success": true,
+          "speed": 2.525535852726754,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-29T21:33:14.259419",
+          "success": true,
+          "speed": 2.5229598840540297,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-29T21:33:14.259647",
+          "success": true,
+          "speed": 2.5264801096250666,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-08-29T21:33:14.259883",
+          "success": true,
+          "speed": 2.5216083325529515,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.6038301078278494,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9983011657883241,
+        "freshness": 0.999999941660114
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 5,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-29T18:59:52.763546"
+    "last_cleanup": "2026-08-29T21:33:14.260475"
   }
 }

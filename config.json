@@ -47,14 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK"
+        "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK"
+        "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -68,16 +68,14 @@
       "tag": "block"
     },
     {
-      "type": "vless",
-      "tag": ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK",
-      "server": "5.188.141.67",
-      "server_port": 8449,
-      "uuid": "2dfd0db2-cd4e-4c09-97fc-67c3d8ee9409",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
+      "type": "trojan",
+      "tag": "🇨🇭 Switzerland | 🌐 [*CIDR] VK",
+      "server": "90.156.218.126",
+      "server_port": 2223,
+      "password": "47SXGr72f1wpGNkZzLUUExRDHuVQypaW",
       "tls": {
         "enabled": true,
-        "server_name": "edge-vk.vpn.partners"
+        "server_name": "vkc7.secured-by-tenzo.sbs"
       }
     }
   ],
