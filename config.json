@@ -47,16 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK",
-        "🌐 Anycast-IP | 🇪🇸 🇵🇱 [*CIDR] VK"
+        ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK",
-        "🌐 Anycast-IP | 🇪🇸 🇵🇱 [*CIDR] VK"
+        ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,46 +69,15 @@
     },
     {
       "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇪🇸 🇵🇱 | [*CIDR] VK",
-      "server": "in-ru-vk-01.ray-balance.space",
-      "server_port": 443,
-      "uuid": "bc6a863f-f482-03f2-a950-3dc3d3b17249",
+      "tag": ".𖥔 ݁ ˖ִ🛸༄˖°. | [*CIDR] VK",
+      "server": "5.188.141.67",
+      "server_port": 8449,
+      "uuid": "2dfd0db2-cd4e-4c09-97fc-67c3d8ee9409",
       "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "www.ray-balance.space",
-        "reality": {
-          "enabled": true,
-          "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🌐 Anycast-IP | 🇪🇸 🇵🇱 [*CIDR] VK",
-      "server": "84.23.54.213",
-      "server_port": 443,
-      "uuid": "bc6a863f-f482-03f2-a950-3dc3d3b17249",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.ray-balance.space",
-        "reality": {
-          "enabled": true,
-          "public_key": "3tOekmYYkNW9IwHGuui6Y9bLmXoyiAmwAgtAdUAmDis",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
-        }
+        "server_name": "edge-vk.vpn.partners"
       }
     }
   ],
