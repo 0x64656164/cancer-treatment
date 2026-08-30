@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
+        "🇫🇮 Finland | [*CIDR] VK",
+        "🇬🇷 Greece | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
+        "🇫🇮 Finland | [*CIDR] VK",
+        "🇬🇷 Greece | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -68,14 +70,47 @@
       "tag": "block"
     },
     {
-      "type": "trojan",
-      "tag": "🇨🇭 Switzerland | 🌐 [*CIDR] VK",
-      "server": "90.156.218.126",
-      "server_port": 2223,
-      "password": "47SXGr72f1wpGNkZzLUUExRDHuVQypaW",
+      "type": "vless",
+      "tag": "🇫🇮 Finland | [*CIDR] VK",
+      "server": "up.photo-frame.com",
+      "server_port": 8081,
+      "uuid": "2f019ee3-d1a0-4a41-84a6-26c9b5d2b9f0",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "vkc7.secured-by-tenzo.sbs"
+        "server_name": "kicker.de",
+        "reality": {
+          "enabled": true,
+          "public_key": "Gy951bXTNLfj43OT3HeMSaHsm0zv-iBsgAqpCvBy9RU",
+          "short_id": ""
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇬🇷 Greece | [*CIDR] VK",
+      "server": "mirrorone.photo-frame.com",
+      "server_port": 8443,
+      "uuid": "2f019ee3-d1a0-4a41-84a6-26c9b5d2b9f0",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "kicker.de",
+        "reality": {
+          "enabled": true,
+          "public_key": "jBYhnSzbsHzKWoTPHq9pX5y3du96uRkShvKib4iEBzo",
+          "short_id": "a1b2c3d4e5f6"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        }
       }
     }
   ],
