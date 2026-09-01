@@ -47,14 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇮 Finland | [*CIDR] VK"
+        "🇨🇭 Switzerland | 🌐 | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇮 Finland | [*CIDR] VK"
+        "🇨🇭 Switzerland | 🌐 | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -68,25 +68,14 @@
       "tag": "block"
     },
     {
-      "type": "vless",
-      "tag": "🇫🇮 Finland | [*CIDR] VK",
-      "server": "up.photo-frame.com",
-      "server_port": 8081,
-      "uuid": "2f019ee3-d1a0-4a41-84a6-26c9b5d2b9f0",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
+      "type": "trojan",
+      "tag": "🇨🇭 Switzerland | 🌐 | [*CIDR] VK",
+      "server": "90.156.218.126",
+      "server_port": 2223,
+      "password": "47SXGr72f1wpGNkZzLUUExRDHuVQypaW",
       "tls": {
         "enabled": true,
-        "server_name": "kicker.de",
-        "reality": {
-          "enabled": true,
-          "public_key": "Gy951bXTNLfj43OT3HeMSaHsm0zv-iBsgAqpCvBy9RU",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
+        "server_name": "vkc7.secured-by-tenzo.sbs"
       }
     }
   ],

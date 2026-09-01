@@ -1,6 +1,62 @@
 {
-  "servers": {},
+  "servers": {
+    "trojan|90.156.218.126|2223|47SXGr72": {
+      "outbound": {
+        "type": "trojan",
+        "tag": "🇨🇭 Switzerland | 🌐 | [*CIDR] VK",
+        "server": "90.156.218.126",
+        "server_port": 2223,
+        "password": "47SXGr72f1wpGNkZzLUUExRDHuVQypaW",
+        "tls": {
+          "enabled": true,
+          "server_name": "vkc7.secured-by-tenzo.sbs"
+        }
+      },
+      "link": "trojan://47SXGr72f1wpGNkZzLUUExRDHuVQypaW@90.156.218.126:2223?type=tcp&security=tls&sni=vkc7.secured-by-tenzo.sbs&alpn=h2%2Chttp%2F1.1&fp=chrome#%F0%9F%87%A8%F0%9F%87%AD%20Switzerland%20%7C%20%F0%9F%8C%90%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "CH",
+      "first_seen": "2026-09-01T03:23:35.657324",
+      "last_seen": "2026-09-01T03:23:35.657684",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        4.442362339016846,
+        4.3735791461306635
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-01T03:23:35.657324",
+          "success": true,
+          "speed": 4.442362339016846,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-01T03:23:35.657684",
+          "success": true,
+          "speed": 4.3735791461306635,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-09-01T04:23:35.657690",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-08-31T23:58:56.124426"
+    "last_cleanup": "2026-09-01T03:23:35.708140"
   }
 }
