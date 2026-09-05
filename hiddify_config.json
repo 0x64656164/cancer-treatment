@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
+        "🇫🇮 Finland | [*CIDR]",
+        "🇩🇪 Germany | 🌐 | [*CIDR]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇨🇭 Switzerland | 🌐 [*CIDR] VK"
+        "🇫🇮 Finland | [*CIDR]",
+        "🇩🇪 Germany | 🌐 | [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,14 +72,47 @@
       "tag": "block"
     },
     {
-      "type": "trojan",
-      "tag": "🇨🇭 Switzerland | 🌐 [*CIDR] VK",
-      "server": "90.156.218.126",
-      "server_port": 2223,
-      "password": "DQMH0rnu-nQ2FL7fddCA306ApdzGuvFA",
+      "type": "vless",
+      "tag": "🇫🇮 Finland | [*CIDR]",
+      "server": "178.248.232.207",
+      "server_port": 14443,
+      "uuid": "954f495f-3c39-000e-9745-752bb56f605f",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "vkc7.secured-by-tenzo.sbs"
+        "server_name": "static.rutube.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
+          "short_id": "43dcff53849b81e6"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany | 🌐 | [*CIDR]",
+      "server": "178.248.232.207",
+      "server_port": 60443,
+      "uuid": "954f495f-3c39-0012-9745-752bb56f605f",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "static.rutube.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
+          "short_id": "43dcff53849b81e6"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "edge"
+        }
       }
     }
   ],
