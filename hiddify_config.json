@@ -49,16 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇮 Finland | [*CIDR]",
-        "🇩🇪 Germany | 🌐 | [*CIDR]"
+        "🇳🇱 The Netherlands | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇮 Finland | [*CIDR]",
-        "🇩🇪 Germany | 🌐 | [*CIDR]"
+        "🇳🇱 The Netherlands | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,46 +71,22 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland | [*CIDR]",
-      "server": "178.248.232.207",
+      "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+      "server": "asd.coteite.pro",
       "server_port": 14443,
-      "uuid": "954f495f-3c39-000e-9745-752bb56f605f",
-      "flow": "xtls-rprx-vision",
+      "uuid": "02f3a6a2-289e-4026-8e26-616d47e0914f",
+      "flow": "",
       "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/tzws",
+        "headers": {
+          "Host": "asd.coteite.pro"
+        }
+      },
       "tls": {
         "enabled": true,
-        "server_name": "static.rutube.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
-          "short_id": "43dcff53849b81e6"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany | 🌐 | [*CIDR]",
-      "server": "178.248.232.207",
-      "server_port": 60443,
-      "uuid": "954f495f-3c39-0012-9745-752bb56f605f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "static.rutube.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
-          "short_id": "43dcff53849b81e6"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
-        }
+        "server_name": "asd.coteite.pro"
       }
     }
   ],

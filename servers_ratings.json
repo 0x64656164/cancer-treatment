@@ -1,6 +1,79 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|asd.coteite.pro|14443|02f3a6a2": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+        "server": "asd.coteite.pro",
+        "server_port": 14443,
+        "uuid": "02f3a6a2-289e-4026-8e26-616d47e0914f",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/tzws",
+          "headers": {
+            "Host": "asd.coteite.pro"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "asd.coteite.pro"
+        }
+      },
+      "link": "vless://02f3a6a2-289e-4026-8e26-616d47e0914f@asd.coteite.pro:14443?type=ws&headerType=none&security=tls&encryption=none&sni=asd.coteite.pro&alpn=http%2F1.1&path=%2Ftzws&host=asd.coteite.pro&fp=chrome#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-09-07T21:18:21.135167",
+      "last_seen": "2026-09-07T21:18:21.135998",
+      "total_tests": 3,
+      "successful_tests": 3,
+      "speed_history": [
+        0.6601631788029488,
+        0.6559690798155184,
+        0.6475121727665872
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-07T21:18:21.135167",
+          "success": true,
+          "speed": 0.6601631788029488,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-07T21:18:21.135613",
+          "success": true,
+          "speed": 0.6559690798155184,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-07T21:18:21.135998",
+          "success": true,
+          "speed": 0.6475121727665872,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5338573052613698,
+      "rating_components": {
+        "speed": 0.6545481437950181,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9894768467572651,
+        "freshness": 0.9999999455109314
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-09-07T18:00:25.749121"
+    "last_cleanup": "2026-09-07T21:18:21.136588"
   }
 }
