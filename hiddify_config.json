@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany | [*CIDR] VK"
+        "🇩🇪 Germany | [*CIDR] VK",
+        "🇩🇪 Germany — #31"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany | [*CIDR] VK"
+        "🇩🇪 Germany | [*CIDR] VK",
+        "🇩🇪 Germany — #31"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -87,6 +89,24 @@
       "tls": {
         "enabled": true,
         "server_name": "api.stroymatdv.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #31",
+      "server": "185.241.195.146",
+      "server_port": 443,
+      "uuid": "49fa7a15-9506-443e-a105-282e3471afa0",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/e7ws",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "dostavka.stroymatdv.cc"
       }
     }
   ],

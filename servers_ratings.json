@@ -25,15 +25,20 @@
       "group": "EUROPE",
       "country": null,
       "first_seen": "2026-09-11T19:58:40.020398",
-      "last_seen": "2026-09-11T19:58:40.021541",
-      "total_tests": 5,
-      "successful_tests": 5,
+      "last_seen": "2026-09-11T22:11:24.553098",
+      "total_tests": 14,
+      "successful_tests": 14,
       "speed_history": [
-        1.168114183424185,
-        1.0957755923223962,
-        1.076802388243907,
-        1.0274893274038726,
-        0.9702271313402926
+        0.9702271313402926,
+        1.2015109360333192,
+        1.1793609341321725,
+        1.1947194581820242,
+        1.1417180642500042,
+        1.136770025727822,
+        1.1462434079060775,
+        1.1027655200644586,
+        1.1056625230358508,
+        1.304403701020335
       ],
       "check_history": [
         {
@@ -70,26 +75,143 @@
           "speed": 0.9702271313402926,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:10:20.216059",
+          "success": true,
+          "speed": 1.2015109360333192,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:10:20.216437",
+          "success": true,
+          "speed": 1.1793609341321725,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:10:20.216901",
+          "success": true,
+          "speed": 1.1947194581820242,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:10:20.217227",
+          "success": true,
+          "speed": 1.1417180642500042,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:10:20.217529",
+          "success": true,
+          "speed": 1.136770025727822,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:10:20.217901",
+          "success": true,
+          "speed": 1.1462434079060775,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:10:20.218461",
+          "success": true,
+          "speed": 1.1027655200644586,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:10:20.218833",
+          "success": true,
+          "speed": 1.1056625230358508,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T22:11:24.553098",
+          "success": true,
+          "speed": 1.304403701020335,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.5915541694247555,
+      "rating": 0.5680502281263434,
       "rating_components": {
-        "speed": 1.0,
+        "speed": 0.041319615895414684,
         "stability": 1.0,
-        "uptime": 0.01,
-        "consistency": 0.8755417736706667,
-        "freshness": 0.9999999470512585
+        "uptime": 0.4348659323361111,
+        "consistency": 0.8583995982534407,
+        "freshness": 0.9999998145831464
       },
       "category": "B",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 5,
+      "consecutive_successes": 14,
       "active": true,
       "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|185.241.195.146|443|49fa7a15": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #31",
+        "server": "185.241.195.146",
+        "server_port": 443,
+        "uuid": "49fa7a15-9506-443e-a105-282e3471afa0",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/e7ws",
+          "headers": {}
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "dostavka.stroymatdv.cc"
+        }
+      },
+      "link": "vless://49fa7a15-9506-443e-a105-282e3471afa0@185.241.195.146:443?alpn=http%2F1.1&encryption=none&fp=edge&path=%2Fe7ws&security=tls&sni=dostavka.stroymatdv.cc&type=ws#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%2331",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-09-11T22:10:20.215373",
+      "last_seen": "2026-09-11T22:10:20.215373",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        27.791598379709743
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-11T22:10:20.215373",
+          "success": true,
+          "speed": 27.791598379709743,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-09-11T23:10:20.215400",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-09-11T19:58:40.022097"
+    "last_cleanup": "2026-09-11T22:11:24.554543"
   }
 }
