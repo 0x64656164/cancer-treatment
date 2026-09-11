@@ -24,7 +24,7 @@
       "country": "DE",
       "first_seen": "2026-09-10T22:04:48.526503",
       "last_seen": "2026-09-10T22:04:48.526503",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         22.651692294744088
@@ -34,6 +34,67 @@
           "timestamp": "2026-09-10T22:04:48.526503",
           "success": true,
           "speed": 22.651692294744088,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-11T00:19:33.862390",
+          "success": false,
+          "speed": 0,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 0,
+      "active": false,
+      "staging_until": null,
+      "consecutive_failures": 1
+    },
+    "vless|185.241.195.146|443|11ebabde": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #30",
+        "server": "185.241.195.146",
+        "server_port": 443,
+        "uuid": "11ebabde-8fff-4264-ab5c-395c8d767286",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/e7ws",
+          "headers": {}
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "dostavka.stroymatdv.cc"
+        }
+      },
+      "link": "vless://11ebabde-8fff-4264-ab5c-395c8d767286@185.241.195.146:443?alpn=http%2F1.1&encryption=none&fp=edge&path=%2Fe7ws&security=tls&sni=dostavka.stroymatdv.cc&type=ws#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%2330",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-09-11T00:19:31.104169",
+      "last_seen": "2026-09-11T00:19:31.104169",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        25.35420617018879
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-11T00:19:31.104169",
+          "success": true,
+          "speed": 25.35420617018879,
           "latency": null,
           "error": null
         }
@@ -51,11 +112,11 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-09-10T23:04:48.526529",
+      "staging_until": "2026-09-11T01:19:31.104195",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-09-10T22:04:48.527333"
+    "last_cleanup": "2026-09-11T00:19:33.863496"
   }
 }
