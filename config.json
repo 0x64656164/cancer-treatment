@@ -47,16 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany | [*CIDR] VK",
-        "🇩🇪 Germany — #31"
+        "🇩🇪 Germany — #31",
+        "🇩🇪 Germany — #32"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany | [*CIDR] VK",
-        "🇩🇪 Germany — #31"
+        "🇩🇪 Germany — #31",
+        "🇩🇪 Germany — #32"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,30 +71,28 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany | [*CIDR] VK",
-      "server": "212.233.98.12",
-      "server_port": 14443,
-      "uuid": "87bd8ffa-7327-47a0-8517-a98eb602d861",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/apws3",
-        "headers": {
-          "Host": "api.stroymatdv.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "api.stroymatdv.cc"
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇩🇪 Germany — #31",
       "server": "185.241.195.146",
       "server_port": 443,
       "uuid": "49fa7a15-9506-443e-a105-282e3471afa0",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/e7ws",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "dostavka.stroymatdv.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #32",
+      "server": "185.241.195.146",
+      "server_port": 443,
+      "uuid": "f71e53bb-f2bb-48c3-8d3d-864c7a194c4c",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
