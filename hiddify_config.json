@@ -49,7 +49,6 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands | [*CIDR]"
       ]
     },
@@ -57,7 +56,6 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands | [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -70,26 +68,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "api.heoleti.pro",
-      "server_port": 14443,
-      "uuid": "0755a698-fc93-4cb7-ac1e-422953bcca33",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/tzws",
-        "headers": {
-          "Host": "api.heoleti.pro"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "api.heoleti.pro"
-      }
     },
     {
       "type": "vless",
