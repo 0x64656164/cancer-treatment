@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #32"
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇳🇱 The Netherlands | [*CIDR]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #32"
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇳🇱 The Netherlands | [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,20 +71,44 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #32",
-      "server": "185.241.195.146",
-      "server_port": 443,
-      "uuid": "f71e53bb-f2bb-48c3-8d3d-864c7a194c4c",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "api.heoleti.pro",
+      "server_port": 14443,
+      "uuid": "0755a698-fc93-4cb7-ac1e-422953bcca33",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
-        "path": "/e7ws",
-        "headers": {}
+        "path": "/tzws",
+        "headers": {
+          "Host": "api.heoleti.pro"
+        }
       },
       "tls": {
         "enabled": true,
-        "server_name": "dostavka.stroymatdv.cc"
+        "server_name": "api.heoleti.pro"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands | [*CIDR]",
+      "server": "185.65.148.217",
+      "server_port": 15443,
+      "uuid": "3f63c86c-ac4a-4900-85cf-4fedf93c2ca5",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rutube.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
+          "short_id": "43dcff53849b81e6"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
       }
     }
   ],

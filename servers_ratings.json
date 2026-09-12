@@ -1,6 +1,161 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|185.65.148.217|15443|3f63c86c": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | [*CIDR]",
+        "server": "185.65.148.217",
+        "server_port": 15443,
+        "uuid": "3f63c86c-ac4a-4900-85cf-4fedf93c2ca5",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "rutube.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc",
+            "short_id": "43dcff53849b81e6"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "chrome"
+          }
+        }
+      },
+      "link": "vless://3f63c86c-ac4a-4900-85cf-4fedf93c2ca5@185.65.148.217:15443?type=tcp&headerType=none&security=reality&encryption=none&sni=rutube.ru&pbk=10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc&sid=43dcff53849b81e6&flow=xtls-rprx-vision&fp=chrome#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%5B%2ACIDR%5D",
+      "group": "EUROPE",
+      "country": "NL",
+      "first_seen": "2026-09-12T20:06:12.773603",
+      "last_seen": "2026-09-12T20:06:12.773603",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        18.80120451988106
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-12T20:06:12.773603",
+          "success": true,
+          "speed": 18.80120451988106,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-09-12T21:06:12.773630",
+      "consecutive_failures": 0
+    },
+    "vless|api.heoleti.pro|14443|0755a698": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+        "server": "api.heoleti.pro",
+        "server_port": 14443,
+        "uuid": "0755a698-fc93-4cb7-ac1e-422953bcca33",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/tzws",
+          "headers": {
+            "Host": "api.heoleti.pro"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "api.heoleti.pro"
+        }
+      },
+      "link": "vless://0755a698-fc93-4cb7-ac1e-422953bcca33@api.heoleti.pro:14443?type=ws&headerType=none&security=tls&encryption=none&sni=api.heoleti.pro&path=%2Ftzws&host=api.heoleti.pro&fp=android#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-09-12T20:06:12.773968",
+      "last_seen": "2026-09-12T20:06:12.775221",
+      "total_tests": 6,
+      "successful_tests": 6,
+      "speed_history": [
+        2.7212376780033027,
+        2.5693303763479913,
+        2.569423946287749,
+        2.70146566556968,
+        2.5133588033975416,
+        2.725988571383702
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-12T20:06:12.773968",
+          "success": true,
+          "speed": 2.7212376780033027,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-12T20:06:12.774251",
+          "success": true,
+          "speed": 2.5693303763479913,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-12T20:06:12.774483",
+          "success": true,
+          "speed": 2.569423946287749,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-12T20:06:12.774705",
+          "success": true,
+          "speed": 2.70146566556968,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-12T20:06:12.774940",
+          "success": true,
+          "speed": 2.5133588033975416,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-12T20:06:12.775221",
+          "success": true,
+          "speed": 2.725988571383702,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.4255451454622946,
+      "rating_components": {
+        "speed": 0.14006908461885723,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9353133734726836,
+        "freshness": 0.9999999412750322
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 6,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-09-12T17:58:33.284411"
+    "last_cleanup": "2026-09-12T20:06:12.775821"
   }
 }
