@@ -1,6 +1,61 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|185.241.195.146|443|163c5ae1": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #36",
+        "server": "185.241.195.146",
+        "server_port": 443,
+        "uuid": "163c5ae1-38ce-48bb-825d-45d2295962fe",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/e7ws",
+          "headers": {}
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "dostavka.stroymatdv.cc"
+        }
+      },
+      "link": "vless://163c5ae1-38ce-48bb-825d-45d2295962fe@185.241.195.146:443?alpn=http%2F1.1&encryption=none&fp=edge&path=%2Fe7ws&security=tls&sni=dostavka.stroymatdv.cc&type=ws#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%2336",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-09-13T10:26:36.507068",
+      "last_seen": "2026-09-13T10:26:36.507068",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        16.290683798398064
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-13T10:26:36.507068",
+          "success": true,
+          "speed": 16.290683798398064,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-09-13T11:26:36.507099",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-09-13T05:03:12.388266"
+    "last_cleanup": "2026-09-13T10:26:36.507769"
   }
 }
