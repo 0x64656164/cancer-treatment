@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #23"
+        "🇩🇪 Germany — #23",
+        "🇩🇪 Germany — #19"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #23"
+        "🇩🇪 Germany — #23",
+        "🇩🇪 Germany — #19"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -75,6 +77,24 @@
       "server": "37.139.42.138",
       "server_port": 443,
       "uuid": "9ab95191-5634-4446-91f2-0748d6c58243",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/e7ws",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "dostavitos.stroymatdv.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #19",
+      "server": "37.139.42.138",
+      "server_port": 443,
+      "uuid": "4158225b-1b60-481d-86a5-859f4cd544e1",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
