@@ -1,66 +1,5 @@
 {
   "servers": {
-    "vless|37.139.42.138|443|e0503859": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇩🇪 Germany — #25",
-        "server": "37.139.42.138",
-        "server_port": 443,
-        "uuid": "e0503859-9d03-4835-a1fd-a82757b27c69",
-        "flow": "",
-        "packet_encoding": "xudp",
-        "transport": {
-          "type": "ws",
-          "path": "/e7ws",
-          "headers": {}
-        },
-        "tls": {
-          "enabled": true,
-          "server_name": "dostavitos.stroymatdv.cc"
-        }
-      },
-      "link": "vless://e0503859-9d03-4835-a1fd-a82757b27c69@37.139.42.138:443?alpn=http%2F1.1&encryption=none&fp=edge&path=%2Fe7ws&security=tls&sni=dostavitos.stroymatdv.cc&type=ws#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%2325",
-      "group": "EUROPE",
-      "country": "DE",
-      "first_seen": "2026-09-20T23:42:36.452710",
-      "last_seen": "2026-09-20T23:42:36.452710",
-      "total_tests": 2,
-      "successful_tests": 1,
-      "speed_history": [
-        22.48289559520802
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-09-20T23:42:36.452710",
-          "success": true,
-          "speed": 22.48289559520802,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-09-21T02:13:02.638866",
-          "success": false,
-          "speed": 0,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.0,
-      "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
-      },
-      "category": "C",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 0,
-      "active": false,
-      "staging_until": null,
-      "consecutive_failures": 1
-    },
     "vless|37.139.42.138|443|d82e3813": {
       "outbound": {
         "type": "vless",
@@ -85,7 +24,7 @@
       "country": "DE",
       "first_seen": "2026-09-21T02:13:00.010887",
       "last_seen": "2026-09-21T02:13:00.010887",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         31.253269097920644
@@ -95,6 +34,13 @@
           "timestamp": "2026-09-21T02:13:00.010887",
           "success": true,
           "speed": 31.253269097920644,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-21T08:05:05.732623",
+          "success": false,
+          "speed": 0,
           "latency": null,
           "error": null
         }
@@ -110,13 +56,13 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 0,
       "active": false,
-      "staging_until": "2026-09-21T03:13:00.010910",
-      "consecutive_failures": 0
+      "staging_until": null,
+      "consecutive_failures": 1
     }
   },
   "metadata": {
-    "last_cleanup": "2026-09-21T02:13:02.639870"
+    "last_cleanup": "2026-09-21T08:05:05.819162"
   }
 }
