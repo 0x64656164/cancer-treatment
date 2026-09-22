@@ -1,6 +1,61 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|37.139.42.138|443|45ab744a": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #28",
+        "server": "37.139.42.138",
+        "server_port": 443,
+        "uuid": "45ab744a-7dcd-4769-b2ce-8fdc32933850",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/e7ws",
+          "headers": {}
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "dostavitos.stroymatdv.cc"
+        }
+      },
+      "link": "vless://45ab744a-7dcd-4769-b2ce-8fdc32933850@37.139.42.138:443?alpn=http%2F1.1&encryption=none&fp=edge&path=%2Fe7ws&security=tls&sni=dostavitos.stroymatdv.cc&type=ws#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%2328",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-09-22T17:08:15.642237",
+      "last_seen": "2026-09-22T17:08:15.642237",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        14.786935985399653
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-22T17:08:15.642237",
+          "success": true,
+          "speed": 14.786935985399653,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-09-22T18:08:15.642259",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-09-22T12:26:21.489408"
+    "last_cleanup": "2026-09-22T17:08:15.643221"
   }
 }

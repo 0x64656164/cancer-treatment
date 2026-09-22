@@ -47,14 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany — #19"
+        "🇩🇪 Germany — #28"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany — #19"
+        "🇩🇪 Germany — #28"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,10 +69,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #19",
+      "tag": "🇩🇪 Germany — #28",
       "server": "37.139.42.138",
       "server_port": 443,
-      "uuid": "027d7518-3f08-4692-b8c4-4817bccfb271",
+      "uuid": "45ab744a-7dcd-4769-b2ce-8fdc32933850",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
@@ -102,29 +102,29 @@
       {
         "rule_set": [
           "netflix",
-          "discord-full",
-          "grok",
-          "tiktok",
-          "rkn",
-          "unavailable-in-russia",
-          "youtube",
-          "discord-voice-chats",
-          "x",
-          "discord-voice-chats-no-cidr",
-          "whatsapp",
-          "telegram",
-          "openai",
-          "roblox",
-          "capcut",
-          "gemini",
           "supercell",
           "copilot",
+          "whatsapp",
+          "unavailable-in-russia",
+          "youtube",
           "instagram",
-          "telegram-voice-chats",
-          "linkedin",
+          "discord-voice-chats",
+          "x",
+          "discord-full",
+          "capcut",
+          "tiktok",
           "spotify",
           "discord-domains",
+          "discord-voice-chats-no-cidr",
           "anime-ru",
+          "grok",
+          "linkedin",
+          "telegram-voice-chats",
+          "roblox",
+          "gemini",
+          "telegram",
+          "openai",
+          "rkn",
           "geosite-ru-blocked",
           "geoip-ru-blocked-all"
         ],
@@ -137,111 +137,6 @@
         "tag": "netflix",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "discord-full",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-full.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "grok",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/grok.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "tiktok",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/tiktok.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "rkn",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/rkn.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "unavailable-in-russia",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/unavailable-in-russia.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "youtube",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/youtube.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "discord-voice-chats",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "x",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/x.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "discord-voice-chats-no-cidr",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats-no-cidr.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "whatsapp",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/whatsapp.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "telegram",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/telegram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "openai",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/openai.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "roblox",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/roblox.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "capcut",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/capcut.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "gemini",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/gemini.srs",
         "download_detour": "direct"
       },
       {
@@ -260,6 +155,27 @@
       },
       {
         "type": "remote",
+        "tag": "whatsapp",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/whatsapp.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "unavailable-in-russia",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/unavailable-in-russia.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "youtube",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/youtube.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
         "tag": "instagram",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/instagram.srs",
@@ -267,16 +183,37 @@
       },
       {
         "type": "remote",
-        "tag": "telegram-voice-chats",
+        "tag": "discord-voice-chats",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/telegram-voice-chats.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats.srs",
         "download_detour": "direct"
       },
       {
         "type": "remote",
-        "tag": "linkedin",
+        "tag": "x",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/linkedin.srs",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/x.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "discord-full",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-full.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "capcut",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/capcut.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "tiktok",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/tiktok.srs",
         "download_detour": "direct"
       },
       {
@@ -295,9 +232,72 @@
       },
       {
         "type": "remote",
+        "tag": "discord-voice-chats-no-cidr",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/discord-voice-chats-no-cidr.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
         "tag": "anime-ru",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/anime-ru.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "grok",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/grok.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "linkedin",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/linkedin.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "telegram-voice-chats",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/telegram-voice-chats.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "roblox",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/roblox.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "gemini",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/gemini.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "telegram",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/telegram.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "openai",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/openai.srs",
+        "download_detour": "direct"
+      },
+      {
+        "type": "remote",
+        "tag": "rkn",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/0x64656164/cancer-treatment/refs/heads/main/ruleset/srs/rkn.srs",
         "download_detour": "direct"
       },
       {
