@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇩🇪 Germany | 🌐 [*CIDR] VK"
+        "🇬🇧 United Kingdom — #55"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇩🇪 Germany | 🌐 [*CIDR] VK"
+        "🇬🇧 United Kingdom — #55"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,20 +71,22 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany | 🌐 [*CIDR] VK",
-      "server": "37.139.42.138",
+      "tag": "🇬🇧 United Kingdom — #55",
+      "server": "37.139.42.235",
       "server_port": 443,
-      "uuid": "365de9e9-ba29-4819-af2d-766f9638e3be",
+      "uuid": "28ad12d9-80ec-4898-882c-a42576d0c5ca",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
-        "path": "/e9ws",
-        "headers": {}
+        "path": "/euws",
+        "headers": {
+          "Host": "katering.coteite.pro"
+        }
       },
       "tls": {
         "enabled": true,
-        "server_name": "dostavitos.stroymatdv.cc"
+        "server_name": "katering.coteite.pro"
       }
     }
   ],
