@@ -47,14 +47,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇬🇧 United Kingdom — #91"
+        "🇬🇧 United Kingdom — #91",
+        "🇬🇧 United Kingdom — #95"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇬🇧 United Kingdom — #91"
+        "🇬🇧 United Kingdom — #91",
+        "🇬🇧 United Kingdom — #95"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,6 +75,26 @@
       "server": "37.139.42.235",
       "server_port": 443,
       "uuid": "b71b23dd-a2b4-48dc-b39d-3418cd63c5c3",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/euws",
+        "headers": {
+          "Host": "katering.coteite.pro"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "katering.coteite.pro"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇬🇧 United Kingdom — #95",
+      "server": "37.139.42.235",
+      "server_port": 443,
+      "uuid": "ef00925a-4d97-43a1-8655-9d183ccb7894",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
