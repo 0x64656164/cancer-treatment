@@ -26,7 +26,7 @@
       "country": null,
       "first_seen": "2026-09-27T20:16:32.695497",
       "last_seen": "2026-09-27T20:16:32.695497",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         20.382496313096574
@@ -36,6 +36,69 @@
           "timestamp": "2026-09-27T20:16:32.695497",
           "success": true,
           "speed": 20.382496313096574,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-27T23:12:08.213216",
+          "success": false,
+          "speed": 0,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 0,
+      "active": false,
+      "staging_until": null,
+      "consecutive_failures": 1
+    },
+    "vless|37.139.42.235|443|52b58d58": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇬🇧 United Kingdom — #85",
+        "server": "37.139.42.235",
+        "server_port": 443,
+        "uuid": "52b58d58-f533-4855-b29f-d6b156c3daa9",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/euws",
+          "headers": {
+            "Host": "katering.coteite.pro"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "katering.coteite.pro"
+        }
+      },
+      "link": "vless://52b58d58-f533-4855-b29f-d6b156c3daa9@37.139.42.235:443?alpn=http%2F1.1&encryption=none&fp=edge&host=katering.coteite.pro&path=%2Feuws&security=tls&sni=katering.coteite.pro&type=ws#%F0%9F%87%AC%F0%9F%87%A7%20United%20Kingdom%20%E2%80%94%20%2385",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-09-27T23:12:04.943635",
+      "last_seen": "2026-09-27T23:12:04.943635",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        23.247522823694577
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-27T23:12:04.943635",
+          "success": true,
+          "speed": 23.247522823694577,
           "latency": null,
           "error": null
         }
@@ -53,11 +116,67 @@
       "bad_hours": [],
       "consecutive_successes": 1,
       "active": false,
-      "staging_until": "2026-09-27T21:16:32.695521",
+      "staging_until": "2026-09-28T00:12:04.943667",
+      "consecutive_failures": 0
+    },
+    "vless|37.139.42.235|443|4fbcd67a": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇬🇧 United Kingdom — #87",
+        "server": "37.139.42.235",
+        "server_port": 443,
+        "uuid": "4fbcd67a-1af6-4b82-b8f6-73d0a61c554e",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/euws",
+          "headers": {
+            "Host": "katering.coteite.pro"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "katering.coteite.pro"
+        }
+      },
+      "link": "vless://4fbcd67a-1af6-4b82-b8f6-73d0a61c554e@37.139.42.235:443?alpn=http%2F1.1&encryption=none&fp=edge&host=katering.coteite.pro&path=%2Feuws&security=tls&sni=katering.coteite.pro&type=ws#%F0%9F%87%AC%F0%9F%87%A7%20United%20Kingdom%20%E2%80%94%20%2387",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-09-27T23:12:04.944385",
+      "last_seen": "2026-09-27T23:12:04.944385",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        21.34698943631812
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-27T23:12:04.944385",
+          "success": true,
+          "speed": 21.34698943631812,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-09-28T00:12:04.944403",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-09-27T20:16:32.696392"
+    "last_cleanup": "2026-09-27T23:12:08.214753"
   }
 }
