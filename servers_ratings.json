@@ -1,68 +1,5 @@
 {
   "servers": {
-    "vless|37.139.42.235|443|c50f2b85": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇬🇧 United Kingdom — #98",
-        "server": "37.139.42.235",
-        "server_port": 443,
-        "uuid": "c50f2b85-b14b-4737-b1e7-931e3ce75d50",
-        "flow": "",
-        "packet_encoding": "xudp",
-        "transport": {
-          "type": "ws",
-          "path": "/euws",
-          "headers": {
-            "Host": "katering.coteite.pro"
-          }
-        },
-        "tls": {
-          "enabled": true,
-          "server_name": "katering.coteite.pro"
-        }
-      },
-      "link": "vless://c50f2b85-b14b-4737-b1e7-931e3ce75d50@37.139.42.235:443?alpn=http%2F1.1&encryption=none&fp=edge&host=katering.coteite.pro&path=%2Feuws&security=tls&sni=katering.coteite.pro&type=ws#%F0%9F%87%AC%F0%9F%87%A7%20United%20Kingdom%20%E2%80%94%20%2398",
-      "group": "EUROPE",
-      "country": null,
-      "first_seen": "2026-09-27T20:16:32.695497",
-      "last_seen": "2026-09-27T20:16:32.695497",
-      "total_tests": 2,
-      "successful_tests": 1,
-      "speed_history": [
-        20.382496313096574
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-09-27T20:16:32.695497",
-          "success": true,
-          "speed": 20.382496313096574,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-09-27T23:12:08.213216",
-          "success": false,
-          "speed": 0,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.0,
-      "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
-      },
-      "category": "C",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 0,
-      "active": false,
-      "staging_until": null,
-      "consecutive_failures": 1
-    },
     "vless|37.139.42.235|443|52b58d58": {
       "outbound": {
         "type": "vless",
@@ -89,7 +26,7 @@
       "country": null,
       "first_seen": "2026-09-27T23:12:04.943635",
       "last_seen": "2026-09-27T23:12:04.943635",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         23.247522823694577
@@ -99,6 +36,13 @@
           "timestamp": "2026-09-27T23:12:04.943635",
           "success": true,
           "speed": 23.247522823694577,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-28T01:49:17.794717",
+          "success": false,
+          "speed": 0,
           "latency": null,
           "error": null
         }
@@ -114,10 +58,10 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 0,
       "active": false,
-      "staging_until": "2026-09-28T00:12:04.943667",
-      "consecutive_failures": 0
+      "staging_until": null,
+      "consecutive_failures": 1
     },
     "vless|37.139.42.235|443|4fbcd67a": {
       "outbound": {
@@ -145,7 +89,7 @@
       "country": null,
       "first_seen": "2026-09-27T23:12:04.944385",
       "last_seen": "2026-09-27T23:12:04.944385",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         21.34698943631812
@@ -155,6 +99,13 @@
           "timestamp": "2026-09-27T23:12:04.944385",
           "success": true,
           "speed": 21.34698943631812,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-28T01:49:17.706978",
+          "success": false,
+          "speed": 0,
           "latency": null,
           "error": null
         }
@@ -170,13 +121,157 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 0,
       "active": false,
-      "staging_until": "2026-09-28T00:12:04.944403",
+      "staging_until": null,
+      "consecutive_failures": 1
+    },
+    "vless|entry3.sparxiecn.com|28447|68d89911": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland | 🌐 [*CIDR] VK",
+        "server": "entry3.sparxiecn.com",
+        "server_port": 28447,
+        "uuid": "68d89911-b92d-46fe-9007-3645c3b285f0",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/lovelive",
+          "headers": {
+            "Host": "pl.sparxiecn.com"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "pl.sparxiecn.com"
+        }
+      },
+      "link": "vless://68d89911-b92d-46fe-9007-3645c3b285f0@entry3.sparxiecn.com:28447?encryption=none&security=tls&sni=pl.sparxiecn.com&alpn=h2%2Chttp%2F1.1&type=ws&path=%2Flovelive&host=pl.sparxiecn.com&fp=random#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%7C%20%F0%9F%8C%90%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-09-28T01:49:14.438367",
+      "last_seen": "2026-09-28T01:49:14.440380",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        0.000191949923979457,
+        0.0003954595329918838,
+        22.064853602607005,
+        21.430484773472124
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-28T01:49:14.438367",
+          "success": true,
+          "speed": 0.000191949923979457,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-28T01:49:14.439307",
+          "success": true,
+          "speed": 0.0003954595329918838,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-28T01:49:14.439878",
+          "success": true,
+          "speed": 22.064853602607005,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-28T01:49:14.440380",
+          "success": true,
+          "speed": 21.430484773472124,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.39745271638272334,
+      "rating_components": {
+        "speed": 0.4677479630346221,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.0,
+        "freshness": 0.999354158505326
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|87.239.106.24|28447|68d89911": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland | 🌐 | [*CIDR] VK",
+        "server": "87.239.106.24",
+        "server_port": 28447,
+        "uuid": "68d89911-b92d-46fe-9007-3645c3b285f0",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/lovelive",
+          "headers": {
+            "Host": "pl.sparxiecn.com"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "pl.sparxiecn.com"
+        }
+      },
+      "link": "vless://68d89911-b92d-46fe-9007-3645c3b285f0@87.239.106.24:28447?encryption=none&host=pl.sparxiecn.com&path=%2Flovelive&security=tls&sni=pl.sparxiecn.com&type=ws&fp=safari#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%7C%20%F0%9F%8C%90%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-09-28T01:49:14.440840",
+      "last_seen": "2026-09-28T01:49:14.441444",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        20.886634699281338,
+        15.665933561398692
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-09-28T01:49:14.440840",
+          "success": true,
+          "speed": 20.886634699281338,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-09-28T01:49:14.441444",
+          "success": true,
+          "speed": 15.665933561398692,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-09-28T02:49:14.441452",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-09-27T23:12:08.214753"
+    "last_cleanup": "2026-09-28T01:49:17.796649"
   }
 }
