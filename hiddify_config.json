@@ -49,20 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇵🇱 Poland | 🌐 [*CIDR] VK",
-        "🇬🇧 United Kingdom — #85",
-        "🇬🇧 United Kingdom — #87",
-        "🇵🇱 Poland | 🌐 | [*CIDR] VK"
+        "🇬🇧 United Kingdom — #102"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇵🇱 Poland | 🌐 [*CIDR] VK",
-        "🇬🇧 United Kingdom — #85",
-        "🇬🇧 United Kingdom — #87",
-        "🇵🇱 Poland | 🌐 | [*CIDR] VK"
+        "🇬🇧 United Kingdom — #102"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -77,30 +71,10 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland | 🌐 [*CIDR] VK",
-      "server": "entry3.sparxiecn.com",
-      "server_port": 28447,
-      "uuid": "68d89911-b92d-46fe-9007-3645c3b285f0",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/lovelive",
-        "headers": {
-          "Host": "pl.sparxiecn.com"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "pl.sparxiecn.com"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇬🇧 United Kingdom — #85",
+      "tag": "🇬🇧 United Kingdom — #102",
       "server": "37.139.42.235",
       "server_port": 443,
-      "uuid": "52b58d58-f533-4855-b29f-d6b156c3daa9",
+      "uuid": "5606c967-765a-4c28-804c-13f257f048b9",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
@@ -113,46 +87,6 @@
       "tls": {
         "enabled": true,
         "server_name": "katering.coteite.pro"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇬🇧 United Kingdom — #87",
-      "server": "37.139.42.235",
-      "server_port": 443,
-      "uuid": "4fbcd67a-1af6-4b82-b8f6-73d0a61c554e",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/euws",
-        "headers": {
-          "Host": "katering.coteite.pro"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "katering.coteite.pro"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland | 🌐 | [*CIDR] VK",
-      "server": "87.239.106.24",
-      "server_port": 28447,
-      "uuid": "68d89911-b92d-46fe-9007-3645c3b285f0",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/lovelive",
-        "headers": {
-          "Host": "pl.sparxiecn.com"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "pl.sparxiecn.com"
       }
     }
   ],
