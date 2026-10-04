@@ -47,7 +47,6 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇮 Finland [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK"
       ]
     },
@@ -55,7 +54,6 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇮 Finland [*CIDR] VK",
         "🇵🇱 Poland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -68,24 +66,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK",
-      "server": "95.163.215.8",
-      "server_port": 6002,
-      "uuid": "8e8ea5d2-6941-40fb-9efe-f9062b11b2b9",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "media.playback.v1.SessionGateway",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "fin1.centermass.net"
-      }
     },
     {
       "type": "vless",
@@ -105,7 +85,7 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "chrome"
+          "fingerprint": "safari"
         }
       }
     }

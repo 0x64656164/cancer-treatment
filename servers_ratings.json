@@ -1,6 +1,65 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|90.156.218.163|443|adc11f30": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland [*CIDR] VK",
+        "server": "90.156.218.163",
+        "server_port": 443,
+        "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
+            "short_id": "db04ce8bdb8900f1"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "safari"
+          }
+        }
+      },
+      "link": "vless://adc11f30-e4cb-4985-bf5e-f9ded69c019f@90.156.218.163:443?security=reality&flow=xtls-rprx-vision&sni=eh.vk.ru&pbk=fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI&sid=db04ce8bdb8900f1&fp=safari#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-10-04T00:25:10.541815",
+      "last_seen": "2026-10-04T00:25:10.541815",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        0.37567591986115145
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-04T00:25:10.541815",
+          "success": true,
+          "speed": 0.37567591986115145,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-10-04T01:25:10.541843",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-10-03T21:34:33.034026"
+    "last_cleanup": "2026-10-04T00:25:10.542931"
   }
 }
