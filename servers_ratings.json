@@ -1,6 +1,144 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|90.156.218.163|443|adc11f30": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland | [*CIDR] VK",
+        "server": "90.156.218.163",
+        "server_port": 443,
+        "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
+            "short_id": "db04ce8bdb8900f1"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://adc11f30-e4cb-4985-bf5e-f9ded69c019f@90.156.218.163:443?security=reality&encryption=none&pbk=fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI&host=%2F%3FTELEGRAM--MARAMBASHI--MARAMBASHI&headerType=none&type=tcp&flow=xtls-rprx-vision&sni=eh.vk.ru&sid=db04ce8bdb8900f1&fp=safari#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-10-06T23:13:02.162546",
+      "last_seen": "2026-10-06T23:13:02.166497",
+      "total_tests": 11,
+      "successful_tests": 11,
+      "speed_history": [
+        1.7746907560319984,
+        1.633256269936044,
+        1.5930939696782658,
+        1.4351627687176116,
+        1.4027915810671001,
+        1.4018009147914672,
+        1.321546937994188,
+        1.3404864495455293,
+        1.2961639770854956,
+        1.3258251079428531
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-06T23:13:02.162546",
+          "success": true,
+          "speed": 1.7941735753136,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.163051",
+          "success": true,
+          "speed": 1.7746907560319984,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.163393",
+          "success": true,
+          "speed": 1.633256269936044,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.163728",
+          "success": true,
+          "speed": 1.5930939696782658,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.164074",
+          "success": true,
+          "speed": 1.4351627687176116,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.164425",
+          "success": true,
+          "speed": 1.4027915810671001,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.164952",
+          "success": true,
+          "speed": 1.4018009147914672,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.165361",
+          "success": true,
+          "speed": 1.321546937994188,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.165725",
+          "success": true,
+          "speed": 1.3404864495455293,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.166066",
+          "success": true,
+          "speed": 1.2961639770854956,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-06T23:13:02.166497",
+          "success": true,
+          "speed": 1.3258251079428531,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5830371873241061,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.7903720014732847,
+        "freshness": 0.9999999145118514
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 11,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-10-06T19:12:16.316202"
+    "last_cleanup": "2026-10-06T23:13:02.167411"
   }
 }
