@@ -49,20 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇵🇱 Poland | [*CIDR] VK",
-        "🇩🇪 Germany | [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK-1"
+        "🇳🇱 The Netherlands | [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇵🇱 Poland | [*CIDR] VK",
-        "🇩🇪 Germany | [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK-1"
+        "🇳🇱 The Netherlands | [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -77,8 +73,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "apis.stroymatdv.cc",
+      "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+      "server": "185.86.145.37",
       "server_port": 443,
       "uuid": "3a8b464f-3701-40ed-b6b6-b612019e34c1",
       "flow": "",
@@ -86,9 +82,7 @@
       "transport": {
         "type": "ws",
         "path": "/amsws",
-        "headers": {
-          "Host": "apis.stroymatdv.cc"
-        }
+        "headers": {}
       },
       "tls": {
         "enabled": true,
@@ -97,52 +91,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇵🇱 Poland | [*CIDR] VK",
-      "server": "90.156.218.163",
-      "server_port": 443,
-      "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "eh.vk.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
-          "short_id": "db04ce8bdb8900f1"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany | [*CIDR] VK",
-      "server": "185.241.195.152",
-      "server_port": 9445,
-      "uuid": "d91dc97c-a09b-40fa-9da0-a3d1729f7427",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "yandex.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "i3F_hP7yc9VpcUC2Vn1oAqLyW3hZayGdTybl-VnWdz0",
-          "short_id": "02827ef87f4a23c0"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
-      "server": "37.139.42.221",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "apis.stroymatdv.cc",
       "server_port": 443,
       "uuid": "3a8b464f-3701-40ed-b6b6-b612019e34c1",
       "flow": "",
