@@ -1,359 +1,63 @@
 {
   "servers": {
-    "vless|185.86.145.37|443|3a8b464f": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
-        "server": "185.86.145.37",
-        "server_port": 443,
-        "uuid": "3a8b464f-3701-40ed-b6b6-b612019e34c1",
-        "flow": "",
-        "packet_encoding": "xudp",
-        "transport": {
-          "type": "ws",
-          "path": "/amsws",
-          "headers": {}
-        },
-        "tls": {
-          "enabled": true,
-          "server_name": "apis.stroymatdv.cc"
-        }
-      },
-      "link": "vless://3a8b464f-3701-40ed-b6b6-b612019e34c1@185.86.145.37:443?type=ws&security=tls&path=%2Famsws&sni=apis.stroymatdv.cc&fp=edge#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%5B%2ACIDR%5D%20VK",
-      "group": "EUROPE",
-      "country": "NL",
-      "first_seen": "2026-10-08T20:45:48.940321",
-      "last_seen": "2026-10-09T00:54:29.166716",
-      "total_tests": 21,
-      "successful_tests": 21,
-      "speed_history": [
-        23.752478663541503,
-        15.985135465556969,
-        15.801860262150436,
-        23.726773556824508,
-        15.65370601455559,
-        17.29655063253177,
-        16.84555445121112,
-        12.634480673951947,
-        9.46261970830782,
-        24.3632636859476
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-10-08T20:45:48.940321",
-          "success": true,
-          "speed": 23.160561845262748,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.941375",
-          "success": true,
-          "speed": 20.20113339324596,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.941755",
-          "success": true,
-          "speed": 19.93244730568637,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.942223",
-          "success": true,
-          "speed": 22.1312169456842,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.942647",
-          "success": true,
-          "speed": 15.409547939825964,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.943064",
-          "success": true,
-          "speed": 23.93823596289389,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.943993",
-          "success": true,
-          "speed": 14.245288980178955,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.945029",
-          "success": true,
-          "speed": 12.281768990228873,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.945521",
-          "success": true,
-          "speed": 17.324479973839335,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.946003",
-          "success": true,
-          "speed": 13.306358941790942,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.947026",
-          "success": true,
-          "speed": 13.99585439504266,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.622793",
-          "success": true,
-          "speed": 23.752478663541503,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.623631",
-          "success": true,
-          "speed": 15.985135465556969,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.624144",
-          "success": true,
-          "speed": 15.801860262150436,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.626575",
-          "success": true,
-          "speed": 23.726773556824508,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.627631",
-          "success": true,
-          "speed": 15.65370601455559,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.629239",
-          "success": true,
-          "speed": 17.29655063253177,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.629798",
-          "success": true,
-          "speed": 16.84555445121112,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.631520",
-          "success": true,
-          "speed": 12.634480673951947,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.632092",
-          "success": true,
-          "speed": 9.46261970830782,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:29.166716",
-          "success": true,
-          "speed": 24.3632636859476,
-          "latency": null,
-          "error": null
-        }
-      ],
-      "rating": 0.7743206785184056,
-      "rating_components": {
-        "speed": 1.0,
-        "stability": 1.0,
-        "uptime": 0.5701200608833333,
-        "consistency": 0.46279408703381764,
-        "freshness": 0.9999549697446029
-      },
-      "category": "A",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 21,
-      "active": true,
-      "staging_until": null,
-      "consecutive_failures": 0
-    },
-    "vless|apis.stroymatdv.cc|443|3a8b464f": {
+    "vless|185.86.145.183|443|5d1f603d": {
       "outbound": {
         "type": "vless",
         "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-        "server": "apis.stroymatdv.cc",
+        "server": "185.86.145.183",
         "server_port": 443,
-        "uuid": "3a8b464f-3701-40ed-b6b6-b612019e34c1",
+        "uuid": "5d1f603d-34dc-4a38-9d4e-9d55bea241db",
         "flow": "",
         "packet_encoding": "xudp",
         "transport": {
           "type": "ws",
-          "path": "/amsws",
+          "path": "/nl7ws",
           "headers": {
-            "Host": "apis.stroymatdv.cc"
+            "Host": "begemotov.cc"
           }
         },
         "tls": {
           "enabled": true,
-          "server_name": "apis.stroymatdv.cc"
+          "server_name": "begemotov.cc"
         }
       },
-      "link": "vless://3a8b464f-3701-40ed-b6b6-b612019e34c1@apis.stroymatdv.cc:443?encryption=none&security=tls&sni=apis.stroymatdv.cc&alpn=http%2F1.1&type=ws&path=%2Famsws&host=apis.stroymatdv.cc&fp=android#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%5B%2ACIDR%5D%20VK",
+      "link": "vless://5d1f603d-34dc-4a38-9d4e-9d55bea241db@185.86.145.183:443?encryption=none&host=begemotov.cc&path=%2Fnl7ws&security=tls&sni=begemotov.cc&type=ws&fp=qq#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%5B%2ACIDR%5D%20VK",
       "group": "EUROPE",
-      "country": "NL",
-      "first_seen": "2026-10-08T20:45:48.940867",
-      "last_seen": "2026-10-09T00:54:29.399588",
-      "total_tests": 13,
-      "successful_tests": 13,
+      "country": null,
+      "first_seen": "2026-10-09T06:56:44.108582",
+      "last_seen": "2026-10-09T06:56:44.108582",
+      "total_tests": 1,
+      "successful_tests": 1,
       "speed_history": [
-        13.51965160577931,
-        13.41025282923146,
-        9.667906000321567,
-        23.73161911902092,
-        16.0222361844055,
-        11.955461723536855,
-        13.152918979839324,
-        15.871376968083212,
-        10.136146077158214,
-        22.51797721920264
+        9.838697459737809
       ],
       "check_history": [
         {
-          "timestamp": "2026-10-08T20:45:48.940867",
+          "timestamp": "2026-10-09T06:56:44.108582",
           "success": true,
-          "speed": 19.650617360195263,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.943540",
-          "success": true,
-          "speed": 18.469440111337516,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.944551",
-          "success": true,
-          "speed": 15.770163038378335,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.946531",
-          "success": true,
-          "speed": 13.51965160577931,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.947560",
-          "success": true,
-          "speed": 13.41025282923146,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-08T20:45:48.948103",
-          "success": true,
-          "speed": 9.667906000321567,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.627104",
-          "success": true,
-          "speed": 23.73161911902092,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.628152",
-          "success": true,
-          "speed": 16.0222361844055,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.628711",
-          "success": true,
-          "speed": 11.955461723536855,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.630343",
-          "success": true,
-          "speed": 13.152918979839324,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.630919",
-          "success": true,
-          "speed": 15.871376968083212,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:25.632701",
-          "success": true,
-          "speed": 10.136146077158214,
-          "latency": null,
-          "error": null
-        },
-        {
-          "timestamp": "2026-10-09T00:54:29.399588",
-          "success": true,
-          "speed": 22.51797721920264,
+          "speed": 9.838697459737809,
           "latency": null,
           "error": null
         }
       ],
-      "rating": 0.7387143642502089,
+      "rating": 0.0,
       "rating_components": {
-        "speed": 0.8545093216304904,
-        "stability": 1.0,
-        "uptime": 0.5701200512583333,
-        "consistency": 0.39764509977012574,
-        "freshness": 0.999999796291766
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
       },
-      "category": "A",
+      "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 13,
-      "active": true,
-      "staging_until": null,
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-10-09T07:56:44.108605",
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-10-09T00:54:29.401300"
+    "last_cleanup": "2026-10-09T06:56:52.679276"
   }
 }

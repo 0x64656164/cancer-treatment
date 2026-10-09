@@ -47,7 +47,6 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK"
       ]
     },
@@ -55,7 +54,6 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -71,40 +69,22 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
-      "server": "185.86.145.37",
-      "server_port": 443,
-      "uuid": "3a8b464f-3701-40ed-b6b6-b612019e34c1",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/amsws",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "apis.stroymatdv.cc"
-      }
-    },
-    {
-      "type": "vless",
       "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "apis.stroymatdv.cc",
+      "server": "185.86.145.183",
       "server_port": 443,
-      "uuid": "3a8b464f-3701-40ed-b6b6-b612019e34c1",
+      "uuid": "5d1f603d-34dc-4a38-9d4e-9d55bea241db",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
-        "path": "/amsws",
+        "path": "/nl7ws",
         "headers": {
-          "Host": "apis.stroymatdv.cc"
+          "Host": "begemotov.cc"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "apis.stroymatdv.cc"
+        "server_name": "begemotov.cc"
       }
     }
   ],
