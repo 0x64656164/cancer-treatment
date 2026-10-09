@@ -47,14 +47,20 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK"
+        "🇵🇱 Poland | [*CIDR] VK",
+        "🇩🇪 Germany — #21",
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇳🇱 The Netherlands — #55"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK"
+        "🇵🇱 Poland | [*CIDR] VK",
+        "🇩🇪 Germany — #21",
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇳🇱 The Netherlands — #55"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,22 +75,82 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "185.86.145.183",
+      "tag": "🇵🇱 Poland | [*CIDR] VK",
+      "server": "90.156.218.163",
       "server_port": 443,
-      "uuid": "5d1f603d-34dc-4a38-9d4e-9d55bea241db",
+      "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
+          "short_id": "db04ce8bdb8900f1"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #21",
+      "server": "185.86.145.142",
+      "server_port": 443,
+      "uuid": "0bbc9e1d-7bc5-41e6-82b3-412f459b9d30",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/e7ws",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "n2.185-86-145-142.sslip.io"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "cosmo-pulse.ru",
+      "server_port": 443,
+      "uuid": "7ec9f26a-edec-4bf1-addd-700626df27c1",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
         "path": "/nl7ws",
         "headers": {
-          "Host": "begemotov.cc"
+          "Host": "cosmo-pulse.ru"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "begemotov.cc"
+        "server_name": "cosmo-pulse.ru"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands — #55",
+      "server": "185.86.145.183",
+      "server_port": 443,
+      "uuid": "7ec9f26a-edec-4bf1-addd-700626df27c1",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/nl7ws",
+        "headers": {
+          "Host": "cosmo-pulse.ru"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "cosmo-pulse.ru"
       }
     }
   ],
