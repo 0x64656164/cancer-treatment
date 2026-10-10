@@ -47,18 +47,18 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands — #93",
-        "🇵🇱 Poland [*CIDR] VK"
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇩🇪 Germany — #59"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK",
         "🇳🇱 The Netherlands — #93",
-        "🇵🇱 Poland [*CIDR] VK"
+        "🇵🇱 Poland [*CIDR] VK",
+        "🇩🇪 Germany — #59"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -70,26 +70,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "cosmo-pulse.ru",
-      "server_port": 443,
-      "uuid": "7ec9f26a-edec-4bf1-addd-700626df27c1",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/nl7ws",
-        "headers": {
-          "Host": "cosmo-pulse.ru"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "cosmo-pulse.ru"
-      }
     },
     {
       "type": "vless",
@@ -131,6 +111,24 @@
           "enabled": true,
           "fingerprint": "ios"
         }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪 Germany — #59",
+      "server": "185.86.145.142",
+      "server_port": 443,
+      "uuid": "895ae830-3276-49ad-9395-7937f6820d45",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/e7ws",
+        "headers": {}
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "n2.185-86-145-142.sslip.io"
       }
     }
   ],
