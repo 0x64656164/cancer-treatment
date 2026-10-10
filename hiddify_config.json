@@ -50,7 +50,8 @@
       "outbounds": [
         "ALL-auto",
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK"
+        "🇳🇱 The Netherlands — #93",
+        "🇵🇱 Poland [*CIDR] VK"
       ]
     },
     {
@@ -58,7 +59,8 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK"
+        "🇳🇱 The Netherlands — #93",
+        "🇵🇱 Poland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -93,22 +95,44 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-      "server": "84.23.52.65",
+      "tag": "🇳🇱 The Netherlands — #93",
+      "server": "185.86.145.183",
       "server_port": 443,
-      "uuid": "d1004cfe-c279-e865-d865-71964dbdf85d",
+      "uuid": "7ec9f26a-edec-4bf1-addd-700626df27c1",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
-        "path": "/api/v3/stream/manifest/54dea6bc",
+        "path": "/nl7ws",
         "headers": {
-          "Host": "seo.video-save.online"
+          "Host": "cosmo-pulse.ru"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "seo.video-save.online"
+        "server_name": "cosmo-pulse.ru"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇵🇱 Poland [*CIDR] VK",
+      "server": "90.156.218.163",
+      "server_port": 443,
+      "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "eh.vk.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
+          "short_id": "db04ce8bdb8900f1"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "ios"
+        }
       }
     }
   ],
