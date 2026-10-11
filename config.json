@@ -48,7 +48,8 @@
       "outbounds": [
         "ALL-auto",
         "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany — #83"
+        "🇸🇪 Sweden | [*CIDR] VK",
+        "🇳🇱 The Netherlands | [*CIDR] VK"
       ]
     },
     {
@@ -56,7 +57,8 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany — #83"
+        "🇸🇪 Sweden | [*CIDR] VK",
+        "🇳🇱 The Netherlands | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -93,20 +95,46 @@
     },
     {
       "type": "vless",
-      "tag": "🇩🇪 Germany — #83",
-      "server": "185.86.145.142",
+      "tag": "🇸🇪 Sweden | [*CIDR] VK",
+      "server": "ru2-1.my-cdn.org",
       "server_port": 443,
-      "uuid": "bb7c3a33-a897-4774-a372-bcb01cbffe7d",
-      "flow": "",
+      "uuid": "dbda882e-a0f4-4d8a-a41d-e520e8d688d3",
+      "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/e7ws",
-        "headers": {}
-      },
       "tls": {
         "enabled": true,
-        "server_name": "n2.185-86-145-142.sslip.io"
+        "server_name": "videolink.okcdn.ru",
+        "reality": {
+          "enabled": true,
+          "public_key": "kbITklNKTdfvB6e3xy97pTV7gjl3Z3irv246oRZ5Gnk",
+          "short_id": "aabbccdd"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "random"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+      "server": "m-vruvc.mvpstr.com",
+      "server_port": 443,
+      "uuid": "37253a6a-2a9b-42bb-992c-b5f1b1ef1791",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "m-vruvc.mvpstr.com",
+        "reality": {
+          "enabled": true,
+          "public_key": "ZtAlhN1pU4MTmv4KaX9J_5_8KWnwy9IOnc-BLzIf234",
+          "short_id": "f709479ae7bf583f"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "qq"
+        }
       }
     }
   ],
