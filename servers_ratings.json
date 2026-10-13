@@ -1,6 +1,113 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|90.156.218.163|443|adc11f30": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland [*CIDR] VK",
+        "server": "90.156.218.163",
+        "server_port": 443,
+        "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
+            "short_id": "db04ce8bdb8900f1"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "firefox"
+          }
+        }
+      },
+      "link": "vless://adc11f30-e4cb-4985-bf5e-f9ded69c019f@90.156.218.163:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=eh.vk.ru&pbk=fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI&sid=db04ce8bdb8900f1&type=tcp&headerType=none&host=%3FTELEGRAM--MARAMBASHI--MARAMBASHI&fp=qq#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-10-13T01:48:07.514061",
+      "last_seen": "2026-10-13T01:48:07.516350",
+      "total_tests": 7,
+      "successful_tests": 7,
+      "speed_history": [
+        1.0993064288509091,
+        1.0500582399634233,
+        0.9758739310243989,
+        0.970575542193696,
+        0.9440306643024878,
+        0.946253252565749,
+        0.9137122309192341
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-13T01:48:07.514061",
+          "success": true,
+          "speed": 1.0993064288509091,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-13T01:48:07.514580",
+          "success": true,
+          "speed": 1.0500582399634233,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-13T01:48:07.514971",
+          "success": true,
+          "speed": 0.9758739310243989,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-13T01:48:07.515297",
+          "success": true,
+          "speed": 0.970575542193696,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-13T01:48:07.515649",
+          "success": true,
+          "speed": 0.9440306643024878,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-13T01:48:07.516001",
+          "success": true,
+          "speed": 0.946253252565749,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-13T01:48:07.516350",
+          "success": true,
+          "speed": 0.9137122309192341,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5889840415263486,
+      "rating_components": {
+        "speed": 0.9856871842599856,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.8784661793079073,
+        "freshness": 0.9999999116237384
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 7,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-10-12T19:40:57.021693"
+    "last_cleanup": "2026-10-13T01:48:07.517205"
   }
 }

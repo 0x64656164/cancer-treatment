@@ -47,20 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-        "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany — #101",
-        "🇩🇪 Germany — #82"
+        "🇵🇱 Poland [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-        "🇵🇱 Poland [*CIDR] VK",
-        "🇩🇪 Germany — #101",
-        "🇩🇪 Germany — #82"
+        "🇵🇱 Poland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,28 +66,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-      "server": "37.139.42.225",
-      "server_port": 7448,
-      "uuid": "2f18de3b-2586-0003-b5ae-a6b2b9412e45",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "37.139.42.225",
-        "reality": {
-          "enabled": true,
-          "public_key": "V-wRiXvhBx01utmXJbrThJ_DE4tNJfK6mnzo9EB3fVA",
-          "short_id": ""
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
     },
     {
       "type": "vless",
@@ -113,44 +85,8 @@
         },
         "utls": {
           "enabled": true,
-          "fingerprint": "ios"
+          "fingerprint": "firefox"
         }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #101",
-      "server": "185.86.145.142",
-      "server_port": 443,
-      "uuid": "5ce2085b-9dee-4c0b-8a74-800c4ea1739c",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/e7ws",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "n2.185-86-145-142.sslip.io"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany — #82",
-      "server": "185.86.145.142",
-      "server_port": 443,
-      "uuid": "b858f1d1-8c73-46cc-b190-17376ce8aaf3",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/e7ws",
-        "headers": {}
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "n2.185-86-145-142.sslip.io"
       }
     }
   ],
