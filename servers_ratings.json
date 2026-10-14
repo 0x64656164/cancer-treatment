@@ -1,6 +1,185 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|185.86.145.142|443|7832b450": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany — #109",
+        "server": "185.86.145.142",
+        "server_port": 443,
+        "uuid": "7832b450-d561-45d6-b425-8527fa8babe0",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/e7ws",
+          "headers": {
+            "Host": "n2.185-86-145-142.sslip.io"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "n2.185-86-145-142.sslip.io"
+        }
+      },
+      "link": "vless://7832b450-d561-45d6-b425-8527fa8babe0@185.86.145.142:443?encryption=none&fp=firefox&host=n2.185-86-145-142.sslip.io&path=%2Fe7ws&security=tls&sni=n2.185-86-145-142.sslip.io&type=ws#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%E2%80%94%20%23109",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-10-14T00:48:31.352723",
+      "last_seen": "2026-10-14T00:48:31.352723",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        1.1216268426650862
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-14T00:48:31.352723",
+          "success": true,
+          "speed": 1.1216268426650862,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-10-14T01:48:31.352746",
+      "consecutive_failures": 0
+    },
+    "vless|n2.185-86-145-142.sslip.io|443|7832b450": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇩🇪 Germany [*CIDR] VK",
+        "server": "n2.185-86-145-142.sslip.io",
+        "server_port": 443,
+        "uuid": "7832b450-d561-45d6-b425-8527fa8babe0",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/e7ws",
+          "headers": {
+            "Host": "n2.185-86-145-142.sslip.io"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "n2.185-86-145-142.sslip.io"
+        }
+      },
+      "link": "vless://7832b450-d561-45d6-b425-8527fa8babe0@n2.185-86-145-142.sslip.io:443?encryption=none&security=tls&sni=n2.185-86-145-142.sslip.io&alpn=http%2F1.1&fp=random&type=ws&path=%2Fe7ws&host=n2.185-86-145-142.sslip.io#%F0%9F%87%A9%F0%9F%87%AA%20Germany%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "DE",
+      "first_seen": "2026-10-14T00:48:31.353272",
+      "last_seen": "2026-10-14T00:48:31.353272",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        1.0780075346188946
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-14T00:48:31.353272",
+          "success": true,
+          "speed": 1.0780075346188946,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-10-14T01:48:31.353290",
+      "consecutive_failures": 0
+    },
+    "vless|90.156.218.163|443|adc11f30": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇵🇱 Poland [*CIDR] VK",
+        "server": "90.156.218.163",
+        "server_port": 443,
+        "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
+        "flow": "xtls-rprx-vision",
+        "packet_encoding": "xudp",
+        "tls": {
+          "enabled": true,
+          "server_name": "eh.vk.ru",
+          "reality": {
+            "enabled": true,
+            "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
+            "short_id": "db04ce8bdb8900f1"
+          },
+          "utls": {
+            "enabled": true,
+            "fingerprint": "ios"
+          }
+        }
+      },
+      "link": "vless://adc11f30-e4cb-4985-bf5e-f9ded69c019f@90.156.218.163:443?type=tcp&security=reality&host=%3FTELEGRAM--MARAMBASHI--MARAMBASHI&sni=eh.vk.ru&pbk=fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI&sid=db04ce8bdb8900f1&flow=xtls-rprx-vision&fp=safari#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-10-14T00:48:31.353815",
+      "last_seen": "2026-10-14T00:48:31.354269",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        1.0527542092478483,
+        0.9884348979086732
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-14T00:48:31.353815",
+          "success": true,
+          "speed": 1.0527542092478483,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-14T00:48:31.354269",
+          "success": true,
+          "speed": 0.9884348979086732,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-10-14T01:48:31.354278",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-10-13T21:38:10.485829"
+    "last_cleanup": "2026-10-14T00:48:31.355259"
   }
 }
