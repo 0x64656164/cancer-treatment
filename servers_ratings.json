@@ -25,17 +25,25 @@
       "group": "EUROPE",
       "country": "DE",
       "first_seen": "2026-10-14T00:48:31.352723",
-      "last_seen": "2026-10-14T00:48:31.352723",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-10-14T05:36:41.619925",
+      "total_tests": 2,
+      "successful_tests": 2,
       "speed_history": [
-        1.1216268426650862
+        1.1216268426650862,
+        5.8504299300553075
       ],
       "check_history": [
         {
           "timestamp": "2026-10-14T00:48:31.352723",
           "success": true,
           "speed": 1.1216268426650862,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-14T05:36:41.619925",
+          "success": true,
+          "speed": 5.8504299300553075,
           "latency": null,
           "error": null
         }
@@ -51,9 +59,9 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
+      "consecutive_successes": 2,
       "active": false,
-      "staging_until": "2026-10-14T01:48:31.352746",
+      "staging_until": "2026-10-14T06:36:41.619951",
       "consecutive_failures": 0
     },
     "vless|n2.185-86-145-142.sslip.io|443|7832b450": {
@@ -82,7 +90,7 @@
       "country": "DE",
       "first_seen": "2026-10-14T00:48:31.353272",
       "last_seen": "2026-10-14T00:48:31.353272",
-      "total_tests": 1,
+      "total_tests": 2,
       "successful_tests": 1,
       "speed_history": [
         1.0780075346188946
@@ -94,70 +102,11 @@
           "speed": 1.0780075346188946,
           "latency": null,
           "error": null
-        }
-      ],
-      "rating": 0.0,
-      "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
-      },
-      "category": "C",
-      "quarantine_until": null,
-      "bad_hours": [],
-      "consecutive_successes": 1,
-      "active": false,
-      "staging_until": "2026-10-14T01:48:31.353290",
-      "consecutive_failures": 0
-    },
-    "vless|90.156.218.163|443|adc11f30": {
-      "outbound": {
-        "type": "vless",
-        "tag": "🇵🇱 Poland [*CIDR] VK",
-        "server": "90.156.218.163",
-        "server_port": 443,
-        "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
-        "flow": "xtls-rprx-vision",
-        "packet_encoding": "xudp",
-        "tls": {
-          "enabled": true,
-          "server_name": "eh.vk.ru",
-          "reality": {
-            "enabled": true,
-            "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
-            "short_id": "db04ce8bdb8900f1"
-          },
-          "utls": {
-            "enabled": true,
-            "fingerprint": "ios"
-          }
-        }
-      },
-      "link": "vless://adc11f30-e4cb-4985-bf5e-f9ded69c019f@90.156.218.163:443?type=tcp&security=reality&host=%3FTELEGRAM--MARAMBASHI--MARAMBASHI&sni=eh.vk.ru&pbk=fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI&sid=db04ce8bdb8900f1&flow=xtls-rprx-vision&fp=safari#%F0%9F%87%B5%F0%9F%87%B1%20Poland%20%5B%2ACIDR%5D%20VK",
-      "group": "EUROPE",
-      "country": "PL",
-      "first_seen": "2026-10-14T00:48:31.353815",
-      "last_seen": "2026-10-14T00:48:31.354269",
-      "total_tests": 2,
-      "successful_tests": 2,
-      "speed_history": [
-        1.0527542092478483,
-        0.9884348979086732
-      ],
-      "check_history": [
-        {
-          "timestamp": "2026-10-14T00:48:31.353815",
-          "success": true,
-          "speed": 1.0527542092478483,
-          "latency": null,
-          "error": null
         },
         {
-          "timestamp": "2026-10-14T00:48:31.354269",
-          "success": true,
-          "speed": 0.9884348979086732,
+          "timestamp": "2026-10-14T05:36:36.974361",
+          "success": false,
+          "speed": 0,
           "latency": null,
           "error": null
         }
@@ -173,13 +122,13 @@
       "category": "C",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 2,
+      "consecutive_successes": 0,
       "active": false,
-      "staging_until": "2026-10-14T01:48:31.354278",
-      "consecutive_failures": 0
+      "staging_until": null,
+      "consecutive_failures": 1
     }
   },
   "metadata": {
-    "last_cleanup": "2026-10-14T00:48:31.355259"
+    "last_cleanup": "2026-10-14T05:36:41.622906"
   }
 }

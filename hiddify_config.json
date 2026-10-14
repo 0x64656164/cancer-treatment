@@ -50,8 +50,7 @@
       "outbounds": [
         "ALL-auto",
         "🇩🇪 Germany — #109",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🇵🇱 Poland [*CIDR] VK"
+        "🇩🇪 Germany [*CIDR] VK"
       ]
     },
     {
@@ -59,8 +58,7 @@
       "tag": "ALL-auto",
       "outbounds": [
         "🇩🇪 Germany — #109",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🇵🇱 Poland [*CIDR] VK"
+        "🇩🇪 Germany [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -111,28 +109,6 @@
       "tls": {
         "enabled": true,
         "server_name": "n2.185-86-145-142.sslip.io"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇵🇱 Poland [*CIDR] VK",
-      "server": "90.156.218.163",
-      "server_port": 443,
-      "uuid": "adc11f30-e4cb-4985-bf5e-f9ded69c019f",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "eh.vk.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI",
-          "short_id": "db04ce8bdb8900f1"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "ios"
-        }
       }
     }
   ],
