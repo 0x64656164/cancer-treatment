@@ -1,6 +1,167 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|185.86.145.183|443|bcf7fc76": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
+        "server": "185.86.145.183",
+        "server_port": 443,
+        "uuid": "bcf7fc76-83ad-419c-91c9-d192797ce7a4",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/nl7ws",
+          "headers": {
+            "Host": "api.wyre-file.ru"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "api.wyre-file.ru"
+        }
+      },
+      "link": "vless://bcf7fc76-83ad-419c-91c9-d192797ce7a4@185.86.145.183:443?encryption=none&host=api.wyre-file.ru&path=%2Fnl7ws&security=tls&sni=api.wyre-file.ru&type=ws&fp=edge#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%F0%9F%8C%90%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-10-15T01:14:04.830457",
+      "last_seen": "2026-10-15T01:14:04.831629",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        31.713204693729388,
+        30.06132849906699,
+        30.072259067715535,
+        28.673454240688496
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-15T01:14:04.830457",
+          "success": true,
+          "speed": 31.713204693729388,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-15T01:14:04.830973",
+          "success": true,
+          "speed": 30.06132849906699,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-15T01:14:04.831297",
+          "success": true,
+          "speed": 30.072259067715535,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-15T01:14:04.831629",
+          "success": true,
+          "speed": 28.673454240688496,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5968526677031005,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9285377049621089,
+        "freshness": 0.9999926480459306
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|api.wyre-file.ru|443|bcf7fc76": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
+        "server": "api.wyre-file.ru",
+        "server_port": 443,
+        "uuid": "bcf7fc76-83ad-419c-91c9-d192797ce7a4",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/nl7ws",
+          "headers": {
+            "Host": "api.wyre-file.ru"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "api.wyre-file.ru"
+        }
+      },
+      "link": "vless://bcf7fc76-83ad-419c-91c9-d192797ce7a4@api.wyre-file.ru:443?encryption=none&security=tls&sni=api.wyre-file.ru&type=ws&path=%2Fnl7ws&host=api.wyre-file.ru&fp=android#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%F0%9F%8C%90%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-10-15T01:14:04.831959",
+      "last_seen": "2026-10-15T01:14:04.869253",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        28.40642052849991,
+        29.012527369982077,
+        28.164545319377105,
+        27.4823023783713
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-15T01:14:04.831959",
+          "success": true,
+          "speed": 28.40642052849991,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-15T01:14:04.832366",
+          "success": true,
+          "speed": 29.012527369982077,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-15T01:14:04.832785",
+          "success": true,
+          "speed": 28.164545319377105,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-15T01:14:04.869253",
+          "success": true,
+          "speed": 27.4823023783713,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5877516897479351,
+      "rating_components": {
+        "speed": 0.9381477293535425,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9612216097485614,
+        "freshness": 0.9999998860158035
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-10-14T22:48:06.419316"
+    "last_cleanup": "2026-10-15T01:14:04.870261"
   }
 }
