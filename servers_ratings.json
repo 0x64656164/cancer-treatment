@@ -1,6 +1,143 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|deliverya.online|443|c8b3c1d7": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇺🇸 United States | [*CIDR] VK",
+        "server": "deliverya.online",
+        "server_port": 443,
+        "uuid": "c8b3c1d7-4294-4f30-9e5b-e4693b64d518",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/adrws",
+          "headers": {
+            "Host": "deliverya.online"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "deliverya.online"
+        }
+      },
+      "link": "vless://c8b3c1d7-4294-4f30-9e5b-e4693b64d518@deliverya.online:443?encryption=none&type=ws&security=tls&sni=deliverya.online&alpn=http%2F1.1&path=%2Fadrws&host=deliverya.online&fp=edge#%F0%9F%87%BA%F0%9F%87%B8%20United%20States%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-10-24T16:11:28.768361",
+      "last_seen": "2026-10-24T16:11:28.770115",
+      "total_tests": 3,
+      "successful_tests": 3,
+      "speed_history": [
+        4.4872372057491985,
+        2.7068653459782674,
+        2.4334086017672605
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-24T16:11:28.768361",
+          "success": true,
+          "speed": 4.4872372057491985,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-24T16:11:28.769752",
+          "success": true,
+          "speed": 2.7068653459782674,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-24T16:11:28.770115",
+          "success": true,
+          "speed": 2.4334086017672605,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5237023324877507,
+      "rating_components": {
+        "speed": 0.88226074978985,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.4325019437104449,
+        "freshness": 0.9999999210582409
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 3,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|185.86.145.142|443|c8b3c1d7": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇺🇸 United States — #79",
+        "server": "185.86.145.142",
+        "server_port": 443,
+        "uuid": "c8b3c1d7-4294-4f30-9e5b-e4693b64d518",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/adrws",
+          "headers": {
+            "Host": "deliverya.online"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "deliverya.online"
+        }
+      },
+      "link": "vless://c8b3c1d7-4294-4f30-9e5b-e4693b64d518@185.86.145.142:443?alpn=http%2F1.1&encryption=none&fp=edge&host=deliverya.online&path=%2Fadrws&security=tls&sni=deliverya.online&type=ws#%F0%9F%87%BA%F0%9F%87%B8%20United%20States%20%E2%80%94%20%2376",
+      "group": "EUROPE",
+      "country": "PL",
+      "first_seen": "2026-10-24T16:11:28.768954",
+      "last_seen": "2026-10-24T16:11:28.769360",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        4.004223689332226,
+        3.27065595427121
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-24T16:11:28.768954",
+          "success": true,
+          "speed": 4.004223689332226,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-24T16:11:28.769360",
+          "success": true,
+          "speed": 3.27065595427121,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-10-24T17:11:28.769366",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-10-24T12:08:32.849371"
+    "last_cleanup": "2026-10-24T16:11:28.770976"
   }
 }

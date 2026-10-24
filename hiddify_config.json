@@ -49,16 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-        "🇳🇱 The Netherlands — #97"
+        "🇺🇸 United States | [*CIDR] VK",
+        "🇺🇸 United States — #79"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-        "🇳🇱 The Netherlands — #97"
+        "🇺🇸 United States | [*CIDR] VK",
+        "🇺🇸 United States — #79"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,44 +73,42 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-      "server": "95sub.ghost-lan.com",
-      "server_port": 8444,
-      "uuid": "5af23e36-62b7-4765-b27d-ed070f0535ed",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "bqLr1d3mbuP10WAYxWj8OEdSuZlVvrywrKq2U6ACw2w",
-          "short_id": "12b9ecabbf3a3b88"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands — #97",
-      "server": "185.86.145.183",
+      "tag": "🇺🇸 United States | [*CIDR] VK",
+      "server": "deliverya.online",
       "server_port": 443,
-      "uuid": "80f7b6c7-2b3c-4937-af9e-49404d926e7c",
+      "uuid": "c8b3c1d7-4294-4f30-9e5b-e4693b64d518",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
-        "path": "/nl7ws",
+        "path": "/adrws",
         "headers": {
-          "Host": "online.wyre-file.ru"
+          "Host": "deliverya.online"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "online.wyre-file.ru"
+        "server_name": "deliverya.online"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸 United States — #79",
+      "server": "185.86.145.142",
+      "server_port": 443,
+      "uuid": "c8b3c1d7-4294-4f30-9e5b-e4693b64d518",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/adrws",
+        "headers": {
+          "Host": "deliverya.online"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "deliverya.online"
       }
     }
   ],
