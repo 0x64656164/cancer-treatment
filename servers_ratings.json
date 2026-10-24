@@ -1,6 +1,127 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|185.86.145.183|443|80f7b6c7": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands — #97",
+        "server": "185.86.145.183",
+        "server_port": 443,
+        "uuid": "80f7b6c7-2b3c-4937-af9e-49404d926e7c",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/nl7ws",
+          "headers": {
+            "Host": "online.wyre-file.ru"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "online.wyre-file.ru"
+        }
+      },
+      "link": "vless://80f7b6c7-2b3c-4937-af9e-49404d926e7c@185.86.145.183:443?alpn=http%2F1.1&encryption=none&fp=edge&host=online.wyre-file.ru&path=%2Fnl7ws&security=tls&sni=online.wyre-file.ru&type=ws#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%E2%80%94%20%2397",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-10-24T02:23:06.211250",
+      "last_seen": "2026-10-24T02:23:06.211250",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        30.200051885314043
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-24T02:23:06.211250",
+          "success": true,
+          "speed": 30.200051885314043,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-10-24T03:23:06.211284",
+      "consecutive_failures": 0
+    },
+    "vless|online.wyre-file.ru|443|80f7b6c7": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+        "server": "online.wyre-file.ru",
+        "server_port": 443,
+        "uuid": "80f7b6c7-2b3c-4937-af9e-49404d926e7c",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/nl7ws",
+          "headers": {
+            "Host": "online.wyre-file.ru"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "online.wyre-file.ru"
+        }
+      },
+      "link": "vless://80f7b6c7-2b3c-4937-af9e-49404d926e7c@online.wyre-file.ru:443?encryption=none&type=ws&security=tls&sni=online.wyre-file.ru&alpn=http%2F1.1&path=%2Fnl7ws&host=online.wyre-file.ru&fp=edge#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%7C%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-10-24T02:23:06.211860",
+      "last_seen": "2026-10-24T02:23:06.212257",
+      "total_tests": 2,
+      "successful_tests": 2,
+      "speed_history": [
+        28.62238645286002,
+        29.453267190109635
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-10-24T02:23:06.211860",
+          "success": true,
+          "speed": 28.62238645286002,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-10-24T02:23:06.212257",
+          "success": true,
+          "speed": 29.453267190109635,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 2,
+      "active": false,
+      "staging_until": "2026-10-24T03:23:06.212266",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-10-23T23:37:54.216133"
+    "last_cleanup": "2026-10-24T02:23:06.213173"
   }
 }
