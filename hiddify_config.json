@@ -49,16 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇺🇸 United States | [*CIDR] VK",
-        "🇺🇸 United States — #79"
+        "🇳🇱 The Netherlands | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇺🇸 United States | [*CIDR] VK",
-        "🇺🇸 United States — #79"
+        "🇳🇱 The Netherlands | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,42 +71,22 @@
     },
     {
       "type": "vless",
-      "tag": "🇺🇸 United States | [*CIDR] VK",
-      "server": "deliverya.online",
+      "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
+      "server": "185.86.145.183",
       "server_port": 443,
-      "uuid": "c8b3c1d7-4294-4f30-9e5b-e4693b64d518",
+      "uuid": "872a2c34-23f4-4dc8-89c8-79e8817415c5",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
-        "path": "/adrws",
+        "path": "/nl7ws",
         "headers": {
-          "Host": "deliverya.online"
+          "Host": "cdns2.wyre-file.ru"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "deliverya.online"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸 United States — #79",
-      "server": "185.86.145.142",
-      "server_port": 443,
-      "uuid": "c8b3c1d7-4294-4f30-9e5b-e4693b64d518",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/adrws",
-        "headers": {
-          "Host": "deliverya.online"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "deliverya.online"
+        "server_name": "cdns2.wyre-file.ru"
       }
     }
   ],
