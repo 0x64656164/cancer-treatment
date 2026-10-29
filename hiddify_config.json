@@ -49,6 +49,7 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
+        "🇳🇱 The Netherlands | [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK"
       ]
     },
@@ -56,6 +57,7 @@
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
+        "🇳🇱 The Netherlands | [*CIDR] VK",
         "🇳🇱 The Netherlands [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
@@ -71,22 +73,42 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "tag": "🇳🇱 The Netherlands | [*CIDR] VK",
       "server": "185.86.145.37",
       "server_port": 443,
-      "uuid": "34ec30ca-c499-46c5-a0b9-20638e5197e9",
+      "uuid": "04b7c62b-762e-4a8c-ba37-8328d25c8d74",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
         "path": "/amws",
         "headers": {
-          "Host": "pulse-resume.pro"
+          "Host": "ararat.rtkdvbr.cc"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "pulse-resume.pro"
+        "server_name": "ararat.rtkdvbr.cc"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "ararat.rtkdvbr.cc",
+      "server_port": 443,
+      "uuid": "04b7c62b-762e-4a8c-ba37-8328d25c8d74",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/amws",
+        "headers": {
+          "Host": "ararat.rtkdvbr.cc"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "ararat.rtkdvbr.cc"
       }
     }
   ],
