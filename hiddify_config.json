@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇮 Finland [*CIDR] VK"
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇮 Finland [*CIDR] VK"
+        "🇳🇱 The Netherlands [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,24 +71,22 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK",
-      "server": "217.16.31.193",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+      "server": "185.86.145.37",
       "server_port": 443,
-      "uuid": "902e7be9-d0a8-42a6-994f-8320916a9d9e",
-      "flow": "xtls-rprx-vision",
+      "uuid": "fd8b05d0-0a98-4fba-9b48-5c0367abfcf5",
+      "flow": "",
       "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/amws",
+        "headers": {
+          "Host": "ara.rtkdvbr.cc"
+        }
+      },
       "tls": {
         "enabled": true,
-        "server_name": "hel.mtmajestic.space",
-        "reality": {
-          "enabled": true,
-          "public_key": "ejbzKnJoNSYWWIcDgo9Ghy-lQvjsp3QQFAGKDaFQbUo",
-          "short_id": "624ed7c00c61576b"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
+        "server_name": "ara.rtkdvbr.cc"
       }
     }
   ],
