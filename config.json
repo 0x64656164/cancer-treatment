@@ -47,26 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK-1",
-        "🇫🇮 Finland [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🇫🇮 Finland [*CIDR] VK-1",
-        "🇫🇮 Finland [*CIDR] VK-2",
-        "🇸🇪 Sweden [*CIDR] VK"
+        "🇫🇮 Finland [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK",
-        "🇳🇱 The Netherlands [*CIDR] VK-1",
-        "🇫🇮 Finland [*CIDR] VK",
-        "🇩🇪 Germany [*CIDR] VK",
-        "🇫🇮 Finland [*CIDR] VK-1",
-        "🇫🇮 Finland [*CIDR] VK-2",
-        "🇸🇪 Sweden [*CIDR] VK"
+        "🇫🇮 Finland [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -78,48 +66,6 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "185.86.145.37",
-      "server_port": 443,
-      "uuid": "e37ebf3b-ac32-48a8-8f56-d113967eaf29",
-      "flow": "",
-      "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/amws",
-        "headers": {
-          "Host": "ara.rtkdvbr.cc"
-        }
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "ara.rtkdvbr.cc"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
-      "server": "sub-edge-14-1g.whitenw.net",
-      "server_port": 10454,
-      "uuid": "1c1ee84d-3409-443c-9723-25dd61a10a89",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "onf.ru",
-        "reality": {
-          "enabled": true,
-          "public_key": "MAQju7q8wIeEznBQoDXP9l4SpuAkEs8CGDKaNNpKlHI",
-          "short_id": "4326"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        }
-      }
     },
     {
       "type": "vless",
@@ -140,94 +86,6 @@
         "utls": {
           "enabled": true,
           "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪 Germany [*CIDR] VK",
-      "server": "83.166.238.173",
-      "server_port": 443,
-      "uuid": "902e7be9-d0a8-42a6-994f-8320916a9d9e",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "willow.gaznw.my",
-        "reality": {
-          "enabled": true,
-          "public_key": "7VYlDCJXbPfNeDI3PGmEQc-cYg1r8CPCp4Xw4Pm4hlc",
-          "short_id": "ce5f35fe1015d222"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK-1",
-      "server": "90.156.214.92",
-      "server_port": 443,
-      "uuid": "902e7be9-d0a8-42a6-994f-8320916a9d9e",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "hel.mtmajestic.space",
-        "reality": {
-          "enabled": true,
-          "public_key": "ejbzKnJoNSYWWIcDgo9Ghy-lQvjsp3QQFAGKDaFQbUo",
-          "short_id": "624ed7c00c61576b"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮 Finland [*CIDR] VK-2",
-      "server": "217.16.31.193",
-      "server_port": 8443,
-      "uuid": "902e7be9-d0a8-42a6-994f-8320916a9d9e",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "hel.mtmajestic.space",
-        "reality": {
-          "enabled": true,
-          "public_key": "ejbzKnJoNSYWWIcDgo9Ghy-lQvjsp3QQFAGKDaFQbUo",
-          "short_id": "624ed7c00c61576b"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "firefox"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇸🇪 Sweden [*CIDR] VK",
-      "server": "83.166.237.167",
-      "server_port": 443,
-      "uuid": "902e7be9-d0a8-42a6-994f-8320916a9d9e",
-      "flow": "xtls-rprx-vision",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "pine.gaznw.my",
-        "reality": {
-          "enabled": true,
-          "public_key": "oKG1EhkfIvBM6xLEk7ck51ZbjvUKDR22RNjTJR_7sTU",
-          "short_id": "46da9a2868751b85"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "qq"
         }
       }
     }
