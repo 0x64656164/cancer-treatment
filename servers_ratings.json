@@ -1,6 +1,95 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|185.86.145.37|443|769cc55c": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+        "server": "185.86.145.37",
+        "server_port": 443,
+        "uuid": "769cc55c-7ed6-4f3a-a77c-92e1c5c137ba",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/amws",
+          "headers": {
+            "Host": "ara.rtkdvbr.cc"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "ara.rtkdvbr.cc"
+        }
+      },
+      "link": "vless://769cc55c-7ed6-4f3a-a77c-92e1c5c137ba@185.86.145.37:443?alpn=http%2F1.1&encryption=none&fp=qq&host=ara.rtkdvbr.cc&path=%2Famws&security=tls&sni=ara.rtkdvbr.cc&type=ws#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%E2%80%94%20%2333",
+      "group": "EUROPE",
+      "country": "NL",
+      "first_seen": "2026-11-02T05:01:40.173039",
+      "last_seen": "2026-11-02T05:01:40.202389",
+      "total_tests": 5,
+      "successful_tests": 5,
+      "speed_history": [
+        8.68118974710373,
+        8.570946045033883,
+        6.765203705312033,
+        5.689177216129899,
+        5.4766642173575235
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-11-02T05:01:40.173039",
+          "success": true,
+          "speed": 8.68118974710373,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-02T05:01:40.173563",
+          "success": true,
+          "speed": 8.570946045033883,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-02T05:01:40.173890",
+          "success": true,
+          "speed": 6.765203705312033,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-02T05:01:40.201962",
+          "success": true,
+          "speed": 5.689177216129899,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-02T05:01:40.202389",
+          "success": true,
+          "speed": 5.4766642173575235,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5650671593611685,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.6106717053816642,
+        "freshness": 0.9999999254866808
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 5,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-11-02T00:00:28.521217"
+    "last_cleanup": "2026-11-02T05:01:40.203179"
   }
 }
