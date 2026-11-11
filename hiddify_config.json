@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK"
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK-1"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK"
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇳🇱 The Netherlands [*CIDR] VK-1"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -73,6 +75,26 @@
       "type": "vless",
       "tag": "🇳🇱 The Netherlands [*CIDR] VK",
       "server": "95.163.209.247",
+      "server_port": 443,
+      "uuid": "010be6fa-ab5f-404a-9edf-ab2db1f09f0c",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/api/generate",
+        "headers": {
+          "Host": "fst.krevetkabs111.net"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "fst.krevetkabs111.net"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱 The Netherlands [*CIDR] VK-1",
+      "server": "fst.krevetkabs111.net",
       "server_port": 443,
       "uuid": "010be6fa-ab5f-404a-9edf-ab2db1f09f0c",
       "flow": "",

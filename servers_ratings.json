@@ -23,13 +23,18 @@
       },
       "link": "vless://010be6fa-ab5f-404a-9edf-ab2db1f09f0c@95.163.209.247:443?host=fst.krevetkabs111.net&path=%2Fapi%2Fgenerate&security=tls&sni=fst.krevetkabs111.net&type=ws&fp=safari#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%5B%2ACIDR%5D%20VK",
       "group": "EUROPE",
-      "country": null,
+      "country": "NL",
       "first_seen": "2026-11-10T19:03:39.291381",
-      "last_seen": "2026-11-10T19:03:39.291381",
-      "total_tests": 1,
-      "successful_tests": 1,
+      "last_seen": "2026-11-11T00:07:56.164900",
+      "total_tests": 6,
+      "successful_tests": 6,
       "speed_history": [
-        4.815395650958932
+        4.815395650958932,
+        24.13724668110353,
+        23.94111520088382,
+        23.183643035657095,
+        20.766382384079286,
+        24.767002613822076
       ],
       "check_history": [
         {
@@ -38,26 +43,141 @@
           "speed": 4.815395650958932,
           "latency": null,
           "error": null
+        },
+        {
+          "timestamp": "2026-11-11T00:07:52.750319",
+          "success": true,
+          "speed": 24.13724668110353,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-11T00:07:52.750877",
+          "success": true,
+          "speed": 23.94111520088382,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-11T00:07:52.751172",
+          "success": true,
+          "speed": 23.183643035657095,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-11T00:07:52.752800",
+          "success": true,
+          "speed": 20.766382384079286,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-11T00:07:56.164900",
+          "success": true,
+          "speed": 24.767002613822076,
+          "latency": null,
+          "error": null
         }
       ],
-      "rating": 0.0,
+      "rating": 0.7658693513140311,
       "rating_components": {
-        "speed": 0.0,
-        "stability": 0.0,
-        "uptime": 0.0,
-        "consistency": 0.0,
-        "freshness": 0.0
+        "speed": 0.9060323740539236,
+        "stability": 1.0,
+        "uptime": 0.6349947778416666,
+        "consistency": 0.30664987605050054,
+        "freshness": 0.9999998517435307
       },
-      "category": "C",
+      "category": "A",
       "quarantine_until": null,
       "bad_hours": [],
-      "consecutive_successes": 1,
-      "active": false,
-      "staging_until": "2026-11-10T20:03:39.291411",
+      "consecutive_successes": 6,
+      "active": true,
+      "staging_until": null,
+      "consecutive_failures": 0
+    },
+    "vless|fst.krevetkabs111.net|443|010be6fa": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands [*CIDR] VK",
+        "server": "fst.krevetkabs111.net",
+        "server_port": 443,
+        "uuid": "010be6fa-ab5f-404a-9edf-ab2db1f09f0c",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/api/generate",
+          "headers": {
+            "Host": "fst.krevetkabs111.net"
+          }
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "fst.krevetkabs111.net"
+        }
+      },
+      "link": "vless://010be6fa-ab5f-404a-9edf-ab2db1f09f0c@fst.krevetkabs111.net:443?security=tls&sni=fst.krevetkabs111.net&fp=firefox&type=ws&host=fst.krevetkabs111.net&path=%2Fapi%2Fgenerate&encryption=none#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%5B%2ACIDR%5D%20VK",
+      "group": "EUROPE",
+      "country": "NL",
+      "first_seen": "2026-11-11T00:07:52.751445",
+      "last_seen": "2026-11-11T00:07:52.752445",
+      "total_tests": 4,
+      "successful_tests": 4,
+      "speed_history": [
+        23.259308129390075,
+        22.194173795229744,
+        21.91678857634632,
+        22.112025458925558
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-11-11T00:07:52.751445",
+          "success": true,
+          "speed": 23.259308129390075,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-11T00:07:52.751809",
+          "success": true,
+          "speed": 22.194173795229744,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-11T00:07:52.752124",
+          "success": true,
+          "speed": 21.91678857634632,
+          "latency": null,
+          "error": null
+        },
+        {
+          "timestamp": "2026-11-11T00:07:52.752445",
+          "success": true,
+          "speed": 22.112025458925558,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.5992264846738271,
+      "rating_components": {
+        "speed": 1.0,
+        "stability": 1.0,
+        "uptime": 0.01,
+        "consistency": 0.9532503118929632,
+        "freshness": 0.9993430232302059
+      },
+      "category": "B",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 4,
+      "active": true,
+      "staging_until": null,
       "consecutive_failures": 0
     }
   },
   "metadata": {
-    "last_cleanup": "2026-11-10T19:03:39.292431"
+    "last_cleanup": "2026-11-11T00:07:56.166095"
   }
 }
