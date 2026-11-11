@@ -49,14 +49,16 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR] VK"
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇮🇷 Iran — #29"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR] VK"
+        "🇳🇱 The Netherlands [*CIDR] VK",
+        "🇮🇷 Iran — #29"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -72,21 +74,41 @@
     {
       "type": "vless",
       "tag": "🇳🇱 The Netherlands [*CIDR] VK",
-      "server": "95.163.209.247",
+      "server": "bhjolq0d0l.flowersgood.top",
       "server_port": 443,
-      "uuid": "010be6fa-ab5f-404a-9edf-ab2db1f09f0c",
+      "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
       "flow": "",
       "packet_encoding": "xudp",
       "transport": {
         "type": "ws",
-        "path": "/api/generate",
+        "path": "/service/telemetry/045d381f1166/",
         "headers": {
-          "Host": "fst.krevetkabs111.net"
+          "Host": "bhjolq0d0l.flowersgood.top"
         }
       },
       "tls": {
         "enabled": true,
-        "server_name": "fst.krevetkabs111.net"
+        "server_name": "bhjolq0d0l.flowersgood.top"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇮🇷 Iran — #29",
+      "server": "185.86.147.175",
+      "server_port": 443,
+      "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
+      "flow": "",
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/service/telemetry/0294da469190/",
+        "headers": {
+          "Host": "nguyxejonb.flowersgood.top"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "nguyxejonb.flowersgood.top"
       }
     }
   ],
