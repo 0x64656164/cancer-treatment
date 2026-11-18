@@ -47,14 +47,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK"
+        "🇳🇱 The Netherlands [*CIDR]"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK"
+        "🇳🇱 The Netherlands [*CIDR]"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -69,24 +69,20 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands | 🌐 | [*CIDR] VK",
-      "server": "185.86.145.223",
-      "server_port": 9449,
-      "uuid": "96c760c3-6949-4a00-b603-16173b9b1a66",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇳🇱 The Netherlands [*CIDR]",
+      "server": "r0xnfzk9ud.newwl.pro",
+      "server_port": 443,
+      "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
+      "flow": "",
       "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/service/telemetry/045d381f1166/",
+        "headers": {}
+      },
       "tls": {
         "enabled": true,
-        "server_name": "tmuk1.trust.rumost.top",
-        "reality": {
-          "enabled": true,
-          "public_key": "VB9m1gQWzJWBXa49PMVGKkI94KN0XRCpC1BSpQP7yzk",
-          "short_id": "0cc15b71a8a6a380"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "safari"
-        }
+        "server_name": "r0xnfzk9ud.newwl.pro"
       }
     }
   ],

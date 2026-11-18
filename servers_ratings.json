@@ -1,6 +1,61 @@
 {
-  "servers": {},
+  "servers": {
+    "vless|r0xnfzk9ud.newwl.pro|443|7955bf18": {
+      "outbound": {
+        "type": "vless",
+        "tag": "🇳🇱 The Netherlands [*CIDR]",
+        "server": "r0xnfzk9ud.newwl.pro",
+        "server_port": 443,
+        "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
+        "flow": "",
+        "packet_encoding": "xudp",
+        "transport": {
+          "type": "ws",
+          "path": "/service/telemetry/045d381f1166/",
+          "headers": {}
+        },
+        "tls": {
+          "enabled": true,
+          "server_name": "r0xnfzk9ud.newwl.pro"
+        }
+      },
+      "link": "vless://7955bf18-35c4-412d-aabd-c0b36c793063@r0xnfzk9ud.newwl.pro:443?type=ws&security=tls&path=/service/telemetry/045d381f1166/&sni=r0xnfzk9ud.newwl.pro&fp=firefox#%F0%9F%87%B3%F0%9F%87%B1%20The%20Netherlands%20%5B%2ACIDR%5D",
+      "group": "EUROPE",
+      "country": null,
+      "first_seen": "2026-11-18T09:27:46.208176",
+      "last_seen": "2026-11-18T09:27:46.208176",
+      "total_tests": 1,
+      "successful_tests": 1,
+      "speed_history": [
+        5.132224636754479
+      ],
+      "check_history": [
+        {
+          "timestamp": "2026-11-18T09:27:46.208176",
+          "success": true,
+          "speed": 5.132224636754479,
+          "latency": null,
+          "error": null
+        }
+      ],
+      "rating": 0.0,
+      "rating_components": {
+        "speed": 0.0,
+        "stability": 0.0,
+        "uptime": 0.0,
+        "consistency": 0.0,
+        "freshness": 0.0
+      },
+      "category": "C",
+      "quarantine_until": null,
+      "bad_hours": [],
+      "consecutive_successes": 1,
+      "active": false,
+      "staging_until": "2026-11-18T10:27:46.208207",
+      "consecutive_failures": 0
+    }
+  },
   "metadata": {
-    "last_cleanup": "2026-11-18T01:45:48.705386"
+    "last_cleanup": "2026-11-18T09:27:46.209178"
   }
 }
