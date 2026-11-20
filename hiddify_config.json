@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇳🇱 The Netherlands [*CIDR]"
+        "🇫🇮 Finland | [*CIDR] VK"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇳🇱 The Netherlands [*CIDR]"
+        "🇫🇮 Finland | [*CIDR] VK"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,20 +71,24 @@
     },
     {
       "type": "vless",
-      "tag": "🇳🇱 The Netherlands [*CIDR]",
-      "server": "r0xnfzk9ud.newwl.pro",
-      "server_port": 443,
-      "uuid": "7955bf18-35c4-412d-aabd-c0b36c793063",
-      "flow": "",
+      "tag": "🇫🇮 Finland | [*CIDR] VK",
+      "server": "83.166.237.124",
+      "server_port": 8444,
+      "uuid": "a77d6228-85a9-449f-b600-ccf4018230eb",
+      "flow": "xtls-rprx-vision",
       "packet_encoding": "xudp",
-      "transport": {
-        "type": "ws",
-        "path": "/service/telemetry/045d381f1166/",
-        "headers": {}
-      },
       "tls": {
         "enabled": true,
-        "server_name": "r0xnfzk9ud.newwl.pro"
+        "server_name": "game2.stich.my",
+        "reality": {
+          "enabled": true,
+          "public_key": "h16vbQ_IBohiTlEVzz1oEZBf63peHSTbhQ3sJuQO-Vw",
+          "short_id": "eab3935b74dd7756"
+        },
+        "utls": {
+          "enabled": true,
+          "fingerprint": "edge"
+        }
       }
     }
   ],
