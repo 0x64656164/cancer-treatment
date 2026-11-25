@@ -49,14 +49,14 @@
       "tag": "ALL",
       "outbounds": [
         "ALL-auto",
-        "🇫🇮 Finland | [*CIDR] VK"
+        "🇳🇱 The Netherlands — #62"
       ]
     },
     {
       "type": "urltest",
       "tag": "ALL-auto",
       "outbounds": [
-        "🇫🇮 Finland | [*CIDR] VK"
+        "🇳🇱 The Netherlands — #62"
       ],
       "url": "http://cp.cloudflare.com/",
       "interval": "10m"
@@ -71,24 +71,22 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮 Finland | [*CIDR] VK",
-      "server": "83.166.237.124",
-      "server_port": 8444,
-      "uuid": "a77d6228-85a9-449f-b600-ccf4018230eb",
-      "flow": "xtls-rprx-vision",
+      "tag": "🇳🇱 The Netherlands — #62",
+      "server": "185.86.145.183",
+      "server_port": 443,
+      "uuid": "65304dbe-31e2-4af5-83ff-72a271ce900d",
+      "flow": "",
       "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/nl7ws",
+        "headers": {
+          "Host": "new.wytys.ru"
+        }
+      },
       "tls": {
         "enabled": true,
-        "server_name": "game2.stich.my",
-        "reality": {
-          "enabled": true,
-          "public_key": "h16vbQ_IBohiTlEVzz1oEZBf63peHSTbhQ3sJuQO-Vw",
-          "short_id": "eab3935b74dd7756"
-        },
-        "utls": {
-          "enabled": true,
-          "fingerprint": "edge"
-        }
+        "server_name": "new.wytys.ru"
       }
     }
   ],
